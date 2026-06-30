@@ -8,12 +8,14 @@ function ContentSection({title,children, imgUrl, imgAlt,ellipseClassName}) {
                 <h2>{title}</h2>
                 {children}
             </div>
-            <div>
-                <ImageWithEllipse
-                    className={ellipseClassName}
-                imgUrl={imgUrl}
-                imgAlt={imgAlt}/>
-            </div>
+            {imgUrl && (
+                <div>
+                    <ImageWithEllipse
+                        className={ellipseClassName}
+                        imgUrl={imgUrl}
+                        imgAlt={imgAlt}/>
+                </div>
+            )}
         </section>
     );
 }

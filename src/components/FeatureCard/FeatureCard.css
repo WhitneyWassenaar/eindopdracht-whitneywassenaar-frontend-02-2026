@@ -1,0 +1,13 @@
+.feature-card {
+    display: flex;
+    justify-content: flex-start;
+    width: 600px;
+    height: 230px;
+    border-radius: 20px;
+    background-color: var(--background-color) ;
+}
+
+.feature-card--reverse {
+    background-color: var(--tertiary-color) ;
+    justify-content: flex-end;
+}

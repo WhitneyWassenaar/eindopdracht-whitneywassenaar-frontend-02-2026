@@ -7,15 +7,13 @@ function Navbar() {
         <nav>
             <img src={logo} alt={"Website logo"}/>
             <ul>
-                <li><a href={"/"}>Dashboard</a></li>
-                <li><a href={"/"}>Paardenbeheer</a></li>
-                <li><a href={"/"}>Stalbezetting</a></li>
-                <li><a href={"/"}>Zorgtaken</a></li>
-                <li><a href={"/"}>Contacten</a></li>
-                <li><a href={"/"}>Help</a></li>
+                <li><a href={"/"}>Home</a></li>
+                <li><a href={"/"}>Functies</a></li>
+                <li><a href={"/"}>Contact</a></li>
             </ul>
 
-            <Button className={"/"}>Uitloggen</Button>
+            <Button className={"/"}>Registreren</Button>
+            <Button className={"/"}>Inloggen</Button>
         </nav>
 
         // Conditional rendering van de navbar, later gebruiken als state is aangemaakt

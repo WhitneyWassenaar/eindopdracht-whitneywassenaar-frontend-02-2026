@@ -1,26 +1,27 @@
 import "./Hero.css";
 import Button from "../Button/Button.jsx";
 import ImageWithEllipse from "../ImageWithEllipse/ImageWithEllipse.jsx";
-import greyHorseWithRider from "../../assets/greyHorseAndRider.png";
 
-function Hero() {
+function Hero({title,text,className,buttonClassName,onClick,children,imgUrl,imgAlt, ellipseClassName}) {
     return (
-        <section>
+        <section className={className}>
             <article>
-                <h1>Beheer jouw paarden,<br/> behoud het overzicht</h1>
-                <p>Beheer gezondheid, trainingen, voeding, documenten en planning van al je paarden vanuit één centraal
-                    systeem.</p>
-                <Button
-                    className={"/"}
-                    onClick={"/"}
-                >
-                    Probeer het gratis
-                </Button>
+                <h1>{title}</h1>
+                <p>{text}</p>
+                {children && (
+                    <Button
+                        className={buttonClassName}
+                        onClick={onClick}
+                    >
+                        {children}
+                    </Button>
+                )}
             </article>
 
             <ImageWithEllipse
-                imgUrl={greyHorseWithRider}
-                imgAlt={"Jumping grey horse with rider"}/>
+                imgUrl={imgUrl}
+                imgAlt={imgAlt}
+            className={ellipseClassName}/>
         </section>
     );
 }

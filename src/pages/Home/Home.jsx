@@ -1,17 +1,25 @@
-import Header from "./components/Header/Header.jsx";
-import Footer from "./components/Footer/Footer.jsx";
-import Hero from "./components/Hero/Hero.jsx";
-import ContentSection from "./components/ContentSection/ContentSection.jsx";
-import foals from "./assets/foals.png";
-import walkingGirlAndHorse from "./assets/walkingGirlAndHorse.png";
-import ReviewSection from "./components/ReviewSection/ReviewSection.jsx";
+import Hero from "../../components/Hero/Hero.jsx";
+import ContentSection from "../../components/ContentSection/ContentSection.jsx";
+import foals from "../../assets/foals.png";
+import walkingGirlAndHorse from "../../assets/walkingGirlAndHorse.png";
+import ReviewSection from "../../components/ReviewSection/ReviewSection.jsx";
+import greyHorseAndRider from "../../assets/greyHorseAndRider.png";
+
+
 
 function Home() {
     return (
         <>
-            <Header/>
-            <main>
-                <Hero/>
+                <Hero
+                title={"Beheer jouw paarden, behoud het overzicht"}
+                text={"Beheer gezondheid, trainingen, voeding, documenten en planning van al je paarden vanuit één centraal systeem."}
+                classname={"hero hero--default"}
+                imgUrl={greyHorseAndRider}
+                imgAlt={"An image of a rider that takes a jump with her grey horse"}
+                ellipseClassName={"ellipse ellipse-default"}
+                >
+                    Probeer het gratis
+                </Hero>
 
                 <ContentSection
                     title={"Wat is EquiManager?"}
@@ -55,10 +63,6 @@ function Home() {
                 </ContentSection>
 
                 <ReviewSection/>
-            </main>
-            <Footer
-                brandText={"EquiManager is een gebruiksvriendelijke paardenmanagement-applicatie waarmee stalhouders alle informatie van hun paarden centraal kunnen beheren - alles overzichtelijk op één plek."}
-                footerText={"Copyright © 2026 EquiManager designed by Whitney Wassenaar"}/>
         </>
     );
 }

@@ -2,7 +2,7 @@ import "./ImageWithEllipse.css";
 
 function ImageWithEllipse({imgUrl,imgAlt,className}) {
     return (
-        <div className="/">
+        <div>
             <img className={"/"} src={imgUrl} alt={imgAlt} />
             <div className={className}></div>
         </div>
