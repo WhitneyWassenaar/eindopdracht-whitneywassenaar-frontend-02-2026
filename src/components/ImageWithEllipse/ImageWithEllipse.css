@@ -1,0 +1,19 @@
+.ellipse {
+    width:550px;
+    height:550px;
+    border-radius:50%;
+
+}
+
+.ellipse-default {
+    background-color: var(--primary-color);
+}
+
+.ellipse-alt {
+    background-color: var(--secondary-color);
+    border: 12px solid var(--primary-color);
+}
+
+.ellipse--feature {
+    border: 12px solid var(--primary-color);
+}
