@@ -11,9 +11,14 @@
   --secondary-color: #E5E39F;
   --tertiary-color: #F3F2F0;
   --background-color: #224B65;
+  --text-color: #fff;
+  --validation-color: #F1FF92;
 
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.5rem;
+  font-size: 20px;
+
+  --font-base: 1rem;
+  --font-small: 0.8rem;
 }
 
 body {

@@ -4,16 +4,29 @@ import logo from "../../assets/logo.svg"
 
 function Navbar() {
     return (
-        <nav>
-            <img src={logo} alt={"Website logo"}/>
-            <ul>
-                <li><a href={"/"}>Home</a></li>
-                <li><a href={"/"}>Functies</a></li>
-                <li><a href={"/"}>Contact</a></li>
-            </ul>
+        <nav className="nav nav--guest">
+            <div className="nav__left">
+                {/*<Link to={isLoggedIn ? "/dashboard" : "/"}>*/}
+                <img src={logo} alt={"Website logo"}/>
+                {/*</Link>*/}
+            </div>
 
-            <Button className={"/"}>Registreren</Button>
-            <Button className={"/"}>Inloggen</Button>
+            <div className="nav__center">
+                <ul>
+                    <li><a href={"/"}>Home</a></li>
+                    <li><a href={"/"}>Functies</a></li>
+                    <li><a href={"/"}>Contact</a></li>
+                </ul>
+            </div>
+
+            <div className="nav__right">
+                <div className="button-wrapper">
+                    <Button type={"button"} className={"button button--solid"}>Registreren</Button>
+                    <Button type={"button"} className={"button button--bordered"}>Inloggen</Button>
+                </div>
+            </div>
+
+
         </nav>
 
         // Conditional rendering van de navbar, later gebruiken als state is aangemaakt
@@ -58,14 +71,18 @@ export default Navbar;
 * TODO:
 *  - isLoggedIn is een state, verplaatsen naar app.jsx, als prop doorgeven in Navbar
 *  - Class aanmaken voor:
-*  - nav
-*  - nav--logged-in
-*  - nav--guest
 *  - logo
 *  Toevoegen:
 *  - const useNavigate
 *  - const isAuth, logout / useContext
 *  - AuthContext
-*  - Link
+*  - NavLink
 *  - Conditional rendering isAuth
+*  - logo klikbaar > doorsturen naar home
+*  - column nav als gebruiker is ingelogd
 */
+
+/*
+* TODO:
+*  In progress:
+*  - Link element staat klaar (logo) , staat nu als comment */

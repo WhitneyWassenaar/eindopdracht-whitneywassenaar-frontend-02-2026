@@ -1,0 +1,30 @@
+.button {
+    border-radius: 15px;
+    padding: 0.2rem 0.7rem ;
+    transition: all 0.3s ease;
+    font-size: var(--font-base);
+}
+
+.button--solid {
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--text-color);
+}
+
+.button--solid:hover {
+    background-color: var(--validation-color);
+    color: var(--background-color);
+    cursor:pointer;
+}
+
+.button--bordered {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.button--bordered:hover {
+    border-color: var(--validation-color);
+    color: var(--validation-color);
+    cursor:pointer;
+}

@@ -5,8 +5,6 @@ import walkingGirlAndHorse from "../../assets/walkingGirlAndHorse.png";
 import ReviewSection from "../../components/ReviewSection/ReviewSection.jsx";
 import greyHorseAndRider from "../../assets/greyHorseAndRider.png";
 
-
-
 function Home() {
     return (
         <>
