@@ -3,15 +3,17 @@
     padding: 0.2rem 0.7rem ;
     transition: all 0.3s ease;
     font-size: var(--font-base);
+    border: none;
 }
 
-.button--solid {
+.button--default {
     background-color: var(--primary-color);
-    border: none;
+
     color: var(--text-color);
 }
 
-.button--solid:hover {
+.button--default:hover,
+.button--hero:hover{
     background-color: var(--validation-color);
     color: var(--background-color);
     cursor:pointer;
@@ -27,4 +29,11 @@
     border-color: var(--validation-color);
     color: var(--validation-color);
     cursor:pointer;
+}
+
+.button--hero {
+    background-color: var(--primary-color);
+    font-weight: 300;
+    color: var(--text-color);
+    padding: 16px 30px;
 }

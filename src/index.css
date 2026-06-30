@@ -16,9 +16,13 @@
 
   font-family: 'Space Grotesk', sans-serif;
   font-size: 20px;
-
+  font-weight: 300;
   --font-base: 1rem;
   --font-small: 0.8rem;
+}
+
+h1 {
+  white-space: pre-line;
 }
 
 body {

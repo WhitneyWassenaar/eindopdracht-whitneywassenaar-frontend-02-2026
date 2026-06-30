@@ -7,8 +7,17 @@ function Contact() {
         <>
             <Hero
                 title={"Contact"}
-                text={"Is er iets niet duidelijk? Wij staan voor jou klaar!\n" +
-                    "Voor de meest gestelde vragen en extra uitleg kan je een bezoekje wagen bij het help-centrum"}
+                text={
+                <>
+                <p>
+                    Is er iets niet duidelijk? Wij staan voor jou klaar!
+                </p>
+                    <br/>
+                <p>
+                    Voor de meest gestelde vragen en extra uitleg kan je een bezoekje wagen bij het  <span className="text-highlight">helpcentrum</span>
+                </p>
+
+                </>}
                 classname={"hero hero--default"}
                 imgUrl={contactImg}
                 imgAlt={"An image of two foals grooming each other"}
@@ -17,14 +26,14 @@ function Contact() {
                 Naar het help-centrum
             </Hero>
 
-            <ContentSection
-            title={"Kom je er toch niet uit?"}
-            >
-                <p>We helpen je graag verder! Gebruik het contactformulier voor vragen, advies of meer informatie</p>
+            {/*<ContentSection*/}
+            {/*title={"Kom je er toch niet uit?"}*/}
+            {/*>*/}
+            {/*    <p>We helpen je graag verder! Gebruik het contactformulier voor vragen, advies of meer informatie</p>*/}
 
-                <ContactForm/>
+            {/*    <ContactForm/>*/}
 
-            </ContentSection>
+            {/*</ContentSection>*/}
         </>
     );
 }
