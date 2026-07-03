@@ -1,5 +1,5 @@
 import Hero from "../../components/Hero/Hero.jsx";
-import contactImg from "../../assets/contactImg.jpg";
+import contactImg from "../../assets/contact/contactImg.jpg";
 import ContentSection from "../../components/ContentSection/ContentSection.jsx";
 import ContactForm from "../../components/ContactForm/ContactForm.jsx";
 function Contact() {
@@ -7,6 +7,7 @@ function Contact() {
         <>
             <Hero
                 title={"Contact"}
+                buttonVariant={"bordered"}
                 text={
                 <>
                 <p>

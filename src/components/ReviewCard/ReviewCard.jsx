@@ -1,11 +1,19 @@
 import "./ReviewCard.css";
 
-function ReviewCard({profileImgUrl,profileImgAlt,personName,stableName,reviewText}) {
+function ReviewCard({
+                        profileImgUrl,
+                        profileImgAlt,
+                        personName,
+                        stableName,
+                        reviewText}) {
     return (
-        <div className="">
-            <img src={profileImgUrl} alt={profileImgAlt} />
-            <h4>{personName}</h4>
-            <h5>{stableName}</h5>
+        <div className="review-card">
+            <div>
+                <img src={profileImgUrl} alt={profileImgAlt} />
+                <h4>{personName}</h4>
+                <h5>{stableName}</h5>
+            </div>
+
             <p>{reviewText}</p>
         </div>
     );

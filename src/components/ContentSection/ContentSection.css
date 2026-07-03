@@ -1,0 +1,65 @@
+.content-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--tertiary-color);
+    border-radius: 40px;
+    height:100%;
+    gap: 80px;
+    width: 1120px;
+    padding: 10px 0 10px 0;
+}
+
+.content-section--default {
+    flex-direction: row-reverse;
+}
+
+.content-section--reverse {
+    flex-direction: row;
+}
+
+.content-wrapper {
+    /*border: 1px solid greenyellow;*/
+}
+
+.content-wrapper h2 {
+    color: var(--background-color);
+    margin-bottom: 10px;
+}
+
+.waarom-equimanager--highlight h3 {
+    color: var(--validation-color);
+}
+
+.content-wrapper p {
+    color: var(--background-color);
+}
+
+.waarom-equimanager--highlight p {
+    color: var(--text-color);
+}
+.content-section-paragraph {
+    /*border: 1px solid var(--background-color);*/
+    max-width: 400px;
+}
+
+.content-section-paragraph p:not(:last-child) {
+    margin-bottom:15px;
+}
+
+.test {
+    border: 1px solid var(--background-color);
+}
+
+.waarom-equimanager--highlight:not(:last-child) {
+    margin-bottom:15px;
+}
+
+.content-section--waarom-equimanager {
+    background-color: transparent;
+}
+
+.content-section--waarom-equimanager h2 {
+    color: var(--text-color);
+}
+

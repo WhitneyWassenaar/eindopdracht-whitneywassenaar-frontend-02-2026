@@ -3,11 +3,21 @@
 ==================== */
 .ellipse-wrapper {
     position: relative;
-    border: 2px lightseagreen solid;
+    /*border: 2px lightseagreen solid;*/
+
 }
 
+/* ====================
+    IMAGE WRAPPER
+==================== */
 .image-wrapper {
     min-width: 500px;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*border: 3px red solid;*/
+    position: relative;
 }
 
 /* ====================
@@ -39,9 +49,46 @@
     right: 30px;
 }
 
-/* ============================
+
+/* =================================
+      CUSTOM ELLIPSE AND IMAGE
+     "HOME > WAT IS EQUIMANAGER?"
+================================= */
+.ellipse--wat-is-equimanager{
+    display: none;
+}
+
+.ellipse-img--wat-is-equimanager {
+    max-height: 500px;
+    width: 550px;
+    bottom: 0;
+    right: 0;
+}
+
+/* =======================================
+   CUSTOM ELLIPSE AND IMAGE
+   "HOME > WAAROM KIEZEN VOOR EQUIMANAGER"
+======================================== */
+.ellipse--waarom-equimanager {
+    background-color: var(--secondary-color);
+    border: 12px solid var(--primary-color);
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+
+}
+.ellipse-img--waarom-equimanager {
+    height: 500px;
+    width: auto;
+    z-index: 2;
+    /*border: 2px solid var(--primary-color);*/
+    position:absolute;
+    left:130px;
+}
+
+/* =======================================
    CUSTOM ELLIPSE AND IMAGE "FUNCTIES"
-============================= */
+======================================== */
 .ellipse--functies {
     background-color: var(--primary-color);
     bottom: 10px;
@@ -52,18 +99,10 @@
     max-height: 500px;
    width:230px;
     z-index: 2;
-    left:120px;
-    bottom: 3px;
+    left:0;
+    bottom: 10px;
 }
 
-/* ============================
-   CUSTOM ELLIPSE AND IMAGE
-   "HOME > WAAROM KIEZEN VOOR EQUIMANAGER"
-============================= */
-.ellipse--alt {
-    background-color: var(--secondary-color);
-    border: 12px solid var(--primary-color);
-}
 
 .ellipse--feature {
     border: 12px solid var(--primary-color);

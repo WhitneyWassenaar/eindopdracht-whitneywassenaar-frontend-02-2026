@@ -1,6 +1,6 @@
 import "./Navbar.css";
 import Button from "../Button/Button.jsx";
-import logo from "../../assets/logo.svg"
+import logo from "../../assets/home/logo.svg"
 
 function Navbar() {
     return (
@@ -21,8 +21,19 @@ function Navbar() {
 
             <div className="nav__right">
                 <div className="button-wrapper">
-                    <Button type={"button"} className={"button button--solid"}>Registreren</Button>
-                    <Button type={"button"} className={"button button--bordered"}>Inloggen</Button>
+                    <Button
+                        type={"button"}
+                        variant={"default"}
+                    >
+                        Registreren
+                    </Button>
+
+                    <Button
+                        type={"button"}
+                        variant={"bordered"}
+                    >
+                        Inloggen
+                    </Button>
                 </div>
             </div>
 

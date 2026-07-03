@@ -1,0 +1,27 @@
+.review-card {
+    background-color: var(--secondary-color);
+    height:400px;
+    width:300px;
+    border-radius:50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap:30px;
+    color: var(--background-color);
+    padding: 0 5px 0 5px;
+}
+
+.review-card img {
+    border-radius: 50%;
+    width:100px;
+    height:100px;
+    object-fit: cover;
+    /*border:2px solid var(--primary-color);*/
+
+}
+
+.review-card p {
+    color: var(--background-color);
+}

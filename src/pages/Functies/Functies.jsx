@@ -1,5 +1,5 @@
 import Hero from "../../components/Hero/Hero.jsx";
-import greyHorse from "../../assets/greyHorse.png";
+import greyHorse from "../../assets/functies/greyHorse.png";
 // import FeatureCard from "../../components/FeatureCard/FeatureCard.jsx";
 // import featureImg1 from "../../assets/featureImg1.jpg";
 
