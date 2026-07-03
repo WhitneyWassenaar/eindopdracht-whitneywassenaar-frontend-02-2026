@@ -1,3 +1,6 @@
+/* ===============================================
+                                          DESKTOP
+================================================ */
 /* ====================
         NAV BASE
 ==================== */
@@ -59,6 +62,38 @@
 .button-wrapper {
     display: flex;
     gap: 15px;
+}
+
+/* ====================
+    HAMBURGER MENU
+==================== */
+.hamburger-menu {
+display: none;
+}
+
+/* ===============================================
+                                          TABLET
+================================================ */
+
+
+@media (max-width: 800px) {
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .nav__center,
+    .button-wrapper
+    {
+        display: none;
+    }
+
+    .nav__right {
+        display: flex;
+    }
+
+
+
+
 }
 
 /*

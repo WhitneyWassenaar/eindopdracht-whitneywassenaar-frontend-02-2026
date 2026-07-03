@@ -1,6 +1,7 @@
 import "./Navbar.css";
 import Button from "../Button/Button.jsx";
 import logo from "../../assets/home/logo.svg"
+import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.jsx";
 
 function Navbar() {
     return (
@@ -35,6 +36,8 @@ function Navbar() {
                         Inloggen
                     </Button>
                 </div>
+
+                <HamburgerMenu/>
             </div>
 
 

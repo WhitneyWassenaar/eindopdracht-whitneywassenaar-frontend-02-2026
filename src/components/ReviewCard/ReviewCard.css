@@ -5,10 +5,10 @@
     border-radius:50px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     text-align: center;
-    gap:30px;
+    gap:10px;
     color: var(--background-color);
     padding: 0 5px 0 5px;
 }
@@ -25,3 +25,4 @@
 .review-card p {
     color: var(--background-color);
 }
+

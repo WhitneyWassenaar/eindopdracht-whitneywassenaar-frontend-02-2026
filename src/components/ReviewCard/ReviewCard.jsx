@@ -8,7 +8,7 @@ function ReviewCard({
                         reviewText}) {
     return (
         <div className="review-card">
-            <div>
+            <div className="avatarAndName">
                 <img src={profileImgUrl} alt={profileImgAlt} />
                 <h4>{personName}</h4>
                 <h5>{stableName}</h5>

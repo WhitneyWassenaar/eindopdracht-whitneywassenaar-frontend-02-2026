@@ -1,0 +1,38 @@
+:root {
+    --menu-bar-width: 50px;
+    --menu-bar-height: 5px;
+}
+
+.hamburger-menu {
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    border: none;
+}
+
+.menu {
+    background-color: var(--primary-color);
+    position: relative;
+    width: var(--menu-bar-width);
+    height: var(--menu-bar-height);
+}
+
+.menu::before,
+.menu::after {
+    background-color: var(--primary-color);
+    display: block;
+    content: "";
+    width: var(--menu-bar-width);
+    height: var(--menu-bar-height);
+    position: absolute;
+}
+
+.menu::before {
+    right: 0;
+    top: -15px;
+}
+
+.menu::after {
+    right: 0;
+    top: 15px;
+}
