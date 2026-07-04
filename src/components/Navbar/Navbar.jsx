@@ -3,13 +3,12 @@ import Button from "../Button/Button.jsx";
 import logo from "../../assets/home/logo.svg"
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.jsx";
 import {useState} from "react";
-import "./Navbar.css"; // Wat laatst wordt geladen telt!
+import "./Navbar.css";
+import Sidebar from "../Sidebar/Sidebar.jsx"; // Wat laatst wordt geladen telt!
 
 function Navbar() {
 
     const [menuOpen, setMenuOpen] = useState(false)
-
-
 
     return (
         <nav className="nav nav--guest">
@@ -52,6 +51,8 @@ function Navbar() {
                     <HamburgerMenu/>
                 </Button>
             </div>
+
+                <Sidebar menuOpen={menuOpen}/>
         </nav>
 
         //Als menu open is
