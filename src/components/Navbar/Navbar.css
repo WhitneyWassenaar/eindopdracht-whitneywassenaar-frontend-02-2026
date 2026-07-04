@@ -71,6 +71,11 @@
 display: none;
 }
 
+.nav__center.open { /*selecteer element dat beide classes heeft*/
+    display: flex;
+    flex-direction: column;
+}
+
 /* ===============================================
                                           TABLET
 ================================================ */
@@ -90,11 +95,9 @@ display: none;
     .nav__right {
         display: flex;
     }
-
-
-
-
 }
+
+
 
 /*
 - Lege classes checken wanneer sidebar wordt gemaakt

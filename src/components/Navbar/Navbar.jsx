@@ -1,9 +1,16 @@
-import "./Navbar.css";
+
 import Button from "../Button/Button.jsx";
 import logo from "../../assets/home/logo.svg"
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.jsx";
+import {useState} from "react";
+import "./Navbar.css"; // Wat laatst wordt geladen telt!
 
 function Navbar() {
+
+    const [menuOpen, setMenuOpen] = useState(false)
+
+
+
     return (
         <nav className="nav nav--guest">
             <div className="nav__left">
@@ -12,7 +19,7 @@ function Navbar() {
                 {/*</Link>*/}
             </div>
 
-            <div className="nav__center">
+            <div className={menuOpen ? "nav__center open" : "nav__center"}>
                 <ul>
                     <li><a href={"/"}>Home</a></li>
                     <li><a href={"/"}>Functies</a></li>
@@ -37,11 +44,18 @@ function Navbar() {
                     </Button>
                 </div>
 
-                <HamburgerMenu/>
+                <Button
+                    type={"button"}
+                    variant={"hamburgermenu"}
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >
+                    <HamburgerMenu/>
+                </Button>
             </div>
-
-
         </nav>
+
+        //Als menu open is
+
 
         // Conditional rendering van de navbar, later gebruiken als state is aangemaakt
         //     <nav className={isLoggedIn ? "nav nav--logged-in" : "nav nav--guest"}>

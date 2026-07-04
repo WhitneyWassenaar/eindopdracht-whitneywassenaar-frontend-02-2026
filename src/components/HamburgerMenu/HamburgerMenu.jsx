@@ -1,8 +1,8 @@
 import "./HamburgerMenu.css";
 
-function HamburgerMenu() {
+function HamburgerMenu({onClick}) {
     return (
-        <button className="hamburger-menu">
+        <button className="hamburger-menu" type="button" onClick={onClick} >
             <div className="menu"></div>
         </button>
 
