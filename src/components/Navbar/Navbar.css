@@ -31,9 +31,6 @@
 /* ====================
       CENTER (MENU)
 ==================== */
-.nav__center {
-}
-
 .nav__center ul {
     display: flex;
     align-items: center;
@@ -71,17 +68,9 @@
 display: none;
 }
 
-.nav__center.open { /*selecteer element dat beide classes heeft*/
-    display: flex;
-    flex-direction: column;
-}
-
-
 /* ===============================================
                                           TABLET
 ================================================ */
-
-
 @media (max-width: 800px) {
     .hamburger-menu {
         display: flex;
