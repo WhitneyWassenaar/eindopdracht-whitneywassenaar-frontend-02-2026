@@ -12,5 +12,11 @@
     max-width: 1200px;
     border: 1px solid red;
     gap:50px;
-    padding: 0 10px;
+    padding: 50px 0;
+}
+
+@media (max-width: 800px) {
+    .inner-container {
+        padding: 0;
+    }
 }

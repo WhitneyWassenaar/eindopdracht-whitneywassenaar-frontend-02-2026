@@ -32,6 +32,10 @@
 /* ====================
       CENTER (MENU)
 ==================== */
+.nav__center {
+    display: flex;
+}
+
 .nav__center ul {
     display: flex;
     align-items: center;

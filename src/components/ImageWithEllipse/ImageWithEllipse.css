@@ -3,20 +3,23 @@
 ==================== */
 .ellipse-wrapper {
     position: relative;
-    /*border: 2px lightseagreen solid;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px lightseagreen solid;
+    width: 550px;
+    height: 100%;
 }
 
 /* ====================
     IMAGE WRAPPER
 ==================== */
 .image-wrapper {
-    min-width: 500px;
-    min-height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*border: 3px red solid;*/
+    width: 550px;
+    height: 550px;
+    /*overflow: hidden;*/
     position: relative;
+    border: 5px solid white;
 }
 
 /* ====================
@@ -24,8 +27,10 @@
 ==================== */
 .ellipse {
     position: absolute;
-    width: 450px;
-    height: 450px;
+    bottom: 0;
+    right: 0;
+    width: 500px;
+    height: 500px;
     border-radius: 50%;
 }
 
@@ -34,33 +39,30 @@
 ============================= */
 .ellipse--default {
     background-color: var(--primary-color);
-    bottom: 10px;
-    right: 10px;
     z-index: 1;
 }
 
-.ellipse-img-default {
-    position: relative;
-    z-index: 2;
-    width: 500px;
+.ellipse-img {
+    width: 100%;
     height: 100%;
-    bottom: -6px;
-    right: 30px;
+
+    z-index: 2;
+    position: relative;
+    border: 1px yellow solid;
+}
+
+.ellipse-img--default {
+
+    transform: translate(-10px, -5px) scale(0.98);
+    border: 1px purple solid;
 }
 
 /* =================================
       CUSTOM ELLIPSE AND IMAGE
      "HOME > WAT IS EQUIMANAGER?"
 ================================= */
-.ellipse--wat-is-equimanager{
-    display: none;
-}
-
 .ellipse-img--wat-is-equimanager {
-    max-height: 500px;
-    width: 550px;
-    bottom: 0;
-    right: 0;
+    object-position: 55% 50%;
 }
 
 /* =======================================
@@ -70,17 +72,10 @@
 .ellipse--waarom-equimanager {
     background-color: var(--secondary-color);
     border: 12px solid var(--primary-color);
-    position: absolute;
-    bottom: 1px;
-    right: 1px;
 }
+
 .ellipse-img--waarom-equimanager {
-    height: 500px;
-    width: auto;
-    z-index: 2;
-    /*border: 2px solid var(--primary-color);*/
-    position:absolute;
-    left:130px;
+    object-position: 50% 50%;
 }
 
 /* =======================================
@@ -88,17 +83,11 @@
 ======================================== */
 .ellipse--functies {
     background-color: var(--primary-color);
-    bottom: 10px;
-    left: 10px;
-    z-index: 1;
 }
 
 .ellipse-img--functies {
-    max-height: 500px;
-   width:230px;
-    z-index: 2;
-    left:0;
-    bottom: 10px;
+    width: 250px;
+    transform: translate(155px, -5px);
 }
 
 /* =======================================
@@ -106,4 +95,51 @@
 ======================================== */
 .ellipse--feature {
     border: 12px solid var(--primary-color);
+}
+
+/* =======================================
+   CUSTOM ELLIPSE AND IMAGE "CONTACT"
+======================================== */
+.ellipse--contact {
+    background-color: var(--primary-color);
+}
+
+.ellipse-img--contact {
+    width: 520px;
+    height: auto;
+    transform: translate(-30px, -5px);
+}
+
+@media (max-width: 800px) {
+
+    .ellipse-wrapper {
+        width: 240px;
+    }
+
+    .ellipse-img--functies {
+        transform: translate(10px, -150px) scale(0.4);
+    }
+
+    .ellipse {
+        width: 200px;
+        height: 200px;
+        transform: translate(-10px, -5px) scale(0.98);
+    }
+
+    .ellipse-img--default {
+        transform: translate(-10px, 15px) scale(0.90);
+    }
+
+    .ellipse-img--functies {
+        transform: translate(5px, -140px) scale(0.40);
+    }
+
+    .ellipse-img--contact {
+        transform: translate(-20px, 10px) scale(0.90);
+    }
+
+    .image-wrapper {
+        width: 240px;
+        height: 250px;
+    }
 }

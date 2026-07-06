@@ -16,6 +16,7 @@ function Home() {
                 imgUrl={greyHorseAndRider}
                 imgAlt={"An image of a rider that takes a jump with her grey horse"}
                 buttonVariant={"hero"}
+
             >
                 Probeer het gratis
             </Hero>

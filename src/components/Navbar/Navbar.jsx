@@ -30,7 +30,7 @@ function Navbar() {
                 {/*</Link>*/}
             </div>
 
-            <div className={menuOpen ? "nav__center open" : "nav__center"}>
+            <div className="nav__center">
                 <ul>
                     <li><a href={"/"}>Home</a></li>
                     <li><a href={"/"}>Functies</a></li>

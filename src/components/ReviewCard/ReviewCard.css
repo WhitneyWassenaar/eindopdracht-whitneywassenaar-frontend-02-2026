@@ -1,7 +1,8 @@
 .review-card {
     background-color: var(--secondary-color);
     height:400px;
-    width:300px;
+    max-width: 1120px;
+    width: 100%;
     border-radius:50px;
     display: flex;
     flex-direction: column;

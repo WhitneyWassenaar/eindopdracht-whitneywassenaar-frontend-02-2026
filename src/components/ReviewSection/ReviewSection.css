@@ -1,7 +1,8 @@
 .review-section {
     display: flex;
     justify-content: space-between;
-    width: 1120px;
+    max-width: 1120px;
+    width: 100%;
 
 }
 

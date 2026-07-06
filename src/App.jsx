@@ -12,8 +12,8 @@ function App() {
             <Navbar/>
             <div className="inner-container">
                 <Home/>
-                {/*<Functies/>*/}
-                {/*<Contact/>*/}
+                <Functies/>
+                <Contact/>
                 {/*/!*<Error/>*!/*/}
             </div>
             <Footer/>

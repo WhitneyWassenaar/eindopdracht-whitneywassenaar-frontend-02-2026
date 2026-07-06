@@ -11,15 +11,16 @@ function Hero({
                   imgAlt,
                   variant = "default",
                   buttonVariant = "default",
-                  imageVariant = "imgSize",
+                  imageVariant = "default",
                   ellipseVariant = "default"
-              }) {
+              }
+) {
     return (
         <section className={`hero hero--${variant}`}>
             <article className="hero-article-wrapper">
                 <div className="hero-article-content-wrapper">
                     <h1>{title}</h1>
-                    <p>{text}</p>
+                    <div>{text}</div>
 
                 </div>
                 {children && (
@@ -30,7 +31,6 @@ function Hero({
                         {children}
                     </Button>
                 )}
-
             </article>
 
             <ImageWithEllipse
@@ -38,7 +38,6 @@ function Hero({
                 imgAlt={imgAlt}
                 imageVariant={imageVariant}
                 ellipseVariant={ellipseVariant}
-
             />
         </section>
     );
