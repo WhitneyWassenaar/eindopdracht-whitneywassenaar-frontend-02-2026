@@ -10,6 +10,7 @@
     align-items: center;
     margin: 0 auto;
     max-width: 1200px;
-    /*border: 1px solid red;*/
+    border: 1px solid red;
     gap:50px;
+    padding: 0 10px;
 }

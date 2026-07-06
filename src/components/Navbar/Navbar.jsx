@@ -65,6 +65,9 @@ function Navbar() {
             </div>
 
                 <Sidebar menuOpen={menuOpen}/>
+            {menuOpen && (
+                <div className="backdrop" onClick={()=> setMenuOpen(false)}/>
+            )}
         </nav>
 
         //Als menu open is

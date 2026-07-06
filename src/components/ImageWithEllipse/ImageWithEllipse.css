@@ -4,7 +4,6 @@
 .ellipse-wrapper {
     position: relative;
     /*border: 2px lightseagreen solid;*/
-
 }
 
 /* ====================
@@ -49,7 +48,6 @@
     right: 30px;
 }
 
-
 /* =================================
       CUSTOM ELLIPSE AND IMAGE
      "HOME > WAT IS EQUIMANAGER?"
@@ -75,7 +73,6 @@
     position: absolute;
     bottom: 1px;
     right: 1px;
-
 }
 .ellipse-img--waarom-equimanager {
     height: 500px;
@@ -95,6 +92,7 @@
     left: 10px;
     z-index: 1;
 }
+
 .ellipse-img--functies {
     max-height: 500px;
    width:230px;
@@ -103,11 +101,9 @@
     bottom: 10px;
 }
 
-
+/* =======================================
+   CUSTOM ELLIPSE AND IMAGE "FUNCTIES" SMALL
+======================================== */
 .ellipse--feature {
     border: 12px solid var(--primary-color);
 }
-
-
-
-

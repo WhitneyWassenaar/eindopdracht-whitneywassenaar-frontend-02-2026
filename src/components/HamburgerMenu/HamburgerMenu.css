@@ -5,9 +5,9 @@
 
 .hamburger-menu {
     padding: 0;
+    margin-right: 1rem;
     background: none;
     cursor: pointer;
-    /*border: none;*/
     width: 50px;
     height: 40px;
     /*border: 1px red solid;*/
@@ -22,13 +22,11 @@
     position: relative;
     width: var(--menu-bar-width);
     height: var(--menu-bar-height);
-    /*border: 1px solid green;*/
 }
 
 .menu::before,
 .menu::after {
     background-color: var(--primary-color);
-
     content: "";
     width: var(--menu-bar-width);
     height: var(--menu-bar-height);
@@ -37,11 +35,9 @@
 }
 
 .menu::before {
-
     top: -15px;
 }
 
 .menu::after {
-
     top: 15px;
 }

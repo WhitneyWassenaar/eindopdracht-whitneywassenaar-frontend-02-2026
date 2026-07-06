@@ -5,10 +5,11 @@
     font-size: var(--font-base);
     border: none;
 }
-
+/* =======================================
+                  BUTTON VARIANT: DEFAULT
+======================================== */
 .button--default {
     background-color: var(--primary-color);
-
     color: var(--text-color);
 }
 
@@ -19,6 +20,9 @@
     cursor:pointer;
 }
 
+/* =======================================
+                  BUTTON VARIANT: BORDERED
+======================================== */
 .button--bordered {
     background-color: transparent;
     border: 2px solid var(--primary-color);
@@ -31,6 +35,9 @@
     cursor:pointer;
 }
 
+/* =======================================
+                  BUTTON VARIANT: HERO
+======================================== */
 .button--hero {
     background-color: var(--primary-color);
     font-weight: 300;
@@ -38,6 +45,9 @@
     padding: 16px 30px;
 }
 
+/* =======================================
+             BUTTON VARIANT: HAMBURGERMENU
+======================================== */
 .button--hamburgermenu {
     padding: 0;
     border: none;
