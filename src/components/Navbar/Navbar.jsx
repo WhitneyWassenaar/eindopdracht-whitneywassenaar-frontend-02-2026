@@ -2,13 +2,25 @@
 import Button from "../Button/Button.jsx";
 import logo from "../../assets/home/logo.svg"
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import "./Navbar.css";
 import Sidebar from "../Sidebar/Sidebar.jsx"; // Wat laatst wordt geladen telt!
 
 function Navbar() {
 
     const [menuOpen, setMenuOpen] = useState(false)
+
+    useEffect(()=> {
+        const handleResize = () => {
+            if (window.innerWidth > 800) {
+                setMenuOpen(false);
+            }
+        }
+        window.addEventListener("resize",handleResize);
+        return () => window.removeEventListener("resize",handleResize);
+    },[]);
+
+
 
     return (
         <nav className="nav nav--guest">
