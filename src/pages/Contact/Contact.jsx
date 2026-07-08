@@ -2,6 +2,7 @@ import Hero from "../../components/Hero/Hero.jsx";
 import contactImg from "../../assets/contact/contactImg.jpg";
 import ContentSection from "../../components/ContentSection/ContentSection.jsx";
 import ContactForm from "../../components/ContactForm/ContactForm.jsx";
+import "./Contact.css"
 
 function Contact() {
     return (
@@ -9,7 +10,7 @@ function Contact() {
             <Hero
                 title={"Contact"}
                 buttonVariant={"bordered"}
-                ellipseVariant = {"contact"}
+                ellipseVariant={"contact"}
                 imageVariant={"contact"}
                 text={
                     <>
@@ -30,14 +31,13 @@ function Contact() {
                 Naar het help-centrum
             </Hero>
 
-            {/*<ContentSection*/}
-            {/*title={"Kom je er toch niet uit?"}*/}
-            {/*>*/}
-            {/*    <p>We helpen je graag verder! Gebruik het contactformulier voor vragen, advies of meer informatie</p>*/}
+            <section className="contact-section">
+                <div className="contact-form-container">
+                <ContactForm/>
+                </div>
+            </section>
 
-            {/*    <ContactForm/>*/}
 
-            {/*</ContentSection>*/}
         </>
     );
 }

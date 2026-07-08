@@ -10,9 +10,10 @@
     align-items: center;
     margin: 0 auto;
     max-width: 1200px;
-    border: 1px solid red;
-    gap:50px;
+    /*border: 1px solid red;*/
+    /*gap:50px;*/
     padding: 50px 0;
+
 }
 
 @media (max-width: 800px) {

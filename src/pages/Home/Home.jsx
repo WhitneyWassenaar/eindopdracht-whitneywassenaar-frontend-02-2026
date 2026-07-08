@@ -29,7 +29,7 @@ function Home() {
                 ellipseVariant={"wat-is-equimanager"}
                 imageVariant={"wat-is-equimanager"}
             >
-                <div className="content-section-paragraph">
+                <div className="contentsection-child--wat-is-equimanager">
                     <p>
                         EquiManager is een applicatie die stalhouders helpt om zorgtaken, gezondheidsinformatie en
                         planningen centraal te beheren, waardoor gegevens actueel en georganiseerd blijven.
@@ -54,7 +54,7 @@ function Home() {
                 ellipseVariant={"waarom-equimanager"}
                 imageVariant={"waarom-equimanager"}
             >
-                <div className="test">
+                <div className="contentsection-child--waarom-equimanager">
                     <div className="waarom-equimanager--highlight">
                         <h3>Complete paardendossiers</h3>
                         <p>Alle informatie van je paarden centraal op één plek! Van medische gegevens en vaccinaties tot

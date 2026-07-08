@@ -10,8 +10,11 @@ function ReviewCard({
         <div className="review-card">
             <div className="avatarAndName">
                 <img src={profileImgUrl} alt={profileImgAlt} />
-                <h4>{personName}</h4>
-                <h5>{stableName}</h5>
+                <div className="nameAndStableName">
+                    <h4>{personName}</h4>
+                    <h5>{stableName}</h5>
+                </div>
+
             </div>
 
             <p>{reviewText}</p>
@@ -20,8 +23,3 @@ function ReviewCard({
 }
 
 export default ReviewCard;
-/*
-* TODO:
-*  - Class maken voor:
-*  - Div van ReviewCard
-*/

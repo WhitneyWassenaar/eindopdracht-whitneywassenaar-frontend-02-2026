@@ -15,17 +15,8 @@ function ImageWithEllipse({
                     alt={imgAlt}/>
                 <div className={`ellipse ellipse--${ellipseVariant}`}></div>
             </div>
-
-
         </div>
     );
 }
 
 export default ImageWithEllipse;
-
-/*
-* TODO:
-*  - Class maken voor:
-*  - img
-*  - ellipse
-*/

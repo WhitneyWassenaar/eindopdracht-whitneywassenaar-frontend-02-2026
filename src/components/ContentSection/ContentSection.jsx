@@ -7,7 +7,7 @@ function ContentSection({
                             imgUrl,
                             imgAlt,
                             variant = "default",
-    styleVariant="default",
+                            styleVariant = "default",
                             ellipseVariant = "default",
                             imageVariant
                         }) {
@@ -29,10 +29,3 @@ function ContentSection({
 }
 
 export default ContentSection;
-
-/*
-* TODO:
-*  - Class maken voor:
-*  - section
-*  - ImageWithEllipse
-*/

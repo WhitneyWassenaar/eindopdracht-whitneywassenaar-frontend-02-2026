@@ -1,3 +1,6 @@
+/* ====================
+ CONTENT SECTION BASE
+==================== */
 .content-section {
     display: flex;
     align-items: center;
@@ -5,7 +8,7 @@
     background-color: var(--tertiary-color);
     border-radius: 40px;
     height:100%;
-    gap: clamp(24px,5vw,80px);
+    gap: clamp(24px,5vw,50px);
     max-width: 1120px;
     width: 100%;
     padding: 10px 0 10px 0;
@@ -13,6 +16,9 @@
     border: 1px solid var(--primary-color);
 }
 
+/* =========================
+ CONTENT SECTION VARIATIONS
+========================== */
 .content-section--default {
     flex-direction: row-reverse;
 }
@@ -21,43 +27,42 @@
     flex-direction: row;
 }
 
+/* ==================
+    CONTENT WRAPPER
+==================== */
 .content-wrapper {
     /*border: 1px solid greenyellow;*/
+    padding: 0 10px 0 10px;
 }
 
 .content-wrapper h2 {
     color: var(--background-color);
-    margin-bottom: 10px;
-}
-
-.waarom-equimanager--highlight h3 {
-    color: var(--validation-color);
+    padding: 0 10px 10px 10px;
 }
 
 .content-wrapper p {
     color: var(--background-color);
 }
 
-.waarom-equimanager--highlight p {
-    color: var(--text-color);
-}
-.content-section-paragraph {
+/* ========================================
+                     CONTENTSECTION CHILDREN
+=========================================== */
+/* =================
+  wat-is-equimanager
+=================== */
+.contentsection-child--wat-is-equimanager {
     /*border: 1px solid var(--background-color);*/
-    max-width: 400px;
+    width: 100%;
+    padding: 10px 10px 10px;
 }
 
-.content-section-paragraph p:not(:last-child) {
+.contentsection-child--wat-is-equimanager p:not(:last-child) {
     margin-bottom:15px;
 }
 
-.test {
-    border: 1px solid var(--background-color);
-}
-
-.waarom-equimanager--highlight:not(:last-child) {
-    margin-bottom:15px;
-}
-
+/* =================
+  waarom-equimanager
+=================== */
 .content-section--waarom-equimanager {
     background-color: transparent;
 }
@@ -66,3 +71,37 @@
     color: var(--text-color);
 }
 
+.contentsection-child--waarom-equimanager {
+    border: 1px solid var(--background-color);
+    padding: 10px;
+}
+
+.waarom-equimanager--highlight h3 {
+    color: var(--validation-color);
+}
+
+.waarom-equimanager--highlight p {
+    color: var(--text-color);
+}
+
+.waarom-equimanager--highlight:not(:last-child) {
+    margin-bottom:15px;
+}
+
+
+
+
+
+
+
+@media (max-width: 800px) {
+    .content-section {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1080px) {
+    .content-section {
+        flex-direction: column;
+    }
+}

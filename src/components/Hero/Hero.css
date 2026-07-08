@@ -27,7 +27,7 @@ h1,h2,p {
     align-items: flex-start;
     gap: clamp(20px,4vw,40px);
     max-width: 480px;
-    border: 1px red solid;
+    /*border: 1px red solid;*/
 }
 
 .hero-article-content-wrapper {
@@ -35,7 +35,7 @@ h1,h2,p {
     flex-direction: column;
     gap:20px;
     font-size: 20px;
-    border: 1px yellow solid;
+    /*border: 1px yellow solid;*/
     color: var(--text-color);
 }
 
@@ -59,7 +59,4 @@ h1,h2,p {
         max-width: 100%;
         height: auto;
     }
-
-
-
 }
