@@ -1,9 +1,9 @@
-
 import Button from "../Button/Button.jsx";
 import logo from "../../assets/home/logo.svg"
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.jsx";
 import {useEffect, useState} from "react";
 import "./Navbar.css";
+import {NavLink} from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar.jsx"; // Wat laatst wordt geladen telt!
 
 function Navbar() {
@@ -26,15 +26,27 @@ function Navbar() {
         <nav className="nav nav--guest">
             <div className="nav__left">
                 {/*<Link to={isLoggedIn ? "/dashboard" : "/"}>*/}
-                <img src={logo} alt={"Website logo"}/>
+                <NavLink to="/"> <img src={logo} alt={"Website logo"}/></NavLink>
+
                 {/*</Link>*/}
             </div>
 
             <div className="nav__center">
                 <ul>
-                    <li><a href={"/"}>Home</a></li>
-                    <li><a href={"/"}>Functies</a></li>
-                    <li><a href={"/"}>Contact</a></li>
+                    <li>
+                        <NavLink
+                            className={({ isActive }) => isActive ? 'active-menu-link' : 'default-menu-link'}
+                            to="/"
+                        >
+                            Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink className={({ isActive }) => isActive ? 'active-menu-link' : 'default-menu-link'} to="/functies">Functies</NavLink>
+                    </li>
+                    <li>
+                        <NavLink className={({ isActive }) => isActive ? 'active-menu-link' : 'default-menu-link'} to="/contact">Contact</NavLink>
+                    </li>
                 </ul>
             </div>
 
@@ -43,6 +55,7 @@ function Navbar() {
                     <Button
                         type={"button"}
                         variant={"default"}
+                        buttonPath={"/registreren"}
                     >
                         Registreren
                     </Button>
@@ -50,6 +63,7 @@ function Navbar() {
                     <Button
                         type={"button"}
                         variant={"bordered"}
+                        buttonPath={"/inloggen"}
                     >
                         Inloggen
                     </Button>

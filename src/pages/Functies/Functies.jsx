@@ -3,10 +3,12 @@ import greyHorse from "../../assets/functies/greyHorse.png";
 import FeatureCard from "../../components/FeatureCard/FeatureCard.jsx";
 import featureImg1 from "../../assets/functies/featureImg1.jpg";
 import "./Functies.css"
+import Navbar from "../../components/Navbar/Navbar.jsx";
 
 function Functies() {
     return (
         <>
+            <Navbar/>
             <section className="hero-wrapper">
             <section className="hero-section">
                 <Hero

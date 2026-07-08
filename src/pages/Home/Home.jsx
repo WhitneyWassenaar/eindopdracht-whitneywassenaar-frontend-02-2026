@@ -6,16 +6,19 @@ import ReviewSection from "../../components/ReviewSection/ReviewSection.jsx";
 import laptopAndPhone from "../../assets/home/laptopAndPhone.png";
 import walkingGirlAndHorse from "../../assets/home/walkingGirlAndHorse.png";
 import greyHorseAndRider from "../../assets/home/greyHorseAndRider.png";
+import Navbar from "../../components/Navbar/Navbar.jsx";
 
 function Home() {
     return (
         <>
+            <Navbar/>
             <Hero
                 title={"Beheer jouw paarden,\n behoud het overzicht"}
                 text={"Beheer gezondheid, trainingen, voeding, documenten en planning van al je paarden vanuit één centraal systeem."}
                 imgUrl={greyHorseAndRider}
                 imgAlt={"An image of a rider that takes a jump with her grey horse"}
                 buttonVariant={"hero"}
+                buttonPath={"/registreren"}
 
             >
                 Probeer het gratis

@@ -1,15 +1,18 @@
 import "./Button.css";
+import {useNavigate} from "react-router-dom";
 
 function Button({
                     children,
-                    variant="default",
-                    onClick,
-                    type}) {
+                    variant = "default",
+                    buttonPath,
+                    type="button"
+                }) {
+    const navigate = useNavigate();
     return (
         <button
             type={type}
             className={`button button--${variant}`}
-            onClick={onClick}
+            onClick={() => navigate(buttonPath)}
         >
             {children}
         </button>

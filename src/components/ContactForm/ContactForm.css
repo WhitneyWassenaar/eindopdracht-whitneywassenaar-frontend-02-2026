@@ -38,3 +38,7 @@
 }
 
 }
+
+.succes-message {
+    color: var(--validation-color);
+}

@@ -3,15 +3,18 @@ import contactImg from "../../assets/contact/contactImg.jpg";
 import ContentSection from "../../components/ContentSection/ContentSection.jsx";
 import ContactForm from "../../components/ContactForm/ContactForm.jsx";
 import "./Contact.css"
+import Navbar from "../../components/Navbar/Navbar.jsx";
 
 function Contact() {
     return (
         <>
+            <Navbar/>
             <Hero
                 title={"Contact"}
                 buttonVariant={"bordered"}
                 ellipseVariant={"contact"}
                 imageVariant={"contact"}
+                buttonPath={"/helpcentrum"}
                 text={
                     <>
                         <p>

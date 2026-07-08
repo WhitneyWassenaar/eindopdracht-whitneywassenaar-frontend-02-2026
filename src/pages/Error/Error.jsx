@@ -2,6 +2,8 @@ import "./Error.css"
 import errorImg from "../../assets/error/errorImg.png";
 import ContentSection from "../../components/ContentSection/ContentSection.jsx";
 
+import {Link} from 'react-router-dom';
+
 function Error() {
     return (
         <>
@@ -12,7 +14,7 @@ function Error() {
                 ellipseClassName={"ellipse ellipse-default"}
             >
                 <p>
-                    OEPS... Er is iets mis gegaan...
+                    OEPS... Er is iets mis gegaan... Klik <Link to="/">hier</Link> om terug te gaan naar de homepagina
                 </p>
             </ContentSection>
         </>

@@ -2,19 +2,21 @@ import "./Hero.css";
 import Button from "../Button/Button.jsx";
 import ImageWithEllipse from "../ImageWithEllipse/ImageWithEllipse.jsx";
 
+
 function Hero({
                   title,
                   text,
-                  onClick,
                   children,
                   imgUrl,
                   imgAlt,
                   variant = "default",
                   buttonVariant = "default",
                   imageVariant = "default",
-                  ellipseVariant = "default"
+                  ellipseVariant = "default",
+                  buttonPath
               }
 ) {
+
     return (
         <section className={`hero hero--${variant}`}>
             <article className="hero-article-wrapper">
@@ -26,7 +28,7 @@ function Hero({
                 {children && (
                     <Button
                         variant={buttonVariant}
-                        onClick={onClick}
+                        buttonPath={buttonPath}
                     >
                         {children}
                     </Button>
