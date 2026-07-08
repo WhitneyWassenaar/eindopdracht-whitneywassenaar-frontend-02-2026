@@ -1,5 +1,5 @@
 import "./RegisterForm.css"
-import Button from "../Button/Button.jsx";
+import Button from "../../ui/Button/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 

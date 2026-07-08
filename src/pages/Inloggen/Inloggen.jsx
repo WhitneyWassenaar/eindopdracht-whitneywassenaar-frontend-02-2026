@@ -1,5 +1,5 @@
-import LoginForm from "../../components/LoginForm/LoginForm.jsx";
-import Navbar from "../../components/Navbar/Navbar.jsx";
+import LoginForm from "../../components/forms/LoginForm/LoginForm.jsx";
+import Navbar from "../../components/navigation/Navbar/Navbar.jsx";
 
 function Inloggen() {
     return(

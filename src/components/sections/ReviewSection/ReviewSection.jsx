@@ -1,10 +1,10 @@
 import "./ReviewSection.css";
-import ReviewCard from "../ReviewCard/ReviewCard.jsx";
+import ReviewCard from "../../cards/ReviewCard/ReviewCard.jsx";
 
 //Images
-import reviewer1 from "../../assets/home/reviewer1.jpg";
-import reviewer2 from "../../assets/home/reviewer2.jpg";
-import reviewer3 from "../../assets/home/reviewer3.jpg";
+import reviewer1 from "../../../assets/home/reviewer1.jpg";
+import reviewer2 from "../../../assets/home/reviewer2.jpg";
+import reviewer3 from "../../../assets/home/reviewer3.jpg";
 
 function ReviewSection() {
     return (

@@ -6,7 +6,7 @@ import Contact from "./pages/Contact/Contact.jsx";
 import Inloggen from "./pages/Inloggen/Inloggen.jsx";
 import Registreren from "./pages/Registreren/Registreren.jsx";
 
-import Footer from "./components/Footer/Footer.jsx";
+import Footer from "./components/layout/Footer/Footer.jsx";
 import Error from "./pages/Error/Error.jsx";
 
 import {Routes, Route} from 'react-router-dom';

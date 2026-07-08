@@ -1,5 +1,5 @@
 
-import Navbar from "../../components/Navbar/Navbar.jsx";
+import Navbar from "../../components/navigation/Navbar/Navbar.jsx";
 
 function Helpcentrum() {
     return(

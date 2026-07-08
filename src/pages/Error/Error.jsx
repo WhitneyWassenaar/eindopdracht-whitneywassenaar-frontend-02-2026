@@ -1,6 +1,6 @@
 import "./Error.css"
 import errorImg from "../../assets/error/errorImg.png";
-import ContentSection from "../../components/ContentSection/ContentSection.jsx";
+import ContentSection from "../../components/sections/ContentSection/ContentSection.jsx";
 
 import {Link} from 'react-router-dom';
 

@@ -1,12 +1,12 @@
 //Components
-import Hero from "../../components/Hero/Hero.jsx";
-import ContentSection from "../../components/ContentSection/ContentSection.jsx";
-import ReviewSection from "../../components/ReviewSection/ReviewSection.jsx";
+import Hero from "../../components/sections/Hero/Hero.jsx";
+import ContentSection from "../../components/sections/ContentSection/ContentSection.jsx";
+import ReviewSection from "../../components/sections/ReviewSection/ReviewSection.jsx";
 //Images
 import laptopAndPhone from "../../assets/home/laptopAndPhone.png";
 import walkingGirlAndHorse from "../../assets/home/walkingGirlAndHorse.png";
 import greyHorseAndRider from "../../assets/home/greyHorseAndRider.png";
-import Navbar from "../../components/Navbar/Navbar.jsx";
+import Navbar from "../../components/navigation/Navbar/Navbar.jsx";
 
 function Home() {
     return (

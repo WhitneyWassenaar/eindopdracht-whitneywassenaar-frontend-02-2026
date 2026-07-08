@@ -1,9 +1,9 @@
-import Hero from "../../components/Hero/Hero.jsx";
+import Hero from "../../components/sections/Hero/Hero.jsx";
 import greyHorse from "../../assets/functies/greyHorse.png";
-import FeatureCard from "../../components/FeatureCard/FeatureCard.jsx";
+import FeatureCard from "../../components/cards/FeatureCard/FeatureCard.jsx";
 import featureImg1 from "../../assets/functies/featureImg1.jpg";
 import "./Functies.css"
-import Navbar from "../../components/Navbar/Navbar.jsx";
+import Navbar from "../../components/navigation/Navbar/Navbar.jsx";
 
 function Functies() {
     return (

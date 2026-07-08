@@ -1,5 +1,5 @@
-import RegisterForm from "../../components/RegisterForm/RegisterForm.jsx";
-import Navbar from "../../components/Navbar/Navbar.jsx";
+import RegisterForm from "../../components/forms/RegisterForm/RegisterForm.jsx";
+import Navbar from "../../components/navigation/Navbar/Navbar.jsx";
 
 function Registreren() {
     return(

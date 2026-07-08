@@ -1,4 +1,4 @@
-import Button from "../Button/Button.jsx";
+import Button from "../../ui/Button/Button.jsx";
 import "./ContactForm.css"
 import {useState} from "react";
 

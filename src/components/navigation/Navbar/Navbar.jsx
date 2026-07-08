@@ -1,10 +1,13 @@
-import Button from "../Button/Button.jsx";
-import logo from "../../assets/home/logo.svg"
-import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.jsx";
+import Button from "../../ui/Button/Button.jsx";
+import logo from "../../../assets/home/logo.svg"
+
 import {useEffect, useState} from "react";
-import "./Navbar.css";
+
 import {NavLink} from 'react-router-dom';
-import Sidebar from "../Sidebar/Sidebar.jsx"; // Wat laatst wordt geladen telt!
+import Sidebar from "../Sidebar/Sidebar.jsx";
+import "./Navbar.css";
+import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.jsx";
+ // Wat laatst wordt geladen telt!
 
 function Navbar() {
 
@@ -131,12 +134,9 @@ export default Navbar;
 *  - Class aanmaken voor:
 *  - logo
 *  Toevoegen:
-*  - const useNavigate
 *  - const isAuth, logout / useContext
 *  - AuthContext
-*  - NavLink
 *  - Conditional rendering isAuth
-*  - logo klikbaar > doorsturen naar home
 *  - column nav als gebruiker is ingelogd
 */
 

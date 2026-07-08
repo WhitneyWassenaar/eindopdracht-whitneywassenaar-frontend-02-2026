@@ -1,5 +1,5 @@
 import "./Hero.css";
-import Button from "../Button/Button.jsx";
+import Button from "../../ui/Button/Button.jsx";
 import ImageWithEllipse from "../ImageWithEllipse/ImageWithEllipse.jsx";
 
 
