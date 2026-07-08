@@ -1,11 +1,8 @@
-
-import Navbar from "../../components/navigation/Navbar/Navbar.jsx";
-
+import './Helpcentrum.css'
 function Helpcentrum() {
     return(
         <>
-            <Navbar/>
-            <section>
+            <section className="helpcentrum-page">
                 <h1>Helpcentrum</h1>
                 <ul>
                     <li>Account</li>

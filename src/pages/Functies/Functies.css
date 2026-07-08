@@ -1,12 +1,15 @@
 .feature-section {
     background-color: var(--secondary-color);
     width: 100%;
+    max-width: 1200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px 0 20px 0;
     gap:10px;
+    margin: 0 auto;
+
     /*border:2px solid orange;*/
 }
 
@@ -44,3 +47,5 @@
 .curve-bottom {
     position: absolute;
 }
+
+

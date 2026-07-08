@@ -3,12 +3,11 @@ import contactImg from "../../assets/contact/contactImg.jpg";
 import ContentSection from "../../components/sections/ContentSection/ContentSection.jsx";
 import ContactForm from "../../components/forms/ContactForm/ContactForm.jsx";
 import "./Contact.css"
-import Navbar from "../../components/navigation/Navbar/Navbar.jsx";
+import GuestNavbar from "../../components/navigation/GuestNavbar/GuestNavbar.jsx";
 
 function Contact() {
     return (
         <>
-            <Navbar/>
             <Hero
                 title={"Contact"}
                 buttonVariant={"bordered"}

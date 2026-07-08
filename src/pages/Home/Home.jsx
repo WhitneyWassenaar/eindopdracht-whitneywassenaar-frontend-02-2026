@@ -6,12 +6,10 @@ import ReviewSection from "../../components/sections/ReviewSection/ReviewSection
 import laptopAndPhone from "../../assets/home/laptopAndPhone.png";
 import walkingGirlAndHorse from "../../assets/home/walkingGirlAndHorse.png";
 import greyHorseAndRider from "../../assets/home/greyHorseAndRider.png";
-import Navbar from "../../components/navigation/Navbar/Navbar.jsx";
 
 function Home() {
     return (
         <>
-            <Navbar/>
             <Hero
                 title={"Beheer jouw paarden,\n behoud het overzicht"}
                 text={"Beheer gezondheid, trainingen, voeding, documenten en planning van al je paarden vanuit één centraal systeem."}

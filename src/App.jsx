@@ -5,29 +5,35 @@ import Functies from "./pages/Functies/Functies.jsx";
 import Contact from "./pages/Contact/Contact.jsx";
 import Inloggen from "./pages/Inloggen/Inloggen.jsx";
 import Registreren from "./pages/Registreren/Registreren.jsx";
-
-import Footer from "./components/layout/Footer/Footer.jsx";
-import Error from "./pages/Error/Error.jsx";
-
-import {Routes, Route} from 'react-router-dom';
 import Helpcentrum from "./pages/Helpcentrum/Helpcentrum.jsx";
+
+import Error from "./pages/Error/Error.jsx";
+import {Routes, Route} from 'react-router-dom';
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
+import DashboardLayout from "./components/layout/DashboardLayout/DashboardLayout.jsx";
+import WebLayout from "./components/layout/WebLayout/WebLayout.jsx";
 
 function App() {
 
     return (
         <>
-            <div className="inner-container">
                 <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/functies" element={<Functies/>}/>
-                    <Route path="/contact" element={<Contact/>}/>
-                    <Route path="/error" element={<Error/>}/>
-                    <Route path="/inloggen" element={<Inloggen/>}/>
-                    <Route path="/registreren" element={<Registreren/>}/>
-                    <Route path="/helpcentrum" element={<Helpcentrum/>}/>
+
+                    <Route element={<WebLayout/>}>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/functies" element={<Functies/>}/>
+                        <Route path="/contact" element={<Contact/>}/>
+                        <Route path="/error" element={<Error/>}/>
+                        <Route path="/inloggen" element={<Inloggen/>}/>
+                        <Route path="/registreren" element={<Registreren/>}/>
+                        <Route path="/helpcentrum" element={<Helpcentrum/>}/>
+                    </Route>
+
+                    <Route element={<DashboardLayout/>}>
+                        <Route path="/dashboard" element={<Dashboard/>}/>
+                    </Route>
+
                 </Routes>
-            </div>
-            <Footer/>
         </>
     );
 }
