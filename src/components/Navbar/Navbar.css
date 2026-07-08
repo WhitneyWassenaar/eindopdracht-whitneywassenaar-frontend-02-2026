@@ -1,0 +1,93 @@
+/* ===============================================
+                                          DESKTOP
+================================================ */
+/* ====================
+        NAV BASE
+==================== */
+.nav {
+    width: 100%;
+    padding: 0 10px;
+}
+
+/* ================================
+                NAV VARIANT: GUEST
+================================ */
+.nav--guest {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1120px;
+    padding-top: 10px ;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ====================
+      LEFT (LOGO)
+==================== */
+.nav__left {
+    display: flex;
+    align-items: center;
+}
+
+/* ====================
+      CENTER (MENU)
+==================== */
+.nav__center {
+    display: flex;
+}
+
+.nav__center ul {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    gap: 40px;
+}
+
+.nav__center a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: var(--primary-color);
+}
+
+.nav__center a:hover {
+    color: var(--validation-color);
+}
+
+/* ====================
+    RIGHT (BUTTONS)
+==================== */
+.nav__right {
+    display: flex;
+    align-items: center;
+}
+
+.button-wrapper {
+    display: flex;
+    gap: 15px;
+}
+
+/* ====================
+    HAMBURGER MENU
+==================== */
+.hamburger-menu {
+display: none;
+}
+
+/* ===============================================
+                                          TABLET
+================================================ */
+@media (max-width: 800px) {
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .nav__center,
+    .button-wrapper
+    {
+        display: none;
+    }
+
+    .nav__right {
+        display: flex;
+    }
+}

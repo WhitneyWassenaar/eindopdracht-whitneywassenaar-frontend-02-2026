@@ -1,17 +1,17 @@
 import "./Footer.css";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/home/logo.svg";
 
 function Footer() {
     return (
-        <footer>
-            <div>
+        <footer className="footer">
+            <div className="branding">
                 <img src={logo} alt="EquiManager branding logo"/>
-                <p>EquiManager is een gebruiksvriendelijke paardenmanagement-applicatie waarmee stalhouders alle informatie van hun paarden centraal kunnen beheren - alles overzichtelijk op één plek.</p>
+                <p>EquiManager is een gebruiksvriendelijke paardenmanagement-applicatie <br/> waarmee stalhouders alle informatie van hun paarden centraal kunnen beheren <br/>- alles overzichtelijk op één plek.</p>
             </div>
 
             <hr/>
 
-            <p>Copyright © 2026 EquiManager designed by Whitney Wassenaar</p>
+            <p className="copyright">Copyright © 2026 EquiManager designed by Whitney Wassenaar</p>
         </footer>
     );
 }

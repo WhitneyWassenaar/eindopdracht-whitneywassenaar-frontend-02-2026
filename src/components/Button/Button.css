@@ -1,0 +1,55 @@
+.button {
+    border-radius: 15px;
+    padding: 0.2rem 0.7rem ;
+    transition: all 0.3s ease;
+    font-size: var(--font-base);
+    border: none;
+}
+/* =======================================
+                  BUTTON VARIANT: DEFAULT
+======================================== */
+.button--default {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.button--default:hover,
+.button--hero:hover{
+    background-color: var(--validation-color);
+    color: var(--background-color);
+    cursor:pointer;
+}
+
+/* =======================================
+                  BUTTON VARIANT: BORDERED
+======================================== */
+.button--bordered {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.button--bordered:hover {
+    border-color: var(--validation-color);
+    color: var(--validation-color);
+    cursor:pointer;
+}
+
+/* =======================================
+                  BUTTON VARIANT: HERO
+======================================== */
+.button--hero {
+    background-color: var(--primary-color);
+    font-weight: 300;
+    color: var(--text-color);
+    padding: 16px 30px;
+}
+
+/* =======================================
+             BUTTON VARIANT: HAMBURGERMENU
+======================================== */
+.button--hamburgermenu {
+    padding: 0;
+    border: none;
+    background: none;
+}

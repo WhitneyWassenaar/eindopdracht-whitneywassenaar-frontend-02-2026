@@ -1,17 +1,26 @@
 import "./FeatureCard.css";
-import ImageWithEllipse from "../ImageWithEllipse/ImageWithEllipse.jsx";
+import FeatureEllipse from "../FeatureElipse/FeatureEllipse.jsx";
 
-function FeatureCard({articleClassName,title,children,imgUrl,imgAlt,ellipseClassName}) {
+function FeatureCard({
+                         articleClassName,
+                         title,
+                         children,
+                         imgUrl,
+                         imgAlt,
+                     variant="default"}) {
     return (
-        <article className={articleClassName}>
-            <h2>{title}</h2>
-            {children}
+        <div className={`feature-card-wrapper--${variant}`}>
+            <article className={articleClassName}>
+                <div className="feature-content-wrapper">
+                    <h2>{title}</h2>
+                    {children}
+                </div>
+            </article>
+            <FeatureEllipse
+                imgUrl={imgUrl}
+                imgAlt={imgAlt}/>
+        </div>
 
-            <ImageWithEllipse
-            imgUrl={imgUrl}
-            imgAlt={imgAlt}
-            className={ellipseClassName}/>
-        </article>
     );
 }
 

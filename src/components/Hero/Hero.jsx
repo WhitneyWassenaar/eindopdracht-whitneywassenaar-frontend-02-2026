@@ -2,15 +2,30 @@ import "./Hero.css";
 import Button from "../Button/Button.jsx";
 import ImageWithEllipse from "../ImageWithEllipse/ImageWithEllipse.jsx";
 
-function Hero({title,text,className,buttonClassName,onClick,children,imgUrl,imgAlt, ellipseClassName}) {
+function Hero({
+                  title,
+                  text,
+                  onClick,
+                  children,
+                  imgUrl,
+                  imgAlt,
+                  variant = "default",
+                  buttonVariant = "default",
+                  imageVariant = "default",
+                  ellipseVariant = "default"
+              }
+) {
     return (
-        <section className={className}>
-            <article>
-                <h1>{title}</h1>
-                <p>{text}</p>
+        <section className={`hero hero--${variant}`}>
+            <article className="hero-article-wrapper">
+                <div className="hero-article-content-wrapper">
+                    <h1>{title}</h1>
+                    <div>{text}</div>
+
+                </div>
                 {children && (
                     <Button
-                        className={buttonClassName}
+                        variant={buttonVariant}
                         onClick={onClick}
                     >
                         {children}
@@ -21,7 +36,9 @@ function Hero({title,text,className,buttonClassName,onClick,children,imgUrl,imgA
             <ImageWithEllipse
                 imgUrl={imgUrl}
                 imgAlt={imgAlt}
-            className={ellipseClassName}/>
+                imageVariant={imageVariant}
+                ellipseVariant={ellipseVariant}
+            />
         </section>
     );
 }

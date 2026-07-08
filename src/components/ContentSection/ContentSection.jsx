@@ -1,30 +1,31 @@
 import "./ContentSection.css";
 import ImageWithEllipse from "../ImageWithEllipse/ImageWithEllipse.jsx";
 
-function ContentSection({title,children, imgUrl, imgAlt,ellipseClassName}) {
+function ContentSection({
+                            title,
+                            children,
+                            imgUrl,
+                            imgAlt,
+                            variant = "default",
+                            styleVariant = "default",
+                            ellipseVariant = "default",
+                            imageVariant
+                        }) {
     return (
-        <section>
-            <div>
+        <section className={`content-section content-section--${variant} content-section--${styleVariant}`}>
+            <div className="content-wrapper">
                 <h2>{title}</h2>
                 {children}
             </div>
             {imgUrl && (
-                <div>
-                    <ImageWithEllipse
-                        className={ellipseClassName}
-                        imgUrl={imgUrl}
-                        imgAlt={imgAlt}/>
-                </div>
+                <ImageWithEllipse
+                    ellipseVariant={ellipseVariant}
+                    imgUrl={imgUrl}
+                    imgAlt={imgAlt}
+                    imageVariant={imageVariant}/>
             )}
         </section>
     );
 }
 
 export default ContentSection;
-
-/*
-* TODO:
-*  - Class maken voor:
-*  - section
-*  - ImageWithEllipse
-*/

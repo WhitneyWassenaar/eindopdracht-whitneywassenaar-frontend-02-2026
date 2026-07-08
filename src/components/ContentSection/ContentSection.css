@@ -1,0 +1,107 @@
+/* ====================
+ CONTENT SECTION BASE
+==================== */
+.content-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--tertiary-color);
+    border-radius: 40px;
+    height:100%;
+    gap: clamp(24px,5vw,50px);
+    max-width: 1120px;
+    width: 100%;
+    padding: 10px 0 10px 0;
+    margin: 0 auto;
+    border: 1px solid var(--primary-color);
+}
+
+/* =========================
+ CONTENT SECTION VARIATIONS
+========================== */
+.content-section--default {
+    flex-direction: row-reverse;
+}
+
+.content-section--reverse {
+    flex-direction: row;
+}
+
+/* ==================
+    CONTENT WRAPPER
+==================== */
+.content-wrapper {
+    /*border: 1px solid greenyellow;*/
+    padding: 0 10px 0 10px;
+}
+
+.content-wrapper h2 {
+    color: var(--background-color);
+    padding: 0 10px 10px 10px;
+}
+
+.content-wrapper p {
+    color: var(--background-color);
+}
+
+/* ========================================
+                     CONTENTSECTION CHILDREN
+=========================================== */
+/* =================
+  wat-is-equimanager
+=================== */
+.contentsection-child--wat-is-equimanager {
+    /*border: 1px solid var(--background-color);*/
+    width: 100%;
+    padding: 10px 10px 10px;
+}
+
+.contentsection-child--wat-is-equimanager p:not(:last-child) {
+    margin-bottom:15px;
+}
+
+/* =================
+  waarom-equimanager
+=================== */
+.content-section--waarom-equimanager {
+    background-color: transparent;
+}
+
+.content-section--waarom-equimanager h2 {
+    color: var(--text-color);
+}
+
+.contentsection-child--waarom-equimanager {
+    border: 1px solid var(--background-color);
+    padding: 10px;
+}
+
+.waarom-equimanager--highlight h3 {
+    color: var(--validation-color);
+}
+
+.waarom-equimanager--highlight p {
+    color: var(--text-color);
+}
+
+.waarom-equimanager--highlight:not(:last-child) {
+    margin-bottom:15px;
+}
+
+
+
+
+
+
+
+@media (max-width: 800px) {
+    .content-section {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1080px) {
+    .content-section {
+        flex-direction: column;
+    }
+}

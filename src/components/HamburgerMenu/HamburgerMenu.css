@@ -1,0 +1,43 @@
+:root {
+    --menu-bar-width: 50px;
+    --menu-bar-height: 5px;
+}
+
+.hamburger-menu {
+    padding: 0;
+    margin-right: 1rem;
+    background: none;
+    cursor: pointer;
+    width: 50px;
+    height: 40px;
+    /*border: 1px red solid;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.menu {
+    background-color: var(--primary-color);
+    position: relative;
+    width: var(--menu-bar-width);
+    height: var(--menu-bar-height);
+}
+
+.menu::before,
+.menu::after {
+    background-color: var(--primary-color);
+    content: "";
+    width: var(--menu-bar-width);
+    height: var(--menu-bar-height);
+    position: absolute;
+    left:0;
+}
+
+.menu::before {
+    top: -15px;
+}
+
+.menu::after {
+    top: 15px;
+}

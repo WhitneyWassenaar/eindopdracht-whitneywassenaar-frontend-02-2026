@@ -1,5 +1,5 @@
 import "./Error.css"
-import errorImg from "../../assets/errorImg.png";
+import errorImg from "../../assets/error/errorImg.png";
 import ContentSection from "../../components/ContentSection/ContentSection.jsx";
 
 function Error() {
