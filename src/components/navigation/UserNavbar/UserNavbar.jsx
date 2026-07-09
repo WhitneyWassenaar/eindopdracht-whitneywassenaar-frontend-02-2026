@@ -2,8 +2,13 @@ import {NavLink} from "react-router-dom";
 import Button from "../../ui/Button/Button.jsx";
 import logo from "../../../assets/home/logo.svg";
 import './UserNavbar.css'
+import {useContext} from "react";
+import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
 function UserNavbar() {
+
+    const {logout} = useContext(AuthContext);
+
     return (
         <nav className="user-nav">
             <div className="nav-content-wrapper">
@@ -25,7 +30,7 @@ function UserNavbar() {
             <div className="nav__logout">
                 <Button
                     variant={"bordered"}
-                    buttonPath={"/"}
+                    onClick={logout}
                 >
                     Uitloggen
                 </Button>
