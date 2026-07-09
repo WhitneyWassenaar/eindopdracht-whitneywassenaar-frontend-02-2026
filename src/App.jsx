@@ -12,6 +12,11 @@ import {Routes, Route} from 'react-router-dom';
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import DashboardLayout from "./components/layout/DashboardLayout/DashboardLayout.jsx";
 import WebLayout from "./components/layout/WebLayout/WebLayout.jsx";
+import Paardenbeheer from "./pages/Paardenbeheer/Paardenbeheer.jsx";
+import Stalbezetting from "./pages/Stalbezetting/Stalbezetting.jsx";
+import Zorgtaken from "./pages/Zorgtaken/Zorgtaken.jsx";
+import Contacten from "./pages/Contacten/Contacten.jsx";
+
 
 function App() {
 
@@ -31,8 +36,11 @@ function App() {
 
                     <Route element={<DashboardLayout/>}>
                         <Route path="/dashboard" element={<Dashboard/>}/>
+                        <Route path="/paardenbeheer" element={<Paardenbeheer/>}/>
+                        <Route path="/stalbezetting" element={<Stalbezetting/>}/>
+                        <Route path="/zorgtaken" element={<Zorgtaken/>}/>
+                        <Route path="/contacten" element={<Contacten/>}/>
                     </Route>
-
                 </Routes>
         </>
     );
@@ -43,6 +51,7 @@ export default App
 /*
 * TODO:
 *  Toevoegen:
+*  - help pagina toevoegen bij user nav
 *  - AuthContext
 *  - Routing
 *  - Conditional rendering toepassen bij specifieke pagina's

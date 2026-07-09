@@ -1,35 +1,36 @@
+import {NavLink} from "react-router-dom";
+import Button from "../../ui/Button/Button.jsx";
+import logo from "../../../assets/home/logo.svg";
+import './UserNavbar.css'
+
+
 function UserNavbar() {
-    retrun (
-        <nav className={isLoggedIn ? "nav nav--logged-in" : "nav nav--guest"}>
-            <img className="logo" src={logo} alt={"Website logo"}/>
-            {!isLoggedIn ? (
-                <>
-                    <ul>
-                        <li><a href={"/"}>Home</a></li>
-                        <li><a href={"/"}>Functies</a></li>
-                        <li><a href={"/"}>Contact</a></li>
-                    </ul>
+    return (
+        <nav className="user-nav">
+            <div className="nav-content-wrapper">
+                <div className="nav__top">
+                    <NavLink to="/dashboard"> <img src={logo} alt={"Website logo"}/></NavLink>
+                </div>
 
-                    <Button className={"/"}>Registreren</Button>
-                    <Button className={"/"}>Inloggen</Button>
-                </>
+                <ul>
+                    <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                    <li><NavLink to="/paardenbeheer">Paardenbeheer</NavLink></li>
+                    <li><NavLink to="/stalbezetting">Stalbezetting</NavLink></li>
+                    <li><NavLink to="/zorgtaken">Zorgtaken</NavLink></li>
+                    <li><NavLink to="/Contacten">Contacten</NavLink></li>
+                    {/*<li><NavLink to="/help">Help</NavLink></li>*/} {/*Later toevoegen*/}
+                </ul>
+            </div>
 
-            ) : (
-                <>
-                    <ul>
-                        <li><a href={"/"}>Dashboard</a></li>
-                        <li><a href={"/"}>Paardenbeheer</a></li>
-                        <li><a href={"/"}>Stalbezetting</a></li>
-                        <li><a href={"/"}>Zorgtaken</a></li>
-                        <li><a href={"/"}>Contacten</a></li>
-                        <li><a href={"/"}>Help</a></li>
-                    </ul>
 
-                    <Button className={"/"}>Uitloggen</Button>
-                </>
-
-            )}
-
+            <div className="nav__logout">
+                <Button
+                    variant={"bordered"}
+                    buttonPath={"/"}
+                >
+                    Uitloggen
+                </Button>
+            </div>
 
         </nav>
     )

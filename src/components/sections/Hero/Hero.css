@@ -40,6 +40,9 @@ h1,h2,p {
     color: var(--text-color);
 }
 
+.hero-article-content-wrapper p {
+    color: inherit;
+}
 .text-highlight {
 
     color: var(--primary-color);

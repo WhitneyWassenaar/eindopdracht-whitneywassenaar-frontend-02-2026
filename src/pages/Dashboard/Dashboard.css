@@ -1,5 +1,9 @@
 .dashboard-page {
     background-color: var(--tertiary-color);
     color:var(--background-color);
-    min-height: 100vh;
+    padding: 20px;
+}
+
+.dashboard-page h1,h2,p {
+    color: var(--background-color);
 }

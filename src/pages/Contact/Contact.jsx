@@ -1,9 +1,8 @@
 import Hero from "../../components/sections/Hero/Hero.jsx";
 import contactImg from "../../assets/contact/contactImg.jpg";
-import ContentSection from "../../components/sections/ContentSection/ContentSection.jsx";
 import ContactForm from "../../components/forms/ContactForm/ContactForm.jsx";
 import "./Contact.css"
-import GuestNavbar from "../../components/navigation/GuestNavbar/GuestNavbar.jsx";
+
 
 function Contact() {
     return (
