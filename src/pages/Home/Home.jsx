@@ -1,7 +1,7 @@
 //Components
-import Hero from "../../components/Hero/Hero.jsx";
-import ContentSection from "../../components/ContentSection/ContentSection.jsx";
-import ReviewSection from "../../components/ReviewSection/ReviewSection.jsx";
+import Hero from "../../components/sections/Hero/Hero.jsx";
+import ContentSection from "../../components/sections/ContentSection/ContentSection.jsx";
+import ReviewSection from "../../components/sections/ReviewSection/ReviewSection.jsx";
 //Images
 import laptopAndPhone from "../../assets/home/laptopAndPhone.png";
 import walkingGirlAndHorse from "../../assets/home/walkingGirlAndHorse.png";
@@ -16,6 +16,7 @@ function Home() {
                 imgUrl={greyHorseAndRider}
                 imgAlt={"An image of a rider that takes a jump with her grey horse"}
                 buttonVariant={"hero"}
+                buttonPath={"/registreren"}
 
             >
                 Probeer het gratis

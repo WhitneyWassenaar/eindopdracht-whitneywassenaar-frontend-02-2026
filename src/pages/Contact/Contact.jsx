@@ -1,8 +1,8 @@
-import Hero from "../../components/Hero/Hero.jsx";
+import Hero from "../../components/sections/Hero/Hero.jsx";
 import contactImg from "../../assets/contact/contactImg.jpg";
-import ContentSection from "../../components/ContentSection/ContentSection.jsx";
-import ContactForm from "../../components/ContactForm/ContactForm.jsx";
+import ContactForm from "../../components/forms/ContactForm/ContactForm.jsx";
 import "./Contact.css"
+
 
 function Contact() {
     return (
@@ -12,6 +12,7 @@ function Contact() {
                 buttonVariant={"bordered"}
                 ellipseVariant={"contact"}
                 imageVariant={"contact"}
+                buttonPath={"/helpcentrum"}
                 text={
                     <>
                         <p>

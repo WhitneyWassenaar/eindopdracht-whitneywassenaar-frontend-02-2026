@@ -1,0 +1,20 @@
+
+.dashboard-layout {
+    display: flex;
+
+    /*border: 1px purple solid;*/
+    background-color: var(--tertiary-color);
+    align-items: stretch;
+}
+
+.dashboard-sidebar {
+    width:250px;
+    flex-shrink: 0;
+}
+
+.dashboard-content {
+    flex: 1;
+    /*border: 5px solid red;*/
+
+}
+
