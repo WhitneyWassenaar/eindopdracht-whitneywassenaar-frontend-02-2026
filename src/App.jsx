@@ -8,7 +8,7 @@ import Registreren from "./pages/Registreren/Registreren.jsx";
 import Helpcentrum from "./pages/Helpcentrum/Helpcentrum.jsx";
 
 import Error from "./pages/Error/Error.jsx";
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import DashboardLayout from "./components/layout/DashboardLayout/DashboardLayout.jsx";
 import WebLayout from "./components/layout/WebLayout/WebLayout.jsx";
@@ -19,6 +19,7 @@ import Contacten from "./pages/Contacten/Contacten.jsx";
 
 
 function App() {
+    const isLoggedIn = false;
 
     return (
         <>
@@ -35,7 +36,8 @@ function App() {
                     </Route>
 
                     <Route element={<DashboardLayout/>}>
-                        <Route path="/dashboard" element={<Dashboard/>}/>
+                        <Route path="/dashboard" element={isLoggedIn === true ? <Dashboard/> : <Navigate to="/"/>}/>
+                        {/*<Route path="/dashboard" element={<Dashboard/>}/>*/}
                         <Route path="/paardenbeheer" element={<Paardenbeheer/>}/>
                         <Route path="/stalbezetting" element={<Stalbezetting/>}/>
                         <Route path="/zorgtaken" element={<Zorgtaken/>}/>

@@ -3,7 +3,6 @@ import Button from "../../ui/Button/Button.jsx";
 import logo from "../../../assets/home/logo.svg";
 import './UserNavbar.css'
 
-
 function UserNavbar() {
     return (
         <nav className="user-nav">

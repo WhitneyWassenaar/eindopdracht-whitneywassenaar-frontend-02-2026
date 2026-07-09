@@ -131,7 +131,6 @@ function RegisterForm() {
             <Button
                 type={"submit"}
                 variant={"default"}
-                onClick={"/"}
             >
                 Registreren
             </Button>
