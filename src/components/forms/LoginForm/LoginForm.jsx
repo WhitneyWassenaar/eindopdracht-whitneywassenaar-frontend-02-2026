@@ -1,11 +1,13 @@
 import "./LoginForm.css"
 import Button from "../../ui/Button/Button.jsx";
 import {Link, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useState, useContext} from "react";
+import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
 function LoginForm() {
 
     const navigate = useNavigate();
+    const {login} = useContext(AuthContext);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -16,7 +18,10 @@ function LoginForm() {
 
         //Dit zijn tijdelijke test gegevens
         if (email === "pietje@live.nl" && password === "123") {
-            navigate("/"); //Dit moet later "/dashboard" zijn
+            login({
+                email:email
+            })
+            navigate("/dashboard");
         } else {
             setError("Ongeldige email of wachtwoord")
         }
