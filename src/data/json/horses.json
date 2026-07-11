@@ -9,12 +9,12 @@
     "status": "Actief",
     "ownerId": 1,
     "contactPersonId": 1,
-    "caretakerId": null,
+    "caretakerId": 3,
     "trainerId": null
   },
   {
     "id": 2,
-    "name": "Xhantos",
+    "name": "Xanthos",
     "gender": "Hengst",
     "birthDate": "2010-07-02",
     "color": "Zwart",
@@ -34,6 +34,19 @@
     "breed": "Andalusiër",
     "status": "Inactief",
     "ownerId": 2,
+    "contactPersonId": 1,
+    "caretakerId": null,
+    "trainerId": null
+  },
+  {
+    "id": 4,
+    "name": "Osha",
+    "gender": "Merrie",
+    "birthDate": "2004-10-20",
+    "color": "Valk",
+    "breed": "Tinker",
+    "status": "Actief",
+    "ownerId": 3,
     "contactPersonId": 1,
     "caretakerId": null,
     "trainerId": null

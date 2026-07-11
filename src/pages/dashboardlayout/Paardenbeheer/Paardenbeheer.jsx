@@ -2,64 +2,67 @@ import './Paardenbeheer.css'
 import Button from "../../../components/ui/Button/Button.jsx";
 import HorseTable from "../../../components/page-components/paardenbeheer/HorseTable/HorseTable.jsx";
 import CreateHorseProfileForm from "../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx";
-import HorseDetailTabs from "../../../components/page-components/paardenbeheer/HorseDetailTabs/HorseDetailTabs.jsx";
-import HorseDetailMainInfo
-    from "../../../components/page-components/paardenbeheer/HorseDetailMainInfo/HorseDetailMainInfo.jsx";
+import horses from "../../../data/json/horses.json";
+import HorseDetail from "../../../components/page-components/paardenbeheer/HorseDetail/HorseDetail.jsx";
+import {useState} from "react";
 
 function Paardenbeheer() {
-    const horses = [
-        {
-            id: 1,
-            photo: "daisy.jpg",
-            name: "Daisy",
-            gender: "Merrie",
-            age: "6 jaar",
-            owner: "Mirjam Haas",
-            status: "Inactief"
-        },
-        {
-            id: 2,
-            photo: "xanthos.jpg",
-            name: "Xanthos",
-            gender: "Ruin",
-            age: "4 jaar",
-            owner: "Dennis Schulten",
-            status: "Actief"
-        }
-    ];
+
+    const [selectedHorse, setSelectedHorse] = useState(null)
 
     return (
-        <>
-            <div className="paardenbeheer-page">
-                <h1>Paardenbeheer</h1>
-                <p>
-                    Totaal aantal paardenprofielen: <strong>{horses.length}</strong>
-                </p>
+        <div className="paardenbeheer-page">
 
-                <div className="paardenbeheer-actions">
-                    <Button variant={"filter-sort"}>Filter</Button>
-                    <Button variant={"filter-sort"}>Sorteren</Button>
+            <h1>Paardenbeheer</h1>
 
-                </div>
+            {selectedHorse ? (
+                <>
+                    <Button
+                        type="button"
+                        onClick={() => setSelectedHorse(null)}
+                    >
+                        Terug
+                    </Button>
 
-                <HorseTable horses={horses}/>
+                    <HorseDetail horse={selectedHorse}/>
+                </>
+            ) : (
+                <>
+                    <p>
+                        Totaal aantal paardenprofielen:
+                        <strong>{horses.length}</strong>
+                    </p>
 
-                <Button>Paardenprofiel toevoegen</Button>
+                    <div className="paardenbeheer-actions">
+                        <Button variant="filter-sort">
+                            Filter
+                        </Button>
 
-                <CreateHorseProfileForm/>
-                <HorseDetailMainInfo/>
-                <HorseDetailTabs/>
+                        <Button variant="filter-sort">
+                            Sorteren
+                        </Button>
+                    </div>
 
-            </div>
-        </>
+                    <HorseTable
+                        horses={horses}
+                        setSelectedHorse={setSelectedHorse}
+                    />
+
+                    <Button type="button">
+                        Paardenprofiel toevoegen
+                    </Button>
+                </>
+            )}
+
+        </div>
     )
 }
 
-export default Paardenbeheer;
+                export default Paardenbeheer;
 
-//TODO:
-// horse table
-// horse row
-// filter
-// sort
-// Op deze pagina <CreateHorseProfileForm /> testen
+                {/*//TODO:*/}
+                {/*// horse table*/}
+                {/*// horse row*/}
+                {/*// filter*/}
+                {/*// sort*/}
+                {/*// Op deze pagina*/}

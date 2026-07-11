@@ -2,9 +2,16 @@ import Button from "../../../ui/Button/Button.jsx";
 import deleteIcon from "/src/assets/delete-icon.png"
 import "./HorseRow.css"
 import horseavatar from "../../../../assets/horse-avatar.png"
-function HorseRow({horse}) {
+import persons from "../../../../data/json/persons.json";
+
+function HorseRow({horse,setSelectedHorse}) {
+
+    const owner = persons.find(
+        persons => persons.id === horse.ownerId
+    );
     return (
-       <tr className="horserow-layout">
+       <tr className="horserow-layout"
+       onClick={() => setSelectedHorse(horse)}>
            <td>
                <img
                    src={horseavatar}
@@ -15,8 +22,7 @@ function HorseRow({horse}) {
            <td>{horse.name}</td>
            <td>{horse.gender}</td>
            <td>{horse.age}</td>
-           <td>{horse.owner}</td>
-
+           <td>{`${owner.firstName} ${owner.lastName}`}</td>
            <td>
                {horse.status}
            </td>
