@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "horseId": 1,
+    "type": "Dierenarts",
+    "date": "2026-08-10",
+    "time": "10:30",
+    "description": "Jaarlijkse controle",
+    "personId": 5,
+    "status": "Gepland"
+  }
+]

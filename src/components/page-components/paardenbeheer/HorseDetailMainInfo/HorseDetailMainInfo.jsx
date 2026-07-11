@@ -16,6 +16,9 @@ function HorseDetailMainInfo() {
                     <li>Geboren: </li>
                     <li>Vachtkleur: </li>
                     <li>Eigenaar:</li>
+                    <li>Contact:</li>
+                    <li>Verzorger: conditioneel </li>
+                    <li>Trainer: conditioneel </li>
                 </ul>
             </div>
         </div>

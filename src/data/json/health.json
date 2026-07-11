@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "horseId": 1,
+    "weight": 560,
+    "lastCheck": "2026-07-01",
+    "vaccinationDate": "2026-05-10",
+    "notes": "Geen bijzonderheden"
+  },
+  {
+    "id": 2,
+    "horseId": 2,
+    "weight": 600,
+    "lastCheck": "2026-06-20",
+    "vaccinationDate": "2026-04-15",
+    "notes": "Extra letten op benen"
+  },
+  {
+    "id": 3,
+    "horseId": 3,
+    "weight": 700,
+    "lastCheck": "2028-06-20",
+    "vaccinationDate": "2026-04-15",
+    "notes": "Extra letten op hoofd"
+  },
+  {
+    "id": 2,
+    "horseId": 2,
+    "weight": 600,
+    "lastCheck": "2026-06-20",
+    "vaccinationDate": "2026-04-15",
+    "notes": "Extra letten op darmen"
+  }
+]

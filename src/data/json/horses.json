@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "name": "Daisy",
+    "gender": "Merrie",
+    "birthDate": "2020-04-12",
+    "color": "Bruin",
+    "breed": "KWPN",
+    "status": "Actief",
+    "ownerId": 1,
+    "contactPersonId": 1,
+    "caretakerId": null,
+    "trainerId": null
+  },
+  {
+    "id": 2,
+    "name": "Xhantos",
+    "gender": "Hengst",
+    "birthDate": "2010-07-02",
+    "color": "Zwart",
+    "breed": "Hannoveraan",
+    "status": "Actief",
+    "ownerId": 2,
+    "contactPersonId": 1,
+    "caretakerId": null,
+    "trainerId": null
+  },
+  {
+    "id": 3,
+    "name": "Amerigo",
+    "gender": "Ruin",
+    "birthDate": "2001-10-20",
+    "color": "Schimmel",
+    "breed": "Andalusiër",
+    "status": "Inactief",
+    "ownerId": 2,
+    "contactPersonId": 1,
+    "caretakerId": null,
+    "trainerId": null
+  }
+]

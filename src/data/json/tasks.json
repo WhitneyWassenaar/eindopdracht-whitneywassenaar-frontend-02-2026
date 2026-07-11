@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "horseId": 1,
+    "title": "Voeren",
+    "description": "Ochtend en avond voeren",
+    "frequency": "Dagelijks",
+    "category": "Verzorging",
+    "time": "08:00",
+    "assignedPersonId": 3,
+    "completed": false
+  },
+  {
+    "id": 2,
+    "horseId": 2,
+    "title": "Borstelen",
+    "description": "Voor training borstelen",
+    "frequency": "Dagelijks",
+    "category": "Verzorging",
+    "time": "12:00",
+    "assignedPersonId": 3,
+    "completed": true
+  },
+  {
+    "id": 3,
+    "horseId": 3,
+    "title": "Manen knippen",
+    "description": "Knippen voor wedstrijd",
+    "frequency": "Eenmalig",
+    "category": "Verzorging",
+    "time": "09:00",
+    "assignedPersonId": 3,
+    "completed": true
+  }
+]
