@@ -16,12 +16,12 @@ function UserNavbar() {
                     <NavLink to="/dashboard"> <img src={logo} alt={"Website logo"}/></NavLink>
                 </div>
 
-                <ul>
-                    <li><NavLink to="/dashboard">Dashboard</NavLink></li>
-                    <li><NavLink to="/paardenbeheer">Paardenbeheer</NavLink></li>
-                    <li><NavLink to="/stalbezetting">Stalbezetting</NavLink></li>
-                    <li><NavLink to="/zorgtaken">Zorgtaken</NavLink></li>
-                    <li><NavLink to="/Contacten">Contacten</NavLink></li>
+                <ul className="nav-menu-items">
+                    <li><NavLink className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'} to="/dashboard">Dashboard</NavLink></li>
+                    <li><NavLink className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}  to="/paardenbeheer">Paardenbeheer</NavLink></li>
+                    <li><NavLink className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'} to="/stalbezetting">Stalbezetting</NavLink></li>
+                    <li><NavLink className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'} to="/zorgtaken">Zorgtaken</NavLink></li>
+                    <li><NavLink className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'} to="/Contacten">Contacten</NavLink></li>
                     {/*<li><NavLink to="/help">Help</NavLink></li>*/} {/*Later toevoegen*/}
                 </ul>
             </div>

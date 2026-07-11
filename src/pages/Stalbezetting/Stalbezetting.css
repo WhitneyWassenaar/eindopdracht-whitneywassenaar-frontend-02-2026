@@ -1,9 +1,0 @@
-.stalbezetting-page {
-    background-color: var(--tertiary-color);
-    color:var(--background-color);
-    padding: 20px;
-}
-
-.stalbezetting-page h1,h2,p {
-    color: var(--background-color);
-}
