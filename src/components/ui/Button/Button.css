@@ -53,3 +53,22 @@
     border: none;
     background: none;
 }
+
+/* =======================================
+                  BUTTON VARIANT: TAB
+======================================== */
+.button--tab {
+    border-radius: 10px 10px 0 0;
+    border: 1px solid var(--primary-color);
+    background-color: var(--tertiary-color);
+    position: relative;
+    z-index: 2;
+    margin-bottom: -1px; /* trekt de tab over de content border heen */
+}
+
+.button--tab:hover {
+    cursor:pointer;
+}
+.button--tab.active {
+    border-bottom-color: transparent;
+}
