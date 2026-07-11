@@ -1,5 +1,6 @@
 import "./HorseDetailMainInfo.css"
 import persons from "../../../../data/json/persons.json";
+import calculateAge from "../../../ui/CalculateAge/CalculateAge.jsx";
 function HorseDetailMainInfo({horse}) {
 
     const owner = persons.find(
@@ -30,7 +31,7 @@ function HorseDetailMainInfo({horse}) {
                     <ul>
                         <li>Ras: {horse.breed}</li>
                         <li>Geslacht: {horse.gender}</li>
-                        <li>Leeftijd: {horse.birthDate}</li>
+                        <li>Leeftijd: {calculateAge(horse.birthDate)}</li>
                         <li>Geboren: {horse.birthDate}</li>
                         <li>Vachtkleur: {horse.color}</li>
                     </ul>

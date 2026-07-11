@@ -3,6 +3,7 @@ import deleteIcon from "/src/assets/delete-icon.png"
 import "./HorseRow.css"
 import horseavatar from "../../../../assets/horse-avatar.png"
 import persons from "../../../../data/json/persons.json";
+import calculateAge from "../../../ui/CalculateAge/CalculateAge.jsx";
 
 function HorseRow({horse,setSelectedHorse}) {
 
@@ -21,7 +22,7 @@ function HorseRow({horse,setSelectedHorse}) {
 
            <td>{horse.name}</td>
            <td>{horse.gender}</td>
-           <td>{horse.age}</td>
+           <td>{calculateAge(horse.birthDate)} jaar</td>
            <td>{`${owner.firstName} ${owner.lastName}`}</td>
            <td>
                {horse.status}
