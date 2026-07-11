@@ -22,7 +22,8 @@ function HorseRow({horse}) {
            </td>
            <td>
                <Button
-               type={"button"}>
+               type={"button"}
+               variant={"delete"}>
                    <img src={deleteIcon} alt={"delete icon"} />
                </Button>
            </td>

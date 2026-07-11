@@ -1,0 +1,21 @@
+.horse-detail-main-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 600px;
+    border: 1px solid var(--primary-color);
+}
+
+.horse-profile-picture {
+    width:200px;
+    height:250px;
+    border: 1px black solid;
+}
+
+.horse-main-info{
+    border: 1px solid var(--primary-color);
+    width: 300px;
+}
+.horse-main-info ul {
+    list-style-type: none;
+}

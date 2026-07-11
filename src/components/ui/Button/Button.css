@@ -72,3 +72,31 @@
 .button--tab.active {
     border-bottom-color: transparent;
 }
+
+/* =======================================
+              BUTTON VARIANT: FILTER & SORT
+======================================== */
+.button--filter-sort {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.button--filter-sort:hover {
+border-color: black;
+    color:black;
+    cursor:pointer;
+    background-color: var(--primary-color);
+
+}
+
+/* =======================================
+              BUTTON VARIANT: DELETE
+======================================== */
+.button--delete {
+    background-color: transparent;
+}
+
+.button--delete:hover {
+    cursor: pointer;
+}

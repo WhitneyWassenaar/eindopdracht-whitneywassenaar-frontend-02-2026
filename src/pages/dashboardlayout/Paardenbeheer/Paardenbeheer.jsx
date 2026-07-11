@@ -3,6 +3,9 @@ import Button from "../../../components/ui/Button/Button.jsx";
 import HorseTable from "../../../components/page-components/paardenbeheer/HorseTable/HorseTable.jsx";
 import CreateHorseProfileForm from "../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx";
 import HorseDetailTabs from "../../../components/page-components/paardenbeheer/HorseDetailTabs/HorseDetailTabs.jsx";
+import HorseDetailMainInfo
+    from "../../../components/page-components/paardenbeheer/HorseDetailMainInfo/HorseDetailMainInfo.jsx";
+
 function Paardenbeheer() {
     const horses = [
         {
@@ -29,13 +32,13 @@ function Paardenbeheer() {
         <>
             <div className="paardenbeheer-page">
                 <h1>Paardenbeheer</h1>
-                    <p>
-                        Totaal aantal paardenprofielen: <strong>{horses.length}</strong>
-                    </p>
+                <p>
+                    Totaal aantal paardenprofielen: <strong>{horses.length}</strong>
+                </p>
 
                 <div className="paardenbeheer-actions">
-                    <Button variant={"bordered"}>Filter</Button>
-                    <Button variant={"bordered"}>Sorteren</Button>
+                    <Button variant={"filter-sort"}>Filter</Button>
+                    <Button variant={"filter-sort"}>Sorteren</Button>
 
                 </div>
 
@@ -43,8 +46,8 @@ function Paardenbeheer() {
 
                 <Button>Paardenprofiel toevoegen</Button>
 
-                <CreateHorseProfileForm />
-
+                <CreateHorseProfileForm/>
+                <HorseDetailMainInfo/>
                 <HorseDetailTabs/>
 
             </div>
