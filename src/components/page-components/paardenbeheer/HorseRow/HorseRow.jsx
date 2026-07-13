@@ -25,7 +25,7 @@ function HorseRow({horse,setSelectedHorse}) {
            <td>{horse.name}</td>
            <td>{horse.gender}</td>
            <td>{calculateAge(horse.birthDate)} jaar</td>
-           <td>{`${owner.firstName} ${owner.lastName}`}</td>
+           <td>{owner ?`${owner.firstName} ${owner.lastName}` : "Eigenaar onbekend"}</td>
            <td>
                {horse.status}
            </td>

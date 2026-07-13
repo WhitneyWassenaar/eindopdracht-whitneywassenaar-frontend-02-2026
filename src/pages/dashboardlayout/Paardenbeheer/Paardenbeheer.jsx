@@ -5,9 +5,9 @@ import horseData from '../../../data/json/horses.json';
 import Button from '../../../components/ui/Button/Button.jsx';
 import HorseTable from '../../../components/page-components/paardenbeheer/HorseTable/HorseTable.jsx';
 import HorseDetail from '../../../components/page-components/paardenbeheer/HorseDetail/HorseDetail.jsx';
+import CreateHorseProfileForm from '../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx';
 
 import './Paardenbeheer.css'
-import CreateHorseProfileForm from "../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx";
 
 function Paardenbeheer() {
 
@@ -61,7 +61,11 @@ function Paardenbeheer() {
                     </Button>
 
                     {showForm && (
-                        <CreateHorseProfileForm setHorses={setHorses}/>
+                        <CreateHorseProfileForm
+                            setHorses={setHorses}
+                            horses={horses}
+                            setShowForm={setShowForm}
+                        />
                     )}
                 </>
             )}

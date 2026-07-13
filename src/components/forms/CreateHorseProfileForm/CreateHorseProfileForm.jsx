@@ -1,35 +1,53 @@
+import {useState} from 'react';
+
 import horseBreeds from '../../../data/horseBreeds.js';
 import coatColors from '../../../data/coatColors.js';
 
 import Button from '../../ui/Button/Button.jsx';
+import generateId from '../../../helpers/generateId.jsx';
 
 import './CreateHorseProfileForm.css';
-import {useState} from "react";
 
-function CreateHorseProfileForm() {
+function CreateHorseProfileForm({horses, setHorses, setShowForm}) {
 
     const [horseName,setHorseName] = useState("");
     const [horseGender,setHorseGender] = useState("");
     const [birthDate,setBirthDate] = useState("");
     const [horseBreed,setHorseBreed] = useState("");
-    const [owner,setOwner] = useState("");
+    const [horseColor,setHorseColor] = useState("");
+    const [ownerId,setOwnerId] = useState("");
+    const [contactPersonId,setContactPersonId] = useState("");
 
     function createHorseFormSubmit(e) {
         e.preventDefault();
 
         const newHorseProfile = {
-            id:,
-            name:,
-            breed:,
-            gender:,
-            birthDate:,
-            color:,
+            id: generateId(horses),
+            name: horseName,
+            breed: horseBreed,
+            gender: horseGender,
+            birthDate: birthDate,
+            color: horseColor,
             status : "Actief",
-            ownerId: 1,
-            contactPersonId: 1,
-            careTakerId: null,
+            ownerId: null,
+            contactPersonId: null,
+            caretakerId: null,
             trainerId: null
         };
+
+        setHorses(previousHorses => [
+                ...previousHorses, newHorseProfile
+            ]);
+
+        setHorseName("");
+        setHorseGender("");
+        setHorseColor("");
+        setHorseBreed("");
+        setBirthDate("")
+
+        setShowForm(false);
+
+
     }
     return (
         <form onSubmit={createHorseFormSubmit} className="create-horse-profile-form-layout">
@@ -38,6 +56,8 @@ function CreateHorseProfileForm() {
                 <div className="form-row">
                     <label>Naam</label>
                     <input
+                        value={horseName}
+                        onChange={(e) => setHorseName(e.target.value)}
                         id={"horse-name"}
                         type={"text"}
                         maxLength={20}
@@ -51,6 +71,8 @@ function CreateHorseProfileForm() {
 
                         <label>
                             <input
+                                checked={horseGender === "Merrie"}
+                                onChange={(e) => setHorseGender(e.target.value)}
                                 id={"mare"}
                                 name={"gender"}
                                 value={"Merrie"}
@@ -62,6 +84,8 @@ function CreateHorseProfileForm() {
 
                         <label>
                             <input
+                                checked={horseGender === "Hengst"}
+                                onChange={(e) => setHorseGender(e.target.value)}
                                 id={"stallion"}
                                 name={"gender"}
                                 value={"Hengst"}
@@ -72,6 +96,8 @@ function CreateHorseProfileForm() {
 
                         <label>
                             <input
+                                checked={horseGender === "Ruin"}
+                                onChange={(e) => setHorseGender(e.target.value)}
                                 id={"gelding"}
                                 name={"gender"}
                                 value={"Ruin"}
@@ -85,6 +111,8 @@ function CreateHorseProfileForm() {
                 <div className="form-row">
                     <label>Geboortedatum</label>
                     <input
+                        value={birthDate}
+                        onChange={(event) => setBirthDate(event.target.value)}
                         id="birth-date"
                         type="date"
                         required/>
@@ -93,6 +121,8 @@ function CreateHorseProfileForm() {
                 <div className="form-row">
                     <label>Ras</label>
                     <select
+                        value={horseBreed}
+                        onChange={(event) => setHorseBreed(event.target.value)}
                         id="breed"
                         required
                     >
@@ -113,6 +143,8 @@ function CreateHorseProfileForm() {
                 <div className="form-row">
                     <label>Kleur</label>
                     <select
+                        value={horseColor}
+                        onChange={(event) => setHorseColor(event.target.value)}
                         id="coatColor"
                         required
                     >
