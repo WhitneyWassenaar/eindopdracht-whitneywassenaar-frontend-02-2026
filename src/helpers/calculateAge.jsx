@@ -1,7 +1,19 @@
 function calculateAge(birthDate) {
+    if (!birthDate) {
+        return "Onbekend";
+    }
 
     const today = new Date();
     const birth = new Date(birthDate);
+
+    const minimumYear = 1900;
+
+    if (
+        birth.getFullYear() < minimumYear ||
+        birth > today
+    ) {
+        return "Onbekend";
+    }
 
     let age = today.getFullYear() - birth.getFullYear();
 
@@ -13,7 +25,8 @@ function calculateAge(birthDate) {
     ) {
         age--;
     }
-    return age;
+
+    return  age >= 0 ? age : "Onbekend";
 }
 
 export default calculateAge;

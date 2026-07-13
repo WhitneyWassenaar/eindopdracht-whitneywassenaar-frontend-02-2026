@@ -3,12 +3,11 @@ import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
 import horseBreeds from '../../../data/horseBreeds.js';
 import coatColors from '../../../data/coatColors.js';
+import projectId from '../../../data/projectId.js';
 
 import Button from '../../ui/Button/Button.jsx';
-// import generateId from '../../../helpers/generateId.jsx';
 
 import './CreateHorseProfileForm.css';
-import projectId from "../../../data/projectId.js";
 
 function CreateHorseProfileForm({setHorses, setShowForm}) {
     const {token} = useContext(AuthContext);
@@ -18,11 +17,13 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
     const [birthDate, setBirthDate] = useState("");
     const [horseBreed, setHorseBreed] = useState("");
     const [horseColor, setHorseColor] = useState("");
+    const today = new Date().toISOString().split("T")[0];
     // const [ownerId,setOwnerId] = useState("");
     // const [contactPersonId,setContactPersonId] = useState("");
 
     async function createHorseFormSubmit(e) {
         e.preventDefault();
+
         try {
             const response = await fetch(
                 "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
@@ -47,16 +48,10 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
 
             const newHorse = await response.json();
 
-            if (!response.ok) {
-                console.error(newHorse);
-                return;
-            }
-
             setHorses(previousHorses => [
                 ...previousHorses,
                 newHorse
             ]);
-
 
             setHorseName("");
             setHorseGender("");
@@ -65,7 +60,6 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
             setBirthDate("")
 
             setShowForm(false);
-
 
         } catch (error) {
             console.error(error)
@@ -134,6 +128,7 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
                 <div className="form-row">
                     <label>Geboortedatum</label>
                     <input
+                        max={today}
                         value={birthDate}
                         onChange={(event) => setBirthDate(event.target.value)}
                         id="birth-date"
@@ -207,7 +202,6 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
                 <Button type={"submit"}>Paardenprofiel aanmaken</Button>
             </fieldset>
         </form>
-
     );
 }
 
@@ -215,5 +209,4 @@ export default CreateHorseProfileForm;
 
 // Foto moet optioneel zijn, niet iedereen heeft gelijk een foto om up te loaden
 // useState toevoegen voor image preview
-// in frontend en backend geboortedatum controle uitvoeren
 // conditioneel renderen van de paardenprofiel aanmaak pagina/component
