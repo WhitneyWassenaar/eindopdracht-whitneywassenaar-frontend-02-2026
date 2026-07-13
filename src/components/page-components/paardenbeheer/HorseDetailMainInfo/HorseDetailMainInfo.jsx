@@ -4,8 +4,11 @@ import persons from '../../../../data/json/persons.json';
 
 import './HorseDetailMainInfo.css';
 
-function HorseDetailMainInfo({horse}) {
 
+
+function HorseDetailMainInfo({horse}) {
+    const defaultHorsePhoto = "/defaultHorsePhoto.png";
+    console.log(horse.photo);
     const owner = persons.find(
         persons => persons.id === horse.ownerId
     );
@@ -25,7 +28,7 @@ function HorseDetailMainInfo({horse}) {
     return (
         <div className="horse-detail-main-info-container">
             <div className="horse-profile-picture">
-                <img src={"/"} alt={horse.name}/>
+                <img src={horse.photo || defaultHorsePhoto} alt={horse.name}/>
             </div>
 
             <div className="horse-main-info">

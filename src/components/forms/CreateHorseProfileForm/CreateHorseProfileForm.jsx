@@ -17,12 +17,17 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
     const [birthDate, setBirthDate] = useState("");
     const [horseBreed, setHorseBreed] = useState("");
     const [horseColor, setHorseColor] = useState("");
+    const [horsePhoto, setHorsePhoto] = useState("");
+
+    const defaultHorsePhoto = "/defaultHorsePhoto.png"
     const today = new Date().toISOString().split("T")[0];
     // const [ownerId,setOwnerId] = useState("");
     // const [contactPersonId,setContactPersonId] = useState("");
 
     async function createHorseFormSubmit(e) {
         e.preventDefault();
+
+
 
         try {
             const response = await fetch(
@@ -41,6 +46,7 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
                         breed: horseBreed,
                         color: horseColor,
                         active: true,
+                        photo: horsePhoto || defaultHorsePhoto,
                         ownerId: 1
                     })
                 }
@@ -58,6 +64,7 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
             setHorseColor("");
             setHorseBreed("");
             setBirthDate("")
+            setHorsePhoto("");
 
             setShowForm(false);
 
@@ -192,11 +199,15 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
 
                 <div className="form-row">
                     <label>Foto</label>
-                    <p>Upload een afbeelding:</p>
+                    <p>Url afbeelding:</p>
                     <input
                         id="horse-photo"
-                        type="file"
-                        accept="image/*"/>
+                        type="url"
+                        placeholder="Plaats URL van afbeelding"
+                        value={horsePhoto}
+                        onChange={(event) => setHorsePhoto(event.target.value)}
+
+                    />
                 </div>
 
                 <Button type={"submit"}>Paardenprofiel aanmaken</Button>

@@ -16,39 +16,44 @@ function Paardenbeheer() {
     const [showForm, setShowForm] = useState(false);
 
     const {token} = useContext(AuthContext);
+    console.log("Token lengte:", token?.length);
 
     useEffect(() => {
         if (!token) return;
 
-    async function getHorses() {
-        try {
-            const response = await fetch(
-                "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
-                {
-                    headers: {
-                        "novi-education-project-id": projectId,
-                        "Authorization": `Bearer ${token}`,
-                    },
+        async function getHorses() {
+            try {
+                const response = await fetch(
+                    "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
+                    {
+                        headers: {
+                            "novi-education-project-id": projectId,
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                console.log("Status:", response.status);
+
+                const responseText = await response.text();
+
+                console.log("Backend antwoord:", responseText);
+
+                if (!response.ok) {
+                    return;
                 }
-            );
 
-            const data = await response.json();
+                const data = JSON.parse(responseText);
 
-            if (!response.ok) {
-                console.error(data);
-                return;
+                setHorses(data);
+
+            } catch (error) {
+                console.error(error);
             }
-
-            setHorses(data);
-
-        } catch (error) {
-            console.error(error);
         }
-    }
             getHorses();
 
     }, [token]);
-
 
 return (
     <div className="paardenbeheer-page">
@@ -111,7 +116,6 @@ return (
 export default Paardenbeheer;
 
 //TODO
-// - Paard toevoegen
 // - paard verwijderen
 // - Paard bewerken
 // - detailpagina kunnen bijwerken
