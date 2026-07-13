@@ -5,13 +5,16 @@ const AuthContext = createContext(null);
 function AuthProvider({children}) {
 
     const [user, setUser] = useState(null);
+    const [token,setToken] = useState(null);
 
-    function login(userData) {
+    function login(userData,token) {
         setUser(userData);
+        setToken(token);
     }
 
     function logout() {
         setUser(null);
+        setToken(null);
     }
 
     return (
@@ -19,7 +22,9 @@ function AuthProvider({children}) {
             value={{
                 user,
                 login,
-                logout
+                logout,
+                token,
+                setToken
             }}
         >
             {children}
