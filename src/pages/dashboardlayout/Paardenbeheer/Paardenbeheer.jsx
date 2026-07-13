@@ -98,7 +98,6 @@ return (
                 {showForm && (
                     <CreateHorseProfileForm
                         setHorses={setHorses}
-                        horses={horses}
                         setShowForm={setShowForm}
                     />
                 )}

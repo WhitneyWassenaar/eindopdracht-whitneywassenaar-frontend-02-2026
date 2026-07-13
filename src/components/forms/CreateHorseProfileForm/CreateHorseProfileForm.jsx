@@ -1,54 +1,77 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
+import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
 import horseBreeds from '../../../data/horseBreeds.js';
 import coatColors from '../../../data/coatColors.js';
 
 import Button from '../../ui/Button/Button.jsx';
-import generateId from '../../../helpers/generateId.jsx';
+// import generateId from '../../../helpers/generateId.jsx';
 
 import './CreateHorseProfileForm.css';
+import projectId from "../../../data/projectId.js";
 
-function CreateHorseProfileForm({horses, setHorses, setShowForm}) {
+function CreateHorseProfileForm({setHorses, setShowForm}) {
+    const {token} = useContext(AuthContext);
 
-    const [horseName,setHorseName] = useState("");
-    const [horseGender,setHorseGender] = useState("");
-    const [birthDate,setBirthDate] = useState("");
-    const [horseBreed,setHorseBreed] = useState("");
-    const [horseColor,setHorseColor] = useState("");
-    const [ownerId,setOwnerId] = useState("");
-    const [contactPersonId,setContactPersonId] = useState("");
+    const [horseName, setHorseName] = useState("");
+    const [horseGender, setHorseGender] = useState("");
+    const [birthDate, setBirthDate] = useState("");
+    const [horseBreed, setHorseBreed] = useState("");
+    const [horseColor, setHorseColor] = useState("");
+    // const [ownerId,setOwnerId] = useState("");
+    // const [contactPersonId,setContactPersonId] = useState("");
 
-    function createHorseFormSubmit(e) {
+    async function createHorseFormSubmit(e) {
         e.preventDefault();
+        try {
+            const response = await fetch(
+                "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "novi-education-project-id": projectId,
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        name: horseName,
+                        gender: horseGender,
+                        birthDate,
+                        breed: horseBreed,
+                        color: horseColor,
+                        active: true,
+                        ownerId: 1
+                    })
+                }
+            );
 
-        const newHorseProfile = {
-            id: generateId(horses),
-            name: horseName,
-            breed: horseBreed,
-            gender: horseGender,
-            birthDate: birthDate,
-            color: horseColor,
-            status : "Actief",
-            ownerId: null,
-            contactPersonId: null,
-            caretakerId: null,
-            trainerId: null
-        };
+            const newHorse = await response.json();
 
-        setHorses(previousHorses => [
-                ...previousHorses, newHorseProfile
+            if (!response.ok) {
+                console.error(newHorse);
+                return;
+            }
+
+            setHorses(previousHorses => [
+                ...previousHorses,
+                newHorse
             ]);
 
-        setHorseName("");
-        setHorseGender("");
-        setHorseColor("");
-        setHorseBreed("");
-        setBirthDate("")
 
-        setShowForm(false);
+            setHorseName("");
+            setHorseGender("");
+            setHorseColor("");
+            setHorseBreed("");
+            setBirthDate("")
+
+            setShowForm(false);
 
 
+        } catch (error) {
+            console.error(error)
+        }
     }
+
     return (
         <form onSubmit={createHorseFormSubmit} className="create-horse-profile-form-layout">
             <fieldset>
