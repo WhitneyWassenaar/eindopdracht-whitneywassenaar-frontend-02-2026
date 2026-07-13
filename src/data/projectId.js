@@ -1,1 +1,3 @@
 const projectId = "38c95702-c47c-4745-9966-a4b0c11867eb";
+
+export default projectId;

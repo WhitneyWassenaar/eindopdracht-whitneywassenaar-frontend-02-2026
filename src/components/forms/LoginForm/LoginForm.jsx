@@ -1,6 +1,7 @@
 import {useState, useContext} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {AuthContext} from '../../authentication/context/AuthContext.jsx';
+import projectId from '../../../data/projectId.js';
 
 import Button from '../../ui/Button/Button.jsx';
 
@@ -15,17 +16,33 @@ function LoginForm() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    function onFormSubmit(e) {
+    async function onFormSubmit(e) {
         e.preventDefault();
+        try {
+            const response = await fetch("https://novi-backend-api-wgsgz.ondigitalocean.app/api/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "novi-education-project-id": projectId,
+                    },
+                    body: JSON.stringify({email, password})
+                });
+            const data = await response.json();
 
-        //Dit zijn tijdelijke test gegevens
-        if (email === "pietje@live.nl" && password === "123") {
-            login({
-                email:email
-            })
+            if (!response.ok) {
+                setError(data.error);
+                return;
+            }
+
+            login(
+                data.user,
+                data.token
+            );
             navigate("/dashboard");
-        } else {
-            setError("Ongeldige email of wachtwoord")
+
+        } catch (error) {
+            setError(error.message);
         }
     }
 
