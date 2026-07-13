@@ -41,18 +41,18 @@ function HorseDetailMainInfo({horse}) {
                 </div>
 
                 <div className="info-block">
-                    <h3>Eigenaar: {`${owner.firstName} ${owner.lastName}`}</h3>
+                    <h3>Eigenaar: {owner ? `${owner.firstName} ${owner.lastName}`: "Eigenaar onbekend"}</h3>
                     <ul>
-                        <li>Telefoon: {`${contactPerson.phone}`}</li>
-                        <li>Email: {`${contactPerson.email}`}</li>
+                        <li>Telefoon: {contactPerson ? `${contactPerson.phone}` : "Telefoonnummer onbekend"}</li>
+                        <li>Email: {contactPerson ? `${contactPerson.email}`: "Email onbekend"}</li>
                     </ul>
                 </div>
 
                 <div className="info-block">
                     <h4>Relaties</h4>
                     <ul>
-                        <li>{caretaker && (`Verzorger: ${caretaker.firstName} ${caretaker.lastName}`)} </li>
-                        <li> {trainer && (`Trainer:${trainer.firstName} ${trainer.lastName}`)} </li>
+                        <li>{caretaker ? `Verzorger: ${caretaker.firstName} ${caretaker.lastName}` : "Verzorger onbekend"} </li>
+                        <li> {trainer ? `Trainer:${trainer.firstName} ${trainer.lastName}`: "Trainer onbekend"} </li>
                     </ul>
                 </div>
             </div>
