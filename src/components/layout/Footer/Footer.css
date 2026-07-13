@@ -12,13 +12,11 @@
 .branding p {
     font-size: 0.8rem;
     filter: brightness(60%);
-
 }
 
 .branding img {
     width: 338px;
     filter: brightness(60%);
-
 }
 
 .copyright {
@@ -33,5 +31,4 @@
 .footer hr {
     filter: brightness(60%);
     margin: 10px 0 10px 0;
-
 }

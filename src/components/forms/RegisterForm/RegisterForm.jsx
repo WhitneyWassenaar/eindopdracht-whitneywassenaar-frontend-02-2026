@@ -1,11 +1,14 @@
-import "./RegisterForm.css"
-import Button from "../../ui/Button/Button.jsx";
-import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+
+import Button from '../../ui/Button/Button.jsx';
+
+import './RegisterForm.css';
 
 function RegisterForm() {
 
     const navigate = useNavigate();
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [stableName, setStableName] = useState("");
@@ -32,7 +35,6 @@ function RegisterForm() {
             setError("Je moet akkoord gaan met de voorwaarden om te kunnen registreren")
             return;
         }
-
         navigate("/inloggen")
     }
 
@@ -135,9 +137,7 @@ function RegisterForm() {
                 Registreren
             </Button>
         </form>
-    )
+    );
 }
 
 export default RegisterForm;
-
-// TODO: usestate, onsubmit, loadstate

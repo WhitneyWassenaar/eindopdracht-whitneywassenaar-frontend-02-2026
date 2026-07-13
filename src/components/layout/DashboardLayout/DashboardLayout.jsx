@@ -1,5 +1,7 @@
-import UserNavbar from "../../navigation/UserNavbar/UserNavbar.jsx";
-import {Outlet} from "react-router-dom";
+import {Outlet} from 'react-router-dom';
+
+import UserNavbar from '../../navigation/UserNavbar/UserNavbar.jsx';
+
 import './DashboardLayout.css'
 
 function DashboardLayout() {
@@ -11,17 +13,11 @@ function DashboardLayout() {
                 </aside>
 
                 <main className="dashboard-content">
-
-<Outlet/>
-
+                    <Outlet/>
                 </main>
             </div>
-
-
         </>
-    )
+    );
 }
 
 export default DashboardLayout;
-
-// sidebar werkent maken en verer gaan met dashbaord

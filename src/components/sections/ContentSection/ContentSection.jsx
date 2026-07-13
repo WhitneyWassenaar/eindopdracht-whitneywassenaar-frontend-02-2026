@@ -1,5 +1,6 @@
-import "./ContentSection.css";
-import ImageWithEllipse from "../ImageWithEllipse/ImageWithEllipse.jsx";
+import ImageWithEllipse from '../ImageWithEllipse/ImageWithEllipse.jsx';
+
+import './ContentSection.css';
 
 function ContentSection({
                             title,

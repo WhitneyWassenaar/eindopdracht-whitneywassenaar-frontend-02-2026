@@ -1,5 +1,5 @@
-import GuestNavbar from "./GuestNavbar/GuestNavbar.jsx";
-import UserNavbar from "./UserNavbar/UserNavbar.jsx";
+import GuestNavbar from './GuestNavbar/GuestNavbar.jsx';
+import UserNavbar from './UserNavbar/UserNavbar.jsx';
 
 function Navbar({isLoggedIn}) {
     return (
@@ -8,8 +8,7 @@ function Navbar({isLoggedIn}) {
                 ?  <GuestNavbar/>
                 : <UserNavbar/>}
         </>
-
-    )
+    );
 }
 
 export default Navbar;

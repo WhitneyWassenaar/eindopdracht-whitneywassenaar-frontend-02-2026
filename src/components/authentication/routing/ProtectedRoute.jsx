@@ -1,6 +1,7 @@
-import {useContext} from "react";
-import {AuthContext} from "../context/AuthContext.jsx";
-import {Navigate} from "react-router-dom";
+import {useContext} from 'react';
+import {Navigate} from 'react-router-dom';
+
+import {AuthContext} from '../context/AuthContext.jsx';
 
 function ProtectedRoute({children}) {
     const {user} = useContext(AuthContext);
@@ -8,7 +9,7 @@ function ProtectedRoute({children}) {
     if (!user) {
         return <Navigate to="/inloggen"/>;
     }
-    return children
+    return children;
 }
 
 export default ProtectedRoute;

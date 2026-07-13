@@ -1,7 +1,8 @@
-import Footer from "../Footer/Footer.jsx";
-import Navbar from "../../navigation/Navbar.jsx";
-import {useState} from "react";
-import {Outlet} from "react-router-dom";
+import {useState} from 'react';
+import {Outlet} from 'react-router-dom';
+
+import Navbar from '../../navigation/Navbar.jsx';
+import Footer from '../Footer/Footer.jsx';
 
 function WebLayout() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -16,4 +17,6 @@ function WebLayout() {
     );
 }
 
-export default WebLayout
+export default WebLayout;
+
+// Check of setIsLoggedIn nog  nodig is.

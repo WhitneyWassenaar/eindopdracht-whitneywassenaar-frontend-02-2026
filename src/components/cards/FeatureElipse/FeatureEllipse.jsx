@@ -1,4 +1,4 @@
-import "./FeatureEllipse.css"
+import './FeatureEllipse.css';
 
 function FeatureEllipse({imgUrl,imgAlt}) {
     return (

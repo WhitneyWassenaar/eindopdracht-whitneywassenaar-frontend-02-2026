@@ -1,12 +1,14 @@
-import "./Button.css";
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
+
+import './Button.css';
 
 function Button({
                     children,
                     variant = "default",
                     buttonPath,
                     type = "button",
-                    onClick
+                    onClick,
+                    className
                 }) {
 
     const navigate = useNavigate();
@@ -22,7 +24,7 @@ function Button({
     return (
         <button
             type={type}
-            className={`button button--${variant}`}
+            className={`button button--${variant} ${className} || ""}`}
             onClick={handleClick}
         >
             {children}

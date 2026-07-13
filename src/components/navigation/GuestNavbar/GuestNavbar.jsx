@@ -1,13 +1,13 @@
-import Button from "../../ui/Button/Button.jsx";
-import logo from "../../../assets/home/logo.svg"
-
-import {useEffect, useState} from "react";
-
+import {useEffect, useState} from 'react';
 import {NavLink} from 'react-router-dom';
-import Sidebar from "../Sidebar/Sidebar.jsx";
-import "./GuestNavbar.css";
-import HamburgerMenu from "../HamburgerMenu/HamburgerMenu.jsx";
- // Wat laatst wordt geladen telt!
+
+import logo from '../../../assets/home/logo.svg';
+
+import Button from '../../ui/Button/Button.jsx';
+import Sidebar from '../Sidebar/Sidebar.jsx';
+import HamburgerMenu from '../HamburgerMenu/HamburgerMenu.jsx';
+
+import './GuestNavbar.css';
 
 function GuestNavbar() {
 
@@ -86,20 +86,3 @@ function GuestNavbar() {
 }
 
 export default GuestNavbar;
-
-/*
-* TODO:
-*  - isLoggedIn is een state, verplaatsen naar app.jsx, als prop doorgeven in GuestNavbar
-*  - Class aanmaken voor:
-*  - logo
-*  Toevoegen:
-*  - const isAuth, logout / useContext
-*  - AuthContext
-*  - Conditional rendering isAuth
-*  - column nav als gebruiker is ingelogd
-*/
-
-/*
-* TODO:
-*  In progress:
-*  - Link element staat klaar (logo) , staat nu als comment */

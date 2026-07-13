@@ -1,6 +1,8 @@
-import Button from "../../ui/Button/Button.jsx";
-import "./ContactForm.css"
-import {useState} from "react";
+import {useState} from 'react';
+
+import Button from '../../ui/Button/Button.jsx';
+
+import './ContactForm.css';
 
 function ContactForm() {
 
@@ -85,10 +87,3 @@ function ContactForm() {
 }
 
 export default ContactForm;
-
-/*
-* TODO:
-*  - onSubmit
-*  - states voor elke input
-*  - preventDefault
-* */

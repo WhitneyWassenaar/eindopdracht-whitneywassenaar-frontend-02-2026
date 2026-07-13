@@ -1,0 +1,8 @@
+.tab-content {
+    border: 1px solid var(--primary-color);
+    border-radius: 0 10px 10px 10px;
+    height: 300px;
+    width: 600px;
+    padding: 1rem;
+    background-color: var(--tertiary-color);
+}

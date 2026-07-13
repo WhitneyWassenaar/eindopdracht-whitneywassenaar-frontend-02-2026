@@ -1,7 +1,7 @@
-import "./Hero.css";
-import Button from "../../ui/Button/Button.jsx";
-import ImageWithEllipse from "../ImageWithEllipse/ImageWithEllipse.jsx";
+import Button from '../../ui/Button/Button.jsx';
+import ImageWithEllipse from '../ImageWithEllipse/ImageWithEllipse.jsx';
 
+import './Hero.css';
 
 function Hero({
                   title,
@@ -16,15 +16,14 @@ function Hero({
                   buttonPath
               }
 ) {
-
     return (
         <section className={`hero hero--${variant}`}>
             <article className="hero-article-wrapper">
                 <div className="hero-article-content-wrapper">
                     <h1>{title}</h1>
                     <div>{text}</div>
-
                 </div>
+
                 {children && (
                     <Button
                         variant={buttonVariant}
@@ -46,12 +45,3 @@ function Hero({
 }
 
 export default Hero;
-
-/*
-* TODO:
-*  - Class maken voor:
-*  - section
-*   - ImageWithEllipse links en rechts
-*  - Buttons de juiste class geven
-*  - onClick koppelen aan buttons
-*/

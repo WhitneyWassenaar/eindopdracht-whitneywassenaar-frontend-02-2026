@@ -1,4 +1,5 @@
-import "./Sidebar.css";
+import './Sidebar.css';
+
 function Sidebar({menuOpen}) {
     return (
         <aside className={menuOpen ? "sidebar open" : "sidebar"}>
