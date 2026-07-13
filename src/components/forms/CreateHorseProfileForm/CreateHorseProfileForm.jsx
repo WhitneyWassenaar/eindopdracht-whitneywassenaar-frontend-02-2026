@@ -4,10 +4,35 @@ import coatColors from '../../../data/coatColors.js';
 import Button from '../../ui/Button/Button.jsx';
 
 import './CreateHorseProfileForm.css';
+import {useState} from "react";
 
 function CreateHorseProfileForm() {
+
+    const [horseName,setHorseName] = useState("");
+    const [horseGender,setHorseGender] = useState("");
+    const [birthDate,setBirthDate] = useState("");
+    const [horseBreed,setHorseBreed] = useState("");
+    const [owner,setOwner] = useState("");
+
+    function createHorseFormSubmit(e) {
+        e.preventDefault();
+
+        const newHorseProfile = {
+            id:,
+            name:,
+            breed:,
+            gender:,
+            birthDate:,
+            color:,
+            status : "Actief",
+            ownerId: 1,
+            contactPersonId: 1,
+            careTakerId: null,
+            trainerId: null
+        };
+    }
     return (
-        <form className="create-horse-profile-form-layout">
+        <form onSubmit={createHorseFormSubmit} className="create-horse-profile-form-layout">
             <fieldset>
                 <legend>Paardengegevens</legend>
                 <div className="form-row">

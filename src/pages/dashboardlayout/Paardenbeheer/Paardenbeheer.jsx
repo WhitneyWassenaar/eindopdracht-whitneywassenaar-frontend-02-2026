@@ -1,15 +1,20 @@
 import {useState} from 'react';
 
-import horses from '../../../data/json/horses.json';
+import horseData from '../../../data/json/horses.json';
 
 import Button from '../../../components/ui/Button/Button.jsx';
 import HorseTable from '../../../components/page-components/paardenbeheer/HorseTable/HorseTable.jsx';
 import HorseDetail from '../../../components/page-components/paardenbeheer/HorseDetail/HorseDetail.jsx';
 
 import './Paardenbeheer.css'
+import CreateHorseProfileForm from "../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx";
 
 function Paardenbeheer() {
-    const [selectedHorse, setSelectedHorse] = useState(null)
+
+    const [horses, setHorses] = useState(horseData);
+    const [selectedHorse, setSelectedHorse] = useState(null);
+    const [showForm,setShowForm] = useState(false);
+
     return (
         <div className="paardenbeheer-page">
 
@@ -48,9 +53,16 @@ function Paardenbeheer() {
                         setSelectedHorse={setSelectedHorse}
                     />
 
-                    <Button type="button">
+                    <Button
+                        type="button"
+                        onClick={() => setShowForm(true)}
+                    >
                         Paardenprofiel toevoegen
                     </Button>
+
+                    {showForm && (
+                        <CreateHorseProfileForm setHorses={setHorses}/>
+                    )}
                 </>
             )}
 
@@ -59,3 +71,9 @@ function Paardenbeheer() {
 }
 
 export default Paardenbeheer;
+
+//TODO
+// - Paard toevoegen
+// - paard verwijderen
+// - Paard bewerken
+// - detailpagina kunnen bijwerken
