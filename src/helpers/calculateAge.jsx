@@ -1,4 +1,5 @@
 function calculateAge(birthDate) {
+
     if (!birthDate) {
         return "Onbekend";
     }
@@ -16,7 +17,6 @@ function calculateAge(birthDate) {
     }
 
     let age = today.getFullYear() - birth.getFullYear();
-
     const month = today.getMonth() - birth.getMonth();
 
     if (
