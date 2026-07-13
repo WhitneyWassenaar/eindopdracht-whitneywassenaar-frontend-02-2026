@@ -34,7 +34,7 @@
         },
         {
           "name": "roles",
-          "type": "array",
+          "type": "string",
           "required": true
         }
       ],
@@ -139,6 +139,15 @@
           "user"
         ]
       }
+    }
+  ],
+  "users": [
+    {
+      "email": "pietje@live.nl",
+      "password": "123",
+      "roles": [
+        "user"
+      ]
     }
   ]
 }
