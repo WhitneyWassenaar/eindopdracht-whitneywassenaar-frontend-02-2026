@@ -1,28 +1,39 @@
-import Hero from "../../../components/sections/Hero/Hero.jsx";
-import greyHorse from "../../../assets/functies/greyHorse.png";
-import FeatureCard from "../../../components/cards/FeatureCard/FeatureCard.jsx";
-import featureImg1 from "../../../assets/functies/featureImg1.jpg";
-import "./Functies.css"
+import Hero from '../../../components/sections/Hero/Hero.jsx';
+import FeatureCard from '../../../components/cards/FeatureCard/FeatureCard.jsx';
 
+import featureImg1 from '../../../assets/functies/featureImg1.jpg';
+import greyHorse from '../../../assets/functies/greyHorse.png';
+
+import './Functies.css';
 
 function Functies() {
     return (
         <>
             <section className="hero-wrapper">
-            <section className="hero-section">
-                <Hero
-                    title={"Voorop in galop,\n dankzij slimme functies!"}
-                    text={"Ontdek functies die jouw workflow versnellen."}
-                    imgUrl={greyHorse}
-                    imgAlt={"An image of a grey horse galopping towards the user's view"}
-                    imageVariant={"functies"}
-                    variant={"reverse"}
-                    ellipseVariant={"functies"}
-                />
+                <section className="hero-section">
+                    <Hero
+                        title={"Voorop in galop,\n dankzij slimme functies!"}
+                        text={"Ontdek functies die jouw workflow versnellen."}
+                        imgUrl={greyHorse}
+                        imgAlt={"An image of a grey horse galopping towards the user's view"}
+                        imageVariant={"functies"}
+                        variant={"reverse"}
+                        ellipseVariant={"functies"}
+                    />
 
-            </section>
-            <svg className="hero-curve-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <g transform="scale(-1,1) translate(-1440,0)"><path fill="var(--secondary-color)" fill-opacity="1" d="M0,32L120,74.7C240,117,480,203,720,250.7C960,299,1200,309,1320,314.7L1440,320L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></g></svg>
+                </section>
+                <svg className="hero-curve-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                    <g
+                        transform="scale(-1,1) translate(-1440,0)"
+                    >
+                        <path
+                            fill="var(--secondary-color)"
+                            fillOpacity="1"
+                            d="M0,32L120,74.7C240,117,480,203,720,250.7C960,299,1200,309,1320,314.7L1440,320L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"
+                        >
+                        </path>
+                    </g>
+                </svg>
             </section>
 
             <section className="feature-section">
@@ -42,7 +53,6 @@ function Functies() {
                                 <li>Zet paarden op actief of inactief</li>
                             </ul>
                         </div>
-
                     </FeatureCard>
 
                     <FeatureCard
@@ -125,14 +135,8 @@ function Functies() {
                     </FeatureCard>
                     {/*<svg className="curve-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">*/}
                     {/*    <g transform="scale(-1,1) translate(-1440,0)"><path fill="var(--background-color)" fill-opacity="1" d="M0,32L120,74.7C240,117,480,203,720,250.7C960,299,1200,309,1320,314.7L1440,320L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></g></svg>*/}
-
                 </div>
-
-
             </section>
-
-
-
         </>
     );
 }

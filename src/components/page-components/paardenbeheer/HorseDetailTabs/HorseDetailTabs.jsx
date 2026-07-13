@@ -1,6 +1,8 @@
-import {useState} from "react"
-import Button from "../../../ui/Button/Button.jsx";
-import "./HorseDetailTabs.css"
+import {useState} from 'react';
+
+import Button from '../../../ui/Button/Button.jsx';
+
+import './HorseDetailTabs.css';
 
 function HorseDetailTabs() {
     const [activeTab,setActiveTab]= useState("1")
@@ -32,7 +34,7 @@ function HorseDetailTabs() {
                 )}
             </div>
         </div>
-    )
+    );
 }
 
 export  default HorseDetailTabs;

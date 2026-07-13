@@ -1,4 +1,4 @@
-import "./ImageWithEllipse.css";
+import './ImageWithEllipse.css';
 
 function ImageWithEllipse({
                               imgUrl,

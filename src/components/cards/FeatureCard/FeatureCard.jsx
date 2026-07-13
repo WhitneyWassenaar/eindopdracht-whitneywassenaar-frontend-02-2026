@@ -1,5 +1,6 @@
-import "./FeatureCard.css";
-import FeatureEllipse from "../FeatureElipse/FeatureEllipse.jsx";
+import FeatureEllipse from '../FeatureElipse/FeatureEllipse.jsx';
+
+import './FeatureCard.css';
 
 function FeatureCard({
                          articleClassName,

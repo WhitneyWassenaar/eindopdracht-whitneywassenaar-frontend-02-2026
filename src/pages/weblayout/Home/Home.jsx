@@ -1,11 +1,12 @@
 //Components
-import Hero from "../../../components/sections/Hero/Hero.jsx";
-import ContentSection from "../../../components/sections/ContentSection/ContentSection.jsx";
-import ReviewSection from "../../../components/sections/ReviewSection/ReviewSection.jsx";
+import Hero from '../../../components/sections/Hero/Hero.jsx';
+import ContentSection from '../../../components/sections/ContentSection/ContentSection.jsx';
+import ReviewSection from '../../../components/sections/ReviewSection/ReviewSection.jsx';
+
 //Images
-import laptopAndPhone from "../../../assets/home/laptopAndPhone.png";
-import walkingGirlAndHorse from "../../../assets/home/walkingGirlAndHorse.png";
-import greyHorseAndRider from "../../../assets/home/greyHorseAndRider.png";
+import laptopAndPhone from '../../../assets/home/laptopAndPhone.png';
+import walkingGirlAndHorse from '../../../assets/home/walkingGirlAndHorse.png';
+import greyHorseAndRider from '../../../assets/home/greyHorseAndRider.png';
 
 function Home() {
     return (
@@ -17,7 +18,6 @@ function Home() {
                 imgAlt={"An image of a rider that takes a jump with her grey horse"}
                 buttonVariant={"hero"}
                 buttonPath={"/registreren"}
-
             >
                 Probeer het gratis
             </Hero>
@@ -85,9 +85,3 @@ function Home() {
 }
 
 export default Home;
-
-/*
-* TODO:
-*  - isLoggedIn state aanmaken
-*  - handleClick voor tijdelijk console.log
-*/

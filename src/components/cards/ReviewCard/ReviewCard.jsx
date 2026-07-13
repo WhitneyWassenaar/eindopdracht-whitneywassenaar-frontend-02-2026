@@ -1,4 +1,4 @@
-import "./ReviewCard.css";
+import './ReviewCard.css';
 
 function ReviewCard({
                         profileImgUrl,
@@ -14,9 +14,7 @@ function ReviewCard({
                     <h4>{personName}</h4>
                     <h5>{stableName}</h5>
                 </div>
-
             </div>
-
             <p>{reviewText}</p>
         </div>
     );

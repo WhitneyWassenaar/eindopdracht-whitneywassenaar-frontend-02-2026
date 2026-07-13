@@ -1,14 +1,16 @@
-import "./LoginForm.css"
-import Button from "../../ui/Button/Button.jsx";
-import {Link, useNavigate} from "react-router-dom";
-import {useState, useContext} from "react";
-import {AuthContext} from "../../authentication/context/AuthContext.jsx";
+import {useState, useContext} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import {AuthContext} from '../../authentication/context/AuthContext.jsx';
+
+import Button from '../../ui/Button/Button.jsx';
+
+import './LoginForm.css'
 
 function LoginForm() {
 
     const navigate = useNavigate();
-    const {login} = useContext(AuthContext);
 
+    const {login} = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -80,5 +82,3 @@ function LoginForm() {
 }
 
 export default LoginForm;
-
-// TODO: usestate, onsubmit, loadstate

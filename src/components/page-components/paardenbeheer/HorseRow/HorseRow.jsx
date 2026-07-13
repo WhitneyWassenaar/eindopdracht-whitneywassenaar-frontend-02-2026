@@ -1,9 +1,11 @@
-import Button from "../../../ui/Button/Button.jsx";
-import deleteIcon from "/src/assets/delete-icon.png"
-import "./HorseRow.css"
-import horseavatar from "../../../../assets/horse-avatar.png"
-import persons from "../../../../data/json/persons.json";
-import calculateAge from "../../../ui/CalculateAge/CalculateAge.jsx";
+import Button from '../../../ui/Button/Button.jsx';
+import calculateAge from '../../../../helpers/calculateAge.jsx';
+
+import deleteIcon from '/src/assets/delete-icon.png'
+import horseavatar from '../../../../assets/horse-avatar.png'
+import persons from '../../../../data/json/persons.json';
+
+import './HorseRow.css'
 
 function HorseRow({horse,setSelectedHorse}) {
 
@@ -27,6 +29,7 @@ function HorseRow({horse,setSelectedHorse}) {
            <td>
                {horse.status}
            </td>
+
            <td>
                <Button
                type={"button"}
@@ -39,6 +42,3 @@ function HorseRow({horse,setSelectedHorse}) {
 }
 
 export default HorseRow;
-
-// TODO:
-// horseavatar vervangen

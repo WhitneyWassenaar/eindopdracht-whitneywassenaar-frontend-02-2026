@@ -1,9 +1,12 @@
-import {NavLink} from "react-router-dom";
-import Button from "../../ui/Button/Button.jsx";
-import logo from "../../../assets/home/logo.svg";
-import './UserNavbar.css'
-import {useContext} from "react";
-import {AuthContext} from "../../authentication/context/AuthContext.jsx";
+import {useContext} from 'react';
+import {NavLink} from 'react-router-dom';
+import {AuthContext} from '../../authentication/context/AuthContext.jsx';
+
+import logo from '../../../assets/home/logo.svg';
+
+import Button from '../../ui/Button/Button.jsx';
+
+import './UserNavbar.css';
 
 function UserNavbar() {
 
@@ -26,7 +29,6 @@ function UserNavbar() {
                 </ul>
             </div>
 
-
             <div className="nav__logout">
                 <Button
                     variant={"bordered"}
@@ -35,10 +37,8 @@ function UserNavbar() {
                     Uitloggen
                 </Button>
             </div>
-
         </nav>
-    )
+    );
 }
 
 export default UserNavbar;
-

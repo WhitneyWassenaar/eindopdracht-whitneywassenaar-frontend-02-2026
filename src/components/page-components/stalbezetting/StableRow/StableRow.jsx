@@ -1,4 +1,3 @@
-
 function StableRow({stable}) {
     return (
         <tr className="stablerow-layout">
@@ -11,7 +10,3 @@ function StableRow({stable}) {
 }
 
 export default StableRow;
-
-//TODO
-// actie : als box leeg is "plaatsen",
-// als box bezet is "wijzigen"

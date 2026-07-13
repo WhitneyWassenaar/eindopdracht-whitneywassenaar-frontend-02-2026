@@ -1,8 +1,7 @@
-import HorseRow from "../HorseRow/HorseRow.jsx";
-import "./HorseTable.css"
+import HorseRow from '../HorseRow/HorseRow.jsx';
+import './HorseTable.css'
 
 function HorseTable({horses, setSelectedHorse}) {
-
     return (
         <table className="table-layout">
             <thead>

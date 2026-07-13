@@ -1,9 +1,8 @@
-import StableRow from "../StableRow/StableRow.jsx";
+import StableRow from '../StableRow/StableRow.jsx';
 
 function StableTable() {
 
-    // tijdelijke test data
-
+// test data
     const stables = [
         {
             id: 1,
@@ -49,5 +48,3 @@ function StableTable() {
 }
 
 export default StableTable;
-
-// taabellen afmaken en console errors oplossen

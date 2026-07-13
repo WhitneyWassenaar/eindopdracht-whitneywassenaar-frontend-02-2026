@@ -2,3 +2,11 @@
     height: 50px;
 }
 
+.horserow-layout:hover {
+    background-color: rgba(223, 236, 226, 0.48);
+    cursor: pointer;
+}
+
+.horserow-layout td {
+    text-align: center;
+}

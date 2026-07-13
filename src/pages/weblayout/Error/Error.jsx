@@ -1,8 +1,10 @@
-import "./Error.css"
+import {Link} from 'react-router-dom';
+
 import errorImg from "../../../assets/error/errorImg.png";
+
 import ContentSection from "../../../components/sections/ContentSection/ContentSection.jsx";
 
-import {Link} from 'react-router-dom';
+import "./Error.css"
 
 function Error() {
     return (
@@ -22,9 +24,3 @@ function Error() {
 }
 
 export default Error;
-
-/*
-* TODO:
-*  - Na een paar seconden doorverwijzen naar homepagina of knop gebruiken of niets
-*  - meer instructies op deze pagina?
-*/

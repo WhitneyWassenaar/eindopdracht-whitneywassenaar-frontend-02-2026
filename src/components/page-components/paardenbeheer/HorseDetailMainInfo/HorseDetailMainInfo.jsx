@@ -1,13 +1,16 @@
-import "./HorseDetailMainInfo.css"
-import persons from "../../../../data/json/persons.json";
-import calculateAge from "../../../ui/CalculateAge/CalculateAge.jsx";
+import calculateAge from '../../../../helpers/calculateAge.jsx';
+
+import persons from '../../../../data/json/persons.json';
+
+import './HorseDetailMainInfo.css';
+
 function HorseDetailMainInfo({horse}) {
 
     const owner = persons.find(
         persons => persons.id === horse.ownerId
     );
 
-    const contactPerson= persons.find(
+    const contactPerson = persons.find(
         persons => persons.id === horse.contactPersonId
     );
 
@@ -36,6 +39,7 @@ function HorseDetailMainInfo({horse}) {
                         <li>Vachtkleur: {horse.color}</li>
                     </ul>
                 </div>
+
                 <div className="info-block">
                     <h3>Eigenaar: {`${owner.firstName} ${owner.lastName}`}</h3>
                     <ul>
@@ -51,9 +55,6 @@ function HorseDetailMainInfo({horse}) {
                         <li> {trainer && (`Trainer:${trainer.firstName} ${trainer.lastName}`)} </li>
                     </ul>
                 </div>
-
-
-
             </div>
         </div>
     );

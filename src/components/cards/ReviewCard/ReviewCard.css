@@ -26,7 +26,6 @@
     color: var(--background-color);
 }
 
-
 @media (max-width: 915px) {
     .review-card {
         flex-direction: row;

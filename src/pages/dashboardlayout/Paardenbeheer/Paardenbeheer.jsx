@@ -1,15 +1,15 @@
+import {useState} from 'react';
+
+import horses from '../../../data/json/horses.json';
+
+import Button from '../../../components/ui/Button/Button.jsx';
+import HorseTable from '../../../components/page-components/paardenbeheer/HorseTable/HorseTable.jsx';
+import HorseDetail from '../../../components/page-components/paardenbeheer/HorseDetail/HorseDetail.jsx';
+
 import './Paardenbeheer.css'
-import Button from "../../../components/ui/Button/Button.jsx";
-import HorseTable from "../../../components/page-components/paardenbeheer/HorseTable/HorseTable.jsx";
-import CreateHorseProfileForm from "../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx";
-import horses from "../../../data/json/horses.json";
-import HorseDetail from "../../../components/page-components/paardenbeheer/HorseDetail/HorseDetail.jsx";
-import {useState} from "react";
 
 function Paardenbeheer() {
-
     const [selectedHorse, setSelectedHorse] = useState(null)
-
     return (
         <div className="paardenbeheer-page">
 
@@ -55,14 +55,7 @@ function Paardenbeheer() {
             )}
 
         </div>
-    )
+    );
 }
 
-                export default Paardenbeheer;
-
-                {/*//TODO:*/}
-                {/*// horse table*/}
-                {/*// horse row*/}
-                {/*// filter*/}
-                {/*// sort*/}
-                {/*// Op deze pagina*/}
+export default Paardenbeheer;

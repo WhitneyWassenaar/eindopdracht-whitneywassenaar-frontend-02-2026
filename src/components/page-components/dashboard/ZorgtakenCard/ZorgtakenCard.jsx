@@ -1,4 +1,4 @@
-import DashboardCard from "../DashboardCard/DashboardCard.jsx";
+import DashboardCard from '../DashboardCard/DashboardCard.jsx';
 
 function ZorgtakenCard() {
     return (

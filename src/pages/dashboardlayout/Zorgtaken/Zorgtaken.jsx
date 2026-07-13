@@ -5,13 +5,9 @@ function Zorgtaken() {
         <>
             <div className="dashboard-page">
                 <h1>Zorgtaken</h1>
-
             </div>
         </>
-    )
+    );
 }
 
 export default Zorgtaken;
-
-//TODO:
-// componenten maken

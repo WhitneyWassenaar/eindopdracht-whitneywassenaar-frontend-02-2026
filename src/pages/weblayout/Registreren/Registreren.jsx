@@ -1,5 +1,4 @@
-import RegisterForm from "../../../components/forms/RegisterForm/RegisterForm.jsx";
-import GuestNavbar from "../../../components/navigation/GuestNavbar/GuestNavbar.jsx";
+import RegisterForm from '../../../components/forms/RegisterForm/RegisterForm.jsx';
 
 function Registreren() {
     return(

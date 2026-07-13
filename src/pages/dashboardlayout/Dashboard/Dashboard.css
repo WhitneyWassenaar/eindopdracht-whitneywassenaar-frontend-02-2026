@@ -13,6 +13,7 @@
 .afspraken-list {
     list-style-type: none;
 }
+
 .dashboard-card-container {
     display: grid;
     grid-template-columns: repeat(3,1fr);

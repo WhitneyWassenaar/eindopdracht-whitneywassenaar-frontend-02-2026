@@ -1,4 +1,5 @@
 import './Helpcentrum.css'
+
 function Helpcentrum() {
     return(
         <>
@@ -8,7 +9,6 @@ function Helpcentrum() {
                     <li>Account</li>
                     <li>gebruik van de applicatie</li>
                     <li>test</li>
-
                 </ul>
             </section>
 

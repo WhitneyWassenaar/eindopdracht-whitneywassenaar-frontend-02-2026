@@ -19,7 +19,6 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-
 }
 
 .nav-content-wrapper {
@@ -31,9 +30,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     width: 100%;
-
 }
 
 .nav-menu-items a {
@@ -41,13 +38,11 @@
     text-decoration: none;
 }
 
-
 /* ====================
         NAV ACTIVE
 ==================== */
 .active-menu-link {
     border-bottom: 1px solid var(--primary-color)
-
 }
 
 .default-menu-link {

@@ -1,7 +1,5 @@
-
 .dashboard-layout {
     display: flex;
-
     /*border: 1px purple solid;*/
     background-color: var(--tertiary-color);
     align-items: stretch;
@@ -15,6 +13,5 @@
 .dashboard-content {
     flex: 1;
     /*border: 5px solid red;*/
-
 }
 

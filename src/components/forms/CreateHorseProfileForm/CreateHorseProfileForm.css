@@ -31,7 +31,6 @@ padding: 15px;
 .radio-button-container {
     display: flex;
     flex-direction: column;
-
 }
 
 .radio-button-container label {

@@ -1,5 +1,6 @@
-import "./Button.css";
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
+
+import './Button.css';
 
 function Button({
                     children,
@@ -7,7 +8,7 @@ function Button({
                     buttonPath,
                     type = "button",
                     onClick,
-    className
+                    className
                 }) {
 
     const navigate = useNavigate();

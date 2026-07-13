@@ -22,7 +22,6 @@
 .sidebar.open { /*element die beide classes tegelijk heeft*/
     transform: translateX(0);
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-
 }
 
 .sidebar a {
@@ -46,8 +45,7 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height:100vh;
-    background:rgba(0,0,0,0.4);
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
     z-index: 4;
 }
-
