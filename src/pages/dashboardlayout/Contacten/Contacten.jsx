@@ -68,7 +68,7 @@ function Contacten() {
                 );
 
                 const data = await response.json();
-
+                console.log("Horses:", data);
                 setHorses(data);
 
             } catch (error) {
@@ -168,7 +168,7 @@ function Contacten() {
 
                     <ContactDetail
                         contact={selectedContact}
-                        horses={{horses}}
+                        horses={horses}
                     />
                 </>
             ) : (

@@ -9,7 +9,7 @@ import Button from '../../ui/Button/Button.jsx';
 
 import './CreateHorseProfileForm.css';
 
-function CreateHorseProfileForm({setHorses, setShowForm}) {
+function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
     const {token} = useContext(AuthContext);
 
     const [horseName, setHorseName] = useState("");
@@ -18,6 +18,7 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
     const [horseBreed, setHorseBreed] = useState("");
     const [horseColor, setHorseColor] = useState("");
     const [horsePhoto, setHorsePhoto] = useState("");
+    const [ownerId, setOwnerId] = useState("");
 
     const defaultHorsePhoto = "/defaultHorsePhoto.png"
     const today = new Date().toISOString().split("T")[0];
@@ -72,6 +73,10 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
             console.error(error)
         }
     }
+
+    const owners = contacts.filter(
+        (contact) => contact.role === "Eigenaar"
+    );
 
     return (
         <form onSubmit={createHorseFormSubmit} className="create-horse-profile-form-layout">
@@ -189,10 +194,23 @@ function CreateHorseProfileForm({setHorses, setShowForm}) {
 
                 <div className="form-row">
                     <label>Eigenaar</label>
-                    <select disabled>
-                        <option>
-                            Eerst contactpersoon aanmaken!
+                    <select
+                        value={ownerId}
+                        onChange={(e) => setOwnerId(e.target.value)}
+                        required
+                    >
+                        <option value="">
+                            Selecteer een eigenaar
                         </option>
+
+                        {owners.map((owner) => (
+                            <option
+                                key={owner.id}
+                                value={owner.id}
+                            >
+                                {owner.firstName} {owner.lastName}
+                            </option>
+                        ))}
                     </select>
 
                 </div>

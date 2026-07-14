@@ -14,6 +14,8 @@ function Paardenbeheer() {
     const [horses, setHorses] = useState([]);
     const [selectedHorse, setSelectedHorse] = useState(null);
     const [showForm, setShowForm] = useState(false);
+    const [contacts, setContacts] = useState([]);
+
 
     const {token} = useContext(AuthContext);
     console.log("Token lengte:", token?.length);
@@ -52,6 +54,38 @@ function Paardenbeheer() {
             }
         }
             getHorses();
+
+    }, [token]);
+
+    useEffect(() => {
+        if (!token) return;
+
+        async function getContacts() {
+            try {
+                const response = await fetch(
+                    "https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons",
+                    {
+                        headers: {
+                            "novi-education-project-id": projectId,
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                if (!response.ok) {
+                    return;
+                }
+
+                const data = await response.json();
+
+                setContacts(data);
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        getContacts();
 
     }, [token]);
 
@@ -125,6 +159,8 @@ function Paardenbeheer() {
         }
     }
 
+
+
 return (
     <div className="paardenbeheer-page">
 
@@ -176,6 +212,7 @@ return (
                     <CreateHorseProfileForm
                         setHorses={setHorses}
                         setShowForm={setShowForm}
+                        contacts={contacts}
                     />
                 )}
             </>
