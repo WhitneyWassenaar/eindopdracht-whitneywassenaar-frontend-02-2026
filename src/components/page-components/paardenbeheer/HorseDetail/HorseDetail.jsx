@@ -1,7 +1,7 @@
 import HorseDetailMainInfo from '../HorseDetailMainInfo/HorseDetailMainInfo.jsx';
-import HorseDetailTabs from '../HorseDetailTabs/HorseDetailTabs.jsx';
 
 import './HorseDetail.css';
+import HorseDetailTabs from "../HorseDetailTabs/HorseDetailTabs.jsx";
 
 function HorseDetail({horse,contacts}) {
     console.log("HorseDetail:", horse);
@@ -11,9 +11,8 @@ function HorseDetail({horse,contacts}) {
                 horse={horse}
                 contacts={contacts}
             />
-            <HorseDetailTabs horse={horse}/>
+            <HorseDetailTabs />
         </div>
-
     );
 }
 

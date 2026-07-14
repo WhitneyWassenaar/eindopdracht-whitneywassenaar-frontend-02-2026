@@ -1,4 +1,5 @@
 import calculateAge from '../../../../helpers/calculateAge.jsx';
+import HorseRelations from "../HorseRelations/HorseRelations.jsx";
 
 import './HorseDetailMainInfo.css';
 
@@ -62,27 +63,9 @@ function HorseDetailMainInfo({horse,contacts}) {
                     </ul>
                 </div>
 
-                <div className="info-block">
-                    <h4>Relaties</h4>
-
-                    {caretaker || trainer ? (
-                        <ul>
-                            {caretaker && (
-                                <li>
-                                    Verzorger: {caretaker.firstName} {caretaker.lastName}
-                                </li>
-                            )}
-
-                            {trainer && (
-                                <li>
-                                    Trainer: {trainer.firstName} {trainer.lastName}
-                                </li>
-                            )}
-                        </ul>
-                    ) : (
-                        <p>Geen relaties</p>
-                    )}
-                </div>
+              <HorseRelations
+                  horse={horse}
+                  contacts={contacts}/>
             </div>
         </div>
     );
