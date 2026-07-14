@@ -55,4 +55,8 @@ function App() {
     );
 }
 
-export default App
+export default App;
+
+/*
+* TODO
+*  Logout after long inactivity*/
