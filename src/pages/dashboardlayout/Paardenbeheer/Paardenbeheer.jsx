@@ -16,6 +16,9 @@ function Paardenbeheer() {
     const [showForm, setShowForm] = useState(false);
     const [contacts, setContacts] = useState([]);
 
+    const [filter, setFilter] = useState("alle");
+    const [showFilter, setShowFilter] = useState(false);
+
     const {token} = useContext(AuthContext);
     console.log("Token lengte:", token?.length);
 
@@ -158,6 +161,17 @@ function Paardenbeheer() {
         }
     }
 
+    const filteredHorses = horses.filter((horse) => {
+        if (filter === "actief") {
+            return horse.active;
+        }
+
+        if (filter === "inactief") {
+            return !horse.active;
+        }
+
+        return true;
+    });
 
 
 return (
@@ -187,7 +201,11 @@ return (
                 </p>
 
                 <div className="paardenbeheer-actions">
-                    <Button variant="filter-sort">
+                    <Button
+                        variant="filter-sort"
+                        type="button"
+                        onClick={() => setShowFilter(!showFilter)}
+                    >
                         Filter
                     </Button>
 
@@ -196,8 +214,27 @@ return (
                     </Button>
                 </div>
 
+                {showFilter && (
+                    <select
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
+                    >
+                        <option value="alle">
+                            Alle paarden
+                        </option>
+
+                        <option value="actief">
+                            Actieve paarden
+                        </option>
+
+                        <option value="inactief">
+                            Inactieve paarden
+                        </option>
+                    </select>
+                )}
+
                 <HorseTable
-                    horses={horses}
+                    horses={filteredHorses}
                     setSelectedHorse={setSelectedHorse}
                     deleteHorse={deleteHorse}
                     toggleHorseActive={toggleHorseActive}
