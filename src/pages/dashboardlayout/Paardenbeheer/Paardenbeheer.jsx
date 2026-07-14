@@ -55,6 +55,35 @@ function Paardenbeheer() {
 
     }, [token]);
 
+    async function deleteHorse(horseId) {
+        try  {
+            const response = await fetch(
+                `https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses/${horseId}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        "novi-education-project-id": projectId,
+                        "Authorization": `Bearer ${token}`,
+                    },
+                }
+            );
+
+            if (!response.ok) {
+                console.error("Paard verwijderen mislukt");
+                console.log("Status:", response.status);
+                return;
+            }
+
+            // Row wordt visueel verwijderd
+            setHorses(previousHorses =>
+                previousHorses.filter(horse => horse.id !== horseId)
+            );
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 return (
     <div className="paardenbeheer-page">
 
@@ -91,6 +120,7 @@ return (
                 <HorseTable
                     horses={horses}
                     setSelectedHorse={setSelectedHorse}
+                    deleteHorse={deleteHorse}
                 />
 
                 <Button
