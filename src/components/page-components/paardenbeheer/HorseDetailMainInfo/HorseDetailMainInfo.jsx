@@ -11,7 +11,7 @@ function HorseDetailMainInfo({horse,contacts}) {
     );
 
     const contactPerson = contacts.find(
-        contact=> Number(contact.id) === Number(horse.contactPersonId)
+        contact=> Number(contact.id) === Number(horse.ownerId)
     );
 
     const caretaker = contacts.find(
@@ -45,19 +45,43 @@ function HorseDetailMainInfo({horse,contacts}) {
                 </div>
 
                 <div className="info-block">
-                    <h3>Eigenaar: {owner ? `${owner.firstName} ${owner.lastName}`: "Eigenaar onbekend"}</h3>
                     <ul>
-                        <li>Telefoon: {contactPerson ? `${contactPerson.phone}` : "Telefoonnummer onbekend"}</li>
-                        <li>Email: {contactPerson ? `${contactPerson.email}`: "Email onbekend"}</li>
+                        <li>
+                            Eigenaar:{owner
+                                ? `${owner.firstName} ${owner.lastName}`
+                                : "Eigenaar onbekend"}
+                        </li>
+                        <li>Telefoon:{owner
+                                ? `${owner.phone}`
+                                : "Telefoonnummer onbekend"}
+                        </li>
+                        <li>Email:{owner
+                                ? `${owner.email}`
+                                : "Email onbekend"}
+                        </li>
                     </ul>
                 </div>
 
                 <div className="info-block">
                     <h4>Relaties</h4>
-                    <ul>
-                        <li>{caretaker ? `Verzorger: ${caretaker.firstName} ${caretaker.lastName}` : "Verzorger onbekend"} </li>
-                        <li> {trainer ? `Trainer:${trainer.firstName} ${trainer.lastName}`: "Trainer onbekend"} </li>
-                    </ul>
+
+                    {caretaker || trainer ? (
+                        <ul>
+                            {caretaker && (
+                                <li>
+                                    Verzorger: {caretaker.firstName} {caretaker.lastName}
+                                </li>
+                            )}
+
+                            {trainer && (
+                                <li>
+                                    Trainer: {trainer.firstName} {trainer.lastName}
+                                </li>
+                            )}
+                        </ul>
+                    ) : (
+                        <p>Geen relaties</p>
+                    )}
                 </div>
             </div>
         </div>
