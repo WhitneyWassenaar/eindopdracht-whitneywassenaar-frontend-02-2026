@@ -19,6 +19,9 @@ function Paardenbeheer() {
     const [filter, setFilter] = useState("alle");
     const [showFilter, setShowFilter] = useState(false);
 
+    const [sortOption, setSortOption] = useState("geen");
+    const [showSort, setShowSort] = useState(false);
+
     const {token} = useContext(AuthContext);
     console.log("Token lengte:", token?.length);
 
@@ -173,6 +176,27 @@ function Paardenbeheer() {
         return true;
     });
 
+    const sortedHorses = [...filteredHorses].sort((a, b) => {
+
+        if (sortOption === "naam-oplopend") {
+            return a.name.localeCompare(b.name);
+        }
+
+        if (sortOption === "naam-aflopend") {
+            return b.name.localeCompare(a.name);
+        }
+
+        if (sortOption === "leeftijd-jong") {
+            return new Date(b.birthDate) - new Date(a.birthDate);
+        }
+
+        if (sortOption === "leeftijd-oud") {
+            return new Date(a.birthDate) - new Date(b.birthDate);
+        }
+
+        return 0;
+    });
+
 
 return (
     <div className="paardenbeheer-page">
@@ -209,7 +233,10 @@ return (
                         Filter
                     </Button>
 
-                    <Button variant="filter-sort">
+                    <Button
+                        variant="filter-sort"
+                             type="button"
+                             onClick={() => setShowSort(!showSort)}>
                         Sorteren
                     </Button>
                 </div>
@@ -219,22 +246,49 @@ return (
                         value={filter}
                         onChange={(e) => setFilter(e.target.value)}
                     >
-                        <option value="alle">
+                        <option value="all">
                             Alle paarden
                         </option>
 
-                        <option value="actief">
+                        <option value="active">
                             Actieve paarden
                         </option>
 
-                        <option value="inactief">
+                        <option value="inactive">
                             Inactieve paarden
                         </option>
                     </select>
                 )}
 
+                {showSort && (
+                    <select
+                        value={sortOption}
+                        onChange={(e)=>setSortOption(e.target.value)}
+                    >
+                        <option value="none">
+                            Geen sortering
+                        </option>
+
+                        <option value="name-ascending">
+                            Naam A-Z
+                        </option>
+
+                        <option value="name-descending">
+                            Naam Z-A
+                        </option>
+
+                        <option value="age-young">
+                            Jongste eerst
+                        </option>
+
+                        <option value="age-old">
+                            Oudste eerst
+                        </option>
+                    </select>
+                )}
+
                 <HorseTable
-                    horses={filteredHorses}
+                    horses={sortedHorses}
                     setSelectedHorse={setSelectedHorse}
                     deleteHorse={deleteHorse}
                     toggleHorseActive={toggleHorseActive}
