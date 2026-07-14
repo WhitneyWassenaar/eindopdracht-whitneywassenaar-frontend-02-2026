@@ -1,0 +1,30 @@
+.create-contact-profile-form-layout {
+    max-width: 700px;
+    width: 100%;
+    height: 100%;
+}
+
+.create-contact-profile-form-layout fieldset {
+    padding: 15px;
+}
+
+.create-contact-profile-form-layout legend {
+    font-weight: 600;
+    font-size:1.3rem;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.form-row label {
+    width:150px;
+}
+
+.radio-button-container {
+    display: flex;
+    flex-direction: column;
+}

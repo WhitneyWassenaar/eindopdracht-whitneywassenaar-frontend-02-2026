@@ -33,8 +33,18 @@
           "required": false
         },
         {
-          "name": "roles",
+          "name": "role",
           "type": "string",
+          "required": true
+        },
+        {
+          "name": "photo",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "active",
+          "type": "boolean",
           "required": true
         }
       ],
