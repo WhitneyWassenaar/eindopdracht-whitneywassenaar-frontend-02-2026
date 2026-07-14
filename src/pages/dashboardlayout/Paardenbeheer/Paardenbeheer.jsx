@@ -1,61 +1,121 @@
-import {useState} from 'react';
-
-import horses from '../../../data/json/horses.json';
+import {useState, useEffect, useContext} from 'react';
+import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
 
 import Button from '../../../components/ui/Button/Button.jsx';
 import HorseTable from '../../../components/page-components/paardenbeheer/HorseTable/HorseTable.jsx';
 import HorseDetail from '../../../components/page-components/paardenbeheer/HorseDetail/HorseDetail.jsx';
+import CreateHorseProfileForm from '../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx';
+import projectId from '../../../data/projectId.js';
 
 import './Paardenbeheer.css'
 
 function Paardenbeheer() {
-    const [selectedHorse, setSelectedHorse] = useState(null)
-    return (
-        <div className="paardenbeheer-page">
 
-            <h1>Paardenbeheer</h1>
+    const [horses, setHorses] = useState([]);
+    const [selectedHorse, setSelectedHorse] = useState(null);
+    const [showForm, setShowForm] = useState(false);
 
-            {selectedHorse ? (
-                <>
-                    <Button
-                        type="button"
-                        onClick={() => setSelectedHorse(null)}
-                    >
-                        Terug
+    const {token} = useContext(AuthContext);
+    console.log("Token lengte:", token?.length);
+
+    useEffect(() => {
+        if (!token) return;
+
+        async function getHorses() {
+            try {
+                const response = await fetch(
+                    "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
+                    {
+                        headers: {
+                            "novi-education-project-id": projectId,
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                console.log("Status:", response.status);
+
+                const responseText = await response.text();
+
+                console.log("Backend antwoord:", responseText);
+
+                if (!response.ok) {
+                    return;
+                }
+
+                const data = JSON.parse(responseText);
+
+                setHorses(data);
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+            getHorses();
+
+    }, [token]);
+
+return (
+    <div className="paardenbeheer-page">
+
+        <h1>Paardenbeheer</h1>
+
+        {selectedHorse ? (
+            <>
+                <Button
+                    type="button"
+                    onClick={() => setSelectedHorse(null)}
+                >
+                    Terug
+                </Button>
+
+                <HorseDetail horse={selectedHorse}/>
+            </>
+        ) : (
+            <>
+                <p>
+                    Totaal aantal paardenprofielen:
+                    <strong>{horses.length}</strong>
+                </p>
+
+                <div className="paardenbeheer-actions">
+                    <Button variant="filter-sort">
+                        Filter
                     </Button>
 
-                    <HorseDetail horse={selectedHorse}/>
-                </>
-            ) : (
-                <>
-                    <p>
-                        Totaal aantal paardenprofielen:
-                        <strong>{horses.length}</strong>
-                    </p>
+                    <Button variant="filter-sort">
+                        Sorteren
+                    </Button>
+                </div>
 
-                    <div className="paardenbeheer-actions">
-                        <Button variant="filter-sort">
-                            Filter
-                        </Button>
+                <HorseTable
+                    horses={horses}
+                    setSelectedHorse={setSelectedHorse}
+                />
 
-                        <Button variant="filter-sort">
-                            Sorteren
-                        </Button>
-                    </div>
+                <Button
+                    type="button"
+                    onClick={() => setShowForm(true)}
+                >
+                    Paardenprofiel toevoegen
+                </Button>
 
-                    <HorseTable
-                        horses={horses}
-                        setSelectedHorse={setSelectedHorse}
+                {showForm && (
+                    <CreateHorseProfileForm
+                        setHorses={setHorses}
+                        setShowForm={setShowForm}
                     />
+                )}
+            </>
+        )}
 
-                    <Button type="button">
-                        Paardenprofiel toevoegen
-                    </Button>
-                </>
-            )}
-
-        </div>
-    );
+    </div>
+);
 }
 
 export default Paardenbeheer;
+
+//TODO
+// - paard verwijderen
+// - Paard bewerken
+// - detailpagina kunnen bijwerken

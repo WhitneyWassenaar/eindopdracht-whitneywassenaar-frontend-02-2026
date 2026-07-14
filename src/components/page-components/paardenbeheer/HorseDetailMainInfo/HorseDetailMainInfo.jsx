@@ -4,8 +4,11 @@ import persons from '../../../../data/json/persons.json';
 
 import './HorseDetailMainInfo.css';
 
-function HorseDetailMainInfo({horse}) {
 
+
+function HorseDetailMainInfo({horse}) {
+    const defaultHorsePhoto = "/defaultHorsePhoto.png";
+    console.log(horse.photo);
     const owner = persons.find(
         persons => persons.id === horse.ownerId
     );
@@ -25,7 +28,7 @@ function HorseDetailMainInfo({horse}) {
     return (
         <div className="horse-detail-main-info-container">
             <div className="horse-profile-picture">
-                <img src={"/"} alt={horse.name}/>
+                <img src={horse.photo || defaultHorsePhoto} alt={horse.name}/>
             </div>
 
             <div className="horse-main-info">
@@ -41,18 +44,18 @@ function HorseDetailMainInfo({horse}) {
                 </div>
 
                 <div className="info-block">
-                    <h3>Eigenaar: {`${owner.firstName} ${owner.lastName}`}</h3>
+                    <h3>Eigenaar: {owner ? `${owner.firstName} ${owner.lastName}`: "Eigenaar onbekend"}</h3>
                     <ul>
-                        <li>Telefoon: {`${contactPerson.phone}`}</li>
-                        <li>Email: {`${contactPerson.email}`}</li>
+                        <li>Telefoon: {contactPerson ? `${contactPerson.phone}` : "Telefoonnummer onbekend"}</li>
+                        <li>Email: {contactPerson ? `${contactPerson.email}`: "Email onbekend"}</li>
                     </ul>
                 </div>
 
                 <div className="info-block">
                     <h4>Relaties</h4>
                     <ul>
-                        <li>{caretaker && (`Verzorger: ${caretaker.firstName} ${caretaker.lastName}`)} </li>
-                        <li> {trainer && (`Trainer:${trainer.firstName} ${trainer.lastName}`)} </li>
+                        <li>{caretaker ? `Verzorger: ${caretaker.firstName} ${caretaker.lastName}` : "Verzorger onbekend"} </li>
+                        <li> {trainer ? `Trainer:${trainer.firstName} ${trainer.lastName}`: "Trainer onbekend"} </li>
                     </ul>
                 </div>
             </div>

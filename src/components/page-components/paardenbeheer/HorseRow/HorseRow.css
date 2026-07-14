@@ -10,3 +10,10 @@
 .horserow-layout td {
     text-align: center;
 }
+
+.horse-photo {
+    width: 70px;
+    height:70px;
+    object-fit: cover;
+    border-radius: 50%;
+}

@@ -1,0 +1,154 @@
+{
+  "collections": [
+    {
+      "name": "persons",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "firstName",
+          "type": "string",
+          "required": true,
+          "min": 2,
+          "max": 20
+        },
+        {
+          "name": "lastName",
+          "type": "string",
+          "required": true,
+          "min": 2,
+          "max": 20
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "roles",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user"
+        ],
+        "POST": [
+          "user"
+        ],
+        "PUT": [
+          "user"
+        ],
+        "PATCH": [
+          "user"
+        ],
+        "DELETE": [
+          "user"
+        ]
+      }
+    },
+    {
+      "name": "horses",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "min": 1,
+          "max": 50
+        },
+        {
+          "name": "gender",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "birthDate",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "breed",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "active",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "photo",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ownerId",
+          "type": "reference:persons",
+          "required": true
+        },
+        {
+          "name": "contactPersonId",
+          "type": "reference:persons",
+          "required": false
+        },
+        {
+          "name": "caretakerId",
+          "type": "reference:persons",
+          "required": false
+        },
+        {
+          "name": "trainerId",
+          "type": "reference:persons",
+          "required": false
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user"
+        ],
+        "POST": [
+          "user"
+        ],
+        "PUT": [
+          "user"
+        ],
+        "PATCH": [
+          "user"
+        ],
+        "DELETE": [
+          "user"
+        ]
+      }
+    }
+  ],
+  "users": [
+    {
+      "email": "pietje@live.nl",
+      "password": "123",
+      "roles": [
+        "user"
+      ]
+    }
+  ]
+}
+
