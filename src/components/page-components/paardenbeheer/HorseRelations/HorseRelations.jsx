@@ -1,8 +1,4 @@
-import Button from "../../../ui/Button/Button.jsx";
-
 function HorseRelations({horse, contacts}) {
-
-    const [showRelationForm, setShowRelationForm] = useState(false);
 
     const caretaker = contacts.find(
         contact => Number(contact.id) === Number(horse.caretakerId)
@@ -33,12 +29,6 @@ function HorseRelations({horse, contacts}) {
             ) : (
                 <p>Geen relaties</p>
             )}
-
-            <Button
-                onClick={() => setShowRelationForm(!showRelationForm)}
-            >
-                Relaties beheren
-            </Button>
         </div>
     );
 }

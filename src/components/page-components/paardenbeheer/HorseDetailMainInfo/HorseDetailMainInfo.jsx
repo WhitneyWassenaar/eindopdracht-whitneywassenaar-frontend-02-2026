@@ -67,6 +67,7 @@ function HorseDetailMainInfo({horse,contacts}) {
                   horse={horse}
                   contacts={contacts}/>
             </div>
+
         </div>
     );
 }

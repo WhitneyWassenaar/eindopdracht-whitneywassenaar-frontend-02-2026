@@ -100,3 +100,40 @@ border-color: black;
 .button--delete:hover {
     cursor: pointer;
 }
+
+/* =======================================
+           BUTTON VARIANT: MANAGE RELATIONS
+======================================== */
+.button--manage-relations {
+    width:100%;
+    max-width: 600px;
+    background-color: var(--primary-color);
+    font-size: 15px;
+    border-radius:0 0 15px 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button--manage-relations:hover {
+   cursor:pointer;
+    background-color: var(--background-color);
+    color: var(--text-color);
+
+}
+
+/* =======================================
+           BUTTON VARIANT: SAVE RELATIONS
+======================================== */
+.button--save-relations {
+    width:100%;
+   max-width: 100px;
+    background-color: var(--primary-color);
+    font-size: 15px;
+    border-radius:10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button--save-relations:hover {
+    cursor:pointer;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}

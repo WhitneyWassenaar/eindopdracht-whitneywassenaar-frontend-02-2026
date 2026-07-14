@@ -1,0 +1,18 @@
+.relation-label {
+    display: block;
+margin-right: 10px;
+
+}
+
+.label-wrapper {
+    display: flex;
+
+}
+
+.form-layout {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    padding: 10px 0 10px 0;
+}
