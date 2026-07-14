@@ -55,6 +55,44 @@ function Paardenbeheer() {
 
     }, [token]);
 
+    async function toggleHorseActive(horse) {
+        try {
+            const response = await fetch(
+                `https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses/${horse.id}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "novi-education-project-id": projectId,
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        active: !horse.active
+                    }),
+                }
+            );
+
+            if (!response.ok) {
+                console.error("Status wijzigen mislukt");
+                return;
+            }
+
+            setHorses(previousHorses =>
+                previousHorses.map(previousHorse =>
+                    previousHorse.id === horse.id
+                        ? {
+                            ...previousHorse,
+                            active: !previousHorse.active
+                        }
+                        : previousHorse
+                )
+            );
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     async function deleteHorse(horseId) {
         if (!window.confirm("Weet je zeker dat je dit paardenprofiel wilt verwijderen?"))
             return;
@@ -124,6 +162,7 @@ return (
                     horses={horses}
                     setSelectedHorse={setSelectedHorse}
                     deleteHorse={deleteHorse}
+                    toggleHorseActive={toggleHorseActive}
                 />
 
                 <Button

@@ -17,3 +17,20 @@
     object-fit: cover;
     border-radius: 50%;
 }
+
+.horse-status {
+    cursor: pointer;
+    width:100px;
+}
+
+.horse-status:hover {
+    text-decoration: underline;
+}
+
+.horse-status.active {
+    color: green;
+}
+
+.horse-status.inactive {
+    color: red;
+}
