@@ -1,20 +1,19 @@
 import './ContactDetail.css';
 import ContactDetailMainInfo from "../ContactDetailMainInfo/ContactDetailMainInfo.jsx";
-import {getHorses} from "../../../../data/horseApi.js";
 
-function ContactDetail({contact}) {
+function ContactDetail({contact,horses}) {
     console.log("ContactDetail:", contact);
 
-    const relatedHorses = getHorses.filter((horseDetail) =>
-    horseDetail.ownerId === contact.id ||
-    horseDetail.careTakerId === contact.id ||
-    horseDetail.trainerId === contact.id);
+    const relatedHorses = horses.filter((horse) =>
+    horse.ownerId === contact.id ||
+    horse.careTakerId === contact.id ||
+    horse.trainerId === contact.id);
 
     return (
         <div className="contact-detail-container">
             <ContactDetailMainInfo
                 contact={contact}
-                horses = {[]}
+                horses = {relatedHorses}
             />
         </div>
 

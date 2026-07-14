@@ -16,6 +16,7 @@ function Contacten() {
     const [contacts, setContacts] = useState([]);
     const [selectedContact, setSelectedContact] = useState(null);
     const [showForm, setShowForm] = useState(false);
+    const [horses, setHorses] = useState([]);
 
     const {token} = useContext(AuthContext);
     console.log("Token lengte:", token?.length);
@@ -53,7 +54,29 @@ function Contacten() {
                 console.error(error);
             }
         }
+
+        async function getHorses() {
+            try {
+                const response = await fetch(
+                    "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
+                    {
+                        headers: {
+                            "novi-education-project-id": projectId,
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                const data = await response.json();
+
+                setHorses(data);
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
         getContacts();
+        getHorses();
 
     }, [token]);
 
@@ -127,6 +150,8 @@ function Contacten() {
         }
     }
 
+
+
     return (
         <div className="contacten-page">
 
@@ -141,7 +166,10 @@ function Contacten() {
                         Terug
                     </Button>
 
-                    <ContactDetail contact={selectedContact}/>
+                    <ContactDetail
+                        contact={selectedContact}
+                        horses={{horses}}
+                    />
                 </>
             ) : (
                 <>
