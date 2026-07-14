@@ -56,6 +56,9 @@ function Paardenbeheer() {
     }, [token]);
 
     async function deleteHorse(horseId) {
+        if (!window.confirm("Weet je zeker dat je dit paardenprofiel wilt verwijderen?"))
+            return;
+
         try  {
             const response = await fetch(
                 `https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses/${horseId}`,
