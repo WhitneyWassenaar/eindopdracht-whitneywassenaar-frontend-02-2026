@@ -1,29 +1,30 @@
 import calculateAge from '../../../../helpers/calculateAge.jsx';
 
-import persons from '../../../../data/json/persons.json';
-
 import './HorseDetailMainInfo.css';
 
-
-
-function HorseDetailMainInfo({horse}) {
+function HorseDetailMainInfo({horse,contacts}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
     console.log(horse.photo);
-    const owner = persons.find(
-        persons => persons.id === horse.ownerId
+
+    const owner = contacts.find(
+        contact => Number(contact.id )=== Number(horse.ownerId)
     );
 
-    const contactPerson = persons.find(
-        persons => persons.id === horse.contactPersonId
+    const contactPerson = contacts.find(
+        contact=> Number(contact.id) === Number(horse.contactPersonId)
     );
 
-    const caretaker = persons.find(
-        persons => persons.id === horse.caretakerId
+    const caretaker = contacts.find(
+        contact => Number(contact.id) === Number(horse.caretakerId)
     );
 
-    const trainer = persons.find(
-        persons => persons.id === horse.trainerId
+    const trainer = contacts.find(
+        contact=> Number(contact.id) === Number(horse.trainerId)
     );
+
+    console.log("Paard:", horse);
+    console.log("Contacten:", contacts);
+    console.log("ownerId van paard:", horse.ownerId);
 
     return (
         <div className="horse-detail-main-info-container">
@@ -64,3 +65,4 @@ function HorseDetailMainInfo({horse}) {
 }
 
 export default HorseDetailMainInfo;
+

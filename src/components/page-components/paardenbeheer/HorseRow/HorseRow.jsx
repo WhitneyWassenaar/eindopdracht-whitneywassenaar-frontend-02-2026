@@ -2,18 +2,15 @@ import Button from '../../../ui/Button/Button.jsx';
 import calculateAge from '../../../../helpers/calculateAge.jsx';
 
 import deleteIcon from '/src/assets/delete-icon.png'
-import persons from '../../../../data/json/persons.json';
 
 import './HorseRow.css'
 
-function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive}) {
+function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, contacts}) {
 
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
-
-    const owner = persons.find(
-        persons => persons.id === horse.ownerId
+    const owner = contacts.find(
+        contact => Number(contact.id) === Number(horse.ownerId)
     );
-
 
     return (
         <tr className="horserow-layout"

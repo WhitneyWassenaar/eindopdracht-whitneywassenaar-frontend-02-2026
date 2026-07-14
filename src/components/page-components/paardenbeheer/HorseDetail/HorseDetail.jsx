@@ -3,11 +3,14 @@ import HorseDetailTabs from '../HorseDetailTabs/HorseDetailTabs.jsx';
 
 import './HorseDetail.css';
 
-function HorseDetail({horse}) {
+function HorseDetail({horse,contacts}) {
     console.log("HorseDetail:", horse);
     return (
         <div className="horse-detail-container">
-            <HorseDetailMainInfo horse={horse}/>
+            <HorseDetailMainInfo
+                horse={horse}
+                contacts={contacts}
+            />
             <HorseDetailTabs horse={horse}/>
         </div>
 

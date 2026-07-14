@@ -1,0 +1,36 @@
+.contactrow-layout {
+    height: 50px;
+}
+
+.contactrow-layout:hover {
+    background-color: rgba(223, 236, 226, 0.48);
+    cursor: pointer;
+}
+
+.contactrow-layout td {
+    text-align: center;
+}
+
+.contact-photo {
+    width: 70px;
+    height:70px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.contact-status {
+    cursor: pointer;
+    width:100px;
+}
+
+.contact-status:hover {
+    text-decoration: underline;
+}
+
+.contact-status.active {
+    color: green;
+}
+
+.contact-status.inactive {
+    color: red;
+}

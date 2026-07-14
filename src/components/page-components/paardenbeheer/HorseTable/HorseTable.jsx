@@ -1,7 +1,7 @@
 import HorseRow from '../HorseRow/HorseRow.jsx';
 import './HorseTable.css'
 
-function HorseTable({horses, setSelectedHorse, deleteHorse,toggleHorseActive}) {
+function HorseTable({horses, setSelectedHorse, deleteHorse,toggleHorseActive, contacts}) {
     return (
         <table className="table-layout">
             <thead>
@@ -15,7 +15,6 @@ function HorseTable({horses, setSelectedHorse, deleteHorse,toggleHorseActive}) {
                 <th></th>
             </tr>
             </thead>
-
             <tbody>
             {horses.map((horse) => (
                 <HorseRow
@@ -24,7 +23,7 @@ function HorseTable({horses, setSelectedHorse, deleteHorse,toggleHorseActive}) {
                     setSelectedHorse={setSelectedHorse}
                     deleteHorse={deleteHorse}
                     toggleHorseActive={toggleHorseActive}
-
+                    contacts={contacts}
                 />
             ))}
             </tbody>
