@@ -16,10 +16,10 @@ function Paardenbeheer() {
     const [showForm, setShowForm] = useState(false);
     const [contacts, setContacts] = useState([]);
 
-    const [filter, setFilter] = useState("alle");
+    const [filter, setFilter] = useState("all");
     const [showFilter, setShowFilter] = useState(false);
 
-    const [sortOption, setSortOption] = useState("geen");
+    const [sortOption, setSortOption] = useState("none");
     const [showSort, setShowSort] = useState(false);
 
     const {token} = useContext(AuthContext);
@@ -165,11 +165,11 @@ function Paardenbeheer() {
     }
 
     const filteredHorses = horses.filter((horse) => {
-        if (filter === "actief") {
+        if (filter === "active") {
             return horse.active;
         }
 
-        if (filter === "inactief") {
+        if (filter === "inactive") {
             return !horse.active;
         }
 
@@ -178,19 +178,19 @@ function Paardenbeheer() {
 
     const sortedHorses = [...filteredHorses].sort((a, b) => {
 
-        if (sortOption === "naam-oplopend") {
+        if (sortOption === "name-ascending") {
             return a.name.localeCompare(b.name);
         }
 
-        if (sortOption === "naam-aflopend") {
+        if (sortOption === "name-descending") {
             return b.name.localeCompare(a.name);
         }
 
-        if (sortOption === "leeftijd-jong") {
+        if (sortOption === "age-young") {
             return new Date(b.birthDate) - new Date(a.birthDate);
         }
 
-        if (sortOption === "leeftijd-oud") {
+        if (sortOption === "age-young") {
             return new Date(a.birthDate) - new Date(b.birthDate);
         }
 
@@ -228,15 +228,23 @@ return (
                     <Button
                         variant="filter-sort"
                         type="button"
-                        onClick={() => setShowFilter(!showFilter)}
+                        onClick={() => {
+                            setShowFilter(!showFilter);
+                            setShowSort(false);
+                        }}
                     >
                         Filter
                     </Button>
 
+
                     <Button
                         variant="filter-sort"
-                             type="button"
-                             onClick={() => setShowSort(!showSort)}>
+                        type="button"
+                        onClick={() => {
+                            setShowSort(!showSort);
+                            setShowFilter(false);
+                        }}
+                    >
                         Sorteren
                     </Button>
                 </div>
