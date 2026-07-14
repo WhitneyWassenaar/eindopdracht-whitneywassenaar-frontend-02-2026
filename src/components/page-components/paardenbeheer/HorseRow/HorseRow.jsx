@@ -6,7 +6,7 @@ import persons from '../../../../data/json/persons.json';
 
 import './HorseRow.css'
 
-function HorseRow({horse, setSelectedHorse, deleteHorse}) {
+function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive}) {
 
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
@@ -33,7 +33,13 @@ function HorseRow({horse, setSelectedHorse, deleteHorse}) {
             <td>{horse.gender}</td>
             <td>{calculateAge(horse.birthDate)} jaar</td>
             <td>{owner ? `${owner.firstName} ${owner.lastName}` : "Eigenaar onbekend"}</td>
-            <td>
+            <td
+                className={horse.active ? "horse-status active" : "horse-status inactive"}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    toggleHorseActive(horse);
+                }}
+                >
                 {horse.active ? "Actief" : "Inactief"}
             </td>
 
