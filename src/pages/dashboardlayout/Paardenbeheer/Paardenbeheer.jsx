@@ -16,7 +16,6 @@ function Paardenbeheer() {
     const [showForm, setShowForm] = useState(false);
     const [contacts, setContacts] = useState([]);
 
-
     const {token} = useContext(AuthContext);
     console.log("Token lengte:", token?.length);
 
@@ -175,7 +174,10 @@ return (
                     Terug
                 </Button>
 
-                <HorseDetail horse={selectedHorse}/>
+                <HorseDetail
+                    horse={selectedHorse}
+                    contacts={contacts}
+                />
             </>
         ) : (
             <>
@@ -199,6 +201,7 @@ return (
                     setSelectedHorse={setSelectedHorse}
                     deleteHorse={deleteHorse}
                     toggleHorseActive={toggleHorseActive}
+                    contacts={contacts}
                 />
 
                 <Button

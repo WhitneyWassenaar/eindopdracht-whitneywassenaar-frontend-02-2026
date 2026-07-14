@@ -48,7 +48,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                         color: horseColor,
                         active: true,
                         photo: horsePhoto || defaultHorsePhoto,
-                        ownerId: 1
+                        ownerId: ownerId
                     })
                 }
             );
