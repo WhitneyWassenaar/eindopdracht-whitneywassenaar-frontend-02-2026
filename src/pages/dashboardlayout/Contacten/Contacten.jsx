@@ -18,6 +18,12 @@ function Contacten() {
     const [showForm, setShowForm] = useState(false);
     const [horses, setHorses] = useState([]);
 
+    const [filter, setFilter] = useState("all");
+    const [showFilter, setShowFilter] = useState(false);
+
+    const [sortOption, setSortOption] = useState("none");
+    const [showSort, setShowSort] = useState(false);
+
     const {token} = useContext(AuthContext);
     console.log("Token lengte:", token?.length);
 
@@ -151,6 +157,35 @@ function Contacten() {
     }
 
 
+    const filteredContacts = contacts.filter((contact) => {
+        if (filter === "active") {
+            return contact.active;
+        }
+
+        if (filter === "inactive") {
+            return !contact.active;
+        }
+
+        return true;
+    });
+
+    const sortedContacts = [...filteredContacts].sort((a, b) => {
+
+        const fullNameA = `${a.firstName} ${a.lastName}`;
+        const fullNameB = `${b.firstName} ${b.lastName}`;
+
+        if (sortOption === "name-ascending") {
+            return fullNameA.localeCompare(fullNameB);
+        }
+
+        if (sortOption === "name-descending") {
+            return fullNameB.localeCompare(fullNameA);
+        }
+
+        return 0;
+    });
+
+
 
     return (
         <div className="contacten-page">
@@ -178,27 +213,81 @@ function Contacten() {
                         <strong>{contacts.length}</strong>
                     </p>
 
-                    <div className="paardenbeheer-actions">
-                        <Button variant="filter-sort">
+                    <div className="contacten-actions">
+                        <Button
+                            variant="filter-sort"
+                            type="button"
+                            onClick={() => {
+                                setShowFilter(!showFilter);
+                                setShowSort(false);
+                            }}
+                        >
                             Filter
                         </Button>
 
-                        <Button variant="filter-sort">
+
+                        <Button
+                            variant="filter-sort"
+                            type="button"
+                            onClick={() => {
+                                setShowSort(!showSort);
+                                setShowFilter(false);
+                            }}
+                        >
                             Sorteren
                         </Button>
                     </div>
 
+                    {showFilter && (
+                        <select
+                            value={filter}
+                            onChange={(e) => setFilter(e.target.value)}
+                        >
+                            <option value="all">
+                                Alle contacten
+                            </option>
+
+                            <option value="active">
+                                Actieve contacten
+                            </option>
+
+                            <option value="inactive">
+                                Inactieve contacten
+                            </option>
+                        </select>
+                    )}
+
+
+                    {showSort && (
+                        <select
+                            value={sortOption}
+                            onChange={(e)=>setSortOption(e.target.value)}
+                        >
+                            <option value="none">
+                                Geen sortering
+                            </option>
+
+                            <option value="name-ascending">
+                                Naam A-Z
+                            </option>
+
+                            <option value="name-descending">
+                                Naam Z-A
+                            </option>
+                        </select>
+                    )}
+
                     <ContactTable
-                        contacts={contacts}
+                        contacts={sortedContacts}
                         setSelectedContact={setSelectedContact}
                         deleteContact={deleteContact}
                         toggleContactActive={toggleContactActive}
+
                     />
 
                     <Button
                         type="button"
                         onClick={() => {
-                            console.log("Button geklikt");
                             setShowForm(true);
                         }}
                     >
