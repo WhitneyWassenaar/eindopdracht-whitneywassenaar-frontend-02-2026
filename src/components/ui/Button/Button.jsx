@@ -13,9 +13,9 @@ function Button({
 
     const navigate = useNavigate();
 
-    const handleClick = () => {
+    const handleClick = (e) => {
         if (onClick) {
-            onClick();
+            onClick(e);
         } else if (buttonPath) {
             navigate(buttonPath);
         }

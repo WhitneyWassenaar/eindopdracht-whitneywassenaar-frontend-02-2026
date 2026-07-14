@@ -6,13 +6,14 @@ import persons from '../../../../data/json/persons.json';
 
 import './HorseRow.css'
 
-function HorseRow({horse, setSelectedHorse}) {
+function HorseRow({horse, setSelectedHorse, deleteHorse}) {
 
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
     const owner = persons.find(
         persons => persons.id === horse.ownerId
     );
+
 
     return (
         <tr className="horserow-layout"
@@ -39,7 +40,11 @@ function HorseRow({horse, setSelectedHorse}) {
             <td>
                 <Button
                     type={"button"}
-                    variant={"delete"}>
+                    variant={"delete"}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        deleteHorse(horse.id);
+                    }}>
                     <img src={deleteIcon} alt={"delete icon"}/>
                 </Button>
             </td>
