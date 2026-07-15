@@ -7,6 +7,7 @@ import Button from '../../ui/Button/Button.jsx';
 
 // CSS
 import './RegisterForm.css';
+import projectId from "../../../data/projectId.js";
 
 function RegisterForm() {
     const navigate = useNavigate();
@@ -20,9 +21,15 @@ function RegisterForm() {
     const [acceptToc, setAcceptToc] = useState(false)
     const [error, setError] = useState("");
 
-    function onFormSubmit(e) {
+    async function onFormSubmit(e) {
         e.preventDefault();
         setError("");
+
+        const cleanEmail = email.toLowerCase().trim();
+        const cleanFirstName = firstName.trim();
+        const cleanLastName = lastName.trim();
+        const cleanStableName = stableName.trim();
+
         if (password !== confirmPassword) {
             setError("De wachtwoorden komen niet met elkaar overeen");
             return;
@@ -33,11 +40,54 @@ function RegisterForm() {
             return;
         }
 
+        const passwordRegex =
+            /^(?=.*[A-Z])(?=.*[@#!$%^&*()_\-+=]).{8,}$/;
+
+        if (!passwordRegex.test(password)) {
+            setError(
+                "Het wachtwoord moet minimaal 8 tekens bevatten, 1 hoofdletter en 1 speciaal teken"
+            );
+            return;
+        }
+
         if (!acceptToc) {
             setError("Je moet akkoord gaan met de voorwaarden om te kunnen registreren")
             return;
         }
-        navigate("/inloggen")
+
+        try {
+            const response = await fetch(
+                "https://novi-backend-api-wgsgz.ondigitalocean.app/api/users", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "novi-education-project-id": projectId,
+                    },
+                    body: JSON.stringify({
+                        cleanFirstName,
+                        cleanLastName,
+                        cleanStableName,
+                        email: cleanEmail,
+                        password,
+                        roles: ["user"]
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                setError(data.error || "Registreren mislukt");
+                return;
+            }
+
+            navigate("/inloggen")
+        } catch (error) {
+            setError(error.message);
+        }
+
+
+
     }
 
     return (
