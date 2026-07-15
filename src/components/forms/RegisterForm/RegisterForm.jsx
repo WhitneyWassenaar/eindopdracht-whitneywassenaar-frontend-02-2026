@@ -64,9 +64,9 @@ function RegisterForm() {
                         "novi-education-project-id": projectId,
                     },
                     body: JSON.stringify({
-                        cleanFirstName,
-                        cleanLastName,
-                        cleanStableName,
+                        firstname:cleanFirstName,
+                        lastName:cleanLastName,
+                        stableName:cleanStableName,
                         email: cleanEmail,
                         password,
                         roles: ["user"]
@@ -86,7 +86,19 @@ function RegisterForm() {
             setError(error.message);
         }
 
+        const response = await fetch(
+            "https://novi-backend-api-wgsgz.ondigitalocean.app/api/users",
+            {
+                method: "GET",
+                headers: {
+                    "novi-education-project-id": projectId,
+                },
+            }
+        );
 
+        const data = await response.json();
+
+        console.log(data);
 
     }
 
