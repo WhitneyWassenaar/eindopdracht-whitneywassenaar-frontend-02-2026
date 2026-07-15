@@ -1,3 +1,4 @@
+// Components
 import LoginForm from '../../../components/forms/LoginForm/LoginForm.jsx';
 
 function Inloggen() {

@@ -1,11 +1,16 @@
-import HorseDetailMainInfo from '../HorseDetailMainInfo/HorseDetailMainInfo.jsx';
-import './HorseDetail.css';
-import HorseDetailTabs from "../HorseDetailTabs/HorseDetailTabs.jsx";
+// React
 import {useState} from "react";
-import Button from "../../../ui/Button/Button.jsx";
-import HorseRelationsForm from "../../../forms/HorseRelationsForm/HorserelationsForm.jsx";
 
-function HorseDetail({horse,contacts,setHorses,setSelectedHorse}) {
+// Components
+import Button from "../../../ui/Button/Button.jsx";
+import HorseDetailMainInfo from '../HorseDetailMainInfo/HorseDetailMainInfo.jsx';
+import HorseRelationsForm from "../../../forms/HorseRelationsForm/HorserelationsForm.jsx";
+import HorseDetailTabs from "../HorseDetailTabs/HorseDetailTabs.jsx";
+
+// CSS
+import './HorseDetail.css';
+
+function HorseDetail({horse, contacts, setHorses, setSelectedHorse}) {
     const [showForm, setShowForm] = useState(false);
 
     return (
@@ -21,6 +26,7 @@ function HorseDetail({horse,contacts,setHorses,setSelectedHorse}) {
             >
                 Relaties beheren
             </Button>
+
             {showForm && (
                 <HorseRelationsForm
                     key={horse.id}
@@ -30,7 +36,7 @@ function HorseDetail({horse,contacts,setHorses,setSelectedHorse}) {
                     setSelectedHorse={setSelectedHorse}
                 />
             )}
-            <HorseDetailTabs />
+            <HorseDetailTabs/>
         </div>
     );
 }

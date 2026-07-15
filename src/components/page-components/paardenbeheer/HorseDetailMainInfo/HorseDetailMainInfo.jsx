@@ -1,6 +1,8 @@
+// Components
 import calculateAge from '../../../../helpers/calculateAge.jsx';
 import HorseRelations from "../HorseRelations/HorseRelations.jsx";
 
+// CSS
 import './HorseDetailMainInfo.css';
 
 function HorseDetailMainInfo({horse,contacts}) {
@@ -17,7 +19,6 @@ function HorseDetailMainInfo({horse,contacts}) {
     const owner = contacts.find(
         contact => Number(contact.id )=== Number(horse.ownerId)
     );
-
 
     return (
         <div className="horse-detail-main-info-container">
@@ -59,13 +60,8 @@ function HorseDetailMainInfo({horse,contacts}) {
                   horse={horse}
                   contacts={contacts}/>
             </div>
-
-
         </div>
-
     );
-
 }
 
 export default HorseDetailMainInfo;
-

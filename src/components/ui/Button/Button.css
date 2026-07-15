@@ -1,10 +1,11 @@
 .button {
     border-radius: 15px;
-    padding: 0.2rem 0.7rem ;
+    padding: 0.2rem 0.7rem;
     transition: all 0.3s ease;
     font-size: var(--font-base);
     border: none;
 }
+
 /* =======================================
                   BUTTON VARIANT: DEFAULT
 ======================================== */
@@ -14,10 +15,10 @@
 }
 
 .button--default:hover,
-.button--hero:hover{
+.button--hero:hover {
     background-color: var(--validation-color);
     color: var(--background-color);
-    cursor:pointer;
+    cursor: pointer;
 }
 
 /* =======================================
@@ -32,7 +33,7 @@
 .button--bordered:hover {
     border-color: var(--validation-color);
     color: var(--validation-color);
-    cursor:pointer;
+    cursor: pointer;
 }
 
 /* =======================================
@@ -67,8 +68,9 @@
 }
 
 .button--tab:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
+
 .button--tab.active {
     border-bottom-color: transparent;
 }
@@ -83,11 +85,10 @@
 }
 
 .button--filter-sort:hover {
-border-color: black;
-    color:black;
-    cursor:pointer;
+    border-color: black;
+    color: black;
+    cursor: pointer;
     background-color: var(--primary-color);
-
 }
 
 /* =======================================
@@ -105,16 +106,16 @@ border-color: black;
            BUTTON VARIANT: MANAGE RELATIONS
 ======================================== */
 .button--manage-relations {
-    width:100%;
+    width: 100%;
     max-width: 600px;
     background-color: var(--primary-color);
     font-size: 15px;
-    border-radius:0 0 15px 15px;
+    border-radius: 0 0 15px 15px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .button--manage-relations:hover {
-   cursor:pointer;
+    cursor: pointer;
     background-color: var(--background-color);
     color: var(--text-color);
 
@@ -124,16 +125,16 @@ border-color: black;
            BUTTON VARIANT: SAVE RELATIONS
 ======================================== */
 .button--save-relations {
-    width:100%;
-   max-width: 100px;
+    width: 100%;
+    max-width: 100px;
     background-color: var(--primary-color);
     font-size: 15px;
-    border-radius:10px;
+    border-radius: 10px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .button--save-relations:hover {
-    cursor:pointer;
+    cursor: pointer;
     background-color: var(--background-color);
     color: var(--text-color);
 }

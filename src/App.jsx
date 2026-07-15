@@ -1,3 +1,4 @@
+// React
 import {Routes, Route} from 'react-router-dom';
 
 // Pages weblayout
@@ -21,6 +22,7 @@ import WebLayout from './components/layout/WebLayout/WebLayout.jsx';
 import DashboardLayout from './components/layout/DashboardLayout/DashboardLayout.jsx';
 import ProtectedRoute from './components/authentication/routing/ProtectedRoute.jsx';
 
+// CSS
 import './App.css';
 
 function App() {
@@ -56,7 +58,3 @@ function App() {
 }
 
 export default App;
-
-/*
-* TODO
-*  Logout after long inactivity*/

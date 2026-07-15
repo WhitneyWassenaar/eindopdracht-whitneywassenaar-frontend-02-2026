@@ -1,3 +1,4 @@
+// Components
 import RegisterForm from '../../../components/forms/RegisterForm/RegisterForm.jsx';
 
 function Registreren() {

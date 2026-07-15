@@ -1,11 +1,21 @@
-import { useState } from "react";
-import Button from "../../ui/Button/Button.jsx";
-import './HorseRelationForm.css';
-import projectId from "../../../data/projectId.js";
-import {AuthContext} from "../../authentication/context/AuthContext.jsx";
-import {useContext} from "react";
+// React
+import {useState, useContext} from "react";
 
-function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
+// Components
+import Button from "../../ui/Button/Button.jsx";
+
+// Context / Hooks
+import {AuthContext} from "../../authentication/context/AuthContext.jsx";
+
+// Data
+import projectId from "../../../data/projectId.js";
+
+// CSS
+import './HorseRelationForm.css';
+
+function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
+
+    const {token} = useContext(AuthContext);
 
     const [ownerId, setOwnerId] = useState(
         horse.ownerId || ""
@@ -35,10 +45,7 @@ function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
         contact =>
             contact.role === "Trainer" &&
             contact.active
-
     );
-
-    const {token} = useContext(AuthContext);
 
     async function saveRelations() {
 
@@ -81,89 +88,88 @@ function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
 
             setSelectedHorse(updatedHorse);
 
-        } catch(error) {
+        } catch (error) {
             console.error(error);
         }
     }
 
     return (
         <div className="form-layout">
-                <div className="label-wrapper">
-                    <label className="relation-label">
-                        Eigenaar
-                    </label>
-
-                    <select
-                        value={ownerId}
-                        onChange={(e) => setOwnerId(e.target.value)}
-                    >
-                        <option value="">
-                            Geen eigenaar
-                        </option>
-
-                        {owners.map((contact) => (
-                            <option
-                                key={contact.id}
-                                value={contact.id}
-                            >
-                                {contact.firstName} {contact.lastName}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-
             <div className="label-wrapper">
-                 <label className="relation-label">
-                Verzorger
-            </label>
+                <label className="relation-label">
+                    Eigenaar
+                </label>
 
-            <select
-                value={caretakerId}
-                onChange={(e) => setCaretakerId(e.target.value)}
-            >
-                <option value="">
-                    Geen verzorger
-                </option>
-
-                {caretakers.map((contact) => (
-                    <option
-                        key={contact.id}
-                        value={contact.id}
-                    >
-                        {contact.firstName} {contact.lastName}
+                <select
+                    value={ownerId}
+                    onChange={(e) => setOwnerId(e.target.value)}
+                >
+                    <option value="">
+                        Geen eigenaar
                     </option>
-                ))}
-            </select>
+
+                    {owners.map((contact) => (
+                        <option
+                            key={contact.id}
+                            value={contact.id}
+                        >
+                            {contact.firstName} {contact.lastName}
+                        </option>
+                    ))}
+                </select>
             </div>
 
-<div className="label-wrapper">
-    <label className="relation-label">
-        Trainer
-    </label>
+            <div className="label-wrapper">
+                <label className="relation-label">
+                    Verzorger
+                </label>
 
-    <select
-        value={trainerId}
-        onChange={(e) => setTrainerId(e.target.value)}
-    >
-        <option value="">
-            Geen trainer
-        </option>
+                <select
+                    value={caretakerId}
+                    onChange={(e) => setCaretakerId(e.target.value)}
+                >
+                    <option value="">
+                        Geen verzorger
+                    </option>
 
-        {trainers.map((contact) => (
-            <option
-                key={contact.id}
-                value={contact.id}
-            >
-                {contact.firstName} {contact.lastName}
-            </option>
-        ))}
-    </select>
-</div>
+                    {caretakers.map((contact) => (
+                        <option
+                            key={contact.id}
+                            value={contact.id}
+                        >
+                            {contact.firstName} {contact.lastName}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+            <div className="label-wrapper">
+                <label className="relation-label">
+                    Trainer
+                </label>
+
+                <select
+                    value={trainerId}
+                    onChange={(e) => setTrainerId(e.target.value)}
+                >
+                    <option value="">
+                        Geen trainer
+                    </option>
+
+                    {trainers.map((contact) => (
+                        <option
+                            key={contact.id}
+                            value={contact.id}
+                        >
+                            {contact.firstName} {contact.lastName}
+                        </option>
+                    ))}
+                </select>
+            </div>
 
             <Button
-            variant="save-relations"
-            onClick={saveRelations}
+                variant="save-relations"
+                onClick={saveRelations}
             >
                 Opslaan
             </Button>

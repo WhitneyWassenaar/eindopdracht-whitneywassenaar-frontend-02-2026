@@ -1,12 +1,14 @@
+// React
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
+// Components
 import Button from '../../ui/Button/Button.jsx';
 
+// CSS
 import './RegisterForm.css';
 
 function RegisterForm() {
-
     const navigate = useNavigate();
 
     const [firstName, setFirstName] = useState("");
@@ -125,7 +127,8 @@ function RegisterForm() {
             </label>
 
             {error && (
-                <p className="error-message">
+                <p className="error-message"
+                >
                     {error}
                 </p>
             )}
