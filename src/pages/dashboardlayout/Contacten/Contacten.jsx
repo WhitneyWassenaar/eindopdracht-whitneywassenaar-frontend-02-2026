@@ -1,15 +1,20 @@
+// React
 import {useState, useEffect, useContext} from 'react';
-import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
 
+// Components
 import Button from '../../../components/ui/Button/Button.jsx';
 import ContactTable from "../../../components/page-components/contacten/ContactTable/ContactTable.jsx";
-// import CreateContactForm from '../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx';
-
-import projectId from '../../../data/projectId.js';
-
-import './Contacten.css'
 import ContactDetail from "../../../components/page-components/contacten/ContactDetail/ContactDetail.jsx";
 import CreateContactProfileForm from "../../../components/forms/CreateContactProfileForm/CreateContactProfileForm.jsx";
+
+// Context / hooks
+import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
+
+// Data
+import projectId from '../../../data/projectId.js';
+
+// CSS
+import './Contacten.css'
 
 function Contacten() {
 
@@ -25,7 +30,6 @@ function Contacten() {
     const [showSort, setShowSort] = useState(false);
 
     const {token} = useContext(AuthContext);
-    console.log("Token lengte:", token?.length);
 
     useEffect(() => {
         if (!token) return;
@@ -81,6 +85,7 @@ function Contacten() {
                 console.error(error);
             }
         }
+
         getContacts();
         getHorses();
 
@@ -128,7 +133,67 @@ function Contacten() {
         if (!window.confirm("Weet je zeker dat je dit contact wilt verwijderen?"))
             return;
 
-        try  {
+        try {
+            // 1. Eerst paardenprofielen loskoppelen
+            for (const horse of horses) {
+                if (
+                    Number(horse.ownerId) === Number(contactId) ||
+                    Number(horse.caretakerId) === Number(contactId) ||
+                    Number(horse.trainerId) === Number(contactId)
+                ) {
+                    await fetch(
+                        `https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses/${horse.id}`,
+                        {
+                            method: "PATCH",
+                            headers: {
+                                "novi-education-project-id": projectId,
+                                "Authorization": `Bearer ${token}`,
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                ownerId:
+                                    Number(horse.ownerId) === Number(contactId)
+                                        ? null
+                                        : horse.ownerId,
+
+                                caretakerId:
+                                    Number(horse.caretakerId) === Number(contactId)
+                                        ? null
+                                        : horse.caretakerId,
+
+                                trainerId:
+                                    Number(horse.trainerId) === Number(contactId)
+                                        ? null
+                                        : horse.trainerId,
+                            }),
+                        }
+                    );
+
+                }
+
+            }
+
+// Frontend direct bijwerken
+            setHorses(previousHorses =>
+                previousHorses.map(horse => ({
+                    ...horse,
+                    ownerId:
+                        Number(horse.ownerId) === Number(contactId)
+                            ? null
+                            : horse.ownerId,
+
+                    caretakerId:
+                        Number(horse.caretakerId) === Number(contactId)
+                            ? null
+                            : horse.caretakerId,
+
+                    trainerId:
+                        Number(horse.trainerId) === Number(contactId)
+                            ? null
+                            : horse.trainerId,
+                }))
+            );
+// 2. Contact verwijderen
             const response = await fetch(
                 `https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons/${contactId}`,
                 {
@@ -146,7 +211,7 @@ function Contacten() {
                 return;
             }
 
-            // Row wordt visueel verwijderd
+            // Row wordt visueel verwijderd, contact wordt uit de state gehaald
             setContacts(previousContacts =>
                 previousContacts.filter(contact => contact.id !== contactId)
             );
@@ -184,7 +249,6 @@ function Contacten() {
 
         return 0;
     });
-
 
 
     return (
@@ -261,7 +325,7 @@ function Contacten() {
                     {showSort && (
                         <select
                             value={sortOption}
-                            onChange={(e)=>setSortOption(e.target.value)}
+                            onChange={(e) => setSortOption(e.target.value)}
                         >
                             <option value="none">
                                 Geen sortering

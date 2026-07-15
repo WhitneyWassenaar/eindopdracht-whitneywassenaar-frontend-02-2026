@@ -1,15 +1,22 @@
+// React
 import {useState, useContext} from 'react';
-import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
-import projectId from '../../../data/projectId.js';
-
+// Components
 import Button from '../../ui/Button/Button.jsx';
 
-import './CreateContactProfileForm.css';
+// Context / Hooks
+import {AuthContext} from "../../authentication/context/AuthContext.jsx";
+
+// Data
+import projectId from '../../../data/projectId.js';
 import roles from "../../../data/roles.js";
+
+// CSS
+import './CreateContactProfileForm.css';
 
 function CreateContactProfileForm({setContacts, setShowForm}) {
     const {token} = useContext(AuthContext);
+    const defaultContactPhoto = "/defaultContactPhoto.png"
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -17,8 +24,6 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [role, setRole] = useState("");
     const [contactPhoto, setContactPhoto] = useState("");
-
-    const defaultContactPhoto = "/defaultContactPhoto.png"
 
     async function createContactFormSubmit(e) {
         e.preventDefault();
@@ -39,7 +44,7 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
                         email: email,
                         phone: phoneNumber,
                         active: true,
-                        role:role,
+                        role: role,
                         photo: contactPhoto || defaultContactPhoto,
                     })
                 }
@@ -156,7 +161,11 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
                     />
                 </div>
 
-                <Button type={"submit"}>Paardenprofiel aanmaken</Button>
+                <Button
+                    type={"submit"}
+                >
+                    Paardenprofiel aanmaken
+                </Button>
             </fieldset>
         </form>
     );

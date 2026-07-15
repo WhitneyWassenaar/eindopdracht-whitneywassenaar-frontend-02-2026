@@ -1,30 +1,24 @@
+// Components
 import calculateAge from '../../../../helpers/calculateAge.jsx';
+import HorseRelations from "../HorseRelations/HorseRelations.jsx";
 
+// CSS
 import './HorseDetailMainInfo.css';
 
 function HorseDetailMainInfo({horse,contacts}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
     console.log(horse.photo);
-
+    console.log(
+        "Relaties:",
+        {
+            horse: horse.name,
+            caretakerId: horse.caretakerId,
+            trainerId: horse.trainerId
+        }
+    );
     const owner = contacts.find(
         contact => Number(contact.id )=== Number(horse.ownerId)
     );
-
-    const contactPerson = contacts.find(
-        contact=> Number(contact.id) === Number(horse.ownerId)
-    );
-
-    const caretaker = contacts.find(
-        contact => Number(contact.id) === Number(horse.caretakerId)
-    );
-
-    const trainer = contacts.find(
-        contact=> Number(contact.id) === Number(horse.trainerId)
-    );
-
-    console.log("Paard:", horse);
-    console.log("Contacten:", contacts);
-    console.log("ownerId van paard:", horse.ownerId);
 
     return (
         <div className="horse-detail-main-info-container">
@@ -62,31 +56,12 @@ function HorseDetailMainInfo({horse,contacts}) {
                     </ul>
                 </div>
 
-                <div className="info-block">
-                    <h4>Relaties</h4>
-
-                    {caretaker || trainer ? (
-                        <ul>
-                            {caretaker && (
-                                <li>
-                                    Verzorger: {caretaker.firstName} {caretaker.lastName}
-                                </li>
-                            )}
-
-                            {trainer && (
-                                <li>
-                                    Trainer: {trainer.firstName} {trainer.lastName}
-                                </li>
-                            )}
-                        </ul>
-                    ) : (
-                        <p>Geen relaties</p>
-                    )}
-                </div>
+              <HorseRelations
+                  horse={horse}
+                  contacts={contacts}/>
             </div>
         </div>
     );
 }
 
 export default HorseDetailMainInfo;
-

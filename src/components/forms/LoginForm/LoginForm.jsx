@@ -1,14 +1,20 @@
+// React
 import {useState, useContext} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import {AuthContext} from '../../authentication/context/AuthContext.jsx';
-import projectId from '../../../data/projectId.js';
 
+// Components
 import Button from '../../ui/Button/Button.jsx';
 
+// Context / Hooks
+import {AuthContext} from '../../authentication/context/AuthContext.jsx';
+
+// Data
+import projectId from '../../../data/projectId.js';
+
+// CSS
 import './LoginForm.css'
 
 function LoginForm() {
-
     const navigate = useNavigate();
 
     const {login} = useContext(AuthContext);
