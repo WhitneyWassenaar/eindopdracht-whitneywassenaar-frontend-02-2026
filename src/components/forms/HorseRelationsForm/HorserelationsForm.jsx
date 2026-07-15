@@ -8,7 +8,7 @@ import {useContext} from "react";
 function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
 
     const [ownerId, setOwnerId] = useState(
-        horse.caretakerId || ""
+        horse.ownerId || ""
     );
 
     const [caretakerId, setCaretakerId] = useState(
@@ -20,20 +20,31 @@ function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
     );
 
     const owners = contacts.filter(
-        contact => contact.role === "Eigenaar"
+        contact =>
+            contact.role === "Eigenaar" &&
+            contact.active
     );
 
     const caretakers = contacts.filter(
-        contact => contact.role === "Verzorger"
+        contact =>
+            contact.role === "Verzorger" &&
+            contact.active
     );
 
     const trainers = contacts.filter(
-        contact => contact.role === "Trainer"
+        contact =>
+            contact.role === "Trainer" &&
+            contact.active
+
     );
 
     const {token} = useContext(AuthContext);
 
     async function saveRelations() {
+
+        const validTrainerId = trainerId || null;
+        const validCaretakerId = caretakerId || null;
+        const validOwnerId = ownerId || null;
 
         try {
             const response = await fetch(
@@ -46,9 +57,9 @@ function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        ownerId: ownerId || null,
-                        caretakerId: caretakerId || null,
-                        trainerId: trainerId || null
+                        ownerId: validOwnerId,
+                        caretakerId: validCaretakerId,
+                        trainerId: validTrainerId
                     }),
                 }
             );
@@ -87,7 +98,7 @@ function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
                         onChange={(e) => setOwnerId(e.target.value)}
                     >
                         <option value="">
-                            Kies eigenaar
+                            Geen eigenaar
                         </option>
 
                         {owners.map((contact) => (
@@ -149,7 +160,6 @@ function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
         ))}
     </select>
 </div>
-
 
             <Button
             variant="save-relations"

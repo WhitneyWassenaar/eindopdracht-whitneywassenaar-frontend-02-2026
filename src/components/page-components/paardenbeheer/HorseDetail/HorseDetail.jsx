@@ -23,6 +23,7 @@ function HorseDetail({horse,contacts,setHorses,setSelectedHorse}) {
             </Button>
             {showForm && (
                 <HorseRelationsForm
+                    key={horse.id}
                     contacts={contacts}
                     horse={horse}
                     setHorses={setHorses}

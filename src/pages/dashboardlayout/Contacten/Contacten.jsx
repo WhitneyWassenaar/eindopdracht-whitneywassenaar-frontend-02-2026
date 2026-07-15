@@ -1,15 +1,20 @@
+// React
 import {useState, useEffect, useContext} from 'react';
-import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
 
+// Components
 import Button from '../../../components/ui/Button/Button.jsx';
 import ContactTable from "../../../components/page-components/contacten/ContactTable/ContactTable.jsx";
-// import CreateContactForm from '../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx';
-
-import projectId from '../../../data/projectId.js';
-
-import './Contacten.css'
 import ContactDetail from "../../../components/page-components/contacten/ContactDetail/ContactDetail.jsx";
 import CreateContactProfileForm from "../../../components/forms/CreateContactProfileForm/CreateContactProfileForm.jsx";
+
+// Context / hooks
+import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
+
+// Data
+import projectId from '../../../data/projectId.js';
+
+// CSS
+import './Contacten.css'
 
 function Contacten() {
 
@@ -25,7 +30,6 @@ function Contacten() {
     const [showSort, setShowSort] = useState(false);
 
     const {token} = useContext(AuthContext);
-    console.log("Token lengte:", token?.length);
 
     useEffect(() => {
         if (!token) return;
