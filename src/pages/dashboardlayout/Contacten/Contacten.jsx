@@ -81,6 +81,7 @@ function Contacten() {
                 console.error(error);
             }
         }
+
         getContacts();
         getHorses();
 
@@ -128,7 +129,44 @@ function Contacten() {
         if (!window.confirm("Weet je zeker dat je dit contact wilt verwijderen?"))
             return;
 
-        try  {
+        try {
+            // 1. Eerst paardenprofielen loskoppelen
+            for (const horse of horses) {
+                if (
+                    Number(horse.ownerId) === Number(contactId) ||
+                    Number(horse.caretakerId) === Number(contactId) ||
+                    Number(horse.trainerId) === Number(contactId)
+                ) {
+                    await fetch(
+                        `https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses/${horse.id}`,
+                        {
+                            method: "PATCH",
+                            headers: {
+                                "novi-education-project-id": projectId,
+                                "Authorization": `Bearer ${token}`,
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                ownerId:
+                                    Number(horse.ownerId) === Number(contactId)
+                                        ? null
+                                        : horse.ownerId,
+
+                                caretakerId:
+                                    Number(horse.caretakerId) === Number(contactId)
+                                        ? null
+                                        : horse.caretakerId,
+
+                                trainerId:
+                                    Number(horse.trainerId) === Number(contactId)
+                                        ? null
+                                        : horse.trainerId,
+                            }),
+                        }
+                    );
+                }
+            }
+// 2. Contact verwijderen
             const response = await fetch(
                 `https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons/${contactId}`,
                 {
@@ -146,7 +184,7 @@ function Contacten() {
                 return;
             }
 
-            // Row wordt visueel verwijderd
+            // Row wordt visueel verwijderd, contact wordt uit de state gehaald
             setContacts(previousContacts =>
                 previousContacts.filter(contact => contact.id !== contactId)
             );
@@ -184,7 +222,6 @@ function Contacten() {
 
         return 0;
     });
-
 
 
     return (
@@ -261,7 +298,7 @@ function Contacten() {
                     {showSort && (
                         <select
                             value={sortOption}
-                            onChange={(e)=>setSortOption(e.target.value)}
+                            onChange={(e) => setSortOption(e.target.value)}
                         >
                             <option value="none">
                                 Geen sortering

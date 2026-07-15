@@ -51,8 +51,18 @@ function Paardenbeheer() {
                 }
 
                 const data = JSON.parse(responseText);
+                console.table(
+                    data.map(horse => ({
+                        paard: horse.name,
+                        eigenaar: horse.ownerId,
+                        verzorger: horse.caretakerId,
+                        trainer: horse.trainerId
+                    }))
+                );
 
                 setHorses(data);
+
+                // setHorses(data);
 
             } catch (error) {
                 console.error(error);
@@ -215,6 +225,8 @@ return (
                 <HorseDetail
                     horse={selectedHorse}
                     contacts={contacts}
+                    setHorses={setHorses}
+                    setSelectedHorse={setSelectedHorse}
                 />
             </>
         ) : (

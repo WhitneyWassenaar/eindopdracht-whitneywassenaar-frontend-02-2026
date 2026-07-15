@@ -5,7 +5,7 @@ import {useState} from "react";
 import Button from "../../../ui/Button/Button.jsx";
 import HorseRelationsForm from "../../../forms/HorseRelationsForm/HorserelationsForm.jsx";
 
-function HorseDetail({horse,contacts}) {
+function HorseDetail({horse,contacts,setHorses,setSelectedHorse}) {
     const [showForm, setShowForm] = useState(false);
 
     return (
@@ -24,6 +24,9 @@ function HorseDetail({horse,contacts}) {
             {showForm && (
                 <HorseRelationsForm
                     contacts={contacts}
+                    horse={horse}
+                    setHorses={setHorses}
+                    setSelectedHorse={setSelectedHorse}
                 />
             )}
             <HorseDetailTabs />

@@ -6,26 +6,18 @@ import './HorseDetailMainInfo.css';
 function HorseDetailMainInfo({horse,contacts}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
     console.log(horse.photo);
-
+    console.log(
+        "Relaties:",
+        {
+            horse: horse.name,
+            caretakerId: horse.caretakerId,
+            trainerId: horse.trainerId
+        }
+    );
     const owner = contacts.find(
         contact => Number(contact.id )=== Number(horse.ownerId)
     );
 
-    const contactPerson = contacts.find(
-        contact=> Number(contact.id) === Number(horse.ownerId)
-    );
-
-    const caretaker = contacts.find(
-        contact => Number(contact.id) === Number(horse.caretakerId)
-    );
-
-    const trainer = contacts.find(
-        contact=> Number(contact.id) === Number(horse.trainerId)
-    );
-
-    console.log("Paard:", horse);
-    console.log("Contacten:", contacts);
-    console.log("ownerId van paard:", horse.ownerId);
 
     return (
         <div className="horse-detail-main-info-container">
@@ -68,8 +60,11 @@ function HorseDetailMainInfo({horse,contacts}) {
                   contacts={contacts}/>
             </div>
 
+
         </div>
+
     );
+
 }
 
 export default HorseDetailMainInfo;
