@@ -137,7 +137,7 @@ function Contacten() {
                     Number(horse.caretakerId) === Number(contactId) ||
                     Number(horse.trainerId) === Number(contactId)
                 ) {
-                    await fetch(
+                    const updateHorseResponse = await fetch(
                         `https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses/${horse.id}`,
                         {
                             method: "PATCH",
@@ -164,8 +164,19 @@ function Contacten() {
                             }),
                         }
                     );
+
+
+                    console.log("PATCH paard:", horse.id);
+                    console.log("Status:", updateHorseResponse.status);
+                    console.log(
+                        "Backend antwoord:",
+                        await updateHorseResponse.text());
                 }
+
             }
+
+
+
 // Frontend direct bijwerken
             setHorses(previousHorses =>
                 previousHorses.map(horse => ({
