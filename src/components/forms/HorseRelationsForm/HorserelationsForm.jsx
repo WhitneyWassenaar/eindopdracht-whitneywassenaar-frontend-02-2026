@@ -6,12 +6,21 @@ import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 import {useContext} from "react";
 
 function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
+
+    const [ownerId, setOwnerId] = useState(
+        horse.caretakerId || ""
+    );
+
     const [caretakerId, setCaretakerId] = useState(
         horse.caretakerId || ""
     );
 
     const [trainerId, setTrainerId] = useState(
         horse.trainerId || ""
+    );
+
+    const owners = contacts.filter(
+        contact => contact.role === "Eigenaar"
     );
 
     const caretakers = contacts.filter(
@@ -37,6 +46,7 @@ function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
+                        ownerId: ownerId || null,
                         caretakerId: caretakerId || null,
                         trainerId: trainerId || null
                     }),
@@ -48,7 +58,6 @@ function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
                 return;
             }
 
-
             const updatedHorse = await response.json();
 
             setHorses(previousHorses =>
@@ -58,6 +67,7 @@ function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
                         : previousHorse
                 )
             );
+
             setSelectedHorse(updatedHorse);
 
         } catch(error) {
@@ -67,6 +77,31 @@ function HorseRelationsForm({ contacts,horse, setHorses, setSelectedHorse}) {
 
     return (
         <div className="form-layout">
+                <div className="label-wrapper">
+                    <label className="relation-label">
+                        Eigenaar
+                    </label>
+
+                    <select
+                        value={ownerId}
+                        onChange={(e) => setOwnerId(e.target.value)}
+                    >
+                        <option value="">
+                            Kies eigenaar
+                        </option>
+
+                        {owners.map((contact) => (
+                            <option
+                                key={contact.id}
+                                value={contact.id}
+                            >
+                                {contact.firstName} {contact.lastName}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+
             <div className="label-wrapper">
                  <label className="relation-label">
                 Verzorger
