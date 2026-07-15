@@ -10,6 +10,7 @@ import './RegisterForm.css';
 import projectId from "../../../data/projectId.js";
 
 function RegisterForm() {
+
     const navigate = useNavigate();
 
     const [firstName, setFirstName] = useState("");
@@ -64,9 +65,6 @@ function RegisterForm() {
                         "novi-education-project-id": projectId,
                     },
                     body: JSON.stringify({
-                        firstname:cleanFirstName,
-                        lastName:cleanLastName,
-                        stableName:cleanStableName,
                         email: cleanEmail,
                         password,
                         roles: ["user"]
@@ -81,25 +79,33 @@ function RegisterForm() {
                 return;
             }
 
-            navigate("/inloggen")
+            const profileResponse = await fetch(
+                "https://novi-backend-api-wgsgz.ondigitalocean.app/api/userProfiles",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "novi-education-project-id": projectId,
+                    },
+                    body: JSON.stringify({
+                        userId: data.id,
+                        firstName: cleanFirstName,
+                        lastName: cleanLastName,
+                        stableName: cleanStableName
+                    })
+                }
+            );
+
+            if (!profileResponse.ok) {
+                setError("Profiel aanmaken mislukt");
+                return;
+            }
+
+            navigate("/inloggen");
+
         } catch (error) {
             setError(error.message);
         }
-
-        const response = await fetch(
-            "https://novi-backend-api-wgsgz.ondigitalocean.app/api/users",
-            {
-                method: "GET",
-                headers: {
-                    "novi-education-project-id": projectId,
-                },
-            }
-        );
-
-        const data = await response.json();
-
-        console.log(data);
-
     }
 
     return (
@@ -116,7 +122,7 @@ function RegisterForm() {
                 id="first-name"
                 name="first-name"
                 required
-                size="30"
+                maxLength="20"
             />
 
             <label>Achternaam</label>
@@ -128,7 +134,7 @@ function RegisterForm() {
                 id="last-name"
                 name="last-name"
                 required
-                size="30"
+                maxLength="20"
             />
 
             <label>Stalnaam</label>
@@ -140,7 +146,7 @@ function RegisterForm() {
                 id="stable-name"
                 name="stable-name"
                 required
-                size="30"
+                maxLength="30"
             />
 
             <label>E-mail</label>
@@ -152,7 +158,7 @@ function RegisterForm() {
                 id="e-mail"
                 name="e-mail"
                 required
-                size="30"
+                maxLength="20"
             />
 
             <label>Wachtwoord</label>
@@ -164,7 +170,7 @@ function RegisterForm() {
                 id="password"
                 name="password"
                 required
-                size="30"
+                maxLength="20"
             />
 
             <label>Herhaal wachtwoord</label>
@@ -176,7 +182,7 @@ function RegisterForm() {
                 id="confirm-password"
                 name="confirm-password"
                 required
-                size="30"
+                maxLength="20"
             />
 
             <label>
@@ -197,7 +203,6 @@ function RegisterForm() {
 
             <Button
                 type={"submit"}
-                variant={"default"}
             >
                 Registreren
             </Button>
