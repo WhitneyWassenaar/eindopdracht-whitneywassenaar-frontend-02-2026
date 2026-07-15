@@ -166,6 +166,26 @@ function Contacten() {
                     );
                 }
             }
+// Frontend direct bijwerken
+            setHorses(previousHorses =>
+                previousHorses.map(horse => ({
+                    ...horse,
+                    ownerId:
+                        Number(horse.ownerId) === Number(contactId)
+                            ? null
+                            : horse.ownerId,
+
+                    caretakerId:
+                        Number(horse.caretakerId) === Number(contactId)
+                            ? null
+                            : horse.caretakerId,
+
+                    trainerId:
+                        Number(horse.trainerId) === Number(contactId)
+                            ? null
+                            : horse.trainerId,
+                }))
+            );
 // 2. Contact verwijderen
             const response = await fetch(
                 `https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons/${contactId}`,
