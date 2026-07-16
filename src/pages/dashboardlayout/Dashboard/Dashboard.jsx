@@ -21,6 +21,12 @@ function Dashboard() {
                 <h1>
                     Hallo {user.firstName} {user.lastName}
                 </h1>
+
+                <h2>Overzicht van {user.stableName}</h2>
+
+
+
+
                 <div className="dashboard-card-container">
                     <PaardenverdelingCard/>
                     <ZorgtakenCard/>
