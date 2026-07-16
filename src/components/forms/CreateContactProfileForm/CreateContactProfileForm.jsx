@@ -31,6 +31,7 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
 
     async function createContactFormSubmit(e) {
         e.preventDefault();
+        setError("");
 
         try {
             const response = await api.post("/persons",

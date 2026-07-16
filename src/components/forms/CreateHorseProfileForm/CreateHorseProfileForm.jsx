@@ -10,13 +10,12 @@ import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 // Data
 import horseBreeds from '../../../data/horseBreeds.js';
 import coatColors from '../../../data/coatColors.js';
-// import projectId from '../../../data/projectId.js';
 
 // Api
+import api from "../../../api/axios.js";
 
 // CSS
 import './CreateHorseProfileForm.css';
-import api from "../../../api/axios.js";
 
 function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
     const {token} = useContext(AuthContext);
@@ -28,12 +27,14 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
     const [horseColor, setHorseColor] = useState("");
     const [horsePhoto, setHorsePhoto] = useState("");
     const [ownerId, setOwnerId] = useState("");
+    const [error, setError] = useState("");
 
     const defaultHorsePhoto = "/defaultHorsePhoto.png"
     const today = new Date().toISOString().split("T")[0];
 
     async function createHorseFormSubmit(e) {
         e.preventDefault();
+        setError("");
 
         try {
             const response = await api.post("/horses",
@@ -46,30 +47,12 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                     active: true,
                     photo: horsePhoto || defaultHorsePhoto,
                     ownerId
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 })
-
-        // try {
-        //     const response = await fetch(
-        //         "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
-        //         {
-        //             method: "POST",
-        //             headers: {
-        //                 "Content-Type": "application/json",
-        //                 "novi-education-project-id": projectId,
-        //                 "Authorization": `Bearer ${token}`,
-        //             },
-        //             body: JSON.stringify({
-        //                 name: horseName,
-        //                 gender: horseGender,
-        //                 birthDate,
-        //                 breed: horseBreed,
-        //                 color: horseColor,
-        //                 active: true,
-        //                 photo: horsePhoto || defaultHorsePhoto,
-        //                 ownerId: ownerId
-        //             })
-        //         }
-        //     );
 
             const newHorse = response.data;
 
@@ -251,16 +234,17 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                     <p className="error-message">
                         {error}
                     </p>
-                )}
+                )
+                }
 
-                <Button type={"submit"}>Paardenprofiel aanmaken</Button>
+                <Button
+                    type={"submit"}
+                >
+                    Paardenprofiel aanmaken
+                </Button>
             </fieldset>
         </form>
     );
 }
 
 export default CreateHorseProfileForm;
-
-// Foto moet optioneel zijn, niet iedereen heeft gelijk een foto om up te loaden
-// useState toevoegen voor image preview
-// conditioneel renderen van de paardenprofiel aanmaak pagina/component
