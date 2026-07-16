@@ -1,15 +1,18 @@
 // React
-import {useState, useContext} from 'react';
+import {useContext, useState} from 'react';
 
 // Components
 import Button from '../../ui/Button/Button.jsx';
 
-// Context / Hooks
+// Context
 import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
+// Api
+import api from "../../../api/axios.js";
+
 // Data
-import projectId from '../../../data/projectId.js';
 import roles from "../../../data/roles.js";
+
 
 // CSS
 import './CreateContactProfileForm.css';
@@ -24,33 +27,30 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [role, setRole] = useState("");
     const [contactPhoto, setContactPhoto] = useState("");
+    const [error, setError] = useState("");
 
     async function createContactFormSubmit(e) {
         e.preventDefault();
 
         try {
-            const response = await fetch(
-                "https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons",
+            const response = await api.post("/persons",
                 {
-                    method: "POST",
+                    firstName,
+                    lastName,
+                    email,
+                    phone: phoneNumber,
+                    active: true,
+                    role,
+                    photo: contactPhoto || defaultContactPhoto
+                },
+                {
                     headers: {
-                        "Content-Type": "application/json",
-                        "novi-education-project-id": projectId,
-                        "Authorization": `Bearer ${token}`,
-                    },
-                    body: JSON.stringify({
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        phone: phoneNumber,
-                        active: true,
-                        role: role,
-                        photo: contactPhoto || defaultContactPhoto,
-                    })
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             );
 
-            const newContact = await response.json();
+            const newContact = response.data;
 
             setContacts(previousContacts => [
                 ...previousContacts,
@@ -68,6 +68,7 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
 
         } catch (error) {
             console.error(error)
+            setError(error.response?.data?.error || "Er is iets mis gegaan..")
         }
     }
 
@@ -161,10 +162,16 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
                     />
                 </div>
 
+                {error && (
+                    <p className="error-message">
+                        {error}
+                    </p>
+                )}
+
                 <Button
                     type={"submit"}
                 >
-                    Paardenprofiel aanmaken
+                    Contactprofiel aanmaken
                 </Button>
             </fieldset>
         </form>

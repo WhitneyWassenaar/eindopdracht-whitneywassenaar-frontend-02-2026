@@ -1,13 +1,22 @@
+// React
 import {useState, useContext} from 'react';
-import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
-import horseBreeds from '../../../data/horseBreeds.js';
-import coatColors from '../../../data/coatColors.js';
-import projectId from '../../../data/projectId.js';
-
+// Components
 import Button from '../../ui/Button/Button.jsx';
 
+// Context / Hooks
+import {AuthContext} from "../../authentication/context/AuthContext.jsx";
+
+// Data
+import horseBreeds from '../../../data/horseBreeds.js';
+import coatColors from '../../../data/coatColors.js';
+// import projectId from '../../../data/projectId.js';
+
+// Api
+
+// CSS
 import './CreateHorseProfileForm.css';
+import api from "../../../api/axios.js";
 
 function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
     const {token} = useContext(AuthContext);
@@ -22,38 +31,47 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
 
     const defaultHorsePhoto = "/defaultHorsePhoto.png"
     const today = new Date().toISOString().split("T")[0];
-    // const [ownerId,setOwnerId] = useState("");
-    // const [contactPersonId,setContactPersonId] = useState("");
 
     async function createHorseFormSubmit(e) {
         e.preventDefault();
 
-
-
         try {
-            const response = await fetch(
-                "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
+            const response = await api.post("/horses",
                 {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "novi-education-project-id": projectId,
-                        "Authorization": `Bearer ${token}`,
-                    },
-                    body: JSON.stringify({
-                        name: horseName,
-                        gender: horseGender,
-                        birthDate,
-                        breed: horseBreed,
-                        color: horseColor,
-                        active: true,
-                        photo: horsePhoto || defaultHorsePhoto,
-                        ownerId: ownerId
-                    })
-                }
-            );
+                    name: horseName,
+                    gender: horseGender,
+                    birthDate,
+                    breed: horseBreed,
+                    color: horseColor,
+                    active: true,
+                    photo: horsePhoto || defaultHorsePhoto,
+                    ownerId
+                })
 
-            const newHorse = await response.json();
+        // try {
+        //     const response = await fetch(
+        //         "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
+        //         {
+        //             method: "POST",
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //                 "novi-education-project-id": projectId,
+        //                 "Authorization": `Bearer ${token}`,
+        //             },
+        //             body: JSON.stringify({
+        //                 name: horseName,
+        //                 gender: horseGender,
+        //                 birthDate,
+        //                 breed: horseBreed,
+        //                 color: horseColor,
+        //                 active: true,
+        //                 photo: horsePhoto || defaultHorsePhoto,
+        //                 ownerId: ownerId
+        //             })
+        //         }
+        //     );
+
+            const newHorse = response.data;
 
             setHorses(previousHorses => [
                 ...previousHorses,
@@ -71,6 +89,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
 
         } catch (error) {
             console.error(error)
+            setError(error.response?.data?.error || "Er is iets mis gegaan..")
         }
     }
 
@@ -227,6 +246,12 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
 
                     />
                 </div>
+
+                {error && (
+                    <p className="error-message">
+                        {error}
+                    </p>
+                )}
 
                 <Button type={"submit"}>Paardenprofiel aanmaken</Button>
             </fieldset>
