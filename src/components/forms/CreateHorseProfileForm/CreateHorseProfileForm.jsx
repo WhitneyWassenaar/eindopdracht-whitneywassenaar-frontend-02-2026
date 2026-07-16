@@ -1,12 +1,20 @@
+// React
 import {useState, useContext} from 'react';
-import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
-import horseBreeds from '../../../data/horseBreeds.js';
-import coatColors from '../../../data/coatColors.js';
-import projectId from '../../../data/projectId.js';
-
+// Components
 import Button from '../../ui/Button/Button.jsx';
 
+// Context / Hooks
+import {AuthContext} from "../../authentication/context/AuthContext.jsx";
+
+// Data
+import horseBreeds from '../../../data/horseBreeds.js';
+import coatColors from '../../../data/coatColors.js';
+
+// Api
+import api from "../../../api/axios.js";
+
+// CSS
 import './CreateHorseProfileForm.css';
 
 function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
@@ -19,41 +27,34 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
     const [horseColor, setHorseColor] = useState("");
     const [horsePhoto, setHorsePhoto] = useState("");
     const [ownerId, setOwnerId] = useState("");
+    const [error, setError] = useState("");
 
     const defaultHorsePhoto = "/defaultHorsePhoto.png"
     const today = new Date().toISOString().split("T")[0];
-    // const [ownerId,setOwnerId] = useState("");
-    // const [contactPersonId,setContactPersonId] = useState("");
 
     async function createHorseFormSubmit(e) {
         e.preventDefault();
-
-
+        setError("");
 
         try {
-            const response = await fetch(
-                "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
+            const response = await api.post("/horses",
                 {
-                    method: "POST",
+                    name: horseName,
+                    gender: horseGender,
+                    birthDate,
+                    breed: horseBreed,
+                    color: horseColor,
+                    active: true,
+                    photo: horsePhoto || defaultHorsePhoto,
+                    ownerId
+                },
+                {
                     headers: {
-                        "Content-Type": "application/json",
-                        "novi-education-project-id": projectId,
-                        "Authorization": `Bearer ${token}`,
-                    },
-                    body: JSON.stringify({
-                        name: horseName,
-                        gender: horseGender,
-                        birthDate,
-                        breed: horseBreed,
-                        color: horseColor,
-                        active: true,
-                        photo: horsePhoto || defaultHorsePhoto,
-                        ownerId: ownerId
-                    })
-                }
-            );
+                        Authorization: `Bearer ${token}`
+                    }
+                })
 
-            const newHorse = await response.json();
+            const newHorse = response.data;
 
             setHorses(previousHorses => [
                 ...previousHorses,
@@ -71,6 +72,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
 
         } catch (error) {
             console.error(error)
+            setError(error.response?.data?.error || "Er is iets mis gegaan..")
         }
     }
 
@@ -228,14 +230,21 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                     />
                 </div>
 
-                <Button type={"submit"}>Paardenprofiel aanmaken</Button>
+                {error && (
+                    <p className="error-message">
+                        {error}
+                    </p>
+                )
+                }
+
+                <Button
+                    type={"submit"}
+                >
+                    Paardenprofiel aanmaken
+                </Button>
             </fieldset>
         </form>
     );
 }
 
 export default CreateHorseProfileForm;
-
-// Foto moet optioneel zijn, niet iedereen heeft gelijk een foto om up te loaden
-// useState toevoegen voor image preview
-// conditioneel renderen van de paardenprofiel aanmaak pagina/component

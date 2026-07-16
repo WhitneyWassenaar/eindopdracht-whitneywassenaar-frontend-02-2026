@@ -1,6 +1,8 @@
+// React
 import {useContext} from 'react';
 import {Navigate} from 'react-router-dom';
 
+// Context
 import {AuthContext} from '../context/AuthContext.jsx';
 
 function ProtectedRoute({children}) {

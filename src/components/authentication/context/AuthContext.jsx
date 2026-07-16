@@ -1,11 +1,13 @@
-import {createContext, useState,useEffect} from 'react';
+// React
+import {createContext, useState, useEffect} from 'react';
 
+// Context
 const AuthContext = createContext(null);
 
 function AuthProvider({children}) {
 
     const [user, setUser] = useState(null);
-    const [token,setToken] = useState(null);
+    const [token, setToken] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -19,7 +21,7 @@ function AuthProvider({children}) {
         setLoading(false);
     }, []);
 
-    function login(userData,token) {
+    function login(userData, token) {
         setUser(userData);
         setToken(token);
 
@@ -39,7 +41,7 @@ function AuthProvider({children}) {
             value={{
                 user,
                 token,
-               login,
+                login,
                 logout,
                 loading
             }}

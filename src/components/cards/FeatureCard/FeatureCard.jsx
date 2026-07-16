@@ -1,5 +1,7 @@
+// Components
 import FeatureEllipse from '../FeatureElipse/FeatureEllipse.jsx';
 
+// CSS
 import './FeatureCard.css';
 
 function FeatureCard({

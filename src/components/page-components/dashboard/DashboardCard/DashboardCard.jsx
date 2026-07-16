@@ -1,9 +1,10 @@
+// Components
 import './DashboardCard.css';
 
 function DashboardCard({
-    title,
-    children
-}) {
+                           title,
+                           children
+                       }) {
     return (
         <div className="dashboard-card">
             <h2>{title}</h2>

@@ -1,8 +1,11 @@
-import contactImg from '../../../assets/contact/contactImg.jpg';
-
+// Components
 import Hero from '../../../components/sections/Hero/Hero.jsx';
 import ContactForm from '../../../components/forms/ContactForm/ContactForm.jsx';
 
+// Assets
+import contactImg from '../../../assets/contact/contactImg.jpg';
+
+// CSS
 import './Contact.css';
 
 function Contact() {

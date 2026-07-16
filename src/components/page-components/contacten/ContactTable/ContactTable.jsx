@@ -1,5 +1,8 @@
-import './ContactTable.css'
+// Components
 import ContactRow from "../ContactRow/ContactRow.jsx";
+
+// CSS
+import './ContactTable.css'
 
 function ContactTable({  contacts,
                           setSelectedContact,

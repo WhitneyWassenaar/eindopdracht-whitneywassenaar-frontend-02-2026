@@ -1,3 +1,4 @@
+// CSS
 import './Zorgtaken.css'
 
 function Zorgtaken() {

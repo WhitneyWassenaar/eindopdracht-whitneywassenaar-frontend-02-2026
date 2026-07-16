@@ -8,11 +8,12 @@ import Button from '../../ui/Button/Button.jsx';
 // Context / Hooks
 import {AuthContext} from '../../authentication/context/AuthContext.jsx';
 
-// Data
-import projectId from '../../../data/projectId.js';
+// Api
+import api from "../../../api/axios.js";
 
 // CSS
 import './LoginForm.css'
+
 
 function LoginForm() {
     const navigate = useNavigate();
@@ -24,22 +25,15 @@ function LoginForm() {
 
     async function onFormSubmit(e) {
         e.preventDefault();
+        setError("");
         try {
-            const response = await fetch("https://novi-backend-api-wgsgz.ondigitalocean.app/api/login",
+            const response = await api.post("/login",
                 {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "novi-education-project-id": projectId,
-                    },
-                    body: JSON.stringify({email, password})
+                    email,
+                    password
                 });
-            const data = await response.json();
 
-            if (!response.ok) {
-                setError(data.error);
-                return;
-            }
+            const data = response.data;
 
             login(
                 data.user,
@@ -48,7 +42,8 @@ function LoginForm() {
             navigate("/dashboard");
 
         } catch (error) {
-            setError(error.message);
+            console.error(error);
+            setError(error.response?.data?.error || "Er is iets mis gegaan..")
         }
     }
 

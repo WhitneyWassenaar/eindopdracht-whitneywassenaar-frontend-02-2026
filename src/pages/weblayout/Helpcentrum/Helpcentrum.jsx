@@ -1,3 +1,4 @@
+// CSS
 import './Helpcentrum.css'
 
 function Helpcentrum() {

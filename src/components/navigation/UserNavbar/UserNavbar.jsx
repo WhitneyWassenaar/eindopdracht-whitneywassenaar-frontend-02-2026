@@ -1,11 +1,17 @@
+// React
 import {useContext} from 'react';
 import {NavLink} from 'react-router-dom';
-import {AuthContext} from '../../authentication/context/AuthContext.jsx';
 
-import logo from '../../../assets/home/logo.svg';
-
+// Components
 import Button from '../../ui/Button/Button.jsx';
 
+// Context / Hooks
+import {AuthContext} from '../../authentication/context/AuthContext.jsx';
+
+// Assets
+import logo from '../../../assets/home/logo.svg';
+
+// CSS
 import './UserNavbar.css';
 
 function UserNavbar() {

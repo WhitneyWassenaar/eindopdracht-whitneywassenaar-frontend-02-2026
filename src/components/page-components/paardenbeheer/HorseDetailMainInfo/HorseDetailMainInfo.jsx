@@ -1,11 +1,13 @@
 // Components
-import calculateAge from '../../../../helpers/calculateAge.jsx';
 import HorseRelations from "../HorseRelations/HorseRelations.jsx";
+
+// Helpers
+import calculateAge from '../../../../helpers/calculateAge.jsx';
 
 // CSS
 import './HorseDetailMainInfo.css';
 
-function HorseDetailMainInfo({horse,contacts}) {
+function HorseDetailMainInfo({horse, contacts}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
     console.log(horse.photo);
     console.log(
@@ -17,7 +19,7 @@ function HorseDetailMainInfo({horse,contacts}) {
         }
     );
     const owner = contacts.find(
-        contact => Number(contact.id )=== Number(horse.ownerId)
+        contact => Number(contact.id) === Number(horse.ownerId)
     );
 
     return (
@@ -42,23 +44,23 @@ function HorseDetailMainInfo({horse,contacts}) {
                     <ul>
                         <li>
                             Eigenaar:{owner
-                                ? `${owner.firstName} ${owner.lastName}`
-                                : "Eigenaar onbekend"}
+                            ? `${owner.firstName} ${owner.lastName}`
+                            : "Eigenaar onbekend"}
                         </li>
                         <li>Telefoon:{owner
-                                ? `${owner.phone}`
-                                : "Telefoonnummer onbekend"}
+                            ? `${owner.phone}`
+                            : "Telefoonnummer onbekend"}
                         </li>
                         <li>Email:{owner
-                                ? `${owner.email}`
-                                : "Email onbekend"}
+                            ? `${owner.email}`
+                            : "Email onbekend"}
                         </li>
                     </ul>
                 </div>
 
-              <HorseRelations
-                  horse={horse}
-                  contacts={contacts}/>
+                <HorseRelations
+                    horse={horse}
+                    contacts={contacts}/>
             </div>
         </div>
     );

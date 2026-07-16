@@ -1,3 +1,4 @@
+// CSS
 import "/PaardenDetailPagina.css";
 
 function PaardenDetailPagina() {

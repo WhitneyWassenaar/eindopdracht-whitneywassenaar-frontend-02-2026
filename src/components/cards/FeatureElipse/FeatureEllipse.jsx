@@ -1,3 +1,4 @@
+// CSS
 import './FeatureEllipse.css';
 
 function FeatureEllipse({imgUrl,imgAlt}) {

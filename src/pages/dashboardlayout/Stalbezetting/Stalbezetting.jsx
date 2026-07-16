@@ -1,5 +1,7 @@
+// Components
 import StableTable from '../../../components/page-components/stalbezetting/StableTable/StableTable.jsx';
 
+// CSS
 import './Stalbezetting.css'
 
 function Stalbezetting() {

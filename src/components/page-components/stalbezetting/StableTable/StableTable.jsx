@@ -1,3 +1,4 @@
+// Components
 import StableRow from '../StableRow/StableRow.jsx';
 
 function StableTable() {

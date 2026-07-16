@@ -1,5 +1,7 @@
+// Assets
 import logo from '../../../assets/home/logo.svg';
 
+// CSS
 import './Footer.css';
 
 function Footer() {

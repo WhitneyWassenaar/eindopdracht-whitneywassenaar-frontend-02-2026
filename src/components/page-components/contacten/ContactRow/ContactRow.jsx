@@ -1,7 +1,10 @@
+// Components
 import Button from '../../../ui/Button/Button.jsx';
 
+// Assets
 import deleteIcon from '/src/assets/delete-icon.png'
 
+// CSS
 import './ContactRow.css'
 
 function ContactRow({
@@ -12,7 +15,7 @@ function ContactRow({
                     }) {
 
     const defaultContactPhoto = "/defaultContactPhoto.png";
-    console.log(contact)
+
     return (
         <tr className="contactrow-layout"
             onClick={() => setSelectedContact(contact)}>

@@ -1,12 +1,16 @@
+// React
 import Button from '../../../ui/Button/Button.jsx';
+
+// Helpers
 import calculateAge from '../../../../helpers/calculateAge.jsx';
 
+// Assets
 import deleteIcon from '/src/assets/delete-icon.png'
 
+// CSS
 import './HorseRow.css'
 
 function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, contacts}) {
-
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
     const owner = contacts.find(
         contact => Number(contact.id) === Number(horse.ownerId)

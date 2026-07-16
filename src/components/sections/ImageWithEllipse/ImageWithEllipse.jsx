@@ -1,3 +1,4 @@
+// CSS
 import './ImageWithEllipse.css';
 
 function ImageWithEllipse({
