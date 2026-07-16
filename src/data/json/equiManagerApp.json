@@ -4,6 +4,11 @@
       "name": "persons",
       "fields": [
         {
+          "name": "userId",
+          "type": "reference:users",
+          "required": true
+        },
+        {
           "name": "id",
           "type": "number",
           "required": true
@@ -69,6 +74,11 @@
     {
       "name": "horses",
       "fields": [
+        {
+          "name": "userId",
+          "type": "reference:users",
+          "required": true
+        },
         {
           "name": "id",
           "type": "number",
