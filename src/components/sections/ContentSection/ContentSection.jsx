@@ -1,5 +1,7 @@
+// Components
 import ImageWithEllipse from '../ImageWithEllipse/ImageWithEllipse.jsx';
 
+// CSS
 import './ContentSection.css';
 
 function ContentSection({

@@ -1,9 +1,12 @@
+// Components
 import ReviewCard from '../../cards/ReviewCard/ReviewCard.jsx';
 
+// Assets
 import reviewer1 from '../../../assets/home/reviewer1.jpg';
 import reviewer2 from '../../../assets/home/reviewer2.jpg';
 import reviewer3 from '../../../assets/home/reviewer3.jpg';
 
+// CSS
 import './ReviewSection.css';
 
 function ReviewSection() {

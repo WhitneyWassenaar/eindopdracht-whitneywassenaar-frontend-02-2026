@@ -1,12 +1,16 @@
+// React
 import {useEffect, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 
-import logo from '../../../assets/home/logo.svg';
-
+// Components
 import Button from '../../ui/Button/Button.jsx';
 import Sidebar from '../Sidebar/Sidebar.jsx';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu.jsx';
 
+// Assets
+import logo from '../../../assets/home/logo.svg';
+
+// CSS
 import './GuestNavbar.css';
 
 function GuestNavbar() {

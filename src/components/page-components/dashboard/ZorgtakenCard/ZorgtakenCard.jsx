@@ -1,3 +1,4 @@
+// Components
 import DashboardCard from '../DashboardCard/DashboardCard.jsx';
 
 function ZorgtakenCard() {

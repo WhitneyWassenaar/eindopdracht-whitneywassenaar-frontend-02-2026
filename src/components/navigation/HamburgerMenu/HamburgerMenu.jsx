@@ -1,3 +1,4 @@
+// CSS
 import './HamburgerMenu.css';
 
 function HamburgerMenu({onClick}) {

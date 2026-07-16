@@ -1,6 +1,8 @@
+// Components
 import Button from '../../ui/Button/Button.jsx';
 import ImageWithEllipse from '../ImageWithEllipse/ImageWithEllipse.jsx';
 
+// CSS
 import './Hero.css';
 
 function Hero({

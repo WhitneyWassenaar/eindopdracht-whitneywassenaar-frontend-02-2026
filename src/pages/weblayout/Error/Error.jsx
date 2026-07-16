@@ -1,9 +1,13 @@
+// React
 import {Link} from 'react-router-dom';
 
-import errorImg from "../../../assets/error/errorImg.png";
-
+// Components
 import ContentSection from "../../../components/sections/ContentSection/ContentSection.jsx";
 
+// Assets
+import errorImg from "../../../assets/error/errorImg.png";
+
+// CSS
 import "./Error.css"
 
 function Error() {

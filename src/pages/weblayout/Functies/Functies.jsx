@@ -1,9 +1,11 @@
+// Components
 import Hero from '../../../components/sections/Hero/Hero.jsx';
 import FeatureCard from '../../../components/cards/FeatureCard/FeatureCard.jsx';
 
+// Assets
 import featureImg1 from '../../../assets/functies/featureImg1.jpg';
 import greyHorse from '../../../assets/functies/greyHorse.png';
-
+// CSS
 import './Functies.css';
 
 function Functies() {

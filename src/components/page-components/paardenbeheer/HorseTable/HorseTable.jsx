@@ -1,4 +1,7 @@
+// Components
 import HorseRow from '../HorseRow/HorseRow.jsx';
+
+// CSS
 import './HorseTable.css'
 
 function HorseTable({horses, setSelectedHorse, deleteHorse,toggleHorseActive, contacts}) {

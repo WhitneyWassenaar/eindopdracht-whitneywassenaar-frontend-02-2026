@@ -1,10 +1,18 @@
+// React
+import {useContext} from "react";
+
+//Context
+import {AuthContext} from "../authentication/context/AuthContext.jsx";
+
+// Components
 import GuestNavbar from './GuestNavbar/GuestNavbar.jsx';
 import UserNavbar from './UserNavbar/UserNavbar.jsx';
 
-function Navbar({isLoggedIn}) {
+function Navbar() {
+    const {user} = useContext(AuthContext);
     return (
         <>
-            {!isLoggedIn
+            {!user
                 ?  <GuestNavbar/>
                 : <UserNavbar/>}
         </>

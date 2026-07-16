@@ -1,5 +1,8 @@
-import './ContactDetail.css';
+// Components
 import ContactDetailMainInfo from "../ContactDetailMainInfo/ContactDetailMainInfo.jsx";
+
+// CSS
+import './ContactDetail.css';
 
 function ContactDetail({contact, horses = []}) {
     console.log("gekozen contact:", contact);

@@ -1,3 +1,4 @@
+// CSS
 import './Sidebar.css';
 
 function Sidebar({menuOpen}) {
