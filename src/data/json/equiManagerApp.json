@@ -149,6 +149,49 @@
           "user"
         ]
       }
+    },
+    {
+      "name": "userProfiles",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "reference:users",
+          "required": true
+        },
+        {
+          "name": "firstName",
+          "type": "string",
+          "required": true,
+          "min": 2,
+          "max": 20
+        },
+        {
+          "name": "lastName",
+          "type": "string",
+          "required": true,
+          "min": 2,
+          "max": 20
+        },
+        {
+          "name": "stableName",
+          "type": "string",
+          "required": true,
+          "min": 5,
+          "max": 30
+        }
+      ],
+      "permissions": {
+        "GET": ["user"],
+        "POST": ["anonymous"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
+      }
     }
   ],
   "users": [
