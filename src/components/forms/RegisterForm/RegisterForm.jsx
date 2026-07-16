@@ -125,6 +125,7 @@ function RegisterForm() {
                 id="first-name"
                 name="first-name"
                 required
+                minLength="2"
                 maxLength="20"
             />
 
@@ -137,6 +138,7 @@ function RegisterForm() {
                 id="last-name"
                 name="last-name"
                 required
+                minLength="2"
                 maxLength="20"
             />
 
@@ -149,6 +151,7 @@ function RegisterForm() {
                 id="stable-name"
                 name="stable-name"
                 required
+                minLength="5"
                 maxLength="30"
             />
 
