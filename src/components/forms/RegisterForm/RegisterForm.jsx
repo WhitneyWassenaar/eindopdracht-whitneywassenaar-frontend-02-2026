@@ -10,6 +10,7 @@ import api from "../../../api/axios.js";
 
 // CSS
 import './RegisterForm.css';
+import userNavbar from "../../navigation/UserNavbar/UserNavbar.jsx";
 
 
 function RegisterForm() {
@@ -68,16 +69,21 @@ function RegisterForm() {
                 }
             );
 
-            const data = response.data;
+            const userData = response.data;
+            console.log("New user:", userData.id);
 
-            await api.post("/userProfiles",
+            const profileResponse = await api.post("/userProfiles",
                 {
-                    userId: data.id,
+                    userId: userData.id,
                     firstName: cleanFirstName,
                     lastName: cleanLastName,
                     stableName: cleanStableName
                 }
             );
+
+            localStorage.setItem("userId", userData.id);
+
+            console.log("New profile:", profileResponse.data);
 
             navigate("/inloggen");
 
