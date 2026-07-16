@@ -5,8 +5,8 @@ import {useNavigate} from 'react-router-dom';
 // Components
 import Button from '../../ui/Button/Button.jsx';
 
-// Data
-import projectId from "../../../data/projectId.js";
+// Api
+import api from "../../../api/axios.js";
 
 // CSS
 import './RegisterForm.css';
@@ -60,54 +60,29 @@ function RegisterForm() {
         }
 
         try {
-            const response = await fetch(
-                "https://novi-backend-api-wgsgz.ondigitalocean.app/api/users", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "novi-education-project-id": projectId,
-                    },
-                    body: JSON.stringify({
-                        email: cleanEmail,
-                        password,
-                        roles: ["user"]
-                    })
-                }
-            );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                setError(data.error || "Registreren mislukt");
-                return;
-            }
-
-            const profileResponse = await fetch(
-                "https://novi-backend-api-wgsgz.ondigitalocean.app/api/userProfiles",
+            const response = await api.post("/users",
                 {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "novi-education-project-id": projectId,
-                    },
-                    body: JSON.stringify({
-                        userId: data.id,
-                        firstName: cleanFirstName,
-                        lastName: cleanLastName,
-                        stableName: cleanStableName
-                    })
+                    email: cleanEmail,
+                    password,
+                    roles: ["user"]
                 }
             );
 
-            if (!profileResponse.ok) {
-                setError("Profiel aanmaken mislukt");
-                return;
-            }
+            const data = response.data;
+
+            await api.post("/userProfiles",
+                {
+                    userId: data.id,
+                    firstName: cleanFirstName,
+                    lastName: cleanLastName,
+                    stableName: cleanStableName
+                }
+            );
 
             navigate("/inloggen");
 
         } catch (error) {
-            setError(error.message);
+            setError(error.response?.data?.error || "Er is iets mis gegaan...");
         }
     }
 
