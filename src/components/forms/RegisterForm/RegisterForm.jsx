@@ -5,9 +5,12 @@ import {useNavigate} from 'react-router-dom';
 // Components
 import Button from '../../ui/Button/Button.jsx';
 
+// Data
+import projectId from "../../../data/projectId.js";
+
 // CSS
 import './RegisterForm.css';
-import projectId from "../../../data/projectId.js";
+
 
 function RegisterForm() {
 
@@ -158,7 +161,7 @@ function RegisterForm() {
                 id="e-mail"
                 name="e-mail"
                 required
-                maxLength="20"
+                maxLength="25"
             />
 
             <label>Wachtwoord</label>
@@ -170,7 +173,6 @@ function RegisterForm() {
                 id="password"
                 name="password"
                 required
-                maxLength="20"
             />
 
             <label>Herhaal wachtwoord</label>
@@ -182,7 +184,6 @@ function RegisterForm() {
                 id="confirm-password"
                 name="confirm-password"
                 required
-                maxLength="20"
             />
 
             <label>

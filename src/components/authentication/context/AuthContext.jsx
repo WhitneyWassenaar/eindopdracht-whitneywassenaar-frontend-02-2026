@@ -34,7 +34,6 @@ function AuthProvider({children}) {
         localStorage.removeItem("user");
     }
 
-
     return (
         <AuthContext.Provider
             value={{
