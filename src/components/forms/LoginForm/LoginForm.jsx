@@ -33,12 +33,44 @@ function LoginForm() {
                     password
                 });
 
-            const data = response.data;
+            const loginData = response.data;
+            console.log("Logged in user:", loginData);
+
+            const userResponse = await api.get("/users",
+                {
+                    headers: {
+                        Authorization: `Bearer ${loginData.token}`
+                    }
+                });
+
+            const user = userResponse.data.find(user => user.email === loginData.user.email)
+
+            const userId = user.id;
+
+            const profileResponse = await api.get(`/users/${userId}/userProfiles`,
+                {
+                    headers : {
+                        Authorization: `Bearer ${loginData.token}`
+                    }
+                });
+            const profile = profileResponse.data[0];
+
+            console.log("Profiel:", profile);
 
             login(
-                data.user,
-                data.token
+                {
+                    ...loginData.user,
+                    id : profile.userId,
+                    firstName: profile.firstName,
+                    lastName: profile.lastName,
+                    stableName: profile.stableName
+                },
+                loginData.token
             );
+
+
+            console.log("Profile:", profileResponse.data);
+
             navigate("/dashboard");
 
         } catch (error) {
