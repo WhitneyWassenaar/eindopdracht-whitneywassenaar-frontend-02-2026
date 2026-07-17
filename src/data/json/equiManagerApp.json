@@ -254,6 +254,72 @@
         "PATCH": ["user"],
         "DELETE": ["user"]
       }
+    },
+    {
+      "name": "horseHealths",
+      "fields": [
+        {
+          "name":"id",
+          "type":"number",
+          "required":true
+        },
+        {
+          "name":"userId",
+          "type":"reference:users",
+          "required":true
+        },
+        {
+          "name":"horseId",
+          "type":"reference:horses",
+          "required":true
+        },
+        {
+          "name":"weight",
+          "type":"number",
+          "required":false
+        },
+        {
+          "name":"diet",
+          "type":"string",
+          "required":false,
+          "max":500
+        },
+        {
+          "name":"allergies",
+          "type":"string",
+          "required":false,
+          "max":500
+        },
+        {
+          "name":"medication",
+          "type":"string",
+          "required":false,
+          "max":500
+        },
+        {
+          "name":"vaccinated",
+          "type":"boolean",
+          "required":false
+        },
+        {
+          "name":"lastDeworming",
+          "type":"date",
+          "required":false
+        },
+        {
+          "name":"notes",
+          "type":"string",
+          "required":false,
+          "max":1000
+        }
+      ],
+      "permissions": {
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
+      }
     }
   ],
   "users": [

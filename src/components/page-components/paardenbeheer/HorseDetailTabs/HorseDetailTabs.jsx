@@ -4,6 +4,7 @@ import Button from '../../../ui/Button/Button.jsx';
 
 import './HorseDetailTabs.css';
 import HorseCareTasks from "../../zorgtaken/HorseCareTasks/HorseCareTasks.jsx";
+import HorseHealth from "../HorseHealth/HorseHealth.jsx";
 
 function HorseDetailTabs({horse}) {
     const [activeTab, setActiveTab] = useState("1")
@@ -38,7 +39,7 @@ function HorseDetailTabs({horse}) {
             <div className="tab-content">
                 {activeTab === "1" && (
                     <div id="1">
-                        Tab 1 content
+                       <HorseHealth horse={horse}/>
                     </div>
                 )}
 
