@@ -8,11 +8,13 @@ import {AuthContext} from "../../../components/authentication/context/AuthContex
 import CareTasksTable from "../../../components/page-components/zorgtaken/CareTasksTable/CareTasksTable.jsx";
 import CreateCareTaskForm from "../../../components/forms/CreateCareTaskForm/CreateCareTaskForm.jsx";
 import Button from "../../../components/ui/Button/Button.jsx";
+import AssignCareTaskForm from "../../../components/forms/AssignCareTaskForm/AssignCareTaskForm.jsx";
 
 function Zorgtaken() {
     const {token, user} = useContext(AuthContext);
     const [careTasks, setCareTasks] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [selectedCareTask, setSelectedCareTask] = useState(null);
 
     function addCareTask(newCareTask) {
         setCareTasks(previousTasks => [
@@ -61,6 +63,11 @@ function Zorgtaken() {
 
     }, [token, user])
 
+    function openAssignForm(careTask) {
+        console.log("Gekozen zorgtaak:", careTask);
+        setSelectedCareTask(careTask);
+    }
+
     return (
         <>
             <div className="dashboard-page">
@@ -69,7 +76,15 @@ function Zorgtaken() {
 
                 <CareTasksTable
                     careTasks={careTasks}
-                    deleteCareTask={deleteCareTask}/>
+                    deleteCareTask={deleteCareTask}
+                    openAssignForm={openAssignForm}/>
+
+                {selectedCareTask && (
+                    <AssignCareTaskForm
+                        careTask={selectedCareTask}
+                        setSelectedCareTask={setSelectedCareTask}
+                    />
+                )}
 
                 <Button
                     onClick={() => setShowForm(true)}
