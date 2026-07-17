@@ -1,7 +1,7 @@
 // CSS
 import "./CreateCareTaskForm.css";
 import Button from "../../ui/Button/Button.jsx";
-import {useContext, useState, useEffect} from "react";
+import {useContext, useState} from "react";
 import api from "../../../api/axios.js";
 import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
@@ -32,44 +32,17 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
 
             const newCareTask = response.data;
             addCareTask(newCareTask);
-            setShowForm(false);
             console.log("Nieuwe zorgtaak uit backend:", newCareTask);
 
             setTitle("");
             setDescription("");
             setShowForm(false);
 
-            console.log("Nieuwe zorgtaak:", newCareTask);
-
         } catch (error) {
             console.error(error)
             setError(error.response?.data?.error || "Er is iets mis gegaan..")
         }
     }
-
-    useEffect(() => {
-        if(!token || !user) return;
-
-        async function getHorses() {
-            try {
-                const response = await api.get(`/users/${user.id}/horses`,
-                    {
-                        headers:{
-                            Authorization:`Bearer ${token}`
-                        }
-                    }
-                );
-
-                setHorses(response.data);
-
-            } catch(error) {
-                console.error(error);
-            }
-        }
-
-        getHorses();
-
-    }, [token, user]);
 
     return (
         <form onSubmit={createCareTaskFormSubmit} className="create-caretask-form-layout">
