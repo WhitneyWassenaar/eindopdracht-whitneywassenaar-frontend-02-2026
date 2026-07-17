@@ -16,8 +16,6 @@ import projectId from '../../../data/projectId.js';
 // CSS
 import './Paardenbeheer.css'
 import api from "../../../api/axios.js";
-// import {data} from "react-router-dom";
-// import error from "../../weblayout/Error/Error.jsx";
 
 function Paardenbeheer() {
 
@@ -57,50 +55,6 @@ function Paardenbeheer() {
         getHorses();
     },[token,user]);
 
-        // async function getHorses() {
-        //     try {
-        //         const response = await fetch(
-        //             "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
-        //             {
-        //                 headers: {
-        //                     "novi-education-project-id": projectId,
-        //                     "Authorization": `Bearer ${token}`,
-        //                 },
-        //             }
-        //         );
-        //
-        //         console.log("Status:", response.status);
-        //
-        //         const responseText = await response.text();
-        //
-        //         console.log("Backend antwoord:", responseText);
-        //
-        //         if (!response.ok) {
-        //             return;
-        //         }
-        //
-        //         const data = JSON.parse(responseText);
-        //         console.table(
-        //             data.map(horse => ({
-        //                 paard: horse.name,
-        //                 eigenaar: horse.ownerId,
-        //                 verzorger: horse.caretakerId,
-        //                 trainer: horse.trainerId
-        //             }))
-        //         );
-
-    //             setHorses(data);
-    //
-    //             // setHorses(data);
-    //
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     }
-    //
-    //     getHorses();
-    //
-    // }, [token]);
     useEffect(() => {
         if (!token || !user) return;
 
@@ -125,37 +79,6 @@ function Paardenbeheer() {
         getContacts();
 
     }, [token, user]);
-
-    //     if (!token) return;
-    //
-    //     async function getContacts() {
-    //         try {
-    //             const response = await fetch(
-    //                 "https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons",
-    //                 {
-    //                     headers: {
-    //                         "novi-education-project-id": projectId,
-    //                         "Authorization": `Bearer ${token}`,
-    //                     },
-    //                 }
-    //             );
-    //
-    //             if (!response.ok) {
-    //                 return;
-    //             }
-    //
-    //             const data = await response.json();
-    //
-    //             setContacts(data);
-    //
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     }
-    //
-    //     getContacts();
-    //
-    // }, [token]);
 
     async function toggleHorseActive(horse) {
         try {
@@ -196,33 +119,76 @@ function Paardenbeheer() {
     }
 
     async function deleteHorse(horseId) {
+
         if (!window.confirm("Weet je zeker dat je dit paardenprofiel wilt verwijderen?"))
             return;
 
         try {
-            const response = await fetch(
-                `https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses/${horseId}`,
+
+            // verwijder gezondheidsgegevens
+            const healthResponse = await api.get(
+                `/horses/${horseId}/horseHealths`,
                 {
-                    method: "DELETE",
-                    headers: {
-                        "novi-education-project-id": projectId,
-                        "Authorization": `Bearer ${token}`,
-                    },
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
                 }
             );
 
-            if (!response.ok) {
-                console.error("Paard verwijderen mislukt");
-                console.log("Status:", response.status);
-                return;
+            for (const health of healthResponse.data) {
+                await api.delete(
+                    `/horseHealths/${health.id}`,
+                    {
+                        headers:{
+                            Authorization:`Bearer ${token}`
+                        }
+                    }
+                );
             }
 
-            // Row wordt visueel verwijderd
-            setHorses(previousHorses =>
-                previousHorses.filter(horse => horse.id !== horseId)
+
+            // verwijder zorgtaken koppelingen
+            const assignmentsResponse = await api.get(
+                `/horses/${horseId}/careTaskAssignments`,
+                {
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                }
             );
 
-        } catch (error) {
+
+            for (const assignment of assignmentsResponse.data) {
+                await api.delete(
+                    `/careTaskAssignments/${assignment.id}`,
+                    {
+                        headers:{
+                            Authorization:`Bearer ${token}`
+                        }
+                    }
+                );
+            }
+
+
+            // verwijder paard
+            await api.delete(
+                `/horses/${horseId}`,
+                {
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                }
+            );
+
+
+            setHorses(previous =>
+                previous.filter(
+                    horse => horse.id !== horseId
+                )
+            );
+
+
+        } catch(error){
             console.error(error);
         }
     }
@@ -256,7 +222,6 @@ function Paardenbeheer() {
         if (sortOption === "age-young") {
             return new Date(a.birthDate) - new Date(b.birthDate);
         }
-
         return 0;
     });
 
@@ -299,7 +264,6 @@ function Paardenbeheer() {
                         >
                             Filter
                         </Button>
-
 
                         <Button
                             variant="filter-sort"

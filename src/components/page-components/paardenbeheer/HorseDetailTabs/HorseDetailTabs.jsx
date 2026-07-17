@@ -1,10 +1,12 @@
+// React
 import {useState} from 'react';
-
+// Components
 import Button from '../../../ui/Button/Button.jsx';
-
-import './HorseDetailTabs.css';
 import HorseCareTasks from "../../zorgtaken/HorseCareTasks/HorseCareTasks.jsx";
 import HorseHealth from "../HorseHealth/HorseHealth.jsx";
+
+// CSS
+import './HorseDetailTabs.css';
 
 function HorseDetailTabs({horse}) {
     const [activeTab, setActiveTab] = useState("1")

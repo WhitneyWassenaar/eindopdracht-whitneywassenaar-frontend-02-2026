@@ -1,7 +1,14 @@
+// React
 import {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
-import api from "../../../../api/axios.js";
+
+// Components
 import HorseHealthForm from "../../../forms/HorseHealthForm/HorseHealthForm.jsx";
+
+// Context / Hooks
+import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
+
+// Api
+import api from "../../../../api/axios.js";
 
 function HorseHealth({horse}) {
 

@@ -1,6 +1,13 @@
+// React
 import {useContext, useEffect, useState} from "react";
+
+// Context / Hooks
 import {AuthContext} from "../../authentication/context/AuthContext.jsx";
+
+// Api
 import api from "../../../api/axios.js";
+
+// CSS
 import "./HorseHealthForm.css"
 
 function HorseHealthForm({horse, onSaved}) {
@@ -200,10 +207,7 @@ function HorseHealthForm({horse, onSaved}) {
                 </p>
             )}
         </form>
-
     );
-
 }
-
 
 export default HorseHealthForm;
