@@ -97,7 +97,7 @@ function HorseCareTasks({horse}) {
                     Geen zorgtaken toegewezen.
                 </p>
             )}
-
+<div className="caretask-list">
             {assignments
                 .sort((a, b) => {
 
@@ -143,6 +143,7 @@ function HorseCareTasks({horse}) {
                     )}
                 </div>
             ))}
+        </div>
         </div>
     );
 }
