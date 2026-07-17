@@ -1,0 +1,29 @@
+.caretask-row-layout {
+    height: 50px;
+}
+
+.caretask-row-layout:hover {
+    background-color: rgba(223, 236, 226, 0.48);
+    cursor: pointer;
+}
+
+.caretask-row-layout td {
+    text-align: center;
+}
+
+.caretask-status {
+    cursor: pointer;
+    width:100px;
+}
+
+.caretask-status:hover {
+    text-decoration: underline;
+}
+
+.caretask-status.active {
+    color: green;
+}
+
+.caretask-status.inactive {
+    color: red;
+}

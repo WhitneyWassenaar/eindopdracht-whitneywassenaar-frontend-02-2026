@@ -5,7 +5,7 @@ import {useContext, useState, useEffect} from "react";
 import api from "../../../api/axios.js";
 import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
-function CreateCareTaskForm() {
+function CreateCareTaskForm({addCareTask, setShowForm}) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [dueDate, setDueDate] = useState("");
@@ -37,6 +37,8 @@ function CreateCareTaskForm() {
             );
 
             const newCareTask = response.data;
+            addCareTask(newCareTask);
+            setShowForm(false);
             console.log("Nieuwe zorgtaak uit backend:", newCareTask);
 
             setTitle("");
