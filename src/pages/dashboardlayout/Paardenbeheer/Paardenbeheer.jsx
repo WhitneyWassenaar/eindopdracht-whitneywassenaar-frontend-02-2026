@@ -15,6 +15,9 @@ import projectId from '../../../data/projectId.js';
 
 // CSS
 import './Paardenbeheer.css'
+import api from "../../../api/axios.js";
+// import {data} from "react-router-dom";
+// import error from "../../weblayout/Error/Error.jsx";
 
 function Paardenbeheer() {
 
@@ -29,47 +32,22 @@ function Paardenbeheer() {
     const [sortOption, setSortOption] = useState("none");
     const [showSort, setShowSort] = useState(false);
 
-    const {token} = useContext(AuthContext);
+    const {token,user} = useContext(AuthContext);
     console.log("Token lengte:", token?.length);
 
     useEffect(() => {
-        if (!token) return;
+        if (!token || !user) return;
 
         async function getHorses() {
             try {
-                const response = await fetch(
-                    "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
+                const horseData = await api.get(`/users/${user.id}/horses`,
                     {
                         headers: {
-                            "novi-education-project-id": projectId,
                             "Authorization": `Bearer ${token}`,
                         },
-                    }
-                );
-
-                console.log("Status:", response.status);
-
-                const responseText = await response.text();
-
-                console.log("Backend antwoord:", responseText);
-
-                if (!response.ok) {
-                    return;
-                }
-
-                const data = JSON.parse(responseText);
-                console.table(
-                    data.map(horse => ({
-                        paard: horse.name,
-                        eigenaar: horse.ownerId,
-                        verzorger: horse.caretakerId,
-                        trainer: horse.trainerId
-                    }))
-                );
-
-                setHorses(data);
-
-                // setHorses(data);
+                    });
+                console.log(JSON.stringify(horseData.data, null, 2));
+                setHorses(horseData.data);
 
             } catch (error) {
                 console.error(error);
@@ -77,31 +55,67 @@ function Paardenbeheer() {
         }
 
         getHorses();
+    },[token,user]);
 
-    }, [token]);
+        // async function getHorses() {
+        //     try {
+        //         const response = await fetch(
+        //             "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
+        //             {
+        //                 headers: {
+        //                     "novi-education-project-id": projectId,
+        //                     "Authorization": `Bearer ${token}`,
+        //                 },
+        //             }
+        //         );
+        //
+        //         console.log("Status:", response.status);
+        //
+        //         const responseText = await response.text();
+        //
+        //         console.log("Backend antwoord:", responseText);
+        //
+        //         if (!response.ok) {
+        //             return;
+        //         }
+        //
+        //         const data = JSON.parse(responseText);
+        //         console.table(
+        //             data.map(horse => ({
+        //                 paard: horse.name,
+        //                 eigenaar: horse.ownerId,
+        //                 verzorger: horse.caretakerId,
+        //                 trainer: horse.trainerId
+        //             }))
+        //         );
 
+    //             setHorses(data);
+    //
+    //             // setHorses(data);
+    //
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     }
+    //
+    //     getHorses();
+    //
+    // }, [token]);
     useEffect(() => {
-        if (!token) return;
+        if (!token || !user) return;
 
         async function getContacts() {
             try {
-                const response = await fetch(
-                    "https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons",
+                const contactData = await api.get(
+                    `/users/${user.id}/persons`,
                     {
                         headers: {
-                            "novi-education-project-id": projectId,
                             "Authorization": `Bearer ${token}`,
                         },
                     }
                 );
 
-                if (!response.ok) {
-                    return;
-                }
-
-                const data = await response.json();
-
-                setContacts(data);
+                setContacts(contactData.data);
 
             } catch (error) {
                 console.error(error);
@@ -110,7 +124,38 @@ function Paardenbeheer() {
 
         getContacts();
 
-    }, [token]);
+    }, [token, user]);
+
+    //     if (!token) return;
+    //
+    //     async function getContacts() {
+    //         try {
+    //             const response = await fetch(
+    //                 "https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons",
+    //                 {
+    //                     headers: {
+    //                         "novi-education-project-id": projectId,
+    //                         "Authorization": `Bearer ${token}`,
+    //                     },
+    //                 }
+    //             );
+    //
+    //             if (!response.ok) {
+    //                 return;
+    //             }
+    //
+    //             const data = await response.json();
+    //
+    //             setContacts(data);
+    //
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     }
+    //
+    //     getContacts();
+    //
+    // }, [token]);
 
     async function toggleHorseActive(horse) {
         try {

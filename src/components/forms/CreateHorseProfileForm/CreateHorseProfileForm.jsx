@@ -18,7 +18,7 @@ import api from "../../../api/axios.js";
 import './CreateHorseProfileForm.css';
 
 function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
-    const {token} = useContext(AuthContext);
+    const {token,user} = useContext(AuthContext);
 
     const [horseName, setHorseName] = useState("");
     const [horseGender, setHorseGender] = useState("");
@@ -39,6 +39,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
         try {
             const response = await api.post("/horses",
                 {
+                    userId: user.id,
                     name: horseName,
                     gender: horseGender,
                     birthDate,
