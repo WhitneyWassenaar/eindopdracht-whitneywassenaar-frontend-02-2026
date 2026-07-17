@@ -8,9 +8,6 @@ import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 function CreateCareTaskForm({addCareTask, setShowForm}) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [dueDate, setDueDate] = useState("");
-    const [selectedHorse, setSelectedHorse] = useState("");
-    const [horses, setHorses] = useState([]);
     const [error, setError] = useState("");
 
     const {token,user} = useContext(AuthContext);
@@ -23,11 +20,8 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
             const response = await api.post("/careTasks",
                 {
                     userId: user.id,
-                    horseId: selectedHorse,
                     title,
                     description,
-                    dueDate,
-                    completed: false
                 },
                 {
                     headers: {
@@ -43,11 +37,9 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
 
             setTitle("");
             setDescription("");
-            setDueDate("");
-            setSelectedHorse("");
+            setShowForm(false);
 
             console.log("Nieuwe zorgtaak:", newCareTask);
-
 
         } catch (error) {
             console.error(error)
@@ -107,40 +99,6 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
                         placeholder={"Voer beschrijving in"}
                         required
                     />
-                </div>
-
-                <div className="form-row">
-                    <label>Datum</label>
-                    <input
-                        value={dueDate}
-                        onChange={(e) => setDueDate(e.target.value)}
-                        id={"dueDate"}
-                        type={"date"}
-                        required
-                    />
-                </div>
-
-                <div className="form-row">
-                    <label>Paard</label>
-                    <select
-                        value={selectedHorse}
-                        onChange={(event) => setSelectedHorse(event.target.value)}
-                        id="selected-horse"
-                        required
-                    >
-                        <option
-                            value="">
-                            Selecteer een paard
-                        </option>
-                        {horses.map((horse) => (
-                            <option
-                                key={horse.id}
-                                value={horse.id}
-                            >
-                                {horse.name}
-                            </option>
-                        ))}
-                    </select>
                 </div>
 
                 {error && (
