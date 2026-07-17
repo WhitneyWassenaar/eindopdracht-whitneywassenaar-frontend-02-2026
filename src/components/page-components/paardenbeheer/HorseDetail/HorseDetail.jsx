@@ -36,7 +36,8 @@ function HorseDetail({horse, contacts, setHorses, setSelectedHorse}) {
                     setSelectedHorse={setSelectedHorse}
                 />
             )}
-            <HorseDetailTabs/>
+            <HorseDetailTabs
+            horse={horse}/>
         </div>
     );
 }

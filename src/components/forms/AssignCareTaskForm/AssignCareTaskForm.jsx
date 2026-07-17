@@ -21,8 +21,38 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
     const [selectedHorses, setSelectedHorses] = useState([]);
     const [dueDate, setDueDate] = useState("");
     const [error, setError] = useState("");
+    const [existingAssignments, setExistingAssignments] = useState([]);
 
+    useEffect(() => {
+        if (!token || !horses.length) return;
 
+        async function getExistingAssignments() {
+            try {
+                const allAssignments = [];
+
+                for (const horse of horses) {
+                    const response = await api.get(
+                        `/horses/${horse.id}/careTaskAssignments`,
+                        {
+                            headers:{
+                                Authorization:`Bearer ${token}`
+                            }
+                        }
+                    );
+
+                    allAssignments.push(...response.data);
+                }
+
+                setExistingAssignments(allAssignments);
+
+            } catch(error) {
+                console.error(error);
+            }
+        }
+
+        getExistingAssignments();
+
+    }, [horses, token]);
 
     useEffect(() => {
         if (!token || !user) return;
@@ -93,9 +123,23 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
 
 
         try {
-
-
             for(const horseId of selectedHorses) {
+
+                const duplicate = existingAssignments.some(
+                    (assignment) =>
+                        assignment.horseId === horseId &&
+                        assignment.careTaskId === careTask.id &&
+                        assignment.dueDate === dueDate
+                );
+
+
+                if (duplicate) {
+                    setError(
+                        "Deze zorgtaak is al toegewezen aan dit paard op deze datum."
+                    );
+                    return;
+                }
+
 
                 await api.post(
                     "/careTaskAssignments",
@@ -111,7 +155,6 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                         }
                     }
                 );
-
             }
 
 
