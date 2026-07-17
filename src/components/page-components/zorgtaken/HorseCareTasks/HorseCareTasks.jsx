@@ -61,6 +61,30 @@ function HorseCareTasks({horse}) {
 
     }, [horse, token]);
 
+    async function completeTask(id) {
+        await api.patch(
+            `/careTaskAssignments/${id}`,
+            {
+                completed: true
+            },
+            {
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+            }
+        );
+
+        setAssignments(previous =>
+            previous.map(task =>
+                task.id === id
+                    ? {...task, completed:true}
+                    : task
+            )
+        );
+    }
+
+
+
     return (
         <div className="horse-caretasks">
 
@@ -98,6 +122,14 @@ function HorseCareTasks({horse}) {
                                 : "Open"
                         }
                     </p>
+
+                    {!assignment.completed && (
+                        <button
+                            onClick={() => completeTask(assignment.id)}
+                        >
+                            Voltooien
+                        </button>
+                    )}
                 </div>
             ))}
         </div>
