@@ -248,7 +248,7 @@
         },
         {
           "name": "createdAt",
-          "type": "datetime",
+          "type": "date",
           "required": true
         }
 
