@@ -198,14 +198,14 @@
         },
         {
           "name": "horseId",
-          "type": "reference:users",
+          "type": "reference:horses",
           "required": true
         },
         {
           "name": "title",
           "type": "string",
           "required": true,
-          "min": 10,
+          "min":5,
           "max": 50
         },
         {
