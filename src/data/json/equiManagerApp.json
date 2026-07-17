@@ -243,15 +243,9 @@
         {
           "name": "description",
           "type": "string",
-          "required": false,
+          "required": true,
           "max": 200
-        },
-        {
-          "name": "createdAt",
-          "type": "date",
-          "required": true
         }
-
       ],
       "permissions": {
         "GET": ["user"],

@@ -7,18 +7,23 @@ import deleteIcon from '/src/assets/delete-icon.png'
 // CSS
 import './CareTaskRow.css'
 
-function CareTaskRow({careTask, deleteCareTask}) {
+function CareTaskRow({careTask, deleteCareTask, openAssignForm}) {
 
     return (
         <tr className="caretask-row-layout">
             <td>{careTask.title}</td>
             <td>{careTask.description}</td>
-            <td>{careTask.dueDate}</td>
-            <td>
-                {careTask.completed ? "Voltooid" : "Open"}
-            </td>
 
             <td>
+                <Button
+                    variant={"assign"}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                      openAssignForm(careTask)
+                    }}>
+                   Toewijzen
+                </Button>
+
                 <Button
                     variant={"delete"}
                     onClick={(e) => {
