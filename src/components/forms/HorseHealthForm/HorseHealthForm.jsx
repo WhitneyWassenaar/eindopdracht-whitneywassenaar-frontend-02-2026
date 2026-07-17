@@ -3,7 +3,7 @@ import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 import api from "../../../api/axios.js";
 import "./HorseHealthForm.css"
 
-function HorseHealthForm({horse}) {
+function HorseHealthForm({horse, onSaved}) {
     const {token, user} = useContext(AuthContext);
     const [healthId, setHealthId] = useState(null);
     const [formData, setFormData] = useState({
@@ -20,20 +20,20 @@ function HorseHealthForm({horse}) {
 
     useEffect(() => {
 
-        if(!horse || !token) return;
+        if (!horse || !token) return;
 
-        async function getHealth(){
+        async function getHealth() {
             try {
 
                 const response = await api.get(`/horses/${horse.id}/horseHealths`,
                     {
-                        headers:{
-                            Authorization:`Bearer ${token}`
+                        headers: {
+                            Authorization: `Bearer ${token}`
                         }
                     }
                 );
 
-                if(response.data.length > 0){
+                if (response.data.length > 0) {
                     const health = response.data[0];
 
                     setHealthId(health.id);
@@ -49,31 +49,32 @@ function HorseHealthForm({horse}) {
                     });
                 }
 
-            } catch(error){
+            } catch (error) {
                 console.error(error);
             }
         }
+
         getHealth();
     }, [horse, token]);
 
-    function handleChange(e){
-        const {name,value,type,checked} = e.target;
+    function handleChange(e) {
+        const {name, value, type, checked} = e.target;
         setFormData(previous => ({
             ...previous,
             [name]: type === "checkbox" ? checked : value
         }));
     }
 
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
         e.preventDefault();
         try {
-            if(healthId){
+            if (healthId) {
                 // bestaande gegevens aanpassen
-                await api.put(`/horseHealths/${healthId}`,
+                await api.patch(`/horseHealths/${healthId}`,
                     formData,
                     {
-                        headers:{
-                            Authorization:`Bearer ${token}`
+                        headers: {
+                            Authorization: `Bearer ${token}`
                         }
                     }
                 );
@@ -85,106 +86,108 @@ function HorseHealthForm({horse}) {
                     "/horseHealths",
                     {
                         ...formData,
-                        userId:user.id,
-                        horseId:horse.id
+                        userId: user.id,
+                        horseId: horse.id
                     },
                     {
-                        headers:{
-                            Authorization:`Bearer ${token}`
+                        headers: {
+                            Authorization: `Bearer ${token}`
                         }
                     }
                 );
             }
 
             setMessage("Gezondheidsgegevens opgeslagen");
+            if (onSaved) {
+                onSaved();
+            }
 
-        } catch(error){
+        } catch (error) {
             console.error(error);
             setMessage("Opslaan mislukt");
         }
     }
+
     return (
 
         <form onSubmit={handleSubmit} className="horsehealth-form-layout">
-            <h3>
-                Gezondheid {horse.name}
-            </h3>
-<div className="form-row">
-    <label>
-        Gewicht (kg)
-        <input
-            type="number"
-            name="weight"
-            value={formData.weight}
-            onChange={handleChange}
-        />
-    </label>
-</div>
 
             <div className="form-row">
-            <label>
-                Dieet
-                <textarea
-                    name="diet"
-                    value={formData.diet}
-                    onChange={handleChange}
-                />
-            </label>
+                <label>
+                    Gewicht (kg)
+                    <input
+                        type="number"
+                        name="weight"
+                        value={formData.weight}
+                        onChange={handleChange}
+                    />
+                </label>
             </div>
 
             <div className="form-row">
-            <label>
-                Allergieën
-                <textarea
-                    name="allergies"
-                    value={formData.allergies}
-                    onChange={handleChange}
-                />
-            </label>
+                <label>
+                    Dieet
+                    <textarea
+                        name="diet"
+                        value={formData.diet}
+                        onChange={handleChange}
+                    />
+                </label>
+            </div>
+
+            <div className="form-row">
+                <label>
+                    Allergieën
+                    <textarea
+                        name="allergies"
+                        value={formData.allergies}
+                        onChange={handleChange}
+                    />
+                </label>
             </div>
             <div className="form-row">
-            <label>
-                Medicatie
-                <textarea
-                    name="medication"
-                    value={formData.medication}
-                    onChange={handleChange}
-                />
-            </label>
+                <label>
+                    Medicatie
+                    <textarea
+                        name="medication"
+                        value={formData.medication}
+                        onChange={handleChange}
+                    />
+                </label>
             </div>
             <div className="form-row">
 
-            <label>
-                <input
-                    type="checkbox"
-                    name="vaccinated"
-                    checked={formData.vaccinated}
-                    onChange={handleChange}
-                />
+                <label>
+                    <input
+                        type="checkbox"
+                        name="vaccinated"
+                        checked={formData.vaccinated}
+                        onChange={handleChange}
+                    />
 
-                Gevaccineerd
-            </label></div>
+                    Gevaccineerd
+                </label></div>
             <div className="form-row">
 
-            <label>
-                Laatste ontworming
-                <input
-                    type="date"
-                    name="lastDeworming"
-                    value={formData.lastDeworming}
-                    onChange={handleChange}
-                />
-            </label>
+                <label>
+                    Laatste ontworming
+                    <input
+                        type="date"
+                        name="lastDeworming"
+                        value={formData.lastDeworming}
+                        onChange={handleChange}
+                    />
+                </label>
             </div>
             <div className="form-row">
-            <label>
-                Bijzonderheden
-                <textarea
-                    name="notes"
-                    value={formData.notes}
-                    onChange={handleChange}
-                />
-            </label>
+                <label>
+                    Bijzonderheden
+                    <textarea
+                        name="notes"
+                        value={formData.notes}
+                        onChange={handleChange}
+                    />
+                </label>
             </div>
 
             <button type="submit">

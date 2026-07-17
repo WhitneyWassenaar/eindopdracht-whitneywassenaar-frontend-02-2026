@@ -7,6 +7,7 @@ function HorseHealth({horse}) {
 
     const {token} = useContext(AuthContext);
     const [health, setHealth] = useState(null);
+    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
         if(!horse || !token) return;
@@ -33,23 +34,99 @@ function HorseHealth({horse}) {
 
     }, [horse, token]);
 
+    async function reloadHealth() {
+        try {
+            const response = await api.get(`/horses/${horse.id}/horseHealths`,
+                {
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                }
+            );
+
+            setHealth(response.data[0] || null);
+            setShowForm(false);
+
+
+        } catch(error){
+            console.error(error);
+        }
+    }
+
     return (
         <div>
             <h2>
                 Gezondheid
             </h2>
 
-            {health ? (
-                <p>
-                    Gewicht: {health.weight} kg
-                </p>
-            ) : (
-                <p>
-                    Nog geen gezondheidsgegevens.
-                </p>
+
+            {!health && !showForm && (
+
+                <button
+                    onClick={() => setShowForm(true)}
+                >
+                    Vul gezondheidsgegevens in
+                </button>
+
             )}
-            <HorseHealthForm
-            horse={horse}/>
+
+
+            {showForm && (
+
+                <HorseHealthForm
+                    horse={horse}
+                    onSaved={reloadHealth}
+                />
+
+            )}
+
+
+            {health && !showForm && (
+
+                <div className="health-overview">
+
+                    <p>
+                        Gewicht: {health.weight} kg
+                    </p>
+
+                    <p>
+                        Dieet: {health.diet || "Geen dieet ingevuld"}
+                    </p>
+
+                    <p>
+                        Allergieën: {health.allergies || "Geen allergieën"}
+                    </p>
+
+                    <p>
+                        Medicatie: {health.medication || "Geen medicatie"}
+                    </p>
+
+                    <p>
+                        Vaccinatie:
+                        {health.vaccinated ? " Ja" : " Nee"}
+                    </p>
+
+                    <p>
+                        Laatste ontworming:
+                        {health.lastDeworming || "Niet ingevuld"}
+                    </p>
+
+                    <p>
+                        Bijzonderheden:
+                        {health.notes || "Geen bijzonderheden"}
+                    </p>
+
+
+                    <button
+                        onClick={() => setShowForm(true)}
+                    >
+                        Wijzigen
+                    </button>
+
+                </div>
+
+            )}
+
         </div>
     );
 }
