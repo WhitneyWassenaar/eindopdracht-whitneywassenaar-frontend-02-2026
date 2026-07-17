@@ -25,3 +25,18 @@
 }
 
 
+.success-message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.error-message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #e8f5e9;
+    color: red;
+}

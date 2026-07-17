@@ -22,6 +22,7 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
     const [dueDate, setDueDate] = useState("");
     const [error, setError] = useState("");
     const [existingAssignments, setExistingAssignments] = useState([]);
+    const [message, setMessage] = useState("");
 
     useEffect(() => {
         if (!token || !horses.length) return;
@@ -157,8 +158,13 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                 );
             }
 
+            setMessage("Zorgtaak succesvol toegewezen aan de geselecteerde paarden.");
 
-            setSelectedCareTask(null);
+            setTimeout(() => {
+                setSelectedCareTask(null);
+                setMessage("");
+            }, 5000);
+
 
 
         } catch(error) {
@@ -242,6 +248,14 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
 
                     <p className="error-message">
                         {error}
+                    </p>
+
+                )}
+
+                {message && (
+
+                    <p className="success-message">
+                        {message}
                     </p>
 
                 )}
