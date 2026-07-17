@@ -1,9 +1,17 @@
+// React
+import {useContext, useState} from "react";
+
+// Components
+import Button from "../../ui/Button/Button.jsx";
+
+// Context / Hooks
+import {AuthContext} from "../../authentication/context/AuthContext.jsx";
+
+// Api
+import api from "../../../api/axios.js";
+
 // CSS
 import "./CreateCareTaskForm.css";
-import Button from "../../ui/Button/Button.jsx";
-import {useContext, useState} from "react";
-import api from "../../../api/axios.js";
-import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
 function CreateCareTaskForm({addCareTask, setShowForm}) {
     const [title, setTitle] = useState("");
