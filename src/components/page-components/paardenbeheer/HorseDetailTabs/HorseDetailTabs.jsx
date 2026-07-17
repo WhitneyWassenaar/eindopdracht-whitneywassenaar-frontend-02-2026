@@ -3,8 +3,9 @@ import {useState} from 'react';
 import Button from '../../../ui/Button/Button.jsx';
 
 import './HorseDetailTabs.css';
+import HorseCareTasks from "../../zorgtaken/HorseCareTasks/HorseCareTasks.jsx";
 
-function HorseDetailTabs() {
+function HorseDetailTabs({horse}) {
     const [activeTab, setActiveTab] = useState("1")
     return (
         <div>
@@ -43,7 +44,8 @@ function HorseDetailTabs() {
 
                 {activeTab === "2" && (
                     <div id="2">
-                        Tab 2 content
+                       <HorseCareTasks
+                       horse={horse}/>
                     </div>
                 )}
 

@@ -54,21 +54,11 @@
         }
       ],
       "permissions": {
-        "GET": [
-          "user"
-        ],
-        "POST": [
-          "user"
-        ],
-        "PUT": [
-          "user"
-        ],
-        "PATCH": [
-          "user"
-        ],
-        "DELETE": [
-          "user"
-        ]
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
       }
     },
     {
@@ -143,21 +133,11 @@
         }
       ],
       "permissions": {
-        "GET": [
-          "user"
-        ],
-        "POST": [
-          "user"
-        ],
-        "PUT": [
-          "user"
-        ],
-        "PATCH": [
-          "user"
-        ],
-        "DELETE": [
-          "user"
-        ]
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
       }
     },
     {
@@ -202,11 +182,83 @@
         "PATCH": ["user"],
         "DELETE": ["user"]
       }
+    },
+    {
+      "name": "careTaskAssignments",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "careTaskId",
+          "type": "reference:careTasks",
+          "required": true
+        },
+        {
+          "name": "horseId",
+          "type": "reference:horses",
+          "required": true
+        },
+        {
+          "name": "dueDate",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "completed",
+          "type": "boolean",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
+      }
+    },
+    {
+      "name": "careTasks",
+      "fields": [
+        {
+          "name": "userId",
+          "type": "reference:users",
+          "required": true
+        },
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "min":5,
+          "max": 50
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": true,
+          "max": 200
+        }
+      ],
+      "permissions": {
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
+      }
     }
   ],
   "users": [
     {
-      "email": "pietje@live.nl",
+      "email": "test@live.nl",
       "password": "123",
       "roles": [
         "user"

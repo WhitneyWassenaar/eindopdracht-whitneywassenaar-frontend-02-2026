@@ -1,0 +1,14 @@
+.horse-caretasks {
+    margin-top: 20px;
+}
+
+.caretask-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.caretask-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
