@@ -11,10 +11,11 @@ import CreateContactProfileForm from "../../../components/forms/CreateContactPro
 import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
 
 // Data
-import projectId from '../../../data/projectId.js';
+// import projectId from '../../../data/projectId.js';
 
 // CSS
 import './Contacten.css'
+import api from "../../../api/axios.js";
 
 function Contacten() {
 
@@ -29,57 +30,75 @@ function Contacten() {
     const [sortOption, setSortOption] = useState("none");
     const [showSort, setShowSort] = useState(false);
 
-    const {token} = useContext(AuthContext);
+    const {token, user} = useContext(AuthContext);
 
     useEffect(() => {
-        if (!token) return;
+        if (!token || !user) return;
 
         async function getContacts() {
             try {
-                const response = await fetch(
-                    "https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons",
+                const contactData = await api.get(
+                    `/users/${user.id}/persons`,
                     {
                         headers: {
-                            "novi-education-project-id": projectId,
-                            "Authorization": `Bearer ${token}`,
+                            Authorization: `Bearer ${token}`,
                         },
                     }
                 );
 
-                console.log("Status:", response.status);
-
-                const responseText = await response.text();
-
-                console.log("Backend antwoord:", responseText);
-
-                if (!response.ok) {
-                    return;
-                }
-
-                const data = JSON.parse(responseText);
-
-                setContacts(data);
+                setContacts(contactData.data);
 
             } catch (error) {
                 console.error(error);
             }
         }
 
+// useEffect(() => {
+//     if (!token) return;
+//
+//     async function getContacts() {
+//         try {
+//             const response = await fetch(
+//                 "https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons",
+//                 {
+//                     headers: {
+//                         "novi-education-project-id": projectId,
+//                         "Authorization": `Bearer ${token}`,
+//                     },
+//                 }
+//             );
+//
+//             console.log("Status:", response.status);
+//
+//             const responseText = await response.text();
+//
+//             console.log("Backend antwoord:", responseText);
+//
+//             if (!response.ok) {
+//                 return;
+//             }
+//
+//             const data = JSON.parse(responseText);
+//
+//             setContacts(data);
+//
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     }
+
         async function getHorses() {
             try {
-                const response = await fetch(
-                    "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
+                const horseData = await api.get(
+                    `/users/${user.id}/horses`,
                     {
                         headers: {
-                            "novi-education-project-id": projectId,
-                            "Authorization": `Bearer ${token}`,
+                            Authorization: `Bearer ${token}`,
                         },
                     }
                 );
 
-                const data = await response.json();
-                console.log("Horses:", data);
-                setHorses(data);
+                setHorses(horseData.data);
 
             } catch (error) {
                 console.error(error);
@@ -89,29 +108,53 @@ function Contacten() {
         getContacts();
         getHorses();
 
-    }, [token]);
+    }, [token, user]);
+
+
+//     async function getHorses() {
+//         try {
+//             const response = await fetch(
+//                 "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
+//                 {
+//                     headers: {
+//                         "novi-education-project-id": projectId,
+//                         "Authorization": `Bearer ${token}`,
+//                     },
+//                 }
+//             );
+//
+//             const data = await response.json();
+//             console.log("Horses:", data);
+//             setHorses(data);
+//
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     }
+//
+//     getContacts();
+//     getHorses();
+//
+// }
+//
+// ,
+// [token]
+// )
+// ;
 
     async function toggleContactActive(contact) {
         try {
-            const response = await fetch(
-                `https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons/${contact.id}`,
+            await api.patch(
+                `/persons/${contact.id}`,
                 {
-                    method: "PATCH",
+                    active: !contact.active
+                },
+                {
                     headers: {
-                        "novi-education-project-id": projectId,
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        active: !contact.active
-                    }),
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             );
-
-            if (!response.ok) {
-                console.error("Status wijzigen mislukt");
-                return;
-            }
 
             setContacts(previousContacts =>
                 previousContacts.map(previousContact =>
@@ -129,6 +172,44 @@ function Contacten() {
         }
     }
 
+// async function toggleContactActive(contact) {
+//     try {
+//         const response = await fetch(
+//             `https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons/${contact.id}`,
+//             {
+//                 method: "PATCH",
+//                 headers: {
+//                     "novi-education-project-id": projectId,
+//                     "Authorization": `Bearer ${token}`,
+//                     "Content-Type": "application/json",
+//                 },
+//                 body: JSON.stringify({
+//                     active: !contact.active
+//                 }),
+//             }
+//         );
+//
+//         if (!response.ok) {
+//             console.error("Status wijzigen mislukt");
+//             return;
+//         }
+//
+//         setContacts(previousContacts =>
+//             previousContacts.map(previousContact =>
+//                 previousContact.id === contact.id
+//                     ? {
+//                         ...previousContact,
+//                         active: !previousContact.active
+//                     }
+//                     : previousContact
+//             )
+//         );
+//
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
+
     async function deleteContact(contactId) {
         if (!window.confirm("Weet je zeker dat je dit contact wilt verwijderen?"))
             return;
@@ -141,31 +222,28 @@ function Contacten() {
                     Number(horse.caretakerId) === Number(contactId) ||
                     Number(horse.trainerId) === Number(contactId)
                 ) {
-                    await fetch(
-                        `https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses/${horse.id}`,
+                    await api.patch(
+                        `/horses/${horse.id}`,
                         {
-                            method: "PATCH",
+                            ownerId:
+                                Number(horse.ownerId) === Number(contactId)
+                                    ? null
+                                    : horse.ownerId,
+
+                            caretakerId:
+                                Number(horse.caretakerId) === Number(contactId)
+                                    ? null
+                                    : horse.caretakerId,
+
+                            trainerId:
+                                Number(horse.trainerId) === Number(contactId)
+                                    ? null
+                                    : horse.trainerId,
+                        },
+                        {
                             headers: {
-                                "novi-education-project-id": projectId,
-                                "Authorization": `Bearer ${token}`,
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                                ownerId:
-                                    Number(horse.ownerId) === Number(contactId)
-                                        ? null
-                                        : horse.ownerId,
-
-                                caretakerId:
-                                    Number(horse.caretakerId) === Number(contactId)
-                                        ? null
-                                        : horse.caretakerId,
-
-                                trainerId:
-                                    Number(horse.trainerId) === Number(contactId)
-                                        ? null
-                                        : horse.trainerId,
-                            }),
+                                Authorization: `Bearer ${token}`
+                            }
                         }
                     );
 
@@ -194,22 +272,14 @@ function Contacten() {
                 }))
             );
 // 2. Contact verwijderen
-            const response = await fetch(
-                `https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons/${contactId}`,
+            await api.delete(
+                `/persons/${contactId}`,
                 {
-                    method: "DELETE",
                     headers: {
-                        "novi-education-project-id": projectId,
-                        "Authorization": `Bearer ${token}`,
-                    },
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             );
-
-            if (!response.ok) {
-                console.error("Contact verwijderen mislukt");
-                console.log("Status:", response.status);
-                return;
-            }
 
             // Row wordt visueel verwijderd, contact wordt uit de state gehaald
             setContacts(previousContacts =>

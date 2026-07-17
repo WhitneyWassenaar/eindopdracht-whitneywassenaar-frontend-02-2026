@@ -19,6 +19,7 @@ import './CreateContactProfileForm.css';
 
 function CreateContactProfileForm({setContacts, setShowForm}) {
     const {token} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const defaultContactPhoto = "/defaultContactPhoto.png"
 
     const [firstName, setFirstName] = useState("");
@@ -36,6 +37,7 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
         try {
             const response = await api.post("/persons",
                 {
+                    userId: user.id,
                     firstName,
                     lastName,
                     email,
@@ -52,6 +54,7 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
             );
 
             const newContact = response.data;
+            console.log("Nieuwe contact uit backend:", newContact);
 
             setContacts(previousContacts => [
                 ...previousContacts,
@@ -66,6 +69,7 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
 
             setShowForm(false);
             console.log("Nieuwe contact:", newContact);
+
 
         } catch (error) {
             console.error(error)
