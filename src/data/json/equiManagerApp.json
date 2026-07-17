@@ -184,6 +184,43 @@
       }
     },
     {
+      "name": "careTaskAssignments",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "careTaskId",
+          "type": "reference:careTasks",
+          "required": true
+        },
+        {
+          "name": "horseId",
+          "type": "reference:horses",
+          "required": true
+        },
+        {
+          "name": "dueDate",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "completed",
+          "type": "boolean",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
+      }
+    },
+    {
       "name": "careTasks",
       "fields": [
         {
@@ -197,11 +234,6 @@
           "required": true
         },
         {
-          "name": "horseId",
-          "type": "reference:horses",
-          "required": true
-        },
-        {
           "name": "title",
           "type": "string",
           "required": true,
@@ -212,18 +244,14 @@
           "name": "description",
           "type": "string",
           "required": false,
-          "max": 100
+          "max": 200
         },
         {
-          "name": "dueDate",
-          "type": "date",
-          "required": true
-        },
-        {
-          "name": "completed",
-          "type": "boolean",
+          "name": "createdAt",
+          "type": "datetime",
           "required": true
         }
+
       ],
       "permissions": {
         "GET": ["user"],
