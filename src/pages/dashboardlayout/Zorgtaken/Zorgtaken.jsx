@@ -5,11 +5,19 @@ import {useContext, useEffect, useState} from "react";
 import './Zorgtaken.css'
 import api from "../../../api/axios.js";
 import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
+import CreateCareTaskForm from "../../../components/forms/CreateCareTaskForm/CreateCareTaskForm.jsx";
 
 
 function Zorgtaken() {
     const {token,user} = useContext(AuthContext);
     const [careTasks, setCareTasks] = useState([]);
+
+    function addCareTask(newCareTask) {
+        setCareTasks(previousTasks => [
+            ...previousTasks,
+            newCareTask
+        ]);
+    }
 
     useEffect(() => {
         if(!token || !user) return;
@@ -47,6 +55,9 @@ function Zorgtaken() {
                             </div>
                         ))
                 )}
+
+                <CreateCareTaskForm
+                onSubmit={addCareTask}/>
 
             </div>
         </>
