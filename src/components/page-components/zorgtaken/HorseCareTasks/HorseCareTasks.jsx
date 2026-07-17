@@ -98,7 +98,18 @@ function HorseCareTasks({horse}) {
                 </p>
             )}
 
-            {assignments.map((assignment)=>(
+            {assignments
+                .sort((a, b) => {
+
+                    // Eerst open taken
+                    if (a.completed !== b.completed) {
+                        return a.completed ? 1 : -1;
+                    }
+
+                    // Daarna sorteren op einddatum (oudste eerst)
+                    return new Date(a.dueDate) - new Date(b.dueDate);
+
+                }).map((assignment)=>(
 
                 <div
                     key={assignment.id}
