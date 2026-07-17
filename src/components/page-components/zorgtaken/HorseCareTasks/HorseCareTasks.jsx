@@ -30,25 +30,25 @@ function HorseCareTasks({horse}) {
                 );
 
                 const assignments = response.data;
+                console.log("Assignments:", assignments);
 
-                const assignmentsWithTasks = await Promise.all(
-                    assignments.map(async (assignment) => {
-
-                        const taskResponse = await api.get(
-                            `/careTasks/${assignment.careTaskId}`,
-                            {
-                                headers: {
-                                    Authorization: `Bearer ${token}`
-                                }
-                            }
-                        );
-
-                        return {
-                            ...assignment,
-                            careTask: taskResponse.data
-                        };
-                    })
+                const tasksResponse = await api.get(
+                    `/careTasks`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
                 );
+
+                const careTasks = tasksResponse.data;
+
+                const assignmentsWithTasks = assignments.map((assignment) => ({
+                    ...assignment,
+                    careTask: careTasks.find(
+                        task => task.id === assignment.careTaskId
+                    )
+                }));
 
                 setAssignments(assignmentsWithTasks);
 
