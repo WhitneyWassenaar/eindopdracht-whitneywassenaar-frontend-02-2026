@@ -1,7 +1,8 @@
 // React
 import {useContext, useEffect, useState} from "react";
 
-// Components
+// Helper
+import getTodayDate from "../../../helpers/getTodayDate.js";
 
 // Context / Hooks
 import {AuthContext} from "../../authentication/context/AuthContext.jsx";
@@ -11,6 +12,7 @@ import api from "../../../api/axios.js";
 
 // CSS
 import"./CreateAppointmentForm.css";
+
 
 function CreateAppointmentForm({horse, onSaved}) {
     const {token, user} = useContext(AuthContext);
@@ -60,6 +62,18 @@ function CreateAppointmentForm({horse, onSaved}) {
 
     async function handleSubmit(e) {
         e.preventDefault();
+
+        const now = new Date();
+
+        const appointmentDateTime = new Date(
+            `${formData.date}T${formData.time}`
+        );
+
+        if (appointmentDateTime < now) {
+            setMessage("Je kunt geen afspraak in het verleden maken.");
+            return;
+        }
+
         try {
             await api.post("/appointments",
                 {
@@ -107,6 +121,7 @@ function CreateAppointmentForm({horse, onSaved}) {
                         type="date"
                         name="date"
                         value={formData.date}
+                        min={getTodayDate()}
                         onChange={handleChange}
                         required
                     />
