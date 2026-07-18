@@ -33,6 +33,33 @@ function Paardenbeheer() {
     const {token,user} = useContext(AuthContext);
     console.log("Token lengte:", token?.length);
 
+    // check hoeveel user profiles er zijn en om te kijken wat hun id is
+    useEffect(() => {
+
+        async function checkUserProfiles() {
+            try {
+
+                const response = await api.get("/userProfiles",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
+                );
+
+                console.log("Alle userProfiles:", response.data);
+
+            } catch(error) {
+                console.error(error);
+            }
+        }
+
+        if (token) {
+            checkUserProfiles();
+        }
+
+    }, [token]);
+
     useEffect(() => {
         if (!token || !user) return;
 

@@ -411,6 +411,18 @@
         "user"
       ]
     }
-  ]
+  ],
+
+  "data": {
+    "userProfiles": [
+      {
+        "id": 1,
+        "userId": 0,
+        "firstName": "Docent",
+        "lastName": "NOVI",
+        "stableName": "NOVI Stables"
+      }
+    ]
+  }
 }
 
