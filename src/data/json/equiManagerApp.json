@@ -405,8 +405,8 @@
 
   "users": [
     {
-      "email": "test@live.nl",
-      "password": "123",
+      "email": "docent@novi-education.nl",
+      "password": "noviEducation@123",
       "roles": [
         "user"
       ]
