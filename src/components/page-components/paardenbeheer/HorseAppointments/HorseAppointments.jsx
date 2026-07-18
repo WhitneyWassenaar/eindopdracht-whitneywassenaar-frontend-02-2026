@@ -94,9 +94,7 @@ function HorseAppointments({horse}) {
         if(!window.confirm("Weet je zeker dat je deze afspraak wilt verwijderen?"))
             return;
 
-
         try {
-
             await api.delete(`/appointments/${id}`,
                 {
                     headers:{
