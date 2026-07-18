@@ -135,6 +135,11 @@
           "name": "boxId",
           "type": "number",
           "required": false
+        },
+        {
+          "name": "location",
+          "type": "string",
+          "required": true
         }
       ],
       "permissions": {

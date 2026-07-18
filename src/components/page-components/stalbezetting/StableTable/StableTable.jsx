@@ -9,7 +9,7 @@ function StableTable() {
         <table className="table-layout">
             <thead>
             <tr>
-                <th>Box nummer</th>
+                <th>Box</th>
                 <th>Foto</th>
                 <th>Naam</th>
                 <th>Eigenaar</th>

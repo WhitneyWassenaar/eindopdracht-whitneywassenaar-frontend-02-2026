@@ -1,20 +1,20 @@
-// React
-
-
-// Assets
-
-
 // CSS
 import './StableRow.css'
 
 function StableRow({box, horses,contacts}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
-    const horse = horses.find(
+    const horse = horses?.find(
         horse => horse.boxId === box.id);
 
-    const owner = contacts.find(
-        contact => Number(contact.id) === Number(horse.ownerId));
+    const owner = contacts?.find(
+        contact => Number(contact.id) === Number(horse?.ownerId));
+
+    const status = !horse
+        ? "Vrij"
+        : horse.location === "stal"
+            ? "Stal"
+            : "Wei";
 
     return (
         <tr className="stablerow-layout">
@@ -34,17 +34,22 @@ function StableRow({box, horses,contacts}) {
 
             </td>
 
-            <td>{horse ? horse.name : "Vrij"}</td>
-            <td>{owner ? `${owner.firstName} ${owner.lastName}` : "Eigenaar onbekend"}</td>
-            <td>Datum</td>
+            <td>{horse ? horse.name : "-"}</td>
             <td>
-                {!horse && "Vrij"}
-                {horse && horse.location === "Stal" && "Stal"}
-                {horse && horse.location === "Wei" && "Wei"}
+                {horse
+                ? owner
+                    ? `${owner.firstName} ${owner.lastName}`
+                    : "Eigenaar onbekend"
+                : "-"
+            }
             </td>
+            <td>Datum</td>
+            <td>{status}</td>
             <td>Acties</td>
         </tr>
     );
 }
 
 export default StableRow;
+
+// class maken voor visueel onderscheid van status
