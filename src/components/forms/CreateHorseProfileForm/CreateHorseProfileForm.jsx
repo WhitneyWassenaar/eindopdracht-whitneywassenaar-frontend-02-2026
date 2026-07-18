@@ -47,7 +47,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                     color: horseColor,
                     active: true,
                     photo: horsePhoto || defaultHorsePhoto,
-                    ownerId
+                    ownerId: ownerId || null
                 },
                 {
                     headers: {
@@ -200,10 +200,9 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                     <select
                         value={ownerId}
                         onChange={(e) => setOwnerId(e.target.value)}
-                        required
                     >
                         <option value="">
-                            Selecteer een eigenaar
+                            Geen eigenaar geselecteerd
                         </option>
 
                         {owners.map((owner) => (
