@@ -355,6 +355,11 @@
           "required": true
         },
         {
+          "name": "time",
+          "type": "string",
+          "required": true
+        },
+        {
           "name": "reason",
           "type": "string",
           "required": true,
