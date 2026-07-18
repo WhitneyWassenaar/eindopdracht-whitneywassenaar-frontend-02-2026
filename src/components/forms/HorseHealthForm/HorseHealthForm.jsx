@@ -66,15 +66,9 @@ function HorseHealthForm({horse, onSaved}) {
 
     function handleChange(e) {
         const {name, value, type, checked} = e.target;
-
         setFormData(previous => ({
             ...previous,
-            [name]:
-                type === "checkbox"
-                    ? checked
-                    : type === "number"
-                        ? Number(value)
-                        : value
+            [name]: type === "checkbox" ? checked : value
         }));
     }
 
@@ -93,15 +87,6 @@ function HorseHealthForm({horse, onSaved}) {
                 );
 
             } else {
-                const data = {
-                    ...formData,
-                    userId: user.id,
-                    horseId: horse.id
-                };
-
-                console.log("data",data);
-                console.log("user", user);
-
 
                 // nieuwe gezondheidsgegevens maken
                 await api.post(
@@ -142,6 +127,9 @@ function HorseHealthForm({horse, onSaved}) {
                         name="weight"
                         value={formData.weight}
                         onChange={handleChange}
+                        min="0"
+                        max="1500"
+                        step="1"
                     />
                 </label>
             </div>
