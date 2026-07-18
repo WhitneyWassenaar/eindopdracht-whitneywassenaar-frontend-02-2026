@@ -74,6 +74,25 @@ function HorseHealthForm({horse, onSaved}) {
 
     async function handleSubmit(e) {
         e.preventDefault();
+
+        const hasHealthData =
+            formData.weight ||
+            formData.diet ||
+            formData.allergies ||
+            formData.medication ||
+            formData.lastDeworming ||
+            formData.notes ||
+            formData.vaccinated;
+
+        // niets ingevuld → niets opslaan
+        if (!hasHealthData) {
+            setMessage("");
+            if (onSaved) {
+                onSaved();
+            }
+            return;
+        }
+
         try {
             if (healthId) {
                 // bestaande gegevens aanpassen
@@ -89,8 +108,7 @@ function HorseHealthForm({horse, onSaved}) {
             } else {
 
                 // nieuwe gezondheidsgegevens maken
-                await api.post(
-                    "/horseHealths",
+                await api.post("/horseHealths",
                     {
                         ...formData,
                         userId: user.id,
