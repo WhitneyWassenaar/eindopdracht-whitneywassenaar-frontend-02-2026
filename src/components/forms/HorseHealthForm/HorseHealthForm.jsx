@@ -66,33 +66,20 @@ function HorseHealthForm({horse, onSaved}) {
 
     function handleChange(e) {
         const {name, value, type, checked} = e.target;
+
         setFormData(previous => ({
             ...previous,
-            [name]: type === "checkbox" ? checked : value
+            [name]:
+                type === "checkbox"
+                    ? checked
+                    : type === "number"
+                        ? Number(value)
+                        : value
         }));
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
-
-        const hasHealthData =
-            formData.weight ||
-            formData.diet ||
-            formData.allergies ||
-            formData.medication ||
-            formData.lastDeworming ||
-            formData.notes ||
-            formData.vaccinated;
-
-        // niets ingevuld → niets opslaan
-        if (!hasHealthData) {
-            setMessage("");
-            if (onSaved) {
-                onSaved();
-            }
-            return;
-        }
-
         try {
             if (healthId) {
                 // bestaande gegevens aanpassen
@@ -106,9 +93,19 @@ function HorseHealthForm({horse, onSaved}) {
                 );
 
             } else {
+                const data = {
+                    ...formData,
+                    userId: user.id,
+                    horseId: horse.id
+                };
+
+                console.log("data",data);
+                console.log("user", user);
+
 
                 // nieuwe gezondheidsgegevens maken
-                await api.post("/horseHealths",
+                await api.post(
+                    "/horseHealths",
                     {
                         ...formData,
                         userId: user.id,
