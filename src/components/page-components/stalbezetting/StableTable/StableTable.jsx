@@ -1,10 +1,10 @@
 // Components
-import StableRow from "../StableRow/StableRow.jsx";
+
 
 // CSS
 import './StableTable.css'
 
-function StableTable({horses, moveHorse, boxes=[], contacts=[]}) {
+function StableTable() {
     return (
         <table className="table-layout">
             <thead>
@@ -19,15 +19,7 @@ function StableTable({horses, moveHorse, boxes=[], contacts=[]}) {
             </tr>
             </thead>
             <tbody>
-            {boxes.map((box) => (
-                <StableRow
-                    key={box.id}
-                    box={box}
-                    horses={horses}
-                    moveHorse={moveHorse}
-                    contacts={contacts}
-                />
-            ))}
+
             </tbody>
         </table>
     );

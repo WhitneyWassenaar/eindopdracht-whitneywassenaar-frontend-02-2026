@@ -132,9 +132,36 @@
           "required": false
         },
         {
-          "name": "stableNumber",
+          "name": "boxId",
           "type": "number",
           "required": false
+        }
+      ],
+      "permissions": {
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
+      }
+    },
+    {
+      "name": "boxes",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "reference:users",
+          "required": true
+        },
+        {
+          "name": "boxNumber",
+          "type": "number",
+          "required": true
         }
       ],
       "permissions": {
