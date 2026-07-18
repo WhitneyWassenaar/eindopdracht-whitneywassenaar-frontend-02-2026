@@ -130,6 +130,11 @@
           "name": "trainerId",
           "type": "reference:persons",
           "required": false
+        },
+        {
+          "name": "stableNumber",
+          "type": "number",
+          "required": false
         }
       ],
       "permissions": {
