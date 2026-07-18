@@ -68,6 +68,7 @@ function CreateAppointmentForm({horse, onSaved}) {
                     professionalType: formData.professionalType,
                     professionalId: Number(formData.professionalId),
                     date: formData.date,
+                    time:formData.time,
                     reason: formData.reason
                 },
                 {
@@ -106,6 +107,19 @@ function CreateAppointmentForm({horse, onSaved}) {
                         type="date"
                         name="date"
                         value={formData.date}
+                        onChange={handleChange}
+                        required
+                    />
+                </label>
+            </div>
+
+            <div className="form-row">
+                <label>
+                    Tijd
+                    <input
+                        type="time"
+                        name="time"
+                        value={formData.time}
                         onChange={handleChange}
                         required
                     />

@@ -119,6 +119,15 @@ function HorseAppointments({horse}) {
 
     }
 
+    function dueAppointment(appointment) {
+
+        const appointmentDateTime = new Date(
+            `${appointment.date}T${appointment.time}`
+        );
+
+        return appointmentDateTime < new Date();
+    }
+
     return (
         <div className="horse-appointments">
             <h2>
@@ -156,10 +165,19 @@ function HorseAppointments({horse}) {
                     <div className="appointment-list">
                     {appointments.map((appointment)=>(
 
-                        <div key={appointment.id} className="appointment-card">
+                        <div key={appointment.id}
+                             className={dueAppointment(appointment)
+                                ? "appointment-card due"
+                                : "appointment-card"
+                        }>
 
                             <p>
                                 Datum: {appointment.date}
+                            </p>
+
+                            <p>
+                                Tijd:
+                                {appointment.time}
                             </p>
 
                             <p>
@@ -171,6 +189,8 @@ function HorseAppointments({horse}) {
                                 Professional:
                                 {getProfessionalName(appointment.professionalId)}
                             </p>
+
+
 
                             <p>
                                 Reden:
