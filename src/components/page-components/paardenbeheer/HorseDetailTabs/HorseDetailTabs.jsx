@@ -7,6 +7,7 @@ import HorseHealth from "../HorseHealth/HorseHealth.jsx";
 
 // CSS
 import './HorseDetailTabs.css';
+import HorseAppointments from "../HorseAppointments/HorseAppointments.jsx";
 
 function HorseDetailTabs({horse}) {
     const [activeTab, setActiveTab] = useState("1")
@@ -41,7 +42,8 @@ function HorseDetailTabs({horse}) {
             <div className="tab-content">
                 {activeTab === "1" && (
                     <div id="1">
-                       <HorseHealth horse={horse}/>
+                       <HorseHealth
+                           horse={horse}/>
                     </div>
                 )}
 
@@ -54,7 +56,8 @@ function HorseDetailTabs({horse}) {
 
                 {activeTab === "3" && (
                     <div id="3">
-                        Tab 3 content
+                        <HorseAppointments
+                        horse={horse}/>
                     </div>
                 )}
             </div>

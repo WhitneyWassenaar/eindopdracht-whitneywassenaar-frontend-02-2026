@@ -320,6 +320,59 @@
         "PATCH": ["user"],
         "DELETE": ["user"]
       }
+    },
+    {
+      "name": "appointments",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "reference:users",
+          "required": true
+        },
+        {
+          "name": "horseId",
+          "type": "reference:horses",
+          "required": true
+        },
+        {
+          "name": "professionalType",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "professionalId",
+          "type": "reference:persons",
+          "required": true
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "time",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "required": true,
+          "max": 500
+        }
+      ],
+      "permissions": {
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
+      }
     }
   ],
   "users": [

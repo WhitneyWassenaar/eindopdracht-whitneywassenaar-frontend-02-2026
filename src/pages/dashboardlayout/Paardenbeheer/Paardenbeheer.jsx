@@ -125,6 +125,30 @@ function Paardenbeheer() {
 
         try {
 
+            // verwijder afspraken
+            const appointmentsResponse = await api.get(
+                `/horses/${horseId}/appointments`,
+                {
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                }
+            );
+
+
+            for (const appointment of appointmentsResponse.data) {
+
+                await api.delete(
+                    `/appointments/${appointment.id}`,
+                    {
+                        headers:{
+                            Authorization:`Bearer ${token}`
+                        }
+                    }
+                );
+
+            }
+
             // verwijder gezondheidsgegevens
             const healthResponse = await api.get(
                 `/horses/${horseId}/horseHealths`,
