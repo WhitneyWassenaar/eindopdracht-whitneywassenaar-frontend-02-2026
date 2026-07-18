@@ -1,5 +1,5 @@
 // React
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 
 // Components
 import StableTable from "../../../components/page-components/stalbezetting/StableTable/StableTable.jsx";
@@ -24,6 +24,28 @@ function Stalbezetting({horses, contacts}) {
     console.log("Token:", token);
     console.log("Capacity:", capacity);
 
+    useEffect(() => {
+        async function fetchBoxes() {
+            try {
+                const response = await api.get("/boxes", {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                setBoxes(response.data);
+
+            } catch (error) {
+                console.error("Fout bij ophalen boxen:", error);
+            }
+        }
+
+        if (token) {
+            fetchBoxes();
+        }
+
+    }, [token]);
+
     async function generateBoxes() {
         try {
             const headers = {
@@ -37,7 +59,20 @@ function Stalbezetting({horses, contacts}) {
 
             const existingBoxes = boxResponse.data;
 
-            // alleen nieuwe boxen maken
+
+            // TE VEEL BOXEN VERWIJDEREN
+            const boxesToDelete = existingBoxes.filter(
+                box => box.boxNumber > capacity
+            );
+
+            for (const box of boxesToDelete) {
+                await api.delete(`/boxes/${box.id}`, {
+                    headers
+                });
+            }
+
+
+            // ONTBREKENDE BOXEN MAKEN
             for (let i = 1; i <= capacity; i++) {
 
                 const exists = existingBoxes.some(
@@ -52,11 +87,13 @@ function Stalbezetting({horses, contacts}) {
                         },
                         {
                             headers
-                        });
+                        }
+                    );
                 }
             }
 
-            // opnieuw ophalen voor tabel
+
+            // nieuwe lijst ophalen
             const updatedBoxes = await api.get("/boxes", {
                 headers
             });
