@@ -373,8 +373,36 @@
         "PATCH": ["user"],
         "DELETE": ["user"]
       }
+    },
+    {
+      "name": "stableSettings",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "reference:users",
+          "required": true
+        },
+        {
+          "name": "capacity",
+          "type": "number",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
+      }
     }
   ],
+
   "users": [
     {
       "email": "test@live.nl",
