@@ -1,7 +1,7 @@
 // CSS
 import './StableRow.css'
 
-function StableRow({box, horses,contacts}) {
+function StableRow({box, horses,contacts, updateHorse}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
     const horse = horses?.find(
@@ -45,7 +45,25 @@ function StableRow({box, horses,contacts}) {
             </td>
             <td>Datum</td>
             <td>{status}</td>
-            <td>Acties</td>
+            <td>
+                {horse ? (
+                <>
+                    <button>
+                        Verplaatsen
+                    </button>
+
+                    <button
+                        onClick={() => updateHorse(horse)}
+                    >
+                        Naar wei
+                    </button>
+                </>
+            ) : (
+                <button>
+                    Paard plaatsen
+                </button>
+            )}
+            </td>
         </tr>
     );
 }

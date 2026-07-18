@@ -57,7 +57,9 @@ function Stalbezetting({horses, contacts}) {
                 headers
             });
 
-            const existingBoxes = boxResponse.data;
+            const existingBoxes = boxResponse.data.filter(
+                box => box.userId === user.id
+            );
 
 
             // TE VEEL BOXEN VERWIJDEREN
@@ -126,6 +128,31 @@ function Stalbezetting({horses, contacts}) {
         }
     }
 
+    async function moveHorseToPasture(horse) {
+        try {
+
+            await api.patch(
+                `/horses/${horse.id}`,
+                {
+                    boxId: null,
+                    location: "wei"
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            console.log("Paard naar wei:", horse.name);
+
+            window.location.reload();
+
+        } catch(error) {
+            console.error(error);
+        }
+    }
+
     return (
         <>
             <div className="stalbezetting-page">
@@ -155,6 +182,7 @@ function Stalbezetting({horses, contacts}) {
                 boxes={boxes}
                 horses={horses}
                 contacts={contacts}
+                updateHorse={moveHorseToPasture}
                 />
             </div>
         </>
