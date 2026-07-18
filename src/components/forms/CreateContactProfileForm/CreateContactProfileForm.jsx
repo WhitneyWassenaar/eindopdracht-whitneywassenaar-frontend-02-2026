@@ -114,7 +114,7 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
                         onChange={(e) => setEmail(e.target.value)}
                         id={"email"}
                         type={"email"}
-                        maxLength={20}
+                        maxLength={50}
                         placeholder={"Voer email in"}
                         required
                     />

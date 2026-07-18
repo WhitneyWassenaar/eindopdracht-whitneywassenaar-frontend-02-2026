@@ -1,14 +1,20 @@
 // React
 import {useContext, useEffect, useState} from "react";
 
-// CSS
-import './Zorgtaken.css'
-import api from "../../../api/axios.js";
-import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
+// Components
 import CareTasksTable from "../../../components/page-components/zorgtaken/CareTasksTable/CareTasksTable.jsx";
 import CreateCareTaskForm from "../../../components/forms/CreateCareTaskForm/CreateCareTaskForm.jsx";
 import Button from "../../../components/ui/Button/Button.jsx";
 import AssignCareTaskForm from "../../../components/forms/AssignCareTaskForm/AssignCareTaskForm.jsx";
+
+// Context / Hooks
+import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
+
+// Api
+import api from "../../../api/axios.js";
+
+// CSS
+import './Zorgtaken.css'
 
 function Zorgtaken() {
     const {token, user} = useContext(AuthContext);
@@ -58,7 +64,6 @@ function Zorgtaken() {
                 console.error(error);
             }
         }
-
         getCareTasks();
 
     }, [token, user])
@@ -72,7 +77,6 @@ function Zorgtaken() {
         <>
             <div className="dashboard-page">
                 <h1>Zorgtaken</h1>
-
 
                 <CareTasksTable
                     careTasks={careTasks}

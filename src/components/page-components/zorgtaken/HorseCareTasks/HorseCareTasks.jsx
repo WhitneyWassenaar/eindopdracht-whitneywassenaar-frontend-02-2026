@@ -20,8 +20,7 @@ function HorseCareTasks({horse}) {
         async function getAssignments() {
             try {
 
-                const response = await api.get(
-                    `/horses/${horse.id}/careTaskAssignments`,
+                const response = await api.get(`/horses/${horse.id}/careTaskAssignments`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`
@@ -32,8 +31,7 @@ function HorseCareTasks({horse}) {
                 const assignments = response.data;
                 console.log("Assignments:", assignments);
 
-                const tasksResponse = await api.get(
-                    `/careTasks`,
+                const tasksResponse = await api.get(`/careTasks`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`
@@ -52,7 +50,7 @@ function HorseCareTasks({horse}) {
 
                 setAssignments(assignmentsWithTasks);
 
-            } catch(error) {
+            } catch (error) {
                 console.error(error);
             }
         }
@@ -62,14 +60,13 @@ function HorseCareTasks({horse}) {
     }, [horse, token]);
 
     async function completeTask(id) {
-        await api.patch(
-            `/careTaskAssignments/${id}`,
+        await api.patch(`/careTaskAssignments/${id}`,
             {
                 completed: true
             },
             {
-                headers:{
-                    Authorization:`Bearer ${token}`
+                headers: {
+                    Authorization: `Bearer ${token}`
                 }
             }
         );
@@ -77,17 +74,14 @@ function HorseCareTasks({horse}) {
         setAssignments(previous =>
             previous.map(task =>
                 task.id === id
-                    ? {...task, completed:true}
+                    ? {...task, completed: true}
                     : task
             )
         );
     }
 
-
-
     return (
         <div className="horse-caretasks">
-
             <h2>
                 Zorgtaken
             </h2>
@@ -97,53 +91,51 @@ function HorseCareTasks({horse}) {
                     Geen zorgtaken toegewezen.
                 </p>
             )}
-<div className="caretask-list">
-            {assignments
-                .sort((a, b) => {
+            <div className="caretask-list">
+                {assignments
+                    .sort((a, b) => {
 
-                    // Eerst open taken
-                    if (a.completed !== b.completed) {
-                        return a.completed ? 1 : -1;
-                    }
-
-                    // Daarna sorteren op einddatum (oudste eerst)
-                    return new Date(a.dueDate) - new Date(b.dueDate);
-
-                }).map((assignment)=>(
-
-                <div
-                    key={assignment.id}
-                    className="caretask-card"
-                >
-                    <h3>
-                        {assignment.careTask?.title
-                            || "Zorgtaak"}
-                    </h3>
-                    <p>
-                        {assignment.careTask?.description}
-                    </p>
-                    <p>
-                        Einddatum: {assignment.dueDate}
-                    </p>
-                    <p>
-                        Status:{" "}
-                        {
-                            assignment.completed
-                                ? "Voltooid"
-                                : "Open"
+                        if (a.completed !== b.completed) {
+                            return a.completed ? 1 : -1;
                         }
-                    </p>
 
-                    {!assignment.completed && (
-                        <button
-                            onClick={() => completeTask(assignment.id)}
+                        return new Date(a.dueDate) - new Date(b.dueDate);
+
+                    }).map((assignment) => (
+
+                        <div
+                            key={assignment.id}
+                            className="caretask-card"
                         >
-                            Voltooien
-                        </button>
-                    )}
-                </div>
-            ))}
-        </div>
+                            <h3>
+                                {assignment.careTask?.title
+                                    || "Zorgtaak"}
+                            </h3>
+                            <p>
+                                {assignment.careTask?.description}
+                            </p>
+                            <p>
+                                Einddatum: {assignment.dueDate}
+                            </p>
+                            <p>
+                                Status:{" "}
+                                {
+                                    assignment.completed
+                                        ? "Voltooid"
+                                        : "Open"
+                                }
+                            </p>
+
+                            {!assignment.completed && (
+                                <button
+                                    onClick={() => completeTask(assignment.id)}
+                                >
+                                    Voltooien
+                                </button>
+                            )}
+                        </div>
+                    ))}
+            </div>
         </div>
     );
 }
