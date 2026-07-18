@@ -1,15 +1,17 @@
 // React
 import {useContext, useEffect, useState} from "react";
 
+// Components
+import CreateAppointmentForm from "../../../forms/CreateAppointmentForm/CreateAppointmentForm.jsx";
+
 // Context / Hooks
 import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
-// Data
 
 // Api
 import api from "../../../../api/axios.js";
 
 // CSS
-import "./HorseAppointments.css";
+
 
 function HorseAppointments({horse}) {
     const {token} = useContext(AuthContext);
@@ -66,8 +68,20 @@ function HorseAppointments({horse}) {
             {showForm && (
                 <CreateAppointmentForm
                     horse={horse}
-                    setShowForm={setShowForm}
-                    setAppointments={setAppointments}
+                    onSaved={async () => {
+
+                        const response = await api.get(`/horses/${horse.id}/appointments`,
+                            {
+                                headers:{
+                                    Authorization:`Bearer ${token}`
+                                }
+                            }
+                        );
+
+                        setAppointments(response.data);
+                        setShowForm(false);
+
+                    }}
                 />
             )}
 
