@@ -10,6 +10,9 @@ import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
 // Api
 import api from "../../../../api/axios.js";
 
+// CSS
+import "./HorseAppointments.css";
+
 function HorseAppointments({horse}) {
     const {token,user} = useContext(AuthContext);
 
@@ -123,17 +126,9 @@ function HorseAppointments({horse}) {
             </h2>
 
             {appointments.length === 0 && !showForm &&(
-                <>
                     <p>
                         Geen afspraken gepland.
                     </p>
-
-                    <button
-                        onClick={() => setShowForm(true)}
-                    >
-                        Nieuwe afspraak
-                    </button>
-                </>
             )}
 
             {showForm && (
@@ -156,34 +151,53 @@ function HorseAppointments({horse}) {
                 />
             )}
 
-            {appointments.map((appointment)=>(
-                <div key={appointment.id}>
-                    <p>
-                        Datum: {appointment.date}
-                    </p>
+            {!showForm && (
+                <>
+                    <div className="appointment-list">
+                    {appointments.map((appointment)=>(
 
-                    <p>
-                        Categorie:
-                        {appointment.professionalType}
-                    </p>
+                        <div key={appointment.id} className="appointment-card">
 
-                    <p>
-                        Professional:
-                        {getProfessionalName(appointment.professionalId)}
-                    </p>
+                            <p>
+                                Datum: {appointment.date}
+                            </p>
 
-                    <p>
-                        Reden:
-                        {appointment.reason}
-                    </p>
+                            <p>
+                                Categorie:
+                                {appointment.professionalType}
+                            </p>
 
-                    <button
-                        onClick={() => deleteAppointment(appointment.id)}
-                    >
-                        Afspraak verwijderen
-                    </button>
-                </div>
-            ))}
+                            <p>
+                                Professional:
+                                {getProfessionalName(appointment.professionalId)}
+                            </p>
+
+                            <p>
+                                Reden:
+                                {appointment.reason}
+                            </p>
+
+
+                            <button
+                                onClick={() => deleteAppointment(appointment.id)}
+                            >
+                                Afspraak verwijderen
+                            </button>
+
+                        </div>
+
+                    ))}
+                    </div>
+                </>
+            )}
+
+            {!showForm && (
+                <button
+                    onClick={() => setShowForm(true)}
+                >
+                    Nieuwe afspraak toevoegen
+                </button>
+            )}
         </div>
     );
 }
