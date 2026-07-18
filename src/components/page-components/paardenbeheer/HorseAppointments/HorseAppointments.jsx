@@ -10,14 +10,12 @@ import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
 // Api
 import api from "../../../../api/axios.js";
 
-// CSS
-
-
 function HorseAppointments({horse}) {
-    const {token} = useContext(AuthContext);
+    const {token,user} = useContext(AuthContext);
 
     const [appointments, setAppointments] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [contacts,setContacts] = useState([]);
 
     useEffect(() => {
         if(!horse || !token) return;
@@ -44,6 +42,79 @@ function HorseAppointments({horse}) {
         getAppointments();
 
     }, [horse, token]);
+
+    useEffect(() => {
+
+        if(!token) return;
+
+
+        async function getContacts(){
+
+            try {
+
+                const response = await api.get(`/users/${user.id}/persons`,
+                    {
+                        headers:{
+                            Authorization:`Bearer ${token}`
+                        }
+                    }
+                );
+
+                setContacts(response.data);
+
+            } catch(error){
+                console.error(error);
+            }
+
+        }
+        getContacts();
+    }, [token]);
+
+    function getProfessionalName(professionalId){
+
+        const professional = contacts.find(
+            contact => Number(contact.id) === Number(professionalId)
+        );
+
+
+        if(!professional){
+            return "Onbekend";
+        }
+
+
+        return `${professional.firstName} ${professional.lastName}`;
+
+    }
+
+    async function deleteAppointment(id) {
+
+        if(!window.confirm("Weet je zeker dat je deze afspraak wilt verwijderen?"))
+            return;
+
+
+        try {
+
+            await api.delete(`/appointments/${id}`,
+                {
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                }
+            );
+
+
+            setAppointments(previous =>
+                previous.filter(
+                    appointment => appointment.id !== id
+                )
+            );
+
+
+        } catch(error){
+            console.error(error);
+        }
+
+    }
 
     return (
         <div className="horse-appointments">
@@ -92,14 +163,25 @@ function HorseAppointments({horse}) {
                     </p>
 
                     <p>
-                        Professional:
+                        Categorie:
                         {appointment.professionalType}
+                    </p>
+
+                    <p>
+                        Professional:
+                        {getProfessionalName(appointment.professionalId)}
                     </p>
 
                     <p>
                         Reden:
                         {appointment.reason}
                     </p>
+
+                    <button
+                        onClick={() => deleteAppointment(appointment.id)}
+                    >
+                        Afspraak verwijderen
+                    </button>
                 </div>
             ))}
         </div>
