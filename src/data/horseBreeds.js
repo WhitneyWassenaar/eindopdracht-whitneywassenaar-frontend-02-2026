@@ -12,6 +12,7 @@ const horseBreeds = [
     "Hannoveraan",
     "Ijslander",
     "KWPN",
+    "Mustang",
     "NRPS",
     "Quarter Horse",
     "Tinker"
