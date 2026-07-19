@@ -88,19 +88,23 @@ function Stalbezetting() {
                 box => box.userId === user?.id
             );
 
-            const horsesInBoxesToDelete = horses.filter(horse =>
-                horse.boxId &&
-                existingBoxes.some(
-                    box =>
-                        Number(box.id) === Number(horse.boxId) &&
-                        box.boxNumber > capacity
+            const occupiedBoxesAfterCapacity = existingBoxes.filter(box =>
+                box.boxNumber > capacity &&
+                horses.some(horse =>
+                    Number(horse.boxId) === Number(box.id)
                 )
             );
 
-            if (horsesInBoxesToDelete.length > 0) {
+            if (occupiedBoxesAfterCapacity.length > 0) {
+
+                const occupiedBoxNumbers = occupiedBoxesAfterCapacity
+                    .map(box => box.boxNumber)
+                    .join(", ");
+
                 alert(
-                    "Kan boxen niet verminderen. Verplaats of koppel eerst de paarden los uit deze boxen."
+                    `Kan capaciteit niet verlagen. De volgende boxen bevatten nog paarden: ${occupiedBoxNumbers}. Verplaats of koppel eerst deze paarden los.`
                 );
+
                 return;
             }
 
