@@ -104,7 +104,7 @@ function StableRow({box, horses,contacts, fromBoxToPasture, fromPastureToBox}) {
                             Paard plaatsen
                         </option>
 
-                        {horses?.filter(horse => horse.location === "wei")
+                        {horses?.filter(horse => !horse.boxId)
                             .map(horse => (
                                 <option
                                     key={horse.id}
