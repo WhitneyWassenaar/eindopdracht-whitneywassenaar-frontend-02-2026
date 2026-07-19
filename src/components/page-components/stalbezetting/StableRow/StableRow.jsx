@@ -17,11 +17,9 @@ function StableRow({box, horses,contacts, fromBoxToPasture, fromPastureToBox}) {
     console.log("Gevonden paard voor deze box:", horse);
     console.log(
         "BOX:",
-        box.boxNumber,
-        "HORSE:",
-        horse?.name,
-        "tijd:",
-        new Date().toLocaleTimeString()
+        box.id,
+        "paarden in deze box:",
+        horses.filter(horse => Number(horse.boxId) === Number(box.id))
     );
 
     const status = !horse

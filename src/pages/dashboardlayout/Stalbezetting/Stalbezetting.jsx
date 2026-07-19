@@ -30,6 +30,8 @@ function Stalbezetting() {
                 };
 
                 const horsesResponse = await api.get("/horses", { headers });
+
+                console.log("PAARDEN UIT API:", horsesResponse.data);
                 setHorses(horsesResponse.data);
 
                 const contactsResponse = await api.get("/persons", { headers });
@@ -153,10 +155,14 @@ function Stalbezetting() {
     }
 
     async function fromBoxToPasture(horse) {
+        console.log("NAAR WEI:", horse);
+
+        console.log("PAARD ID:", horse.id);
+        console.log("PAARD NAAM:", horse.name);
+
         try {
 
-            await api.patch(
-                `/horses/${horse.id}`,
+            const response = await api.patch(`/horses/${horse.id}`,
                 {
                     location: "wei"
                 },
@@ -167,11 +173,17 @@ function Stalbezetting() {
                 }
             );
 
+            console.log("BACKEND RESPONSE:", response.data);
+
+            console.log("RESPONSE ID:", response.data.id);
+            console.log("RESPONSE NAAM:", response.data.name);
+            console.log("RESPONSE LOCATION:", response.data.location);
+
             setHorses(prevHorses =>
-                prevHorses.map(horse =>
-                    horse.id === horse.id
-                        ? { ...horse, location: "wei" }
-                        : horse
+                prevHorses.map(h =>
+                    h.id === horse.id
+                        ? { ...h, location: "wei" }
+                        : h
                 )
             );
 
@@ -195,10 +207,10 @@ function Stalbezetting() {
             );
 
             setHorses(prevHorses =>
-                prevHorses.map(horse =>
-                    horse.id === horse.id
-                        ? { ...horse, location: "stal" }
-                        : horse
+                prevHorses.map(h =>
+                    h.id === horse.id
+                        ? { ...h, location: "stal" }
+                        : h
                 )
             );
 
