@@ -25,6 +25,25 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
         setError("");
 
         try {
+
+            const existingTasksResponse = await api.get("/careTasks",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            const taskExists = existingTasksResponse.data.some(task =>
+                task.title.toLowerCase() === title.toLowerCase()
+            );
+
+            if (taskExists) {
+                setError("Deze zorgtaak bestaat al.");
+                return;
+            }
+
+
             const response = await api.post("/careTasks",
                 {
                     userId: user.id,
@@ -37,6 +56,8 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
                     }
                 }
             );
+
+
 
             const newCareTask = response.data;
             addCareTask(newCareTask);
