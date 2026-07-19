@@ -153,6 +153,7 @@ function Stalbezetting({horses, contacts}) {
         }
     }
 
+
     return (
         <>
             <div className="stalbezetting-page">
@@ -182,7 +183,8 @@ function Stalbezetting({horses, contacts}) {
                 boxes={boxes}
                 horses={horses}
                 contacts={contacts}
-                updateHorse={moveHorseToPasture}
+                moveHorseToPasture={moveHorseToPasture}
+
                 />
             </div>
         </>

@@ -4,7 +4,7 @@ import StableRow from "../StableRow/StableRow.jsx";
 // CSS
 import './StableTable.css'
 
-function StableTable({boxes, horses, contacts, updateHorse}) {
+function StableTable({boxes, horses, contacts, updateHorse, moveHorseToPasture}) {
     return (
         <table className="table-layout">
             <thead>
@@ -26,6 +26,7 @@ function StableTable({boxes, horses, contacts, updateHorse}) {
                     horses={horses}
                     contacts={contacts}
                     updateHorse={updateHorse}
+                    moveHorseToPasture={moveHorseToPasture}
                 />
             ))}
             </tbody>
