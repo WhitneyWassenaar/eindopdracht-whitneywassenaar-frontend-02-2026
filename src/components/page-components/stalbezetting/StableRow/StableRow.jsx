@@ -27,7 +27,7 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
 
 
     return (
-        <tr className="stablerow-layout">
+        <tr className={!horse?.active ? "stablerow-layout inactive-row" : "stablerow-layout"}>
             <td>{box.boxNumber}</td>
             <td>
                 {horse ? (
@@ -45,6 +45,7 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
             </td>
 
             <td>{horse ? horse.name : "-"}</td>
+
             <td>
                 {horse
                 ? owner
@@ -84,7 +85,7 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
                             Paard plaatsen
                         </option>
 
-                        {horses?.filter(horse => !horse.boxId)
+                        {horses?.filter(horse => !horse.boxId && horse.active)
                             .map(horse => (
                                 <option
                                     key={horse.id}
