@@ -1,5 +1,5 @@
 // React
-import {useContext} from "react";
+import {useContext,useEffect,useState} from "react";
 
 // Context
 import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
@@ -9,11 +9,63 @@ import PaardenverdelingCard from '../../../components/page-components/dashboard/
 import ZorgtakenCard from '../../../components/page-components/dashboard/ZorgtakenCard/ZorgtakenCard.jsx';
 import AfsprakenCard from '../../../components/page-components/dashboard/AfsprakenCard/AfsprakenCard.jsx';
 
+// Api
+import api from "../../../api/axios.js";
+
 // CSS
 import './Dashboard.css'
 
+
 function Dashboard() {
-    const { user } = useContext(AuthContext);
+    const { user, token } = useContext(AuthContext);
+
+    const [horses, setHorses] = useState([]);
+    const [boxes, setBoxes] = useState([]);
+
+    useEffect(() => {
+
+        async function fetchDashboardData(){
+
+            try {
+
+                const headers = {
+                    Authorization: `Bearer ${token}`
+                };
+
+
+                const horsesResponse = await api.get("/horses", {
+                    headers
+                });
+
+                setHorses(horsesResponse.data);
+
+
+                const boxesResponse = await api.get("/boxes", {
+                    headers
+                });
+
+                setBoxes(
+                    boxesResponse.data.filter(
+                        box => box.userId === user.id
+                    )
+                );
+
+
+            } catch(error){
+                console.error(
+                    "Dashboard data ophalen mislukt:",
+                    error
+                );
+            }
+
+        }
+
+
+        if(token && user){
+            fetchDashboardData();
+        }
+
+    }, [token, user]);
 
 
 
@@ -30,7 +82,9 @@ function Dashboard() {
 
 
                 <div className="dashboard-card-container">
-                    <PaardenverdelingCard/>
+                    <PaardenverdelingCard
+                    horses={horses}
+                    boxes={boxes}/>
                     <ZorgtakenCard/>
                     <AfsprakenCard/>
                 </div>
