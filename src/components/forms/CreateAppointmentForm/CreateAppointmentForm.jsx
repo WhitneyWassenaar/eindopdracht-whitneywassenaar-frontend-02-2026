@@ -162,6 +162,10 @@ function CreateAppointmentForm({horse, onSaved}) {
                             Hoefsmid
                         </option>
 
+                        <option value="Trainer">
+                            Trainer
+                        </option>
+
                     </select>
 
                 </label>

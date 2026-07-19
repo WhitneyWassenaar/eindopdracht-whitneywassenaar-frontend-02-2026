@@ -1,7 +1,17 @@
 // Components
 import DashboardCard from '../DashboardCard/DashboardCard.jsx';
 
-function PaardenverdelingCard() {
+function PaardenverdelingCard({horses,boxes}) {
+    const stableCapacity = boxes?.length || 0;
+
+    const horsesInStable = horses?.filter(
+        horse => horse.location === "stal"
+    ).length || 0;
+
+    const horsesInPasture = horses?.filter(
+        horse => horse.location === "wei"
+    ).length || 0;
+
 
     return (
         <DashboardCard
@@ -10,15 +20,15 @@ function PaardenverdelingCard() {
             <ul className="paardenverdeling-list">
                 <li>
                     <span>Stal capaciteit: </span>
-                    <strong>10</strong>
+                    <strong>{stableCapacity}</strong>
                 </li>
                 <li>
                     <span>Paarden op stal: </span>
-                    <strong>10</strong>
+                    <strong>{horsesInStable}</strong>
                 </li>
                 <li>
                     <span>Paarden op de wei: </span>
-                    <strong>10</strong>
+                    <strong>{horsesInPasture}</strong>
                 </li>
             </ul>
         </DashboardCard>
