@@ -1,7 +1,7 @@
 // CSS
 import './StableRow.css'
 
-function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, placeHorseInBox}) {
+function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, placeHorseInBox, removeHorseFromBox}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
     const horse = horses?.find(
@@ -97,6 +97,14 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
 
                     </select>
             )}
+
+                {horse && (
+                    <button
+                        onClick={() => removeHorseFromBox(horse)}
+                    >
+                        Loskoppelen
+                    </button>
+                )}
             </td>
         </tr>
     );

@@ -247,6 +247,32 @@ function Stalbezetting() {
         }
     }
 
+    async function removeHorseFromBox(horse) {
+        try {
+            await api.patch(`/horses/${horse.id}`, {
+                boxId: null
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            setHorses(prevHorses =>
+                prevHorses.map(h =>
+                    h.id === horse.id
+                        ? {
+                            ...h,
+                            boxId: null
+                        }
+                        : h
+                )
+            );
+
+        } catch(error) {
+            console.error("Paard loskoppelen mislukt:", error);
+        }
+    }
+
 
     return (
         <>
@@ -281,6 +307,7 @@ function Stalbezetting() {
                 fromPastureToBox={fromPastureToBox}
                 setHorses={setHorses}
                 placeHorseInBox={placeHorseInBox}
+                removeHorseFromBox={removeHorseFromBox}
 
                 />
             </div>
