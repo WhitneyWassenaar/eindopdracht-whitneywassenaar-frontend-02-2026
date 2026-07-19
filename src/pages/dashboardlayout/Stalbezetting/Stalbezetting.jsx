@@ -330,7 +330,8 @@ function Stalbezetting() {
     async function removeHorseFromBox(horse) {
         try {
             await api.patch(`/horses/${horse.id}`, {
-                boxId: null
+                boxId: null,
+
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -350,6 +351,34 @@ function Stalbezetting() {
 
         } catch(error) {
             console.error("Paard loskoppelen mislukt:", error);
+        }
+    }
+
+    async function updateHorseDates(horse, field, value) {
+        try {
+
+            await api.patch(`/horses/${horse.id}`, {
+                [field]: value
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+
+            setHorses(prev =>
+                prev.map(h =>
+                    h.id === horse.id
+                        ? {
+                            ...h,
+                            [field]: value
+                        }
+                        : h
+                )
+            );
+
+        } catch(error) {
+            console.error("Datum aanpassen mislukt:", error);
         }
     }
 
@@ -391,6 +420,7 @@ function Stalbezetting() {
                 moveHorseToBox={moveHorseToBox}
                 setMovingHorse={setMovingHorse}
                 movingHorse={movingHorse}
+                updateHorseDates={updateHorseDates}
 
                 />
             </div>

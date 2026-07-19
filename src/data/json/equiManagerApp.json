@@ -107,6 +107,16 @@
           "required": true
         },
         {
+          "name": "boxStartDate",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "boxEndDate",
+          "type": "string",
+          "required": false
+        },
+        {
           "name": "photo",
           "type": "string",
           "required": false

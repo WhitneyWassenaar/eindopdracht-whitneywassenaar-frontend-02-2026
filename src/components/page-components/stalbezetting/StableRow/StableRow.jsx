@@ -1,7 +1,7 @@
 // CSS
 import './StableRow.css'
 
-function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, placeHorseInBox, removeHorseFromBox, setMovingHorse, movingHorse, moveHorseToBox,boxes}) {
+function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, placeHorseInBox, removeHorseFromBox, setMovingHorse, movingHorse, moveHorseToBox,boxes, updateHorseDates}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
     const horse = horses?.find(
@@ -56,7 +56,39 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
                 : "-"
             }
             </td>
-            <td>Datum</td>
+
+            <td>
+                {horse ? (
+                    <>
+                        <input
+                            type="date"
+                            value={horse.boxStartDate || ""}
+                            onChange={(e) =>
+                                updateHorseDates(
+                                    horse,
+                                    "boxStartDate",
+                                    e.target.value
+                                )
+                            }
+                        />
+
+                        <input
+                            type="date"
+                            value={horse.boxEndDate || ""}
+                            onChange={(e) =>
+                                updateHorseDates(
+                                    horse,
+                                    "boxEndDate",
+                                    e.target.value
+                                )
+                            }
+                        />
+                    </>
+                ) : (
+                    "-"
+                )}
+            </td>
+
             <td>{status}</td>
             <td>
                 {horse ? (
