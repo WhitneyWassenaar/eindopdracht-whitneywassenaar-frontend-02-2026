@@ -59,8 +59,12 @@ function Stalbezetting() {
                     }
                 });
 
-                setBoxes(
-                    response.data.filter(box => box.userId === user?.id))
+                const userBoxes = response.data.filter(
+                    box => box.userId === user?.id
+                );
+
+                setBoxes(userBoxes);
+                setCapacity(userBoxes.length);
 
             } catch (error) {
                 console.error("Fout bij ophalen boxen:", error);
