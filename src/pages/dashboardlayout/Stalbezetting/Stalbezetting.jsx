@@ -219,6 +219,34 @@ function Stalbezetting() {
         }
     }
 
+    async function placeHorseInBox(horseId, boxId) {
+        try {
+            await api.patch(`/horses/${horseId}`, {
+                boxId: Number(boxId),
+                location: "stal"
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            setHorses(prevHorses =>
+                prevHorses.map(h =>
+                    h.id === Number(horseId)
+                        ? {
+                            ...h,
+                            boxId: Number(boxId),
+                            location: "stal"
+                        }
+                        : h
+                )
+            );
+
+        } catch (error) {
+            console.error("Paard plaatsen mislukt:", error);
+        }
+    }
+
 
     return (
         <>
@@ -251,6 +279,8 @@ function Stalbezetting() {
                 contacts={contacts}
                 fromBoxToPasture={fromBoxToPasture}
                 fromPastureToBox={fromPastureToBox}
+                setHorses={setHorses}
+                placeHorseInBox={placeHorseInBox}
 
                 />
             </div>

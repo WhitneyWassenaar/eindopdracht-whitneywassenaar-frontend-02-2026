@@ -1,11 +1,7 @@
 // CSS
 import './StableRow.css'
-import api from "../../../../api/axios.js";
-import {useContext} from "react";
-import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
 
-function StableRow({box, horses,contacts, fromBoxToPasture, fromPastureToBox}) {
-    const {token} = useContext(AuthContext);
+function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
     const horse = horses?.find(
@@ -28,23 +24,7 @@ function StableRow({box, horses,contacts, fromBoxToPasture, fromPastureToBox}) {
             ? "Stal"
             : "Wei";
 
-    async function placeHorseInBox(horseId, boxId) {
-        try {
-            await api.patch(`/horses/${horseId}`, {
-                boxId: Number(boxId),
-                location: "stal"
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
 
-            window.location.reload();
-
-        } catch (error) {
-            console.error("Paard plaatsen mislukt:", error);
-        }
-    }
 
     return (
         <tr className="stablerow-layout">
