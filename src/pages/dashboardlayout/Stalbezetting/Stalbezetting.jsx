@@ -164,7 +164,6 @@ function Stalbezetting() {
             await api.patch(
                 `/horses/${horse.id}`,
                 {
-                    boxId: null,
                     location: "wei"
                 },
                 {

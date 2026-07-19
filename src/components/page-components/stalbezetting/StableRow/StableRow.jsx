@@ -8,11 +8,7 @@ import {useContext} from "react";
 import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
 
 function StableRow({box, horses,contacts, moveHorseToPasture}) {
-    const {token,user} = useContext(AuthContext);
-    console.log("Huidige box:", box.id, box.boxNumber);
-
-    console.log("paarden",horses);
-
+    const {token} = useContext(AuthContext);
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
     const horse = horses?.find(
