@@ -5,7 +5,6 @@
     justify-content: center;
     padding: 2rem;
     width: 100%;
-    border: 1px red solid;
 }
 
 .contact-form-container {
@@ -13,7 +12,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    border: 1px yellow solid;
     padding: 40px;
     max-width:700px;
     width: 100%;

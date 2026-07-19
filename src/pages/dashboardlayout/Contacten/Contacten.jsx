@@ -10,9 +10,6 @@ import CreateContactProfileForm from "../../../components/forms/CreateContactPro
 // Context / hooks
 import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
 
-// Data
-// import projectId from '../../../data/projectId.js';
-
 // CSS
 import './Contacten.css'
 import api from "../../../api/axios.js";
@@ -53,39 +50,6 @@ function Contacten() {
             }
         }
 
-// useEffect(() => {
-//     if (!token) return;
-//
-//     async function getContacts() {
-//         try {
-//             const response = await fetch(
-//                 "https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons",
-//                 {
-//                     headers: {
-//                         "novi-education-project-id": projectId,
-//                         "Authorization": `Bearer ${token}`,
-//                     },
-//                 }
-//             );
-//
-//             console.log("Status:", response.status);
-//
-//             const responseText = await response.text();
-//
-//             console.log("Backend antwoord:", responseText);
-//
-//             if (!response.ok) {
-//                 return;
-//             }
-//
-//             const data = JSON.parse(responseText);
-//
-//             setContacts(data);
-//
-//         } catch (error) {
-//             console.error(error);
-//         }
-//     }
 
         async function getHorses() {
             try {
@@ -110,37 +74,6 @@ function Contacten() {
 
     }, [token, user]);
 
-
-//     async function getHorses() {
-//         try {
-//             const response = await fetch(
-//                 "https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses",
-//                 {
-//                     headers: {
-//                         "novi-education-project-id": projectId,
-//                         "Authorization": `Bearer ${token}`,
-//                     },
-//                 }
-//             );
-//
-//             const data = await response.json();
-//             console.log("Horses:", data);
-//             setHorses(data);
-//
-//         } catch (error) {
-//             console.error(error);
-//         }
-//     }
-//
-//     getContacts();
-//     getHorses();
-//
-// }
-//
-// ,
-// [token]
-// )
-// ;
 
     async function toggleContactActive(contact) {
         try {
@@ -172,50 +105,12 @@ function Contacten() {
         }
     }
 
-// async function toggleContactActive(contact) {
-//     try {
-//         const response = await fetch(
-//             `https://novi-backend-api-wgsgz.ondigitalocean.app/api/persons/${contact.id}`,
-//             {
-//                 method: "PATCH",
-//                 headers: {
-//                     "novi-education-project-id": projectId,
-//                     "Authorization": `Bearer ${token}`,
-//                     "Content-Type": "application/json",
-//                 },
-//                 body: JSON.stringify({
-//                     active: !contact.active
-//                 }),
-//             }
-//         );
-//
-//         if (!response.ok) {
-//             console.error("Status wijzigen mislukt");
-//             return;
-//         }
-//
-//         setContacts(previousContacts =>
-//             previousContacts.map(previousContact =>
-//                 previousContact.id === contact.id
-//                     ? {
-//                         ...previousContact,
-//                         active: !previousContact.active
-//                     }
-//                     : previousContact
-//             )
-//         );
-//
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
 
     async function deleteContact(contactId) {
         if (!window.confirm("Weet je zeker dat je dit contact wilt verwijderen?"))
             return;
 
         try {
-            // 1. Eerst paardenprofielen loskoppelen
             for (const horse of horses) {
                 if (
                     Number(horse.ownerId) === Number(contactId) ||
@@ -251,7 +146,7 @@ function Contacten() {
 
             }
 
-// Frontend direct bijwerken
+
             setHorses(previousHorses =>
                 previousHorses.map(horse => ({
                     ...horse,
@@ -271,7 +166,7 @@ function Contacten() {
                             : horse.trainerId,
                 }))
             );
-// 2. Contact verwijderen
+
             await api.delete(
                 `/persons/${contactId}`,
                 {
