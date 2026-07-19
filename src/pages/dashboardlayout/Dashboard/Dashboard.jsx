@@ -21,43 +21,45 @@ function Dashboard() {
 
     const [horses, setHorses] = useState([]);
     const [boxes, setBoxes] = useState([]);
+    const [careTasks, setCareTasks] = useState([]);
 
     useEffect(() => {
 
-        async function fetchDashboardData(){
-
+        async function fetchDashboardData() {
             try {
-
                 const headers = {
                     Authorization: `Bearer ${token}`
                 };
 
+                const horsesResponse = await api.get("/horses", { headers });
 
-                const horsesResponse = await api.get("/horses", {
-                    headers
-                });
+                const horses = horsesResponse.data;
+                setHorses(horses);
 
-                setHorses(horsesResponse.data);
-
-
-                const boxesResponse = await api.get("/boxes", {
-                    headers
-                });
-
+                const boxesResponse = await api.get("/boxes", { headers });
                 setBoxes(
                     boxesResponse.data.filter(
                         box => box.userId === user.id
                     )
                 );
 
+                const careTaskAssignmentResponse = await api.get(
+                    "/careTaskAssignments",
+                    { headers }
+                );
 
-            } catch(error){
+                setCareTasks(
+                    careTaskAssignmentResponse.data.filter(task =>
+                        horses.some(horse => horse.id === task.horseId)
+                    )
+                );
+
+            } catch (error) {
                 console.error(
                     "Dashboard data ophalen mislukt:",
                     error
                 );
             }
-
         }
 
 
@@ -66,8 +68,6 @@ function Dashboard() {
         }
 
     }, [token, user]);
-
-
 
     return (
         <>
@@ -85,7 +85,8 @@ function Dashboard() {
                     <PaardenverdelingCard
                     horses={horses}
                     boxes={boxes}/>
-                    <ZorgtakenCard/>
+                    <ZorgtakenCard
+                    tasks={careTasks}/>
                     <AfsprakenCard/>
                 </div>
             </div>
