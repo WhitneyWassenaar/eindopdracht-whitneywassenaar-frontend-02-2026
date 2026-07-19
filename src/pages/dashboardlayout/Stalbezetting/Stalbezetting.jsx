@@ -17,6 +17,7 @@ function Stalbezetting() {
     const [boxes, setBoxes] = useState([]);
     const [horses, setHorses] = useState([]);
     const [contacts, setContacts] = useState([]);
+    const [movingHorse, setMovingHorse] = useState(null);
 
     function handleCapacityChange(e) {
         setCapacity(Number(e.target.value));
@@ -87,8 +88,24 @@ function Stalbezetting() {
                 box => box.userId === user?.id
             );
 
+            const horsesInBoxesToDelete = horses.filter(horse =>
+                horse.boxId &&
+                existingBoxes.some(
+                    box =>
+                        Number(box.id) === Number(horse.boxId) &&
+                        box.boxNumber > capacity
+                )
+            );
 
-            // TE VEEL BOXEN VERWIJDEREN
+            if (horsesInBoxesToDelete.length > 0) {
+                alert(
+                    "Kan boxen niet verminderen. Verplaats of koppel eerst de paarden los uit deze boxen."
+                );
+                return;
+            }
+
+
+
             const boxesToDelete = existingBoxes.filter(
                 box => box.boxNumber > capacity
             );
@@ -247,6 +264,30 @@ function Stalbezetting() {
         }
     }
 
+    async function moveHorseToBox(horse, newBoxId) {
+
+        await api.patch(`/horses/${horse.id}`,
+            {
+                boxId: Number(newBoxId)
+            },
+            {
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+            }
+        );
+
+        setHorses(prev =>
+            prev.map(h =>
+                h.id === horse.id
+                    ? {...h, boxId:Number(newBoxId)}
+                    : h
+            )
+        );
+
+        setMovingHorse(null);
+    }
+
     async function removeHorseFromBox(horse) {
         try {
             await api.patch(`/horses/${horse.id}`, {
@@ -308,6 +349,9 @@ function Stalbezetting() {
                 setHorses={setHorses}
                 placeHorseInBox={placeHorseInBox}
                 removeHorseFromBox={removeHorseFromBox}
+                moveHorseToBox={moveHorseToBox}
+                setMovingHorse={setMovingHorse}
+                movingHorse={movingHorse}
 
                 />
             </div>

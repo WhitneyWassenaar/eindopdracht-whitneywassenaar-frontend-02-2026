@@ -1,7 +1,7 @@
 // CSS
 import './StableRow.css'
 
-function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, placeHorseInBox, removeHorseFromBox}) {
+function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, placeHorseInBox, removeHorseFromBox, setMovingHorse, movingHorse, moveHorseToBox,boxes}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
     const horse = horses?.find(
@@ -63,9 +63,50 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
                     <>
                         {horse.active && (
                             <>
-                                <button>
-                                    Verplaatsen
-                                </button>
+                                {movingHorse?.id === horse.id ? (
+                                    <>
+                                    <select
+                                        onChange={(e) =>
+                                            moveHorseToBox(horse, e.target.value)
+                                        }
+                                    >
+                                        <option value="">
+                                            Kies nieuwe box
+                                        </option>
+
+                                        {boxes
+                                            .filter(box =>
+                                                !horses.some(h =>
+                                                    Number(h.boxId) === Number(box.id)
+                                                )
+                                            )
+                                            .map(box => (
+                                                <option
+                                                    key={box.id}
+                                                    value={box.id}
+                                                >
+                                                    Box {box.boxNumber}
+                                                </option>
+                                            ))
+                                        }
+                                    </select>
+
+                                    <button
+                                        onClick={() => setMovingHorse(null)}
+                                    >
+                                        Verplaatsen annuleren
+                                    </button>
+                                    </>
+                                    ) : (
+                                    <button
+                                    onClick={() => setMovingHorse(horse)}
+                                >
+                            Verplaatsen
+                            </button>
+                        )}
+
+
+
 
                                 {horse.location === "stal" ? (
                                     <button
@@ -91,13 +132,18 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
                     </>
                 ) : (
                     <select
-                        onChange={(e) => placeHorseInBox(e.target.value, box.id)}
+                        onChange={(e) =>
+                            placeHorseInBox(e.target.value, box.id)
+                        }
                     >
                         <option value="">
                             Paard plaatsen
                         </option>
 
-                        {horses?.filter(horse => !horse.boxId && horse.active)
+                        {horses
+                            ?.filter(horse =>
+                                !horse.boxId && horse.active
+                            )
                             .map(horse => (
                                 <option
                                     key={horse.id}
@@ -107,7 +153,6 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
                                 </option>
                             ))
                         }
-
                     </select>
                 )}
             </td>
