@@ -161,18 +161,49 @@ function Stalbezetting() {
     }
 
     async function deleteAllBoxes() {
+
+        const confirmReset = window.confirm(
+            "Resetten van de boxen betekent dat alle paarden in de toegewezen boxen verloren gaan. Dit is onomkeerbaar. \n Weet je zeker dat je de boxen wil resetten?"
+        );
+
+        if (!confirmReset) {
+            return;
+        }
+
         try {
             const headers = {
                 Authorization: `Bearer ${token}`
             };
 
+            // Alle paarden loskoppelen
+            for (const horse of horses) {
+                if (horse.boxId) {
+                    await api.patch(`/horses/${horse.id}`, {
+                        boxId: null
+                    }, {
+                        headers
+                    });
+                }
+            }
+
+            // Alle boxen verwijderen
             const response = await api.get("/boxes", { headers });
 
             for (const box of response.data) {
                 await api.delete(`/boxes/${box.id}`, { headers });
             }
 
+            // Frontend leeg maken
             setBoxes([]);
+
+            setHorses(prevHorses =>
+                prevHorses.map(horse => ({
+                    ...horse,
+                    boxId: null
+                }))
+            );
+
+            setCapacity("");
 
         } catch (error) {
             console.error(error.response?.data || error);
