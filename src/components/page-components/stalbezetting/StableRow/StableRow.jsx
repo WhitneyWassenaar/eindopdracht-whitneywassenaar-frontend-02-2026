@@ -27,7 +27,9 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
 
 
     return (
-        <tr className={!horse?.active ? "stablerow-layout inactive-row" : "stablerow-layout"}>
+        <tr className={horse && !horse.active
+            ? "stablerow-layout inactive-row"
+            : "stablerow-layout"}>
             <td>{box.boxNumber}</td>
             <td>
                 {horse ? (
@@ -58,26 +60,36 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
             <td>{status}</td>
             <td>
                 {horse ? (
-                <>
-                    <button>
-                        Verplaatsen
-                    </button>
+                    <>
+                        {horse.active && (
+                            <>
+                                <button>
+                                    Verplaatsen
+                                </button>
 
-                    {horse.location === "stal" ? (
+                                {horse.location === "stal" ? (
+                                    <button
+                                        onClick={() => fromBoxToPasture(horse)}
+                                    >
+                                        Naar wei
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={() => fromPastureToBox(horse)}
+                                    >
+                                        Zet op stal
+                                    </button>
+                                )}
+                            </>
+                        )}
+
                         <button
-                            onClick={() => fromBoxToPasture(horse)}
+                            onClick={() => removeHorseFromBox(horse)}
                         >
-                            Naar wei
+                            Loskoppelen
                         </button>
-                    ) : (
-                        <button
-                            onClick={() => fromPastureToBox(horse)}
-                        >
-                            Zet op stal
-                        </button>
-                    )}
-                </>
-            ) : (
+                    </>
+                ) : (
                     <select
                         onChange={(e) => placeHorseInBox(e.target.value, box.id)}
                     >
@@ -97,14 +109,6 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
                         }
 
                     </select>
-            )}
-
-                {horse && (
-                    <button
-                        onClick={() => removeHorseFromBox(horse)}
-                    >
-                        Loskoppelen
-                    </button>
                 )}
             </td>
         </tr>
