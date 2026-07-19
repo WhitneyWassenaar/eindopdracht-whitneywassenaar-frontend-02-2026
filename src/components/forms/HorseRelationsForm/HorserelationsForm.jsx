@@ -7,11 +7,10 @@ import Button from "../../ui/Button/Button.jsx";
 // Context / Hooks
 import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
-// Data
-import projectId from "../../../data/projectId.js";
 
 // CSS
 import './HorseRelationForm.css';
+import api from "../../../api/axios.js";
 
 function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
 
@@ -54,29 +53,22 @@ function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
         const validOwnerId = ownerId || null;
 
         try {
-            const response = await fetch(
-                `https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses/${horse.id}`,
+
+            const response = await api.patch(
+                `/horses/${horse.id}`,
                 {
-                    method: "PATCH",
+                    ownerId: validOwnerId,
+                    caretakerId: validCaretakerId,
+                    trainerId: validTrainerId
+                },
+                {
                     headers: {
-                        "novi-education-project-id": projectId,
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        ownerId: validOwnerId,
-                        caretakerId: validCaretakerId,
-                        trainerId: validTrainerId
-                    }),
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             );
 
-            if (!response.ok) {
-                console.error("Relaties opslaan mislukt");
-                return;
-            }
-
-            const updatedHorse = await response.json();
+            const updatedHorse = response.data;
 
             setHorses(previousHorses =>
                 previousHorses.map(previousHorse =>
@@ -89,7 +81,7 @@ function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
             setSelectedHorse(updatedHorse);
 
         } catch (error) {
-            console.error(error);
+            console.error("Relaties opslaan mislukt:", error);
         }
     }
 

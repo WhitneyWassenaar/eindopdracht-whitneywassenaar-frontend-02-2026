@@ -10,9 +10,6 @@ import CreateHorseProfileForm from '../../../components/forms/CreateHorseProfile
 // Context
 import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
 
-// Data
-import projectId from '../../../data/projectId.js';
-
 // CSS
 import './Paardenbeheer.css'
 import api from "../../../api/axios.js";
@@ -109,25 +106,17 @@ function Paardenbeheer() {
 
     async function toggleHorseActive(horse) {
         try {
-            const response = await fetch(
-                `https://novi-backend-api-wgsgz.ondigitalocean.app/api/horses/${horse.id}`,
+
+            await api.patch(`/horses/${horse.id}`,
                 {
-                    method: "PATCH",
+                    active: !horse.active
+                },
+                {
                     headers: {
-                        "novi-education-project-id": projectId,
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        active: !horse.active
-                    }),
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             );
-
-            if (!response.ok) {
-                console.error("Status wijzigen mislukt");
-                return;
-            }
 
             setHorses(previousHorses =>
                 previousHorses.map(previousHorse =>
@@ -141,7 +130,7 @@ function Paardenbeheer() {
             );
 
         } catch (error) {
-            console.error(error);
+            console.error("Status wijzigen mislukt:", error);
         }
     }
 
