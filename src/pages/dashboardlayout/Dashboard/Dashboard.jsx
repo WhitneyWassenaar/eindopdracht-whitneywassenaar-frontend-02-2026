@@ -22,6 +22,7 @@ function Dashboard() {
     const [horses, setHorses] = useState([]);
     const [boxes, setBoxes] = useState([]);
     const [careTasks, setCareTasks] = useState([]);
+    const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
 
@@ -40,6 +41,16 @@ function Dashboard() {
                 setBoxes(
                     boxesResponse.data.filter(
                         box => box.userId === user.id
+                    )
+                );
+
+                const appointmentsResponse = await api.get("/appointments", {
+                    headers
+                });
+
+                setAppointments(
+                    appointmentsResponse.data.filter(appointment =>
+                        horses.some(horse => horse.id === appointment.horseId)
                     )
                 );
 
@@ -87,7 +98,8 @@ function Dashboard() {
                     boxes={boxes}/>
                     <ZorgtakenCard
                     tasks={careTasks}/>
-                    <AfsprakenCard/>
+                    <AfsprakenCard
+                    appointments={appointments}/>
                 </div>
             </div>
         </>
