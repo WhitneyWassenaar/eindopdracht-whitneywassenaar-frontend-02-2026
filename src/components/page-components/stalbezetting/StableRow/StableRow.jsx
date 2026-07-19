@@ -7,7 +7,7 @@ import api from "../../../../api/axios.js";
 import {useContext} from "react";
 import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
 
-function StableRow({box, horses,contacts, moveHorseToPasture}) {
+function StableRow({box, horses,contacts, moveHorseToPasture, moveHorseToBox}) {
     const {token} = useContext(AuthContext);
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
@@ -79,12 +79,19 @@ function StableRow({box, horses,contacts, moveHorseToPasture}) {
                         Verplaatsen
                     </button>
 
-                    <button
-                        onClick={() => moveHorseToPasture(horse)}
-
-                    >
-                        Naar wei
-                    </button>
+                    {horse.location === "stal" ? (
+                        <button
+                            onClick={() => moveHorseToPasture(horse)}
+                        >
+                            Naar wei
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => moveHorseToBox(horse)}
+                        >
+                            Zet op stal
+                        </button>
+                    )}
                 </>
             ) : (
                     <select

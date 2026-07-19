@@ -182,6 +182,26 @@ function Stalbezetting() {
         }
     }
 
+    async function moveHorseToBox(horse) {
+        try {
+            await api.patch(`/horses/${horse.id}`,
+                {
+                    location: "stal"
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            window.location.reload();
+
+        } catch(error) {
+            console.error(error);
+        }
+    }
+
 
     return (
         <>
@@ -213,6 +233,7 @@ function Stalbezetting() {
                 horses={horses}
                 contacts={contacts}
                 moveHorseToPasture={moveHorseToPasture}
+                moveHorseToBox={moveHorseToBox}
 
                 />
             </div>
