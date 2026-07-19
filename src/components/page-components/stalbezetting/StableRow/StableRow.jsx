@@ -3,21 +3,49 @@
 
 // CSS
 import './StableRow.css'
+import api from "../../../../api/axios.js";
+import {useContext} from "react";
+import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
 
 function StableRow({box, horses,contacts, moveHorseToPasture}) {
+    const {token,user} = useContext(AuthContext);
+    console.log("Huidige box:", box.id, box.boxNumber);
+
+    console.log("paarden",horses);
+
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
     const horse = horses?.find(
-        horse => horse.boxId === box.id);
+        horse => Number(horse.boxId) === Number(box.id)
+    );
 
     const owner = contacts?.find(
         contact => Number(contact.id) === Number(horse?.ownerId));
+    console.log("Gevonden paard voor deze box:", horse);
 
     const status = !horse
         ? "Vrij"
         : horse.location === "stal"
             ? "Stal"
             : "Wei";
+
+    async function placeHorseInBox(horseId, boxId) {
+        try {
+            await api.patch(`/horses/${horseId}`, {
+                boxId: boxId,
+                location: "stal"
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            window.location.reload();
+
+        } catch (error) {
+            console.error("Paard plaatsen mislukt:", error);
+        }
+    }
 
     return (
         <tr className="stablerow-layout">
@@ -63,7 +91,25 @@ function StableRow({box, horses,contacts, moveHorseToPasture}) {
                     </button>
                 </>
             ) : (
-                <button>Paard plaatsen</button>
+                    <select
+                        onChange={(e) => placeHorseInBox(e.target.value, box.id)}
+                    >
+                        <option value="">
+                            Paard plaatsen
+                        </option>
+
+                        {horses?.filter(horse => horse.location === "wei")
+                            .map(horse => (
+                                <option
+                                    key={horse.id}
+                                    value={horse.id}
+                                >
+                                    {horse.name}
+                                </option>
+                            ))
+                        }
+
+                    </select>
             )}
             </td>
         </tr>

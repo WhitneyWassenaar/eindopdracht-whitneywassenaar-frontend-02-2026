@@ -10,10 +10,14 @@ import api from "../../../api/axios.js";
 import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
 
 
-function Stalbezetting({horses, contacts}) {
+function Stalbezetting() {
+
     const {token,user} = useContext(AuthContext);
     const [capacity, setCapacity] = useState("");
     const [boxes, setBoxes] = useState([]);
+    const [horses, setHorses] = useState([]);
+    const [contacts, setContacts] = useState([]);
+    console.log("horses in Stalbezetting:", horses);
 
 
     function handleCapacityChange(e) {
@@ -25,6 +29,31 @@ function Stalbezetting({horses, contacts}) {
     console.log("Capacity:", capacity);
 
     useEffect(() => {
+        async function fetchHorsesAndContacts() {
+            try {
+                const headers = {
+                    Authorization: `Bearer ${token}`
+                };
+
+                const horsesResponse = await api.get("/horses", { headers });
+                setHorses(horsesResponse.data);
+
+                const contactsResponse = await api.get("/persons", { headers });
+                setContacts(contactsResponse.data);
+
+            } catch (error) {
+                console.error("Fout bij ophalen paarden/contacten:", error);
+            }
+        }
+
+        if (token) {
+            fetchHorsesAndContacts();
+        }
+    }, [token]);
+
+
+
+    useEffect(() => {
         async function fetchBoxes() {
             try {
                 const response = await api.get("/boxes", {
@@ -33,7 +62,8 @@ function Stalbezetting({horses, contacts}) {
                     }
                 });
 
-                setBoxes(response.data);
+                setBoxes(
+                    response.data.filter(box => box.userId === user?.id))
 
             } catch (error) {
                 console.error("Fout bij ophalen boxen:", error);
@@ -58,7 +88,7 @@ function Stalbezetting({horses, contacts}) {
             });
 
             const existingBoxes = boxResponse.data.filter(
-                box => box.userId === user.id
+                box => box.userId === user?.id
             );
 
 
