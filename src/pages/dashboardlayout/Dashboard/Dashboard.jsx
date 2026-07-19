@@ -32,19 +32,16 @@ function Dashboard() {
                     Authorization: `Bearer ${token}`
                 };
 
-                const horsesResponse = await api.get("/horses", { headers });
+                const horsesResponse = await api.get(`/users/${user.id}/horses`, { headers });
+                console.log("Dashboard paarden:", horsesResponse.data);
 
                 const horses = horsesResponse.data;
                 setHorses(horses);
 
-                const boxesResponse = await api.get("/boxes", { headers });
-                setBoxes(
-                    boxesResponse.data.filter(
-                        box => box.userId === user.id
-                    )
-                );
+                const boxesResponse = await api.get(`/users/${user.id}/boxes`, { headers });
+                setBoxes(boxesResponse.data);
 
-                const appointmentsResponse = await api.get("/appointments", {
+                const appointmentsResponse = await api.get(`/users/${user.id}/appointments`, {
                     headers
                 });
 
@@ -54,8 +51,7 @@ function Dashboard() {
                     )
                 );
 
-                const careTaskAssignmentResponse = await api.get(
-                    "/careTaskAssignments",
+                const careTaskAssignmentResponse = await api.get(`/careTaskAssignments`,
                     { headers }
                 );
 
