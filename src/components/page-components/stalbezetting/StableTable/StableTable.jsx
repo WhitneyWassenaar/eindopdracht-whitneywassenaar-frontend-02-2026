@@ -1,46 +1,40 @@
 // Components
-import StableRow from '../StableRow/StableRow.jsx';
+import StableRow from "../StableRow/StableRow.jsx";
 
-function StableTable() {
+// CSS
+import './StableTable.css'
 
-// test data
-    const stables = [
-        {
-            id: 1,
-            name: "Box 1",
-            horse: "Daisy",
-            owner: "Mirjam Haas"
-        },
-        {
-            id: 2,
-            name: "Box 2",
-            horse: null,
-            owner: null
-        },
-        {
-            id: 3,
-            name: "Box 3",
-            horse: "Xanthos",
-            owner: "aDennis Schulten"
-        }
-    ];
-
+function StableTable({boxes, horses, contacts, updateHorse, fromBoxToPasture, fromPastureToBox, placeHorseInBox, removeHorseFromBox, moveHorseToBox,setMovingHorse, movingHorse, updateHorseDates}) {
     return (
         <table className="table-layout">
             <thead>
             <tr>
                 <th>Box</th>
-                <th>Paard</th>
+                <th>Foto</th>
+                <th>Naam</th>
                 <th>Eigenaar</th>
-                <th>Actie</th>
+                <th>Periode</th>
+                <th>Status</th>
+                <th>Acties</th>
             </tr>
             </thead>
-
             <tbody>
-            {stables.map(stable => (
+            {boxes?.map((box) => (
                 <StableRow
-                    key={stable.id}
-                    stable={stable}
+                    key={box.id}
+                    box={box}
+                    boxes={boxes}
+                    horses={horses}
+                    contacts={contacts}
+                    updateHorse={updateHorse}
+                    fromBoxToPasture={fromBoxToPasture}
+                    fromPastureToBox={fromPastureToBox}
+                    placeHorseInBox={placeHorseInBox}
+                    removeHorseFromBox={removeHorseFromBox}
+                    moveHorseToBox={moveHorseToBox}
+                    setMovingHorse={setMovingHorse}
+                    movingHorse={movingHorse}
+                    updateHorseDates={updateHorseDates}
                 />
             ))}
             </tbody>

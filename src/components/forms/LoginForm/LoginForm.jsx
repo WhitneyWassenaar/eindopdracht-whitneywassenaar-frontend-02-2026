@@ -23,6 +23,7 @@ function LoginForm() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
+
     async function onFormSubmit(e) {
         e.preventDefault();
         setError("");
@@ -56,7 +57,9 @@ function LoginForm() {
             const profile = profileResponse.data[0];
 
             console.log("Profiel:", profile);
-
+            console.log("Login response:", response.data);
+            console.log("User:", response.data.user);
+            console.log("Profiel:", profile);
             login(
                 {
                     ...loginData.user,

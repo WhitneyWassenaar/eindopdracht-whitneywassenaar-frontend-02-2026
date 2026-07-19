@@ -107,6 +107,16 @@
           "required": true
         },
         {
+          "name": "boxStartDate",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "boxEndDate",
+          "type": "string",
+          "required": false
+        },
+        {
           "name": "photo",
           "type": "string",
           "required": false
@@ -130,6 +140,43 @@
           "name": "trainerId",
           "type": "reference:persons",
           "required": false
+        },
+        {
+          "name": "boxId",
+          "type": "number",
+          "required": false
+        },
+        {
+          "name": "location",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
+      }
+    },
+    {
+      "name": "boxes",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "reference:users",
+          "required": true
+        },
+        {
+          "name": "boxNumber",
+          "type": "number",
+          "required": true
         }
       ],
       "permissions": {
@@ -373,16 +420,56 @@
         "PATCH": ["user"],
         "DELETE": ["user"]
       }
+    },
+    {
+      "name": "stableSettings",
+      "fields": [
+        {
+          "name": "id",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "reference:users",
+          "required": true
+        },
+        {
+          "name": "capacity",
+          "type": "number",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
+      }
     }
   ],
+
   "users": [
     {
-      "email": "test@live.nl",
-      "password": "123",
+      "email": "docent@novi-education.nl",
+      "password": "noviEducation@123",
       "roles": [
         "user"
       ]
     }
-  ]
+  ],
+
+  "data": {
+    "userProfiles": [
+      {
+        "id": 1,
+        "userId": 0,
+        "firstName": "Docent",
+        "lastName": "NOVI",
+        "stableName": "NOVI Stables"
+      }
+    ]
+  }
 }
 

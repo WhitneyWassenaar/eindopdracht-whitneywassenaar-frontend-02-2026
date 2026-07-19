@@ -127,6 +127,9 @@ function HorseHealthForm({horse, onSaved}) {
                         name="weight"
                         value={formData.weight}
                         onChange={handleChange}
+                        min="0"
+                        max="1500"
+                        step="1"
                     />
                 </label>
             </div>
