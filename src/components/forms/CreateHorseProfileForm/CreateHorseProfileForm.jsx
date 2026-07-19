@@ -35,6 +35,12 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
     async function createHorseFormSubmit(e) {
         e.preventDefault();
         setError("");
+        const lettersOnly = /^[a-zA-ZÀ-ÿ\s]+$/;
+
+        if (!lettersOnly.test(horseName)) {
+            setError("Alleen letters zijn toegestaan");
+            return;
+        }
 
         try {
             const response = await api.post("/horses",
@@ -91,7 +97,9 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                     <label>Naam</label>
                     <input
                         value={horseName}
-                        onChange={(e) => setHorseName(e.target.value)}
+                        onChange={(e) => {
+                            setHorseName(e.target.value);
+                            setError("");}}
                         id={"horse-name"}
                         type={"text"}
                         maxLength={20}
