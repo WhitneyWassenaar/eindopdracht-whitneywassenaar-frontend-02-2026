@@ -84,6 +84,7 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
                         onChange={(e) => setTitle(e.target.value)}
                         id={"title"}
                         type={"text"}
+                        minLength={10}
                         maxLength={20}
                         placeholder={"Voer titel in"}
                         required
