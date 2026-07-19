@@ -1,7 +1,7 @@
 // CSS
 import './StableRow.css'
 
-function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox}) {
+function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, placeHorseInBox}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
     const horse = horses?.find(
