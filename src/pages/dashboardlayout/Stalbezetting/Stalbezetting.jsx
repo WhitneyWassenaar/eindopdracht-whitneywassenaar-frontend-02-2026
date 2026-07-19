@@ -17,16 +17,10 @@ function Stalbezetting() {
     const [boxes, setBoxes] = useState([]);
     const [horses, setHorses] = useState([]);
     const [contacts, setContacts] = useState([]);
-    console.log("horses in Stalbezetting:", horses);
-
 
     function handleCapacityChange(e) {
         setCapacity(Number(e.target.value));
     }
-
-    console.log("User:", user);
-    console.log("Token:", token);
-    console.log("Capacity:", capacity);
 
     useEffect(() => {
         async function fetchHorsesAndContacts() {
@@ -130,7 +124,9 @@ function Stalbezetting() {
                 headers
             });
 
-            setBoxes(updatedBoxes.data);
+            setBoxes(
+                updatedBoxes.data.filter(box => box.userId === user?.id)
+            );
 
         } catch (error) {
             console.error(error.response?.data || error);
@@ -151,14 +147,12 @@ function Stalbezetting() {
 
             setBoxes([]);
 
-            console.log("Alle boxen verwijderd");
-
         } catch (error) {
             console.error(error.response?.data || error);
         }
     }
 
-    async function moveHorseToPasture(horse) {
+    async function fromBoxToPasture(horse) {
         try {
 
             await api.patch(
@@ -173,19 +167,24 @@ function Stalbezetting() {
                 }
             );
 
-            console.log("Paard naar wei:", horse.name);
-
-            window.location.reload();
+            setHorses(prevHorses =>
+                prevHorses.map(horse =>
+                    horse.id === horse.id
+                        ? { ...horse, location: "wei" }
+                        : horse
+                )
+            );
 
         } catch(error) {
             console.error(error);
         }
     }
 
-    async function moveHorseToBox(horse) {
+    async function fromPastureToBox(horse) {
         try {
             await api.patch(`/horses/${horse.id}`,
                 {
+                    boxId: horse.boxId,
                     location: "stal"
                 },
                 {
@@ -195,7 +194,13 @@ function Stalbezetting() {
                 }
             );
 
-            window.location.reload();
+            setHorses(prevHorses =>
+                prevHorses.map(horse =>
+                    horse.id === horse.id
+                        ? { ...horse, location: "stal" }
+                        : horse
+                )
+            );
 
         } catch(error) {
             console.error(error);
@@ -232,8 +237,8 @@ function Stalbezetting() {
                 boxes={boxes}
                 horses={horses}
                 contacts={contacts}
-                moveHorseToPasture={moveHorseToPasture}
-                moveHorseToBox={moveHorseToBox}
+                fromBoxToPasture={fromBoxToPasture}
+                fromPastureToBox={fromPastureToBox}
 
                 />
             </div>

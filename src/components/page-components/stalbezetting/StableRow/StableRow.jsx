@@ -1,13 +1,10 @@
-// COmponents
-
-
 // CSS
 import './StableRow.css'
 import api from "../../../../api/axios.js";
 import {useContext} from "react";
 import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
 
-function StableRow({box, horses,contacts, moveHorseToPasture, moveHorseToBox}) {
+function StableRow({box, horses,contacts, fromBoxToPasture, fromPastureToBox}) {
     const {token} = useContext(AuthContext);
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
@@ -18,6 +15,14 @@ function StableRow({box, horses,contacts, moveHorseToPasture, moveHorseToBox}) {
     const owner = contacts?.find(
         contact => Number(contact.id) === Number(horse?.ownerId));
     console.log("Gevonden paard voor deze box:", horse);
+    console.log(
+        "BOX:",
+        box.boxNumber,
+        "HORSE:",
+        horse?.name,
+        "tijd:",
+        new Date().toLocaleTimeString()
+    );
 
     const status = !horse
         ? "Vrij"
@@ -28,7 +33,7 @@ function StableRow({box, horses,contacts, moveHorseToPasture, moveHorseToBox}) {
     async function placeHorseInBox(horseId, boxId) {
         try {
             await api.patch(`/horses/${horseId}`, {
-                boxId: boxId,
+                boxId: Number(boxId),
                 location: "stal"
             }, {
                 headers: {
@@ -81,13 +86,13 @@ function StableRow({box, horses,contacts, moveHorseToPasture, moveHorseToBox}) {
 
                     {horse.location === "stal" ? (
                         <button
-                            onClick={() => moveHorseToPasture(horse)}
+                            onClick={() => fromBoxToPasture(horse)}
                         >
                             Naar wei
                         </button>
                     ) : (
                         <button
-                            onClick={() => moveHorseToBox(horse)}
+                            onClick={() => fromPastureToBox(horse)}
                         >
                             Zet op stal
                         </button>
