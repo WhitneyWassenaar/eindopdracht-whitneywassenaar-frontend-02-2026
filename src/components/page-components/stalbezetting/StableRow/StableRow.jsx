@@ -62,6 +62,7 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
                     <>
                         <input
                             type="date"
+                            disabled={!horse.active}
                             value={horse.boxStartDate || ""}
                             onChange={(e) =>
                                 updateHorseDates(
@@ -74,6 +75,8 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
 
                         <input
                             type="date"
+                            disabled={!horse.active}
+                            min={new Date().toISOString().split("T")[0]}
                             value={horse.boxEndDate || ""}
                             onChange={(e) =>
                                 updateHorseDates(

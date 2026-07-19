@@ -355,6 +355,24 @@ function Stalbezetting() {
     }
 
     async function updateHorseDates(horse, field, value) {
+
+        const today = new Date().toISOString().split("T")[0];
+
+        if (field === "boxEndDate" && value < today) {
+            alert("Einddatum mag niet eerder zijn dan vandaag.");
+            return;
+        }
+
+        if (
+            field === "boxEndDate" &&
+            horse.boxStartDate &&
+            value < horse.boxStartDate
+        ) {
+            alert("Einddatum mag niet vóór de startdatum liggen.");
+            return;
+        }
+
+
         try {
 
             await api.patch(`/horses/${horse.id}`, {
