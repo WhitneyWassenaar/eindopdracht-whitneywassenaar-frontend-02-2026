@@ -32,7 +32,7 @@ function ContactForm() {
             className="contact-form"
             onSubmit={onFormSubmit}
         >
-            <label className="label">Naam</label>
+            <label htmlFor="name" className="label">Naam</label>
             <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -45,7 +45,7 @@ function ContactForm() {
                 maxLength="12"
                 size="12"
             />
-            <label className="label">E-mail</label>
+            <label htmlFor="e-mail" className="label">E-mail</label>
             <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -56,7 +56,7 @@ function ContactForm() {
                 required
                 size="30"
             />
-            <label className="label">Bericht</label>
+            <label htmlFor="contact-message" className="label">Bericht</label>
             <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}

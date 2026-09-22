@@ -82,59 +82,69 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
             <fieldset>
                 <legend>Contactgegevens</legend>
                 <div className="form-row">
-                    <label>Voornaam</label>
+                    <label htmlFor="first-name">
+                        Voornaam
+                    </label>
                     <input
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        id={"first-name"}
-                        type={"text"}
+                        id="first-name"
+                        type="text"
                         maxLength={20}
-                        placeholder={"Voer voornaam in"}
+                        placeholder="Voer voornaam in"
                         required
                     />
                 </div>
 
                 <div className="form-row">
-                    <label>Achternaam</label>
+                    <label htmlFor="last-name">
+                        Achternaam
+                    </label>
                     <input
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
-                        id={"last-name"}
-                        type={"text"}
+                        id="last-name"
+                        type="text"
                         maxLength={20}
-                        placeholder={"Voer achternaam in"}
+                        placeholder="Voer achternaam in"
                         required
                     />
                 </div>
 
                 <div className="form-row">
-                    <label>Email</label>
+                    <label htmlFor="email">
+                        Email
+                    </label>
                     <input
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        id={"email"}
-                        type={"email"}
+                        id="email"
+                        type="email"
                         maxLength={50}
-                        placeholder={"Voer email in"}
+                        placeholder="Voer email in"
                         required
                     />
                 </div>
 
                 <div className="form-row">
-                    <label>Telefoonnummer</label>
+                    <label htmlFor="phoneNumber">
+                        Telefoonnummer
+                    </label>
                     <input
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
-                        id={"phoneNumber"}
-                        type={"text"}
+                        id="phoneNumber"
+                        type="text"
                         maxLength={20}
-                        placeholder={"Voer telefoonnummer in"}
+                        placeholder="Voer telefoonnummer in"
                         required
                     />
                 </div>
 
                 <div className="form-row">
-                    <label>Rol</label>
+                    <label htmlFor="role">
+                        Rol
+                    </label>
                     <select
                         value={role}
                         onChange={(event) => setRole(event.target.value)}
@@ -156,8 +166,9 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
                 </div>
 
                 <div className="form-row">
-                    <label>Foto</label>
-                    <p>Url afbeelding:</p>
+                    <label htmlFor="contact-photo">
+                        Url afbeelding:
+                    </label>
                     <input
                         id="contact-photo"
                         type="url"

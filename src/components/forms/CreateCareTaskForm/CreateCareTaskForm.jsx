@@ -25,7 +25,6 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
         setError("");
 
         try {
-
             const existingTasksResponse = await api.get("/careTasks",
                 {
                     headers: {
@@ -43,7 +42,6 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
                 return;
             }
 
-
             const response = await api.post("/careTasks",
                 {
                     userId: user.id,
@@ -56,8 +54,6 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
                     }
                 }
             );
-
-
 
             const newCareTask = response.data;
             addCareTask(newCareTask);
@@ -78,28 +74,32 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
             <fieldset>
                 <legend>Zorgtaak aanmaken</legend>
                 <div className="form-row">
-                    <label>Titel</label>
+                    <label htmlFor="title">
+                        Titel
+                    </label>
                     <input
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        id={"title"}
-                        type={"text"}
+                        id="title"
+                        type="text"
                         minLength={10}
                         maxLength={20}
-                        placeholder={"Voer titel in"}
+                        placeholder="Voer titel in"
                         required
                     />
                 </div>
 
                 <div className="form-row">
-                    <label>Beschrijving</label>
+                    <label htmlFor="description">
+                        Beschrijving
+                    </label>
                     <input
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        id={"description"}
-                        type={"text"}
+                        id="description"
+                        type="text"
                         maxLength={100}
-                        placeholder={"Voer beschrijving in"}
+                        placeholder="Voer beschrijving in"
                         required
                     />
                 </div>

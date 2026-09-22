@@ -18,7 +18,7 @@ import api from "../../../api/axios.js";
 import './CreateHorseProfileForm.css';
 
 function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
-    const {token,user} = useContext(AuthContext);
+    const {token, user} = useContext(AuthContext);
 
     const [horseName, setHorseName] = useState("");
     const [horseGender, setHorseGender] = useState("");
@@ -54,8 +54,8 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                     active: true,
                     photo: horsePhoto || defaultHorsePhoto,
                     ownerId: ownerId || null,
-                    location:"wei",
-                    boxId:null
+                    location: "wei",
+                    boxId: null
                 },
                 {
                     headers: {
@@ -94,56 +94,61 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
             <fieldset>
                 <legend>Paardengegevens</legend>
                 <div className="form-row">
-                    <label>Naam</label>
+                    <label htmlFor="horse-name">
+                        Naam
+                    </label>
                     <input
                         value={horseName}
                         onChange={(e) => {
                             setHorseName(e.target.value);
-                            setError("");}}
-                        id={"horse-name"}
-                        type={"text"}
+                            setError("");
+                        }}
+                        id="horse-name"
+                        type="text"
                         maxLength={20}
-                        placeholder={"Voer naam van paard in"}
+                        placeholder="Voer naam van paard in"
                         required/>
                 </div>
 
                 <div className="form-row gender-row">
-                    <label>Geslacht</label>
+                    <span className="form-label">
+                        Geslacht
+                    </span>
                     <div className="radio-button-container">
 
-                        <label>
+                        <label htmlFor="mare">
                             <input
                                 checked={horseGender === "Merrie"}
                                 onChange={(e) => setHorseGender(e.target.value)}
-                                id={"mare"}
-                                name={"gender"}
-                                value={"Merrie"}
-                                type={"radio"}
+                                id="mare"
+                                name="gender"
+                                value="Merrie"
+                                type="radio"
                                 required
                             />
                             Merrie
                         </label>
 
-                        <label>
+                        <label htmlFor="stallion">
                             <input
                                 checked={horseGender === "Hengst"}
                                 onChange={(e) => setHorseGender(e.target.value)}
-                                id={"stallion"}
-                                name={"gender"}
-                                value={"Hengst"}
-                                type={"radio"}
+                                id="stallion"
+                                name="gender"
+                                value="Hengst"
+                                type="radio"
                             />
                             Hengst
                         </label>
 
-                        <label>
+                        <label htmlFor="gelding">
                             <input
                                 checked={horseGender === "Ruin"}
                                 onChange={(e) => setHorseGender(e.target.value)}
-                                id={"gelding"}
-                                name={"gender"}
-                                value={"Ruin"}
-                                type={"radio"}
+                                id="gelding"
+                                name="gender"
+                                value="Ruin"
+                                type="radio"
                             />
                             Ruin
                         </label>
@@ -151,7 +156,9 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                 </div>
 
                 <div className="form-row">
-                    <label>Geboortedatum</label>
+                    <label htmlFor="birth-date">
+                        Geboortedatum
+                    </label>
                     <input
                         max={today}
                         value={birthDate}
@@ -162,7 +169,9 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                 </div>
 
                 <div className="form-row">
-                    <label>Ras</label>
+                    <label htmlFor="breed">
+                        Ras
+                    </label>
                     <select
                         value={horseBreed}
                         onChange={(event) => setHorseBreed(event.target.value)}
@@ -184,7 +193,9 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                 </div>
 
                 <div className="form-row">
-                    <label>Kleur</label>
+                    <label htmlFor="coatColor">
+                        Kleur
+                    </label>
                     <select
                         value={horseColor}
                         onChange={(event) => setHorseColor(event.target.value)}
@@ -206,8 +217,11 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                 </div>
 
                 <div className="form-row">
-                    <label>Eigenaar</label>
+                    <label htmlFor="owner">
+                        Eigenaar
+                    </label>
                     <select
+                        id="owner"
                         value={ownerId}
                         onChange={(e) => setOwnerId(e.target.value)}
                     >
@@ -228,15 +242,15 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                 </div>
 
                 <div className="form-row">
-                    <label>Foto</label>
-                    <p>Url afbeelding:</p>
+                    <label htmlFor="horse-photo">
+                        Url afbeelding:
+                    </label>
                     <input
                         id="horse-photo"
                         type="url"
                         placeholder="Plaats URL van afbeelding"
                         value={horsePhoto}
                         onChange={(event) => setHorsePhoto(event.target.value)}
-
                     />
                 </div>
 
@@ -248,7 +262,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                 }
 
                 <Button
-                    type={"submit"}
+                    type="submit"
                 >
                     Paardenprofiel aanmaken
                 </Button>

@@ -10,8 +10,6 @@ import api from "../../../api/axios.js";
 
 // CSS
 import './RegisterForm.css';
-import userNavbar from "../../navigation/UserNavbar/UserNavbar.jsx";
-
 
 function RegisterForm() {
 
@@ -97,7 +95,11 @@ function RegisterForm() {
             className="register-form"
             onSubmit={onFormSubmit}
         >
-            <label>Voornaam</label>
+            <label
+            htmlFor="first-name"
+            >
+                Voornaam
+            </label>
             <input
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -110,7 +112,10 @@ function RegisterForm() {
                 maxLength="20"
             />
 
-            <label>Achternaam</label>
+            <label htmlFor="last-name"
+            >
+                Achternaam
+            </label>
             <input
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -123,7 +128,11 @@ function RegisterForm() {
                 maxLength="20"
             />
 
-            <label>Stalnaam</label>
+            <label
+                htmlFor="stable-name"
+            >
+                Stalnaam
+            </label>
             <input
                 value={stableName}
                 onChange={(e) => setStableName(e.target.value)}
@@ -136,7 +145,11 @@ function RegisterForm() {
                 maxLength="30"
             />
 
-            <label>E-mail</label>
+            <label htmlFor="e-mail"
+            >
+                E-mail
+            </label>
+
             <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -148,7 +161,11 @@ function RegisterForm() {
                 maxLength="25"
             />
 
-            <label>Wachtwoord</label>
+            <label
+                htmlFor="password"
+            >
+                Wachtwoord
+            </label>
             <input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -159,7 +176,10 @@ function RegisterForm() {
                 required
             />
 
-            <label>Herhaal wachtwoord</label>
+            <label htmlFor="confirm-password"
+            >
+                Herhaal wachtwoord
+            </label>
             <input
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -170,14 +190,17 @@ function RegisterForm() {
                 required
             />
 
-            <label>
+            <label htmlFor="accept-tos">
+                Ik ga akkoord met de voorwaarden
+            </label>
                 <input
+                    id="accept-tos"
                     checked={acceptToc}
                     onChange={(e) => setAcceptToc(e.target.checked)}
                     type="checkbox"
                     required/>
-                Ik ga akkoord met de voorwaarden
-            </label>
+
+
 
             {error && (
                 <p className="error-message"

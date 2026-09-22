@@ -7,7 +7,6 @@ import Button from "../../ui/Button/Button.jsx";
 // Context / Hooks
 import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 
-
 // CSS
 import './HorseRelationForm.css';
 import api from "../../../api/axios.js";
@@ -53,7 +52,6 @@ function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
         const validOwnerId = ownerId || null;
 
         try {
-
             const response = await api.patch(
                 `/horses/${horse.id}`,
                 {
@@ -88,11 +86,15 @@ function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
     return (
         <div className="form-layout">
             <div className="label-wrapper">
-                <label className="relation-label">
+                <label
+                    htmlFor="owner"
+                    className="relation-label"
+                >
                     Eigenaar
                 </label>
 
                 <select
+                    id="owner"
                     value={ownerId}
                     onChange={(e) => setOwnerId(e.target.value)}
                 >
@@ -112,11 +114,14 @@ function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
             </div>
 
             <div className="label-wrapper">
-                <label className="relation-label">
+                <label
+                    htmlFor="caretaker"
+                    className="relation-label"
+                >
                     Verzorger
                 </label>
-
                 <select
+                    id="caretaker"
                     value={caretakerId}
                     onChange={(e) => setCaretakerId(e.target.value)}
                 >
@@ -136,11 +141,14 @@ function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
             </div>
 
             <div className="label-wrapper">
-                <label className="relation-label">
+                <label
+                    htmlFor="trainer"
+                    className="relation-label"
+                >
                     Trainer
                 </label>
-
                 <select
+                    id="trainer"
                     value={trainerId}
                     onChange={(e) => setTrainerId(e.target.value)}
                 >

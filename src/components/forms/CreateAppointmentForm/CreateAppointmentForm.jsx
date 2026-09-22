@@ -11,12 +11,10 @@ import {AuthContext} from "../../authentication/context/AuthContext.jsx";
 import api from "../../../api/axios.js";
 
 // CSS
-import"./CreateAppointmentForm.css";
-
+import "./CreateAppointmentForm.css";
 
 function CreateAppointmentForm({horse, onSaved}) {
     const {token, user} = useContext(AuthContext);
-
     const [contacts, setContacts] = useState([]);
     const [formData, setFormData] = useState({
         professionalType: "",
@@ -82,7 +80,7 @@ function CreateAppointmentForm({horse, onSaved}) {
                     professionalType: formData.professionalType,
                     professionalId: Number(formData.professionalId),
                     date: formData.date,
-                    time:formData.time,
+                    time: formData.time,
                     reason: formData.reason
                 },
                 {
@@ -98,7 +96,6 @@ function CreateAppointmentForm({horse, onSaved}) {
                 onSaved();
             }
 
-
         } catch (error) {
 
             console.error(error);
@@ -107,108 +104,108 @@ function CreateAppointmentForm({horse, onSaved}) {
         }
     }
 
-               const filteredProfessionals = contacts.filter(contact => contact.role === formData.professionalType);
-
+    const filteredProfessionals = contacts.filter(contact => contact.role === formData.professionalType);
 
     return (
-
         <form onSubmit={handleSubmit} className="createappointment-form-layout">
 
             <div className="form-row">
-                <label>
-                   Datum
-                    <input
-                        type="date"
-                        name="date"
-                        value={formData.date}
-                        min={getTodayDate()}
-                        onChange={handleChange}
-                        required
-                    />
+                <label htmlFor="appointment-date">
+                    Datum
                 </label>
+                <input
+                    id="appointment-date"
+                    type="date"
+                    name="date"
+                    value={formData.date}
+                    min={getTodayDate()}
+                    onChange={handleChange}
+                    required
+                />
             </div>
 
             <div className="form-row">
-                <label>
+                <label htmlFor="appointment-time">
                     Tijd
-                    <input
-                        type="time"
-                        name="time"
-                        value={formData.time}
-                        onChange={handleChange}
-                        required
-                    />
                 </label>
+                <input
+                    id="appointment-time"
+                    type="time"
+                    name="time"
+                    value={formData.time}
+                    onChange={handleChange}
+                    required
+                />
             </div>
 
             <div className="form-row">
-                <label>
+                <label htmlFor="professional-type">
                     Professional
-                    <select
-                        name="professionalType"
-                        value={formData.professionalType}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="">
-                            Kies professional
-                        </option>
-
-                        <option value="Dierenarts">
-                            Dierenarts
-                        </option>
-
-                        <option value="Hoefsmid">
-                            Hoefsmid
-                        </option>
-
-                        <option value="Trainer">
-                            Trainer
-                        </option>
-
-                    </select>
-
                 </label>
+                <select
+                    id="professional-type"
+                    name="professionalType"
+                    value={formData.professionalType}
+                    onChange={handleChange}
+                    required
+                >
+                    <option value="">
+                        Kies professional
+                    </option>
+
+                    <option value="Dierenarts">
+                        Dierenarts
+                    </option>
+
+                    <option value="Hoefsmid">
+                        Hoefsmid
+                    </option>
+
+                    <option value="Trainer">
+                        Trainer
+                    </option>
+
+                </select>
             </div>
 
             <div className="form-row">
-                <label>
+                <label htmlFor="professional-name">
                     Naam professional
-                    <select
-                        name="professionalId"
-                        value={formData.professionalId}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="">
-                            Kies contact
-                        </option>
-
-                        {filteredProfessionals.map(contact => (
-
-                            <option
-                                key={contact.id}
-                                value={contact.id}
-                            >
-                                {contact.firstName} {contact.lastName}
-                            </option>
-                        ))}
-                    </select>
                 </label>
+                <select
+                    id="professional-name"
+                    name="professionalId"
+                    value={formData.professionalId}
+                    onChange={handleChange}
+                    required
+                >
+                    <option value="">
+                        Kies contact
+                    </option>
+
+                    {filteredProfessionals.map(contact => (
+
+                        <option
+                            key={contact.id}
+                            value={contact.id}
+                        >
+                            {contact.firstName} {contact.lastName}
+                        </option>
+                    ))}
+                </select>
             </div>
 
             <div className="form-row">
-                <label>
+                <label htmlFor="appointment-reason">
                     Reden afspraak
-
-                    <textarea
-                        name="reason"
-                        value={formData.reason}
-                        onChange={handleChange}
-                        required
-                    />
-
                 </label>
+                <textarea
+                    id="appointment-reason"
+                    name="reason"
+                    value={formData.reason}
+                    onChange={handleChange}
+                    required
+                />
             </div>
 
             <button type="submit">

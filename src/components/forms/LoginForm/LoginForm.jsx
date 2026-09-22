@@ -50,7 +50,7 @@ function LoginForm() {
 
             const profileResponse = await api.get(`/users/${userId}/userProfiles`,
                 {
-                    headers : {
+                    headers: {
                         Authorization: `Bearer ${loginData.token}`
                     }
                 });
@@ -63,7 +63,7 @@ function LoginForm() {
             login(
                 {
                     ...loginData.user,
-                    id : profile.userId,
+                    id: profile.userId,
                     firstName: profile.firstName,
                     lastName: profile.lastName,
                     stableName: profile.stableName
@@ -87,7 +87,11 @@ function LoginForm() {
             className="login-form"
             onSubmit={onFormSubmit}
         >
-            <label>E-mail</label>
+            <label
+                htmlFor="e-mail"
+            >
+                E-mail
+            </label>
             <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -99,7 +103,11 @@ function LoginForm() {
                 size="30"
             />
 
-            <label>Wachtwoord</label>
+            <label
+                htmlFor="password"
+            >
+                Wachtwoord
+            </label>
             <input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
