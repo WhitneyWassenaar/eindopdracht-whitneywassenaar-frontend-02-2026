@@ -78,12 +78,9 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
             }
         }
 
-
         getHorses();
 
     }, [token, user]);
-
-
 
     function handleHorseSelect(horseId) {
 
@@ -108,20 +105,14 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
 
     }
 
-
-
     async function assignCareTaskSubmit(e) {
-
         e.preventDefault();
-
         setError("");
-
 
         if(selectedHorses.length === 0) {
             setError("Selecteer minimaal één paard");
             return;
         }
-
 
         try {
             for(const horseId of selectedHorses) {
@@ -133,14 +124,12 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                         assignment.dueDate === dueDate
                 );
 
-
                 if (duplicate) {
                     setError(
                         "Deze zorgtaak is al toegewezen aan dit paard op deze datum."
                     );
                     return;
                 }
-
 
                 await api.post(
                     "/careTaskAssignments",
@@ -165,28 +154,20 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                 setMessage("");
             }, 5000);
 
-
-
         } catch(error) {
-
             console.error(error);
             setError(
                 error.response?.data?.error ||
                 "Toewijzen mislukt"
             );
-
         }
-
     }
-
-
 
     return (
         <form
             onSubmit={assignCareTaskSubmit}
             className="assign-caretask-form-layout"
         >
-
             <fieldset>
 
                 <legend>
@@ -197,13 +178,10 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
 
                 <div className="form-row">
 
-                    <label>Paarden</label>
-
+                    <span className="form-label">Paarden</span>
 
                     {horses.map((horse) => (
-
                         <label key={horse.id}>
-
                             <input
                                 type="checkbox"
                                 checked={
@@ -213,25 +191,19 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                                     handleHorseSelect(horse.id)
                                 }
                             />
-
                             {horse.name}
-
                         </label>
-
                     ))}
-
-
                 </div>
-
-
 
                 <div className="form-row">
 
-                    <label>
+                    <label htmlFor="dueDate">
                         Einddatum
                     </label>
 
                     <input
+                        id="dueDate"
                         type="date"
                         value={dueDate}
                         onChange={(e)=>
@@ -242,30 +214,21 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
 
                 </div>
 
-
-
                 {error && (
-
                     <p className="error-message">
                         {error}
                     </p>
-
                 )}
 
                 {message && (
-
                     <p className="success-message">
                         {message}
                     </p>
-
                 )}
-
-
 
                 <Button type="submit">
                     Zorgtaak toewijzen
                 </Button>
-
 
                 <Button
                     type="button"
@@ -276,13 +239,8 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                 >
                     Annuleren
                 </Button>
-
-
             </fieldset>
-
         </form>
     );
 }
-
-
 export default AssignCareTaskForm;

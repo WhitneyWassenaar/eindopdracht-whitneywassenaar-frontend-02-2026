@@ -28,6 +28,9 @@ padding: 15px;
     width:150px;
 }
 
+.form-label {
+    width: 150px;
+}
 .radio-button-container {
     display: flex;
     flex-direction: column;

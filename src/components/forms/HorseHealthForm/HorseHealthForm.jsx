@@ -120,9 +120,11 @@ function HorseHealthForm({horse, onSaved}) {
         <form onSubmit={handleSubmit} className="horsehealth-form-layout">
 
             <div className="form-row">
-                <label>
+                <label htmlFor="weight">
                     Gewicht (kg)
+                </label>
                     <input
+                        id="weight"
                         type="number"
                         name="weight"
                         value={formData.weight}
@@ -131,73 +133,81 @@ function HorseHealthForm({horse, onSaved}) {
                         max="1500"
                         step="1"
                     />
-                </label>
+
             </div>
 
             <div className="form-row">
-                <label>
+                <label htmlFor="diet">
                     Dieet
+                </label>
                     <textarea
+                        id="diet"
                         name="diet"
                         value={formData.diet}
                         onChange={handleChange}
                     />
-                </label>
             </div>
 
             <div className="form-row">
-                <label>
+                <label htmlFor="allergies">
                     Allergieën
+                </label>
                     <textarea
+                        id="allergies"
                         name="allergies"
                         value={formData.allergies}
                         onChange={handleChange}
                     />
-                </label>
             </div>
+
             <div className="form-row">
-                <label>
+                <label htmlFor="medication">
                     Medicatie
+                </label>
                     <textarea
+                        id="medication"
                         name="medication"
                         value={formData.medication}
                         onChange={handleChange}
                     />
-                </label>
             </div>
-            <div className="form-row">
 
-                <label>
+            <div className="form-row">
+                <label htmlFor="vaccinated">
+                    Gevaccineerd
+                </label>
                     <input
+                        id="vaccinated"
                         type="checkbox"
                         name="vaccinated"
                         checked={formData.vaccinated}
                         onChange={handleChange}
                     />
+            </div>
 
-                    Gevaccineerd
-                </label></div>
             <div className="form-row">
-
-                <label>
+                <label htmlFor="last-deworming">
                     Laatste ontworming
+                </label>
                     <input
+                        id="last-deworming"
                         type="date"
                         name="lastDeworming"
                         value={formData.lastDeworming}
                         onChange={handleChange}
                     />
-                </label>
             </div>
+
             <div className="form-row">
-                <label>
+                <label htmlFor="notes">
                     Bijzonderheden
+                </label>
                     <textarea
+                        id="notes"
                         name="notes"
                         value={formData.notes}
                         onChange={handleChange}
                     />
-                </label>
             </div>
 
             <button type="submit">
