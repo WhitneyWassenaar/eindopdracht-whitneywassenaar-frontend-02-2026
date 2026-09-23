@@ -5,7 +5,7 @@ import {useContext, useState} from 'react';
 import Button from '../../ui/Button/Button.jsx';
 
 // Context
-import {AuthContext} from "../../authentication/context/AuthContext.jsx";
+import {AuthContext} from "../../../context/AuthContext.jsx";
 
 // Api
 import api from "../../../api/axios.js";

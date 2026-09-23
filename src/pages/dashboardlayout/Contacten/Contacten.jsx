@@ -8,7 +8,7 @@ import ContactDetail from "../../../components/page-components/contacten/Contact
 import CreateContactProfileForm from "../../../components/forms/CreateContactProfileForm/CreateContactProfileForm.jsx";
 
 // Context / hooks
-import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
+import {AuthContext} from "../../../context/AuthContext.jsx";
 
 // CSS
 import './Contacten.css'

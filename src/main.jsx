@@ -6,7 +6,7 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import App from './App.jsx';
 
 // Context / Hooks
-import {AuthProvider} from './components/authentication/context/AuthContext.jsx';
+import {AuthProvider} from './context/AuthContext.jsx';
 
 // CSS
 import './index.css';

@@ -8,7 +8,7 @@ import HorseDetail from '../../../components/page-components/paardenbeheer/Horse
 import CreateHorseProfileForm from '../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx';
 
 // Context
-import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
+import {AuthContext} from "../../../context/AuthContext.jsx";
 
 // CSS
 import './Paardenbeheer.css'

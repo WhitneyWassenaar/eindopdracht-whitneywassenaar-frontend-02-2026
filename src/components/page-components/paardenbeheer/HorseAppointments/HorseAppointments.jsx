@@ -5,7 +5,7 @@ import {useContext, useEffect, useState} from "react";
 import CreateAppointmentForm from "../../../forms/CreateAppointmentForm/CreateAppointmentForm.jsx";
 
 // Context / Hooks
-import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
+import {AuthContext} from "../../../../context/AuthContext.jsx";
 
 // Api
 import api from "../../../../api/axios.js";

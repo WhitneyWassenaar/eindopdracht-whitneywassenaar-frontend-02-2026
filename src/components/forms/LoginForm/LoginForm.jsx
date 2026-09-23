@@ -6,7 +6,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import Button from '../../ui/Button/Button.jsx';
 
 // Context / Hooks
-import {AuthContext} from '../../authentication/context/AuthContext.jsx';
+import {AuthContext} from '../../../context/AuthContext.jsx';
 
 // Api
 import api from "../../../api/axios.js";

@@ -5,7 +5,7 @@ import {useContext, useEffect, useState} from "react";
 import api from "../../../../api/axios.js";
 
 // Context
-import {AuthContext} from "../../../authentication/context/AuthContext.jsx";
+import {AuthContext} from "../../../../context/AuthContext.jsx";
 
 // CSS
 import "./HorseCareTasks.css";

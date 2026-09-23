@@ -20,7 +20,7 @@ import Contacten from './pages/dashboardlayout/Contacten/Contacten.jsx';
 // Components
 import WebLayout from './components/layout/WebLayout/WebLayout.jsx';
 import DashboardLayout from './components/layout/DashboardLayout/DashboardLayout.jsx';
-import ProtectedRoute from './components/authentication/routing/ProtectedRoute.jsx';
+import ProtectedRoute from './routing/ProtectedRoute.jsx';
 
 // CSS
 import './App.css';

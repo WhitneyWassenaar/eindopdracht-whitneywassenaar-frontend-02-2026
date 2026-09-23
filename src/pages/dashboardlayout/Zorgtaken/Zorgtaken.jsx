@@ -8,7 +8,7 @@ import Button from "../../../components/ui/Button/Button.jsx";
 import AssignCareTaskForm from "../../../components/forms/AssignCareTaskForm/AssignCareTaskForm.jsx";
 
 // Context / Hooks
-import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
+import {AuthContext} from "../../../context/AuthContext.jsx";
 
 // Api
 import api from "../../../api/axios.js";

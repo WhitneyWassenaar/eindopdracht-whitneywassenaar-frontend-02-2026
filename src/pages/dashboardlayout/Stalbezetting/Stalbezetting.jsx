@@ -7,7 +7,7 @@ import StableTable from "../../../components/page-components/stalbezetting/Stabl
 // CSS
 import './Stalbezetting.css'
 import api from "../../../api/axios.js";
-import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
+import {AuthContext} from "../../../context/AuthContext.jsx";
 
 
 function Stalbezetting() {

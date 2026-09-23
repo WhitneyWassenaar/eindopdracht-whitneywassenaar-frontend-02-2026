@@ -2,7 +2,7 @@
 import {useContext, useEffect, useState} from "react";
 
 // Context
-import {AuthContext} from "../../../components/authentication/context/AuthContext.jsx";
+import {AuthContext} from "../../../context/AuthContext.jsx";
 
 // Components
 import PaardenverdelingCard

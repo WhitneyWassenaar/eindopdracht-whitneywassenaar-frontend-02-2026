@@ -5,7 +5,7 @@ import {useState, useContext} from "react";
 import Button from "../../ui/Button/Button.jsx";
 
 // Context / Hooks
-import {AuthContext} from "../../authentication/context/AuthContext.jsx";
+import {AuthContext} from "../../../context/AuthContext.jsx";
 
 // CSS
 import './HorseRelationForm.css';

@@ -2,7 +2,7 @@
 import {useContext} from "react";
 
 //Context
-import {AuthContext} from "../authentication/context/AuthContext.jsx";
+import {AuthContext} from "../../context/AuthContext.jsx";
 
 // Components
 import GuestNavbar from './GuestNavbar/GuestNavbar.jsx';

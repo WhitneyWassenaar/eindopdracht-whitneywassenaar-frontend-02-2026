@@ -2,7 +2,7 @@
 import {useContext, useEffect, useState} from "react";
 
 // Context / Hooks
-import {AuthContext} from "../../authentication/context/AuthContext.jsx";
+import {AuthContext} from "../../../context/AuthContext.jsx";
 
 // Api
 import api from "../../../api/axios.js";

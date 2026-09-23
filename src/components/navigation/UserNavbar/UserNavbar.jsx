@@ -6,7 +6,7 @@ import {NavLink} from 'react-router-dom';
 import Button from '../../ui/Button/Button.jsx';
 
 // Context / Hooks
-import {AuthContext} from '../../authentication/context/AuthContext.jsx';
+import {AuthContext} from '../../../context/AuthContext.jsx';
 
 // Assets
 import logo from '../../../assets/home/logo.svg';
