@@ -402,10 +402,11 @@ function Stalbezetting() {
     return (
             <div className="stalbezetting-page">
                 <h1>Stalbezetting</h1>
-                <label>
+                <label htmlFor="box-capacity">
                     Hoeveel boxen heb je nodig?
                 </label>
                 <input
+                    id="box-capacity"
                     type="number"
                     min="1"
                     max="100"
@@ -413,10 +414,14 @@ function Stalbezetting() {
                     onChange={handleCapacityChange}
                 />
 
-                <button onClick={generateBoxes}>
+                <button
+                    type="button"
+                    onClick={generateBoxes}>
                     Opslaan
                 </button>
-                <button onClick={deleteAllBoxes}>
+                <button
+                    type="button"
+                    onClick={deleteAllBoxes}>
                     Reset boxen
                 </button>
 
