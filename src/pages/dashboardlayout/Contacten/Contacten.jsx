@@ -268,42 +268,56 @@ function Contacten() {
                     </div>
 
                     {showFilter && (
-                        <select
-                            value={filter}
-                            onChange={(e) => setFilter(e.target.value)}
-                        >
-                            <option value="all">
-                                Alle contacten
-                            </option>
+                        <>
+                            <label htmlFor="contact-filter">
+                                Toon contacten:
+                            </label>
 
-                            <option value="active">
-                                Actieve contacten
-                            </option>
+                            <select
+                                id="contact-filter"
+                                value={filter}
+                                onChange={(e) => setFilter(e.target.value)}
+                            >
+                                <option value="all">
+                                    Alle contacten
+                                </option>
 
-                            <option value="inactive">
-                                Inactieve contacten
-                            </option>
-                        </select>
+                                <option value="active">
+                                    Actieve contacten
+                                </option>
+
+                                <option value="inactive">
+                                    Inactieve contacten
+                                </option>
+                            </select>
+                        </>
                     )}
 
 
                     {showSort && (
-                        <select
-                            value={sortOption}
-                            onChange={(e) => setSortOption(e.target.value)}
-                        >
-                            <option value="none">
-                                Geen sortering
-                            </option>
+                        <>
+                            <label htmlFor="sort-contacts">
+                                Sorteer op:
+                            </label>
 
-                            <option value="name-ascending">
-                                Naam A-Z
-                            </option>
+                            <select
+                                id="sort-contacts"
+                                value={sortOption}
+                                onChange={(e) => setSortOption(e.target.value)}
+                            >
+                                <option value="none">
+                                    Geen sortering
+                                </option>
 
-                            <option value="name-descending">
-                                Naam Z-A
-                            </option>
-                        </select>
+                                <option value="name-ascending">
+                                    Naam A-Z
+                                </option>
+
+                                <option value="name-descending">
+                                    Naam Z-A
+                                </option>
+                            </select>
+                        </>
                     )}
 
                     <ContactTable

@@ -27,7 +27,7 @@ function Paardenbeheer() {
     const [sortOption, setSortOption] = useState("none");
     const [showSort, setShowSort] = useState(false);
 
-    const {token,user} = useContext(AuthContext);
+    const {token, user} = useContext(AuthContext);
     console.log("Token lengte:", token?.length);
 
     // check hoeveel user profiles er zijn en om te kijken wat hun id is
@@ -46,7 +46,7 @@ function Paardenbeheer() {
 
                 console.log("Alle userProfiles:", response.data);
 
-            } catch(error) {
+            } catch (error) {
                 console.error(error);
             }
         }
@@ -77,7 +77,7 @@ function Paardenbeheer() {
         }
 
         getHorses();
-    },[token,user]);
+    }, [token, user]);
 
     useEffect(() => {
         if (!token || !user) return;
@@ -145,8 +145,8 @@ function Paardenbeheer() {
             const appointmentsResponse = await api.get(
                 `/horses/${horseId}/appointments`,
                 {
-                    headers:{
-                        Authorization:`Bearer ${token}`
+                    headers: {
+                        Authorization: `Bearer ${token}`
                     }
                 }
             );
@@ -157,8 +157,8 @@ function Paardenbeheer() {
                 await api.delete(
                     `/appointments/${appointment.id}`,
                     {
-                        headers:{
-                            Authorization:`Bearer ${token}`
+                        headers: {
+                            Authorization: `Bearer ${token}`
                         }
                     }
                 );
@@ -169,8 +169,8 @@ function Paardenbeheer() {
             const healthResponse = await api.get(
                 `/horses/${horseId}/horseHealths`,
                 {
-                    headers:{
-                        Authorization:`Bearer ${token}`
+                    headers: {
+                        Authorization: `Bearer ${token}`
                     }
                 }
             );
@@ -179,8 +179,8 @@ function Paardenbeheer() {
                 await api.delete(
                     `/horseHealths/${health.id}`,
                     {
-                        headers:{
-                            Authorization:`Bearer ${token}`
+                        headers: {
+                            Authorization: `Bearer ${token}`
                         }
                     }
                 );
@@ -191,8 +191,8 @@ function Paardenbeheer() {
             const assignmentsResponse = await api.get(
                 `/horses/${horseId}/careTaskAssignments`,
                 {
-                    headers:{
-                        Authorization:`Bearer ${token}`
+                    headers: {
+                        Authorization: `Bearer ${token}`
                     }
                 }
             );
@@ -202,8 +202,8 @@ function Paardenbeheer() {
                 await api.delete(
                     `/careTaskAssignments/${assignment.id}`,
                     {
-                        headers:{
-                            Authorization:`Bearer ${token}`
+                        headers: {
+                            Authorization: `Bearer ${token}`
                         }
                     }
                 );
@@ -214,8 +214,8 @@ function Paardenbeheer() {
             await api.delete(
                 `/horses/${horseId}`,
                 {
-                    headers:{
-                        Authorization:`Bearer ${token}`
+                    headers: {
+                        Authorization: `Bearer ${token}`
                     }
                 }
             );
@@ -228,7 +228,7 @@ function Paardenbeheer() {
             );
 
 
-        } catch(error){
+        } catch (error) {
             console.error(error);
         }
     }
@@ -259,7 +259,7 @@ function Paardenbeheer() {
             return new Date(b.birthDate) - new Date(a.birthDate);
         }
 
-        if (sortOption === "age-young") {
+        if (sortOption === "age-old") {
             return new Date(a.birthDate) - new Date(b.birthDate);
         }
         return 0;
@@ -316,54 +316,69 @@ function Paardenbeheer() {
                     </div>
 
                     {showFilter && (
-                        <select
-                            value={filter}
-                            onChange={(e) => setFilter(e.target.value)}
-                        >
-                            <option value="all">
-                                Alle paarden
-                            </option>
+                        <>
+                            <label
+                                htmlFor="horse-filter">
+                                Toon paarden:
+                            </label>
+                            <select
+                                id="horse-filter"
+                                value={filter}
+                                onChange={(e) => setFilter(e.target.value)}
+                            >
+                                <option value="all">
+                                    Alle paarden
+                                </option>
 
-                            <option value="active">
-                                Actieve paarden
-                            </option>
+                                <option value="active">
+                                    Actieve paarden
+                                </option>
 
-                            <option value="inactive">
-                                Inactieve paarden
-                            </option>
-                        </select>
+                                <option value="inactive">
+                                    Inactieve paarden
+                                </option>
+                            </select>
+                        </>
                     )}
 
                     {showSort && (
-                        <select
-                            value={sortOption}
-                            onChange={(e) => setSortOption(e.target.value)}
-                        >
-                            <option value="none"
-                            >
-                                Geen sortering
-                            </option>
+                        <>
+                            <label
+                                htmlFor="horse-sort">
+                                Sorteer op:
+                            </label>
 
-                            <option value="name-ascending"
+                            <select
+                                id="horse-sort"
+                                value={sortOption}
+                                onChange={(e) => setSortOption(e.target.value)}
                             >
-                                Naam A-Z
-                            </option>
+                                <option value="none"
+                                >
+                                    Geen sortering
+                                </option>
 
-                            <option value="name-descending"
-                            >
-                                Naam Z-A
-                            </option>
+                                <option value="name-ascending"
+                                >
+                                    Naam A-Z
+                                </option>
 
-                            <option value="age-young"
-                            >
-                                Jongste eerst
-                            </option>
+                                <option value="name-descending"
+                                >
+                                    Naam Z-A
+                                </option>
 
-                            <option value="age-old"
-                            >
-                                Oudste eerst
-                            </option>
-                        </select>
+                                <option value="age-young"
+                                >
+                                    Jongste eerst
+                                </option>
+
+                                <option value="age-old"
+                                >
+                                    Oudste eerst
+                                </option>
+                            </select>
+                        </>
                     )}
 
                     <HorseTable
@@ -393,4 +408,5 @@ function Paardenbeheer() {
         </div>
     );
 }
+
 export default Paardenbeheer;
