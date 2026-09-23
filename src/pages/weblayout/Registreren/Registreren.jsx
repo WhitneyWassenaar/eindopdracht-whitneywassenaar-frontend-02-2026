@@ -3,10 +3,7 @@ import RegisterForm from '../../../components/forms/RegisterForm/RegisterForm.js
 
 function Registreren() {
     return(
-        <>
             <RegisterForm />
-        </>
     );
 }
-
 export default Registreren;

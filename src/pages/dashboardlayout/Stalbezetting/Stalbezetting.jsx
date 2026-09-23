@@ -372,7 +372,6 @@ function Stalbezetting() {
             return;
         }
 
-
         try {
 
             await api.patch(`/horses/${horse.id}`, {
@@ -400,16 +399,12 @@ function Stalbezetting() {
         }
     }
 
-
     return (
-        <>
             <div className="stalbezetting-page">
                 <h1>Stalbezetting</h1>
-
                 <label>
                     Hoeveel boxen heb je nodig?
                 </label>
-
                 <input
                     type="number"
                     min="1"
@@ -425,7 +420,6 @@ function Stalbezetting() {
                     Reset boxen
                 </button>
 
-
                 <StableTable
                 boxes={boxes}
                 horses={horses}
@@ -439,11 +433,8 @@ function Stalbezetting() {
                 setMovingHorse={setMovingHorse}
                 movingHorse={movingHorse}
                 updateHorseDates={updateHorseDates}
-
                 />
             </div>
-        </>
     );
 }
-
 export default Stalbezetting;

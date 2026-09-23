@@ -26,9 +26,7 @@ import ProtectedRoute from './components/authentication/routing/ProtectedRoute.j
 import './App.css';
 
 function App() {
-
     return (
-        <>
             <Routes>
 
                 <Route element={<WebLayout/>}>
@@ -53,8 +51,6 @@ function App() {
                 </Route>
 
             </Routes>
-        </>
     );
 }
-
 export default App;

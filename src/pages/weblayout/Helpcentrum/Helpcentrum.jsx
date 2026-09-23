@@ -3,7 +3,6 @@ import './Helpcentrum.css'
 
 function Helpcentrum() {
     return(
-        <>
             <section className="helpcentrum-page">
                 <h1>Helpcentrum</h1>
                 <ul>
@@ -12,8 +11,6 @@ function Helpcentrum() {
                     <li>test</li>
                 </ul>
             </section>
-
-        </>
     );
 }
 

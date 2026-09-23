@@ -64,6 +64,7 @@ function Zorgtaken() {
                 console.error(error);
             }
         }
+
         getCareTasks();
 
     }, [token, user])
@@ -74,37 +75,34 @@ function Zorgtaken() {
     }
 
     return (
-        <>
-            <div className="dashboard-page">
-                <h1>Zorgtaken</h1>
+        <div className="dashboard-page">
+            <h1>Zorgtaken</h1>
 
-                <CareTasksTable
-                    careTasks={careTasks}
-                    deleteCareTask={deleteCareTask}
-                    openAssignForm={openAssignForm}/>
+            <CareTasksTable
+                careTasks={careTasks}
+                deleteCareTask={deleteCareTask}
+                openAssignForm={openAssignForm}/>
 
-                {selectedCareTask && (
-                    <AssignCareTaskForm
-                        careTask={selectedCareTask}
-                        setSelectedCareTask={setSelectedCareTask}
-                    />
-                )}
+            {selectedCareTask && (
+                <AssignCareTaskForm
+                    careTask={selectedCareTask}
+                    setSelectedCareTask={setSelectedCareTask}
+                />
+            )}
 
-                <Button
-                    onClick={() => setShowForm(true)}
-                >
-                    Zorgtaak toevoegen
-                </Button>
+            <Button
+                onClick={() => setShowForm(true)}
+            >
+                Zorgtaak toevoegen
+            </Button>
 
-
-                {showForm && (
-                    <CreateCareTaskForm
-                        addCareTask={addCareTask}
-                        setShowForm={setShowForm}
-                    />
-                )}
-            </div>
-        </>
+            {showForm && (
+                <CreateCareTaskForm
+                    addCareTask={addCareTask}
+                    setShowForm={setShowForm}
+                />
+            )}
+        </div>
     )
 }
 

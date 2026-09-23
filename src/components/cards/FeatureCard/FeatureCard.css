@@ -31,10 +31,6 @@
     gap: 10px;
 }
 
-.feature-list--default ul {
-    padding-left: 20px;
-}
-
 .feature-card-wrapper--reverse {
     display: flex;
     flex-direction: row-reverse;
@@ -60,8 +56,8 @@
     font-size: 35px;
 }
 
-.feature-list--default ul,
-.feature-list--reverse ul {
+.feature-list--default,
+.feature-list--reverse {
 
     padding-left: 20px;
 }
