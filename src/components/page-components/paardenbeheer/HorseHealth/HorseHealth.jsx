@@ -61,35 +61,24 @@ function HorseHealth({horse}) {
     }
 
     return (
-        <div>
-            <h2>
-                Gezondheid
-            </h2>
-
-
+        <section>
+            <h2>Gezondheid</h2>
             {!health && !showForm && (
-
                 <button
                     onClick={() => setShowForm(true)}
                 >
                     Vul gezondheidsgegevens in
                 </button>
-
             )}
 
-
             {showForm && (
-
                 <HorseHealthForm
                     horse={horse}
                     onSaved={reloadHealth}
                 />
-
             )}
 
-
             {health && !showForm && (
-
                 <div className="health-overview">
 
                     <p>
@@ -123,20 +112,14 @@ function HorseHealth({horse}) {
                         {health.notes || "Geen bijzonderheden"}
                     </p>
 
-
                     <button
                         onClick={() => setShowForm(true)}
                     >
                         Wijzigen
                     </button>
-
                 </div>
-
             )}
-
-        </div>
+        </section>
     );
 }
-
-
 export default HorseHealth;

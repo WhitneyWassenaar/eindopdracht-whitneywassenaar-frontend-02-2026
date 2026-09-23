@@ -9,7 +9,6 @@ import './DashboardLayout.css'
 
 function DashboardLayout() {
     return (
-        <>
             <div className="dashboard-layout">
                 <aside className="dashboard-sidebar">
                     <UserNavbar/>
@@ -19,7 +18,6 @@ function DashboardLayout() {
                     <Outlet/>
                 </main>
             </div>
-        </>
     );
 }
 

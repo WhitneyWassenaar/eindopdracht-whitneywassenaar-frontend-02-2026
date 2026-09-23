@@ -12,56 +12,51 @@ import HorseAppointments from "../HorseAppointments/HorseAppointments.jsx";
 function HorseDetailTabs({horse}) {
     const [activeTab, setActiveTab] = useState("1")
     return (
-        <div>
-            <div>
-                <Button
-                    variant={"tab"}
-                    className={activeTab === "1" ? "active" : ""}
-                    onClick={() => setActiveTab("1")}
-                >
-                    Gezondheid
-                </Button>
+        <section>
+            <Button
+                variant={"tab"}
+                className={activeTab === "1" ? "active" : ""}
+                onClick={() => setActiveTab("1")}
+            >
+                Gezondheid
+            </Button>
 
-                <Button
-                    variant={"tab"}
-                    className={activeTab === "2" ? "active" : ""}
-                    onClick={() => setActiveTab("2")}
-                >
-                    Zorgtaken
-                </Button>
+            <Button
+                variant={"tab"}
+                className={activeTab === "2" ? "active" : ""}
+                onClick={() => setActiveTab("2")}
+            >
+                Zorgtaken
+            </Button>
 
-                <Button
-                    variant={"tab"}
-                    className={activeTab === "3" ? "active" : ""}
-                    onClick={() => setActiveTab("3")}
-                >
-                    Afspraken
-                </Button>
-            </div>
+            <Button
+                variant={"tab"}
+                className={activeTab === "3" ? "active" : ""}
+                onClick={() => setActiveTab("3")}
+            >
+                Afspraken
+            </Button>
 
             <div className="tab-content">
                 {activeTab === "1" && (
-                    <div id="1">
-                       <HorseHealth
-                           horse={horse}/>
-                    </div>
+                    <HorseHealth
+                        horse={horse}
+                    />
                 )}
 
                 {activeTab === "2" && (
-                    <div id="2">
-                       <HorseCareTasks
-                       horse={horse}/>
-                    </div>
+                    <HorseCareTasks
+                        horse={horse}
+                    />
                 )}
 
                 {activeTab === "3" && (
-                    <div id="3">
-                        <HorseAppointments
-                        horse={horse}/>
-                    </div>
+                    <HorseAppointments
+                        horse={horse}
+                    />
                 )}
             </div>
-        </div>
+        </section>
     );
 }
 
