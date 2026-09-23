@@ -22,7 +22,6 @@ function Functies() {
                         variant={"reverse"}
                         ellipseVariant={"functies"}
                     />
-
                 </section>
                 <svg className="hero-curve-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                     <g
@@ -47,14 +46,12 @@ function Functies() {
                         imgAlt={"An image of a chestnut horse looking out the stable"}
                         variant={"default"}
                     >
-                        <div className="feature-list--default">
-                            <ul>
+                            <ul className="feature-list--default">
                                 <li>Maak paardenprofielen aan</li>
                                 <li>Koppel paarden met contactpersonen</li>
                                 <li>Voeg medische gegevens toe in het paardenprofiel</li>
                                 <li>Zet paarden op actief of inactief</li>
                             </ul>
-                        </div>
                     </FeatureCard>
 
                     <FeatureCard
@@ -63,14 +60,12 @@ function Functies() {
                         imgUrl={featureImg1}
                         imgAlt={"An image of a chestnut horse looking out the stable"}
                         variant={"reverse"}>
-                        <div className="feature-list--reverse">
-                            <ul>
+                            <ul className="feature-list--reverse">
                                 <li>Registreer (aankomende) behandelingen</li>
                                 <li>Dierenartsverslagen bewaren</li>
                                 <li>Vaccinaties bijhouden</li>
                                 <li>Registreer voeding en supplementen</li>
                             </ul>
-                        </div>
                     </FeatureCard>
 
                     <FeatureCard
@@ -79,15 +74,13 @@ function Functies() {
                         imgUrl={featureImg1}
                         imgAlt={"An image of a chestnut horse looking out the stable"}
                         variant={"default"}>
-                        <div className="feature-list--default">
-                            <ul>
+                            <ul className="feature-list--default">
                                 <li>Overzicht van de dagelijkse verzorging</li>
                                 <li>Eenvoudig af te vinken</li>
                                 <li>Wijs zorgtaken aan een specifiek paard toe</li>
                                 <li>Maak zelf zorgtaken aan</li>
                                 <li>Wijzig op ieder moment</li>
                             </ul>
-                        </div>
                     </FeatureCard>
 
                     <FeatureCard
@@ -96,13 +89,11 @@ function Functies() {
                         imgUrl={featureImg1}
                         imgAlt={"An image of a chestnut horse looking out the stable"}
                         variant={"reverse"}>
-                        <div className="feature-list--reverse">
-                            <ul>
+                            <ul className="feature-list--reverse">
                                 <li>Maak slimme keuzes op basis van de statistieken in het dashboard</li>
                                 <li>Mis nooit de belangrijkste taken en afspraken</li>
                                 <li>Inzicht in stalbezetting en weideplekken</li>
                             </ul>
-                        </div>
                     </FeatureCard>
 
                     <FeatureCard
@@ -112,13 +103,11 @@ function Functies() {
                         imgAlt={"An image of a chestnut horse looking out the stable"}
                         variant={"default"}
                     >
-                        <div className="feature-list--default">
-                            <ul>
+                            <ul className="feature-list--default">
                                 <li>Meerdere contactpersonen koppelen aan één paard</li>
                                 <li>Inzicht in rollen of relaties</li>
                                 <li>Bewerk detailpagina van elk contactpersoon</li>
                             </ul>
-                        </div>
                     </FeatureCard>
 
                     <FeatureCard
@@ -127,13 +116,11 @@ function Functies() {
                         imgUrl={featureImg1}
                         imgAlt={"An image of a chestnut horse looking out the stable"}
                         variant={"reverse"}>
-                        <div className="feature-list--default">
-                            <ul>
+                            <ul className="feature-list--reverse">
                                 <li>Filter bij contactpersonen op rol (verzorger, dierenarts, hoefsmid etc.)</li>
                                 <li>Zoek op naam van paarden of contactpersonen</li>
                                 <li>Sorteer paarden op status, naam, ras, locatie etc.</li>
                             </ul>
-                        </div>
                     </FeatureCard>
                     {/*<svg className="curve-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">*/}
                     {/*    <g transform="scale(-1,1) translate(-1440,0)"><path fill="var(--background-color)" fill-opacity="1" d="M0,32L120,74.7C240,117,480,203,720,250.7C960,299,1200,309,1320,314.7L1440,320L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></g></svg>*/}

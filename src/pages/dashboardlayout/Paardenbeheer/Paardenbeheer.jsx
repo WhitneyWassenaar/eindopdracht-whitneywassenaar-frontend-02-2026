@@ -267,11 +267,9 @@ function Paardenbeheer() {
 
     return (
         <div className="paardenbeheer-page">
-
             <h1>Paardenbeheer</h1>
-
             {selectedHorse ? (
-                <>
+                <section>
                     <Button
                         type="button"
                         onClick={() => setSelectedHorse(null)}
@@ -285,9 +283,9 @@ function Paardenbeheer() {
                         setHorses={setHorses}
                         setSelectedHorse={setSelectedHorse}
                     />
-                </>
+                </section>
             ) : (
-                <>
+                <section>
                     <p>
                         Totaal aantal paardenprofielen:
                         <strong>{horses.length}</strong>
@@ -390,10 +388,9 @@ function Paardenbeheer() {
                             contacts={contacts}
                         />
                     )}
-                </>
+                </section>
             )}
         </div>
     );
 }
-
 export default Paardenbeheer;
