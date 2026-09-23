@@ -159,7 +159,7 @@ function HorseAppointments({horse}) {
             )}
 
             {!showForm && (
-                <>
+
                     <div className="appointment-list">
                     {appointments.map((appointment)=>(
 
@@ -206,7 +206,7 @@ function HorseAppointments({horse}) {
 
                     ))}
                     </div>
-                </>
+
             )}
 
             {!showForm && (

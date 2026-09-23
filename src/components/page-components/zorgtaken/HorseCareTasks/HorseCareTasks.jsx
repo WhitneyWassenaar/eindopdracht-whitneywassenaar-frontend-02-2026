@@ -103,7 +103,7 @@ function HorseCareTasks({horse}) {
 
                     }).map((assignment) => (
 
-                        <div
+                        <article
                             key={assignment.id}
                             className="caretask-card"
                         >
@@ -133,7 +133,7 @@ function HorseCareTasks({horse}) {
                                     Voltooien
                                 </button>
                             )}
-                        </div>
+                        </article>
                     ))}
             </div>
         </div>
