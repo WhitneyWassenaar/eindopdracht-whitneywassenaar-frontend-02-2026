@@ -9,6 +9,7 @@
     max-width: 1120px;
     width: 100%;
     margin: 1.25rem auto 0;
+    box-sizing: border-box;
 }
 
 /* ====================
@@ -71,6 +72,8 @@
 
     .hero-article-wrapper {
         align-items: center;
+        width: 100%;
+        max-width: 100%;
     }
 
     .hero img {

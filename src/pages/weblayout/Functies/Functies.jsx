@@ -5,6 +5,11 @@ import FeatureCard from '../../../components/cards/FeatureCard/FeatureCard.jsx';
 // Assets
 import featureImg1 from '../../../assets/functies/featureImg1.jpg';
 import greyHorse from '../../../assets/functies/greyHorse.png';
+import medical from '../../../assets/functies/medical.jpg';
+import brushHorse from '../../../assets/functies/brushhorse.jpg';
+import pastureHorse from '../../../assets/functies/pastureHorse.png';
+import careTakers from '../../../assets/functies/caretakers.jpg';
+import sorteren from '../../../assets/functies/sorteren.png';
 // CSS
 import './Functies.css';
 
@@ -57,8 +62,8 @@ function Functies() {
                     <FeatureCard
                         title={"Gezondheidsdossier"}
                         articleClassName={"feature-card--reverse"}
-                        imgUrl={featureImg1}
-                        imgAlt={"An image of a chestnut horse looking out the stable"}
+                        imgUrl={medical}
+                        imgAlt={"An image of a chestnut horse getting a medicine shot"}
                         variant={"reverse"}>
                             <ul className="feature-list--reverse">
                                 <li>Registreer (aankomende) behandelingen</li>
@@ -71,8 +76,8 @@ function Functies() {
                     <FeatureCard
                         title={"Zorgtaken"}
                         articleClassName={"feature-card--default"}
-                        imgUrl={featureImg1}
-                        imgAlt={"An image of a chestnut horse looking out the stable"}
+                        imgUrl={brushHorse}
+                        imgAlt={"An image of a chestnut horse getting brushed"}
                         variant={"default"}>
                             <ul className="feature-list--default">
                                 <li>Overzicht van de dagelijkse verzorging</li>
@@ -86,8 +91,8 @@ function Functies() {
                     <FeatureCard
                         title={"Planning en afspraken"}
                         articleClassName={"feature-card--reverse"}
-                        imgUrl={featureImg1}
-                        imgAlt={"An image of a chestnut horse looking out the stable"}
+                        imgUrl={pastureHorse}
+                        imgAlt={"An image of horses in the pasture"}
                         variant={"reverse"}>
                             <ul className="feature-list--reverse">
                                 <li>Maak slimme keuzes op basis van de statistieken in het dashboard</li>
@@ -99,7 +104,7 @@ function Functies() {
                     <FeatureCard
                         title={"Contactpersonen"}
                         articleClassName={"feature-card--default"}
-                        imgUrl={featureImg1}
+                        imgUrl={careTakers}
                         imgAlt={"An image of a chestnut horse looking out the stable"}
                         variant={"default"}
                     >
@@ -113,13 +118,13 @@ function Functies() {
                     <FeatureCard
                         title={"Overzicht & filters"}
                         articleClassName={"feature-card--reverse"}
-                        imgUrl={featureImg1}
+                        imgUrl={sorteren}
                         imgAlt={"An image of a chestnut horse looking out the stable"}
                         variant={"reverse"}>
                             <ul className="feature-list--reverse">
                                 <li>Filter bij contactpersonen op rol (verzorger, dierenarts, hoefsmid etc.)</li>
                                 <li>Zoek op naam van paarden of contactpersonen</li>
-                                <li>Sorteer paarden op status, naam, ras, locatie etc.</li>
+                                <li>Sorteer paarden op alfabetische volgorde en leeftijd</li>
                             </ul>
                     </FeatureCard>
                     {/*<svg className="curve-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">*/}

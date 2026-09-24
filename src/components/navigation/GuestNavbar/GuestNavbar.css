@@ -7,6 +7,7 @@
 .nav {
     width: 100%;
     padding: 0 10px;
+    box-sizing: border-box;
 }
 
 /* ====================
@@ -88,7 +89,7 @@
 /* ===============================================
                                           TABLET
 ================================================ */
-@media (max-width: 800px) {
+@media (max-width:1000px) {
     .hamburger-menu {
         display: flex;
     }
