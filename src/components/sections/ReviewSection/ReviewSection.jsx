@@ -14,15 +14,15 @@ function ReviewSection() {
         <section className="review-section">
             <ReviewCard
                 profileImgUrl={reviewer1}
-                profileImgAlt={"Profile picture from the reviewer Justin van Dam"}
-                personName={"Justin van dam"}
+                profileImgAlt={"Profile picture of the reviewer Justin van Dam"}
+                personName={"Justin van Dam"}
                 stableName={"Stal Horse Paradise"}
                 reviewText={"Ik heb veel meer rust en overzicht met alles wat te maken heeft met management, paarden en stal. "}
             />
 
             <ReviewCard
                 profileImgUrl={reviewer2}
-                profileImgAlt={"Profile picture from the reviewer mario Hoeven"}
+                profileImgAlt={"Profile picture of the reviewer Mario Hoeven"}
                 personName={"Mario Hoeven"}
                 stableName={"Stal Vrijheidshoeve"}
                 reviewText={"EquiManager zorgt er voor dat ik alle taken makkelijk kan bijhouden. Ik ben er super blij mee!"}

@@ -4,7 +4,9 @@
     padding: 20px;
 }
 
-.dashboard-page h1,h2,p {
+.dashboard-page h1,
+.dashboard-page h2,
+.dashboard-page p {
     color: var(--background-color);
 }
 

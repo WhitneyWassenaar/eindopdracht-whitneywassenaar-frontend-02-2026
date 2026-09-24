@@ -1,19 +1,19 @@
-.feature-card-wrapper--default {
-    display: flex;
-    gap: 80px;
-    /*border: 4px red solid;*/
-}
-
 .feature-card--default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     border-radius: 20px;
     background-color: var(--background-color);
-    /*border: 5px solid var(--primary-color);*/
     color: var(--text-color);
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     padding: 20px;
+}
+
+.feature-card-wrapper--default {
+    display: flex;
+    gap: 5rem;
+    /*border: 4px red solid;*/
 }
 
 .feature-card--default h2 {
@@ -28,13 +28,13 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 0.6rem;
 }
 
 .feature-card-wrapper--reverse {
     display: flex;
     flex-direction: row-reverse;
-    gap: 80px;
+    gap: 5rem;
     /*border: 4px green solid;*/
 }
 
@@ -46,7 +46,8 @@
     background-color: var(--tertiary-color);
     /*border: 5px solid var(--primary-color);*/
     color: var(--background-color);
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     padding: 10px;
 }
 
@@ -59,5 +60,5 @@
 .feature-list--default,
 .feature-list--reverse {
 
-    padding-left: 20px;
+    padding-left: 1.25rem;
 }
