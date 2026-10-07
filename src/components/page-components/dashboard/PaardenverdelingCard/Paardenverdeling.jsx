@@ -1,7 +1,7 @@
 // Components
 import DashboardCard from '../DashboardCard/DashboardCard.jsx';
 
-function PaardenverdelingCard({horses,boxes}) {
+function PaardenverdelingCard({horses, boxes}) {
     const stableCapacity = boxes?.length || 0;
 
     const horsesInStable = horses?.filter(
@@ -11,7 +11,6 @@ function PaardenverdelingCard({horses,boxes}) {
     const horsesInPasture = horses?.filter(
         horse => horse.location === "wei"
     ).length || 0;
-
 
     return (
         <DashboardCard

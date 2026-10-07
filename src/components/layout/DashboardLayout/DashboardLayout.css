@@ -1,7 +1,6 @@
 .dashboard-layout {
     display: flex;
     background-color: var(--tertiary-color);
-    align-items: stretch;
 }
 
 .dashboard-content {

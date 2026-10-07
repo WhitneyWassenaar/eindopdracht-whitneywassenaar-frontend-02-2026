@@ -21,16 +21,14 @@ function AfsprakenCard({appointments}) {
 
     return (
         <DashboardCard
-            title={"Afspraken"}
+            title="Afspraken"
         >
             <ul className="afspraken-list">
                 <li>
                     <span>Aankomende afspraken:</span>
                     <strong>{upcomingAppointments}</strong>
-
                 </li>
                 <li>
-
                     <span>Behandelingen:</span>
                     <strong>{treatments}</strong>
                 </li>

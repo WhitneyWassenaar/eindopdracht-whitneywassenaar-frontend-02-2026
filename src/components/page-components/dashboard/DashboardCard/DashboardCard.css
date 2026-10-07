@@ -1,10 +1,11 @@
 .dashboard-card {
     border: 1px solid black;
-    height:200px;
-    width: 300px;
-    padding: 10px;
+    width: 100%;
+    max-width: 30rem;
+    padding: 0.5rem;
+    margin: 0 auto;
 }
 
 .dashboard-card h2 {
-    margin-bottom:15px;
+    margin-bottom: 0.75rem
 }
