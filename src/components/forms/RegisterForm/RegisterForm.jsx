@@ -21,8 +21,9 @@ function RegisterForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [acceptToc, setAcceptToc] = useState(false)
+    const [acceptToc, setAcceptToc] = useState(false);
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     async function onFormSubmit(e) {
         e.preventDefault();
@@ -39,17 +40,17 @@ function RegisterForm() {
         }
 
         if (password.length < 8) {
-            setError("Het wachtwoord moet minimaal 8 tekens bevatten")
+            setError("Het wachtwoord moet minimaal 8 tekens bevatten");
             return;
         }
 
-        const passwordRegex =
-            /^(?=.*[A-Z])(?=.*[@#!$%^&*()_\-+=]).{8,}$/;
+        if (!/[A-Z]/.test(password)) {
+            setError("Het wachtwoord moet minimaal 1 hoofdletter bevatten");
+            return;
+        }
 
-        if (!passwordRegex.test(password)) {
-            setError(
-                "Het wachtwoord moet minimaal 8 tekens bevatten, 1 hoofdletter en 1 speciaal teken"
-            );
+        if (!/[@#!$%^&*()_\-+=]/.test(password)) {
+            setError("Het wachtwoord moet minimaal 1 speciaal teken bevatten");
             return;
         }
 
@@ -68,9 +69,8 @@ function RegisterForm() {
             );
 
             const userData = response.data;
-            console.log("New user:", userData.id);
 
-            const profileResponse = await api.post("/userProfiles",
+            await api.post("/userProfiles",
                 {
                     userId: userData.id,
                     firstName: cleanFirstName,
@@ -81,9 +81,11 @@ function RegisterForm() {
 
             localStorage.setItem("userId", userData.id);
 
-            console.log("New profile:", profileResponse.data);
+            setSuccess("Account succesvol aangemaakt! Je wordt doorgestuurd naar de inlogpagina.");
 
-            navigate("/inloggen");
+            setTimeout(() => {
+                navigate("/inloggen");
+            }, 5000);
 
         } catch (error) {
             setError(error.response?.data?.error || "Er is iets mis gegaan...");
@@ -91,130 +93,148 @@ function RegisterForm() {
     }
 
     return (
-        <form
-            className="register-form"
-            onSubmit={onFormSubmit}
-        >
-            <label
-            htmlFor="first-name"
-            >
-                Voornaam
-            </label>
-            <input
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                className="input"
-                type="text"
-                id="first-name"
-                name="first-name"
-                required
-                minLength="2"
-                maxLength="20"
-            />
-
-            <label htmlFor="last-name"
-            >
-                Achternaam
-            </label>
-            <input
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                className="input"
-                type="text"
-                id="last-name"
-                name="last-name"
-                required
-                minLength="2"
-                maxLength="20"
-            />
-
-            <label
-                htmlFor="stable-name"
-            >
-                Stalnaam
-            </label>
-            <input
-                value={stableName}
-                onChange={(e) => setStableName(e.target.value)}
-                className="input"
-                type="text"
-                id="stable-name"
-                name="stable-name"
-                required
-                minLength="5"
-                maxLength="30"
-            />
-
-            <label htmlFor="e-mail"
-            >
-                E-mail
-            </label>
-
-            <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input"
-                type="email"
-                id="e-mail"
-                name="e-mail"
-                required
-                maxLength="25"
-            />
-
-            <label
-                htmlFor="password"
-            >
-                Wachtwoord
-            </label>
-            <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input"
-                type="password"
-                id="password"
-                name="password"
-                required
-            />
-
-            <label htmlFor="confirm-password"
-            >
-                Herhaal wachtwoord
-            </label>
-            <input
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="input"
-                type="password"
-                id="confirm-password"
-                name="confirm-password"
-                required
-            />
-
-            <label htmlFor="accept-tos">
-                Ik ga akkoord met de voorwaarden
-            </label>
-                <input
-                    id="accept-tos"
-                    checked={acceptToc}
-                    onChange={(e) => setAcceptToc(e.target.checked)}
-                    type="checkbox"
-                    required/>
-
-
-
-            {error && (
-                <p className="error-message"
+                <form
+                    className="register-form"
+                    onSubmit={onFormSubmit}
                 >
-                    {error}
-                </p>
-            )}
+                    <label
+                        htmlFor="first-name"
+                        className="register-form-label"
+                    >
+                        Voornaam
+                    </label>
+                    <input
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        className="register-form-input"
+                        type="text"
+                        id="first-name"
+                        name="first-name"
+                        required
+                        minLength="2"
+                        maxLength="50"
+                    />
 
-            <Button
-                type={"submit"}
-            >
-                Registreren
-            </Button>
-        </form>
+                    <label
+                        htmlFor="last-name"
+                        className="register-form-label"
+                    >
+                        Achternaam
+                    </label>
+                    <input
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        className="register-form-input"
+                        type="text"
+                        id="last-name"
+                        name="last-name"
+                        required
+                        minLength="2"
+                        maxLength="50"
+                    />
+
+                    <label
+                        htmlFor="stable-name"
+                        className="register-form-label"
+                    >
+                        Stalnaam
+                    </label>
+                    <input
+                        value={stableName}
+                        onChange={(e) => setStableName(e.target.value)}
+                        className="register-form-input"
+                        type="text"
+                        id="stable-name"
+                        name="stable-name"
+                        required
+                        minLength="5"
+                        maxLength="50"
+                    />
+
+                    <label
+                        htmlFor="e-mail"
+                        className="register-form-label"
+                    >
+                        E-mail
+                    </label>
+
+                    <input
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="register-form-input"
+                        type="email"
+                        id="e-mail"
+                        name="e-mail"
+                        required
+                        maxLength="50"
+                    />
+
+                    <label
+                        htmlFor="password"
+                        className="register-form-label"
+                    >
+                        Wachtwoord
+                    </label>
+                    <input
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="register-form-input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                    />
+
+                    <label
+                        htmlFor="confirm-password"
+                        className="register-form-label"
+                    >
+                        Herhaal wachtwoord
+                    </label>
+                    <input
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="register-form-input"
+                        type="password"
+                        id="confirm-password"
+                        name="confirm-password"
+                        required
+                    />
+
+                    <div className="register-form-checkbox">
+                        <input
+                            id="accept-tos"
+                            checked={acceptToc}
+                            onChange={(e) => setAcceptToc(e.target.checked)}
+                            type="checkbox"
+                            required
+                        />
+                        <label
+                            htmlFor="accept-tos"
+                        >
+                            Ik ga akkoord met de voorwaarden
+                        </label>
+                    </div>
+
+                    {error && (
+                        <p className="register-form-error-message"
+                        >
+                            {error}
+                        </p>
+                    )}
+
+                    {success && (
+                        <p className="register-form-success-message">
+                            {success}
+                        </p>
+                    )}
+
+                    <Button
+                        type={"submit"}
+                    >
+                        Registreren
+                    </Button>
+                </form>
     );
 }
 

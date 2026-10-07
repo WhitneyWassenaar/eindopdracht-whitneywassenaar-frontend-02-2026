@@ -5,33 +5,37 @@
     align-items: flex-start;
     justify-content: center;
     color: var(--text-color);
-    padding: 20px;
+    padding: 1.25rem;
     margin: 0 auto;
-    max-width: 500px;
+    max-width: 31.25rem;
+    width: 100%;
 }
 
-.register-text {
-    font-size: 12px;
-    margin: 5px;
+.login-form-register-text {
+    font-size: 0.8rem;
+    margin: 0.5rem 0 0.5rem;
 }
 
-.register-text a {
+.login-form-register-text a {
     color: var(--validation-color);
-    padding-left: 10px;
+    padding-left: 0.625rem;
     text-decoration: none;
 }
 
-.input {
-    max-width: 700px;
-    width: 100%;
-    height: 20px;
-    font-size: 20px;
-    padding: 15px 0 15px 0;
+.login-form-label {
+    margin-top: 1.25rem;
 }
 
-.error-message {
-    color: #770303;
-    padding: 20px 0 20px 0;
-    font-weight: 500;
+.login-form-input {
+    max-width: 30rem;
+    width: 100%;
+    height: 1.25rem;
+    font-size: 1.25rem;
+    padding: 0.9375rem 0;
+}
 
+.login-form-error-message {
+    color: var(--error-color);
+    padding: 1.25rem 0;
+    font-weight: 500;
 }

@@ -5,18 +5,19 @@ import {Outlet} from 'react-router-dom';
 import Navbar from '../../navigation/Navbar.jsx';
 import Footer from '../Footer/Footer.jsx';
 
+// CSS
+import './WebLayout.css'
+
 function WebLayout() {
     return (
-        <>
-            <Navbar />
-            <div className="inner-container">
-                <Outlet />
+            <div className="web-layout">
+                <Navbar/>
+                <main className="inner-container">
+                    <Outlet/>
+                </main>
+                <Footer/>
             </div>
-            <Footer/>
-        </>
     );
 }
 
 export default WebLayout;
-
-// Check of setIsLoggedIn nog  nodig is.

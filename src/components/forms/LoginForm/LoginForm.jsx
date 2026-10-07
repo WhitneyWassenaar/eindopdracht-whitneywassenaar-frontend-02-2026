@@ -14,15 +14,12 @@ import api from "../../../api/axios.js";
 // CSS
 import './LoginForm.css'
 
-
 function LoginForm() {
     const navigate = useNavigate();
-
     const {login} = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-
 
     async function onFormSubmit(e) {
         e.preventDefault();
@@ -71,9 +68,6 @@ function LoginForm() {
                 loginData.token
             );
 
-
-            console.log("Profile:", profileResponse.data);
-
             navigate("/dashboard");
 
         } catch (error) {
@@ -95,31 +89,30 @@ function LoginForm() {
             <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input"
+                className="login-form-input"
                 type="email"
                 id="e-mail"
                 name="e-mail"
                 required
-                size="30"
             />
 
             <label
                 htmlFor="password"
+                className="login-form-label"
             >
                 Wachtwoord
             </label>
             <input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input"
+                className="login-form-input"
                 type="password"
                 id="password"
                 name="password"
                 required
-                size="30"
             />
 
-            <p className="register-text">
+            <p className="login-form-register-text">
                 Nog geen account?
                 <Link to="/registreren">
                     Registreer!
@@ -127,14 +120,14 @@ function LoginForm() {
             </p>
 
             {error && (
-                <p className="error-message">
+                <p className="login-form-error-message">
                     {error}
                 </p>
             )}
 
             <Button
-                type={"submit"}
-                variant={"default"}
+                type="submit"
+                variant="default"
             >
                 Inloggen
             </Button>
