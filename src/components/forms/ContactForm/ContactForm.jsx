@@ -11,20 +11,18 @@ function ContactForm() {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [message, setMessage] = useState("")
-    const [succes, setSucces] = useState("")
-    const [error, setError] = useState("");
+    const [message, setMessage] = useState("");
+    const [success, setSuccess] = useState("");
 
     function onFormSubmit(e) {
         e.preventDefault();
-        setError("");
-        setSucces("");
+        setSuccess("");
 
-        setSucces("Bedankt voor je bericht!");
+        setSuccess("Bericht succesvol verzonden!");
 
-        setName("")
-        setEmail("")
-        setMessage("")
+        setName("");
+        setEmail("");
+        setMessage("");
     }
 
     return (
@@ -32,59 +30,55 @@ function ContactForm() {
             className="contact-form"
             onSubmit={onFormSubmit}
         >
-            <label htmlFor="name" className="label">Naam</label>
+            <label htmlFor="name" className="contact-form-label">Naam</label>
             <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="input"
+                className="contact-form-input"
                 type="text"
                 id="name"
                 name="name"
                 required
                 minLength="2"
-                maxLength="12"
-                size="12"
+                maxLength="50"
             />
-            <label htmlFor="e-mail" className="label">E-mail</label>
+            <label htmlFor="e-mail" className="contact-form-label">E-mail</label>
             <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input"
+                className="contact-form-input"
                 type="email"
                 id="e-mail"
                 name="e-mail"
+                maxLength="50"
                 required
-                size="30"
+
             />
-            <label htmlFor="contact-message" className="label">Bericht</label>
+            <label htmlFor="contact-message" className="contact-form-label">Bericht</label>
             <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="text-area"
+                className="contact-form-text-area"
                 id="contact-message"
                 name="contact-message"
                 rows="10"
+                maxLength="1000"
                 required
                 placeholder="Begin hier met het schrijven van jouw bericht...">
             </textarea>
 
-            {error && (
-                <p className="error-message">
-                    {error}
-                </p>
-            )}
-
-            {succes && (
-                <p className="succes-message">
-                    {succes}
-                </p>
-            )}
             <Button
-                type={"submit"}
-                variant={"default"}
+                type="submit"
+                variant="default"
             >
                 Verzenden
             </Button>
+
+            {success && (
+                <p className="contact-form-success-message">
+                    {success}
+                </p>
+            )}
         </form>
     );
 }
