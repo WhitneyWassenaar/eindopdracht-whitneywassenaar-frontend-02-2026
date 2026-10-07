@@ -7,6 +7,8 @@ function Sidebar({menuOpen}) {
             <a href="/">Home</a>
             <a href="/functies">Functies</a>
             <a href="/contact">Contact</a>
+            <a href="/inloggen">Inloggen</a>
+            <a href="/registreren">Registreren</a>
         </aside>
     );
 }

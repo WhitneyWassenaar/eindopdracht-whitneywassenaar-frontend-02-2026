@@ -2,27 +2,25 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content:space-between ;
+    justify-content: space-between;
     min-height: 100vh;
     width: 250px;
-    background-color:#002237;
-    padding: 10px;
-    /*border: 1px solid var(--primary-color);*/
+    flex-shrink: 0;
+    background-color: #002237;
+    padding: 0.625rem;
 }
 
-.nav__top img{
+.nav__top img {
     width: 100%;
-    /*border:1px red solid;*/
 }
-.user-nav ul  {
+
+.user-nav ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
-}
-
-.nav-content-wrapper {
-    /*border:1px solid yellowgreen;*/
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .nav__logout {
@@ -38,13 +36,69 @@
     text-decoration: none;
 }
 
-/* ====================
-        NAV ACTIVE
-==================== */
 .active-menu-link {
-    border-bottom: 1px solid var(--primary-color)
+    border-bottom: 1px solid var(--primary-color);
 }
 
 .default-menu-link {
-    border-bottom: none;;
+    border-bottom: none;
+}
+
+.dashboard-hamburger {
+    display: none;
+}
+
+/* ====================
+        TABLET / MOBIEL
+==================== */
+
+@media (max-width: 800px) {
+
+    .user-nav {
+        width: 100%;
+        min-height: auto;
+        padding: 0.5rem 1rem;
+        flex-direction: column;
+    }
+
+    .nav-content-wrapper {
+        width: 100%;
+    }
+
+    .nav__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .nav__top img {
+        width: 6rem;
+    }
+
+    .dashboard-hamburger {
+        display: flex;
+    }
+
+    .nav-menu-items {
+        display: none !important;
+        width: 100%;
+        padding-top: 1rem !important;
+        gap: 1rem;
+    }
+
+    .user-nav--open .nav-menu-items {
+        display: flex !important;
+        flex-direction: column;
+    }
+
+    .nav__logout {
+        display: none;
+    }
+
+    .user-nav--open .nav__logout {
+        display: flex;
+        width: 100%;
+        margin-top: 1rem;
+    }
 }
