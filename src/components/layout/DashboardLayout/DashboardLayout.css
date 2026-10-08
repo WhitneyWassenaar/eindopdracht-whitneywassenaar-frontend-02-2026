@@ -6,6 +6,8 @@
 .dashboard-content {
     flex: 1;
     min-height: 100vh;
+    border: 1px solid green;
+
 }
 
 @media (max-width: 800px) {

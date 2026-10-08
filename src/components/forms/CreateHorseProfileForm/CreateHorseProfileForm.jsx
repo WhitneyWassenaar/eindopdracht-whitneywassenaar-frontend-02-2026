@@ -266,6 +266,15 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                 >
                     Paardenprofiel aanmaken
                 </Button>
+
+                <Button
+                    type="button"
+                    onClick={() => {
+                        setShowForm(false);
+                    }}
+                >
+                    Annuleren
+                </Button>
             </fieldset>
         </form>
     );

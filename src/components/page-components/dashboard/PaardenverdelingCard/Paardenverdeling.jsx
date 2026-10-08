@@ -14,7 +14,7 @@ function PaardenverdelingCard({horses, boxes}) {
 
     return (
         <DashboardCard
-            title={"Paardenverdeling"}
+            title="Paardenverdeling"
         >
             <ul className="paardenverdeling-list">
                 <li>

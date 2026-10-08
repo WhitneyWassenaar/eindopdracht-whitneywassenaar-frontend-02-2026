@@ -9,3 +9,14 @@
 .paardenbeheer-page p {
     color: var(--background-color);
 }
+
+.horse-overview-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.horse-table-container {
+    max-height: 80vh;
+    overflow-y: auto;
+}

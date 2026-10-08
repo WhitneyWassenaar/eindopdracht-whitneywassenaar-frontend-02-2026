@@ -12,7 +12,7 @@ function WebLayout() {
     return (
             <div className="web-layout">
                 <Navbar/>
-                <main className="inner-container">
+                <main className="web-content">
                     <Outlet/>
                 </main>
                 <Footer/>
