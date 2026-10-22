@@ -46,8 +46,8 @@ function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, conta
 
             <td>
                 <Button
-                    type={"button"}
-                    variant={"delete"}
+                    type="button"
+                    variant="delete"
                     onClick={(e) => {
                         e.stopPropagation();
                         deleteHorse(horse.id);

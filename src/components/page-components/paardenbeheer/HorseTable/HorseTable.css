@@ -1,7 +1,7 @@
 .table-layout {
     border: 1px solid black;
-    height: auto;
-    min-width: 1000px;
+    width: 100%;
+    min-width: 0;
     background-color: #ECECEC;
     border-collapse: collapse;
 }

@@ -1,16 +1,18 @@
 .horse-appointments {
-    margin-top: 20px;
+    margin-top: 1.25rem;
+    min-width: 0
 }
 
 .appointment-card {
     border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 0.625rem;
+    margin-bottom: 0.625rem;
 }
 
 .appointment-list {
-    max-height: 500px;
+    max-height: 31.25rem;
     overflow-y: auto;
+    min-width: 0;
 }
 
 .appointment-card.due p {

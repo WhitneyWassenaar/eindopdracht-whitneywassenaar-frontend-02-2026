@@ -1,43 +1,29 @@
-// React
-import {useState} from "react";
-
 // Components
-import Button from "../../../ui/Button/Button.jsx";
+
 import HorseDetailMainInfo from '../HorseDetailMainInfo/HorseDetailMainInfo.jsx';
-import HorseRelationsForm from "../../../forms/HorseRelationsForm/HorserelationsForm.jsx";
+
 import HorseDetailTabs from "../HorseDetailTabs/HorseDetailTabs.jsx";
 
 // CSS
 import './HorseDetail.css';
 
 function HorseDetail({horse, contacts, setHorses, setSelectedHorse}) {
-    const [showForm, setShowForm] = useState(false);
-
+    console.log("HorseDetail wordt weergegeven");
     return (
         <div className="horse-detail-container">
             <HorseDetailMainInfo
                 horse={horse}
                 contacts={contacts}
             />
+            <div className="relation-and-tabs-container">
 
-            <Button
-                onClick={() => setShowForm(!showForm)}
-                variant="manage-relations"
-            >
-                Relaties beheren
-            </Button>
-
-            {showForm && (
-                <HorseRelationsForm
-                    key={horse.id}
-                    contacts={contacts}
+                <HorseDetailTabs
                     horse={horse}
+                    contacts={contacts}
                     setHorses={setHorses}
-                    setSelectedHorse={setSelectedHorse}
-                />
-            )}
-            <HorseDetailTabs
-            horse={horse}/>
+                    setSelectedHorse={setSelectedHorse}/>
+            </div>
+
         </div>
     );
 }
