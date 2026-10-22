@@ -6,6 +6,6 @@
     margin: 0 auto;
 }
 
-.dashboard-card h2 {
-    margin-bottom: 0.75rem
+.dashboard-card-heading {
+    margin-bottom: 0.75rem;
 }

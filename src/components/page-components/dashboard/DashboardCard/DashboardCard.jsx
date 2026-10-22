@@ -1,4 +1,4 @@
-// Components
+// CSS
 import './DashboardCard.css';
 
 function DashboardCard({
@@ -7,7 +7,7 @@ function DashboardCard({
                        }) {
     return (
         <div className="dashboard-card">
-            <h2>{title}</h2>
+            <h2 className="dashboard-card-heading">{title}</h2>
             {children}
         </div>
     );

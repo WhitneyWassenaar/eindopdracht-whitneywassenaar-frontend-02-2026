@@ -4,16 +4,9 @@
     padding: 1rem;
 }
 
-.dashboard-page h1,
-.dashboard-page h2,
-.dashboard-page p {
+.dashboard-page-title,
+.dashboard-page-heading {
     color: var(--background-color);
-}
-
-.dashboard-page .paardenverdeling-list,
-.dashboard-page .zorgtaken-list,
-.dashboard-page .afspraken-list {
-    list-style-type: none;
 }
 
 .dashboard-card-container {
@@ -24,7 +17,13 @@
     margin: 0 auto;
 }
 
-@media (max-width: 1220px) {
+@media (max-width: 60rem) {
+    .dashboard-card-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 40rem) {
     .dashboard-card-container {
         grid-template-columns: 1fr;
     }

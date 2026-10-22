@@ -1,6 +1,9 @@
 // Components
 import DashboardCard from '../DashboardCard/DashboardCard.jsx';
 
+// CSS
+import './AfsprakenCard.css';
+
 function AfsprakenCard({appointments}) {
     const today = new Date().toISOString().split("T")[0];
 

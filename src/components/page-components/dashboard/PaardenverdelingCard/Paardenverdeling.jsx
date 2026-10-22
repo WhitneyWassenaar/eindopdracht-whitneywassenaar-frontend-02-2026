@@ -1,6 +1,9 @@
 // Components
 import DashboardCard from '../DashboardCard/DashboardCard.jsx';
 
+// CSS
+import './Paardenverdeling.css';
+
 function PaardenverdelingCard({horses, boxes}) {
     const stableCapacity = boxes?.length || 0;
 
