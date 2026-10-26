@@ -8,11 +8,14 @@ import HorseHealth from "../HorseHealth/HorseHealth.jsx";
 // CSS
 import './HorseDetailTabs.css';
 import HorseAppointments from "../HorseAppointments/HorseAppointments.jsx";
+import HorseRelationsForm from "../../../forms/HorseRelationsForm/HorserelationsForm.jsx";
 
-function HorseDetailTabs({horse}) {
-    const [activeTab, setActiveTab] = useState("1")
+function HorseDetailTabs({horse, contacts, setHorses, setSelectedHorse}) {
+
+    const [activeTab, setActiveTab] = useState("1");
+
     return (
-        <section>
+        <section className="horse-detail-tabs-container">
             <Button
                 variant={"tab"}
                 className={activeTab === "1" ? "active" : ""}
@@ -37,6 +40,14 @@ function HorseDetailTabs({horse}) {
                 Afspraken
             </Button>
 
+            <Button
+                variant={"tab"}
+                className={activeTab === "4" ? "active" : ""}
+                onClick={() => setActiveTab("4")}
+            >
+                Relaties beheren
+            </Button>
+
             <div className="tab-content">
                 {activeTab === "1" && (
                     <HorseHealth
@@ -55,6 +66,18 @@ function HorseDetailTabs({horse}) {
                         horse={horse}
                     />
                 )}
+
+                {activeTab === "4" && (
+                    <HorseRelationsForm
+                        key={horse.id}
+                        contacts={contacts}
+                        horse={horse}
+                        setHorses={setHorses}
+                        setSelectedHorse={setSelectedHorse}
+                    />
+                )}
+
+
             </div>
         </section>
     );

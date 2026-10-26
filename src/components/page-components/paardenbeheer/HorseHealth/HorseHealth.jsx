@@ -10,6 +10,9 @@ import {AuthContext} from "../../../../context/AuthContext.jsx";
 // Api
 import api from "../../../../api/axios.js";
 
+// CSS
+import './HorseHealth.css';
+
 function HorseHealth({horse}) {
 
     const {token} = useContext(AuthContext);
@@ -30,7 +33,6 @@ function HorseHealth({horse}) {
                     }
                 );
 
-                console.log("Health:", response.data);
                 setHealth(response.data[0] || null);
 
             } catch(error){
@@ -61,7 +63,7 @@ function HorseHealth({horse}) {
     }
 
     return (
-        <section>
+        <section className="horse-health">
             <h2>Gezondheid</h2>
             {!health && !showForm && (
                 <button

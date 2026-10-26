@@ -18,8 +18,7 @@ import roles from "../../../data/roles.js";
 import './CreateContactProfileForm.css';
 
 function CreateContactProfileForm({setContacts, setShowForm}) {
-    const {token} = useContext(AuthContext);
-    const { user } = useContext(AuthContext);
+    const {token, user} = useContext(AuthContext);
     const defaultContactPhoto = "/defaultContactPhoto.png"
 
     const [firstName, setFirstName] = useState("");

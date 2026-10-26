@@ -1,5 +1,6 @@
 .stablerow-layout {
     height: 50px;
+    width: 100%;
 }
 
 .inactive-horse {
@@ -9,3 +10,24 @@
 .inactive-row {
     opacity: 0.6;
 }
+
+.stable-actions-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:0.1rem;
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+}
+
+.stable-actions-container .place-horse {
+    width: 100%;
+    max-width: 6rem;
+}
+
+.stable-actions-container .choose-box{
+    width: 100%;
+    max-width: 6rem;
+}
+

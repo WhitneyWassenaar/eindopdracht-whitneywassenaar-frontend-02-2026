@@ -17,8 +17,8 @@ function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, conta
     );
 
     return (
-        <tr className="horserow-layout"
-            onClick={() => setSelectedHorse(horse)}>
+        <tr className="horse-row-layout"
+            onClick={() => {setSelectedHorse(currentHorse => currentHorse?.id === horse.id ? null : horse);}}>
             <td>
                 <img
                     src={horse.photo || defaultHorsePhoto}
@@ -46,8 +46,8 @@ function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, conta
 
             <td>
                 <Button
-                    type={"button"}
-                    variant={"delete"}
+                    type="button"
+                    variant="delete"
                     onClick={(e) => {
                         e.stopPropagation();
                         deleteHorse(horse.id);

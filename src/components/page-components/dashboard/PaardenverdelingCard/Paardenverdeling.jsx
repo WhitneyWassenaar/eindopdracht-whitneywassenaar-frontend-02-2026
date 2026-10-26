@@ -1,7 +1,10 @@
 // Components
 import DashboardCard from '../DashboardCard/DashboardCard.jsx';
 
-function PaardenverdelingCard({horses,boxes}) {
+// CSS
+import './Paardenverdeling.css';
+
+function PaardenverdelingCard({horses, boxes}) {
     const stableCapacity = boxes?.length || 0;
 
     const horsesInStable = horses?.filter(
@@ -12,10 +15,9 @@ function PaardenverdelingCard({horses,boxes}) {
         horse => horse.location === "wei"
     ).length || 0;
 
-
     return (
         <DashboardCard
-            title={"Paardenverdeling"}
+            title="Paardenverdeling"
         >
             <ul className="paardenverdeling-list">
                 <li>

@@ -1,5 +1,5 @@
 .contactrow-layout {
-    height: 50px;
+    height: 3.125rem;
 }
 
 .contactrow-layout:hover {
@@ -12,15 +12,15 @@
 }
 
 .contact-photo {
-    width: 70px;
-    height:70px;
+    width: 4.375rem;
+    height: 4.375rem;
     object-fit: cover;
     border-radius: 50%;
 }
 
 .contact-status {
     cursor: pointer;
-    width:100px;
+    width: 6.25rem;
 }
 
 .contact-status:hover {
@@ -33,4 +33,40 @@
 
 .contact-status.inactive {
     color: red;
+}
+
+
+@media (max-width: 37.5rem) {
+    .contactrow-layout {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        height: auto;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+    }
+
+    .contactrow-layout td {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        padding: 0.5rem;
+        overflow-wrap: anywhere;
+    }
+
+    .contact-photo {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .contactrow-layout td:last-child {
+        display: flex;
+        justify-content: center;
+    }
+
+    .contact-status {
+        width: auto;
+    }
 }

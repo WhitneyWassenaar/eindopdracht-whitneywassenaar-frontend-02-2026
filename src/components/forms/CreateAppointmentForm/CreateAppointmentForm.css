@@ -10,7 +10,7 @@
 
 .createappointment-form-layout legend {
     font-weight: 600;
-    font-size:1.3rem;
+    font-size: 1.3rem;
 }
 
 .form-row {
@@ -25,5 +25,5 @@
 }
 
 .form-row label {
-    width:150px;
+    width: 150px;
 }

@@ -1,21 +1,30 @@
 .dashboard-page {
     background-color: var(--tertiary-color);
-    color:var(--background-color);
-    padding: 20px;
-}
-
-.dashboard-page h1,h2,p {
     color: var(--background-color);
+    padding: 1rem;
 }
 
-.paardenverdeling-list,
-.zorgtaken-list,
-.afspraken-list {
-    list-style-type: none;
+.dashboard-page-title,
+.dashboard-page-heading {
+    color: var(--background-color);
 }
 
 .dashboard-card-container {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+@media (max-width: 60rem) {
+    .dashboard-card-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 40rem) {
+    .dashboard-card-container {
+        grid-template-columns: 1fr;
+    }
 }

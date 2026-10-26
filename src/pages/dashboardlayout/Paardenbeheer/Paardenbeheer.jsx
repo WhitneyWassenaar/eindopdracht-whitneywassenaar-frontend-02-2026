@@ -20,22 +20,15 @@ function Paardenbeheer() {
     const [selectedHorse, setSelectedHorse] = useState(null);
     const [showForm, setShowForm] = useState(false);
     const [contacts, setContacts] = useState([]);
-
     const [filter, setFilter] = useState("all");
-    const [showFilter, setShowFilter] = useState(false);
-
     const [sortOption, setSortOption] = useState("none");
-    const [showSort, setShowSort] = useState(false);
-
     const {token, user} = useContext(AuthContext);
-    console.log("Token lengte:", token?.length);
 
     // check hoeveel user profiles er zijn en om te kijken wat hun id is
     useEffect(() => {
 
         async function checkUserProfiles() {
             try {
-
                 const response = await api.get("/userProfiles",
                     {
                         headers: {
@@ -266,147 +259,108 @@ function Paardenbeheer() {
     });
 
     return (
-        <div className="paardenbeheer-page">
-            <h1>Paardenbeheer</h1>
-            {selectedHorse ? (
-                <section>
-                    <Button
-                        type="button"
-                        onClick={() => setSelectedHorse(null)}
-                    >
-                        Terug
-                    </Button>
+        <section className="paardenbeheer-page">
+            <section className="paardenbeheer-inner-container">
+                <h1>Paardenbeheer</h1>
+                <p className="horse-profile-count">
+                    Totaal aantal paardenprofielen:{" "}
+                    <strong>{horses.length}</strong>
+                </p>
 
-                    <HorseDetail
-                        horse={selectedHorse}
-                        contacts={contacts}
-                        setHorses={setHorses}
-                        setSelectedHorse={setSelectedHorse}
-                    />
-                </section>
-            ) : (
-                <section>
-                    <p>
-                        Totaal aantal paardenprofielen:
-                        <strong>{horses.length}</strong>
-                    </p>
+                <div className="paardenbeheer-actions">
+                    <label
+                        htmlFor="horse-filter">
+                        Toon paarden: {" "}
 
-                    <div className="paardenbeheer-actions">
-                        <Button
-                            variant="filter-sort"
-                            type="button"
-                            onClick={() => {
-                                setShowFilter(!showFilter);
-                                setShowSort(false);
-                            }}
+                        <select
+                            id="horse-filter"
+                            value={filter}
+                            onChange={(e) => setFilter(e.target.value)}
                         >
-                            Filter
-                        </Button>
+                            <option value="all">Alle paarden</option>
+                            <option value="active">Actieve paarden</option>
+                            <option value="inactive">Inactieve paarden</option>
+                        </select>
+                    </label>
 
-                        <Button
-                            variant="filter-sort"
-                            type="button"
-                            onClick={() => {
-                                setShowSort(!showSort);
-                                setShowFilter(false);
-                            }}
-                        >
-                            Sorteren
-                        </Button>
-                    </div>
-
-                    {showFilter && (
-                        <>
-                            <label
-                                htmlFor="horse-filter">
-                                Toon paarden:
-                            </label>
-                            <select
-                                id="horse-filter"
-                                value={filter}
-                                onChange={(e) => setFilter(e.target.value)}
-                            >
-                                <option value="all">
-                                    Alle paarden
-                                </option>
-
-                                <option value="active">
-                                    Actieve paarden
-                                </option>
-
-                                <option value="inactive">
-                                    Inactieve paarden
-                                </option>
-                            </select>
-                        </>
-                    )}
-
-                    {showSort && (
-                        <>
-                            <label
-                                htmlFor="horse-sort">
-                                Sorteer op:
-                            </label>
-
-                            <select
-                                id="horse-sort"
-                                value={sortOption}
-                                onChange={(e) => setSortOption(e.target.value)}
-                            >
-                                <option value="none"
-                                >
-                                    Geen sortering
-                                </option>
-
-                                <option value="name-ascending"
-                                >
-                                    Naam A-Z
-                                </option>
-
-                                <option value="name-descending"
-                                >
-                                    Naam Z-A
-                                </option>
-
-                                <option value="age-young"
-                                >
-                                    Jongste eerst
-                                </option>
-
-                                <option value="age-old"
-                                >
-                                    Oudste eerst
-                                </option>
-                            </select>
-                        </>
-                    )}
-
-                    <HorseTable
-                        horses={sortedHorses}
-                        setSelectedHorse={setSelectedHorse}
-                        deleteHorse={deleteHorse}
-                        toggleHorseActive={toggleHorseActive}
-                        contacts={contacts}
-                    />
-
-                    <Button
-                        type="button"
-                        onClick={() => setShowForm(true)}
+                    <label
+                        htmlFor="horse-sort"
                     >
-                        Paardenprofiel toevoegen
-                    </Button>
+                        Sorteer op:{" "}
 
-                    {showForm && (
-                        <CreateHorseProfileForm
-                            setHorses={setHorses}
-                            setShowForm={setShowForm}
+                        <select
+                            id="horse-sort"
+                            value={sortOption}
+                            onChange={(e) => setSortOption(e.target.value)}
+                        >
+                            <option value="none">Geen sortering</option>
+                            <option value="name-ascending">Naam A-Z</option>
+                            <option value="name-descending">Naam Z-A</option>
+                            <option value="age-young">Jongste eerst</option>
+                            <option value="age-old">Oudste eerst</option>
+                        </select>
+                    </label>
+
+
+                </div>
+
+                <div className="horse-overview-content">
+                    <div className="horse-table-container">
+                        <HorseTable
+                            horses={sortedHorses}
+                            setSelectedHorse={setSelectedHorse}
+                            deleteHorse={deleteHorse}
+                            toggleHorseActive={toggleHorseActive}
                             contacts={contacts}
                         />
-                    )}
-                </section>
-            )}
-        </div>
-    );
+                    </div>
+
+                    <div className="profile-container">
+                        {showForm ? (
+                            <CreateHorseProfileForm
+                                setHorses={setHorses}
+                                setShowForm={setShowForm}
+                                contacts={contacts}
+                            />
+                        ) : selectedHorse ? (
+                            <HorseDetail
+                                horse={selectedHorse}
+                                contacts={contacts}
+                                setHorses={setHorses}
+                                setSelectedHorse={setSelectedHorse}
+                            />
+                        ) : (
+                            <div className="horse-profile-empty-state">
+                                <h2>Geen profiel geselecteerd</h2>
+                                <p>
+                                    Selecteer een paardenprofiel uit de tabel om de profielgegevens te bekijken, of maak
+                                    een
+                                    nieuw paardenprofiel aan.
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                <footer className="paardenbeheer-footer">
+                    <Button
+                        type="button"
+                        onClick={() => {
+                            setShowForm(true);
+                            setSelectedHorse(null);
+                        }}
+                    >
+                        Nieuw profiel aanmaken
+                    </Button>
+                </footer>
+
+            </section>
+        </section>
+    )
+        ;
 }
 
 export default Paardenbeheer;
+
+
+// Paardenbeheer verder afmaken

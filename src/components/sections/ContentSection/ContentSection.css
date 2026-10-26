@@ -7,17 +7,15 @@
     justify-content: center;
     background-color: var(--tertiary-color);
     border-radius: 40px;
-    height:100%;
-    gap: clamp(24px,5vw,50px);
+    gap: clamp(24px, 5vw, 50px);
     max-width: 1120px;
     width: 100%;
-    padding: 10px 0 10px 0;
-    margin: 0 auto;
-
+    padding: 0.625rem 0;
+    margin: 2rem auto;
 }
 
 /* =========================
- CONTENT SECTION VARIATIONS
+ CONTENT SECTION VARIANTS
 ========================== */
 .content-section--default {
     flex-direction: row-reverse;
@@ -32,36 +30,33 @@
 ==================== */
 .content-wrapper {
     /*border: 1px solid greenyellow;*/
-    padding: 0 10px 0 10px;
+    padding: 0 0.625rem;
 }
 
 .content-wrapper h2 {
     color: var(--background-color);
-    padding: 0 10px 10px 10px;
+    padding: 0 0.625rem 0.625rem;
 }
 
 .content-wrapper p {
     color: var(--background-color);
 }
 
-/* ========================================
-                     CONTENTSECTION CHILDREN
+/* =========================================
+   CONTENT SECTION - Wat is EquiManager?
 =========================================== */
-/* =================
-  wat-is-equimanager
-=================== */
 .contentsection-child--wat-is-equimanager {
     /*border: 1px solid var(--background-color);*/
     width: 100%;
-    padding: 10px 10px 10px;
+    padding: 0.625rem;
 }
 
 .contentsection-child--wat-is-equimanager p:not(:last-child) {
-    margin-bottom:15px;
+    margin-bottom: 0.9375rem;
 }
 
 /* =================
-  waarom-equimanager
+  CONTENT SECTION - Waarom EquiManager?
 =================== */
 .content-section--waarom-equimanager {
     background-color: transparent;
@@ -73,7 +68,7 @@
 
 .contentsection-child--waarom-equimanager {
     border: 1px solid var(--background-color);
-    padding: 10px;
+    padding: 0.625rem;
 }
 
 .waarom-equimanager--highlight h3 {
@@ -85,17 +80,18 @@
 }
 
 .waarom-equimanager--highlight:not(:last-child) {
-    margin-bottom:15px;
+    margin-bottom: 0.9375rem;
 }
 
-@media (max-width: 800px) {
-    .content-section {
-        flex-direction: column;
-    }
-}
-
+/* ====================
+      CONTENT SECTION RESPONSIVE
+==================== */
 @media (max-width: 1080px) {
     .content-section {
         flex-direction: column;
+    }
+
+    .content-section .ellipse-wrapper {
+        width: min(70%,400px);
     }
 }

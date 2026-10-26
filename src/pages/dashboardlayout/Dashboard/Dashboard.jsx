@@ -75,11 +75,11 @@ function Dashboard() {
 
     return (
         <div className="dashboard-page">
-            <h1>
+            <h1 className="dashboard-page-title">
                 Hallo {user.firstName} {user.lastName}
             </h1>
 
-            <h2>
+            <h2 className="dashboard-page-heading">
                 Overzicht van {user.stableName}
             </h2>
 

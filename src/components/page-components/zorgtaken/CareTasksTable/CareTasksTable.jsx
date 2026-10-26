@@ -6,7 +6,7 @@ import "./CareTasksTable.css";
 
 function CareTasksTable({careTasks, deleteCareTask, openAssignForm}) {
     return (
-        <table className="table-layout">
+        <table className="caretask-table-layout">
             <thead>
             <tr>
                 <th>Titel</th>

@@ -7,6 +7,7 @@
 .nav {
     width: 100%;
     padding: 0 10px;
+    box-sizing: border-box;
 }
 
 /* ====================
@@ -20,6 +21,7 @@
 .default-menu-link {
     border-bottom: none;;
 }
+
 /* ================================
                 NAV VARIANT: GUEST
 ================================ */
@@ -27,7 +29,7 @@
     display: flex;
     margin: 0 auto;
     max-width: 1120px;
-    padding-top: 10px ;
+    padding-top: 10px;
     align-items: center;
     justify-content: space-between;
 }
@@ -81,20 +83,19 @@
     HAMBURGER MENU
 ==================== */
 .hamburger-menu {
-display: none;
+    display: none;
 }
 
 /* ===============================================
                                           TABLET
 ================================================ */
-@media (max-width: 800px) {
+@media (max-width:1000px) {
     .hamburger-menu {
         display: flex;
     }
 
     .nav__center,
-    .button-wrapper
-    {
+    .button-wrapper {
         display: none;
     }
 

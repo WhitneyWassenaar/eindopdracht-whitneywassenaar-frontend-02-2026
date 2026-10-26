@@ -1,6 +1,9 @@
 // Components
 import DashboardCard from '../DashboardCard/DashboardCard.jsx';
 
+// CSS
+import './AfsprakenCard.css';
+
 function AfsprakenCard({appointments}) {
     const today = new Date().toISOString().split("T")[0];
 
@@ -21,16 +24,14 @@ function AfsprakenCard({appointments}) {
 
     return (
         <DashboardCard
-            title={"Afspraken"}
+            title="Afspraken"
         >
             <ul className="afspraken-list">
                 <li>
                     <span>Aankomende afspraken:</span>
                     <strong>{upcomingAppointments}</strong>
-
                 </li>
                 <li>
-
                     <span>Behandelingen:</span>
                     <strong>{treatments}</strong>
                 </li>

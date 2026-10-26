@@ -1,8 +1,28 @@
 .tab-content {
-    border: 1px solid var(--primary-color);
-    border-radius: 0 10px 10px 10px;
-    height: 300px;
-    width: 600px;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
     padding: 1rem;
+    overflow: auto;
+    border: 1px solid var(--primary-color);
+    border-radius: 0 0.5rem 0.5rem 0.5rem;
     background-color: var(--tertiary-color);
+}
+
+.horse-detail-tabs-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 100%;
+}
+
+@media (max-width: 700px) {
+    .horse-detail-tabs-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        min-height: 0;
+    }
 }

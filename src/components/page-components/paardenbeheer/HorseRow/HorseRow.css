@@ -1,19 +1,21 @@
-.horserow-layout {
-    height: 50px;
+.horse-row-layout {
+    height: 93px;
 }
 
-.horserow-layout:hover {
+.horse-row-layout:hover {
     background-color: rgba(223, 236, 226, 0.48);
     cursor: pointer;
 }
 
-.horserow-layout td {
+.horse-row-layout td {
     text-align: center;
+    border-bottom: 1px solid #224B655E;
+
 }
 
 .horse-photo {
-    width: 70px;
-    height:70px;
+    width: 3.5rem;
+    height: 3.5rem;
     object-fit: cover;
     border-radius: 50%;
 }

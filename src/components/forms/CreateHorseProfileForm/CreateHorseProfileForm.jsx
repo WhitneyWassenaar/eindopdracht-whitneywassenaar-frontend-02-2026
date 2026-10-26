@@ -105,7 +105,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                         }}
                         id="horse-name"
                         type="text"
-                        maxLength={20}
+                        maxLength={50}
                         placeholder="Voer naam van paard in"
                         required/>
                 </div>
@@ -265,6 +265,15 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                     type="submit"
                 >
                     Paardenprofiel aanmaken
+                </Button>
+
+                <Button
+                    type="button"
+                    onClick={() => {
+                        setShowForm(false);
+                    }}
+                >
+                    Annuleren
                 </Button>
             </fieldset>
         </form>

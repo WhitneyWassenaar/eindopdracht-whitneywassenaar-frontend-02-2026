@@ -1,29 +1,24 @@
 .caretask-row-layout {
-    height: 50px;
+    border:1px solid black;
+    width:100%;
 }
 
 .caretask-row-layout:hover {
     background-color: rgba(223, 236, 226, 0.48);
-    cursor: pointer;
 }
 
 .caretask-row-layout td {
     text-align: center;
+    overflow-wrap: anywhere;
+    padding: 0.625rem;
 }
 
-.caretask-status {
-    cursor: pointer;
-    width:100px;
-}
+@media (max-width: 37.5rem) {
+    .caretask-row-layout td {
+        padding: 0.375rem;
+    }
 
-.caretask-status:hover {
-    text-decoration: underline;
-}
-
-.caretask-status.active {
-    color: green;
-}
-
-.caretask-status.inactive {
-    color: red;
+    .caretask-row-layout td:last-child {
+        white-space: normal;
+    }
 }

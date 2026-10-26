@@ -4,6 +4,8 @@
     padding: 20px;
 }
 
-.stalbezetting-page h1,h2,p {
+.stalbezetting-page h1,
+.stalbezetting-page h2,
+.stalbezetting-page p {
     color: var(--background-color);
 }

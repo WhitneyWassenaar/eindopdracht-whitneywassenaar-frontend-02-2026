@@ -1,5 +1,23 @@
-.table-layout {
-    border:1px solid black;
-    height:auto;
-    min-width:1000px;
+.caretask-table-layout {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.caretask-table-layout th,
+.caretask-table-layout td {
+    padding: 0.625rem;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.caretask-table-layout th {
+    font-weight: 600;
+}
+
+@media (max-width: 37.5rem) {
+    .caretask-table-layout th,
+    .caretask-table-layout td {
+        padding: 0.375rem;
+    }
 }

@@ -1,0 +1,17 @@
+.horse-health {
+    width: 100%;
+    min-width: 0;
+}
+
+.health-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    min-width: 0;
+}
+
+.health-overview p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}

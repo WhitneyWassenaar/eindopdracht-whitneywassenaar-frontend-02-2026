@@ -1,5 +1,6 @@
 // CSS
 import './StableRow.css'
+import Button from '../../../ui/Button/Button.jsx';
 
 function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, placeHorseInBox, removeHorseFromBox, setMovingHorse, movingHorse, moveHorseToBox,boxes, updateHorseDates}) {
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
@@ -94,6 +95,7 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
 
             <td>{status}</td>
             <td>
+                <div className="stable-actions-container">
                 {horse ? (
                     <>
                         {horse.active && (
@@ -101,6 +103,7 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
                                 {movingHorse?.id === horse.id ? (
                                     <>
                                     <select
+                                        className="choose-box"
                                         onChange={(e) =>
                                             moveHorseToBox(horse, e.target.value)
                                         }
@@ -126,52 +129,60 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
                                         }
                                     </select>
 
-                                    <button
+                                    <Button
+                                        variant="stable-actions"
                                         onClick={() => setMovingHorse(null)}
                                     >
                                         Verplaatsen annuleren
-                                    </button>
+                                    </Button>
                                     </>
                                     ) : (
-                                    <button
+                                    <Button
+                                        variant="stable-actions"
                                     onClick={() => setMovingHorse(horse)}
                                 >
                             Verplaatsen
-                            </button>
+                            </Button>
                         )}
 
 
 
 
                                 {horse.location === "stal" ? (
-                                    <button
+                                    <Button
+                                        variant="stable-actions"
                                         onClick={() => fromBoxToPasture(horse)}
                                     >
                                         Naar wei
-                                    </button>
+                                    </Button>
                                 ) : (
-                                    <button
+                                    <Button
+                                        variant="stable-actions"
                                         onClick={() => fromPastureToBox(horse)}
                                     >
                                         Zet op stal
-                                    </button>
+                                    </Button>
                                 )}
                             </>
                         )}
 
-                        <button
+                        <Button
+                            variant="stable-actions"
                             onClick={() => removeHorseFromBox(horse)}
+
                         >
                             Loskoppelen
-                        </button>
+                        </Button>
                     </>
                 ) : (
                     <select
+                        className="place-horse"
                         onChange={(e) =>
                             placeHorseInBox(e.target.value, box.id)
                         }
                     >
-                        <option value="">
+                        <option
+                            value="">
                             Paard plaatsen
                         </option>
 
@@ -190,6 +201,7 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
                         }
                     </select>
                 )}
+                </div>
             </td>
         </tr>
     );

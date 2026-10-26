@@ -1,11 +1,16 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+.web-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.web-content {
+    flex: 1 0 auto;
+    width: 100%;
 }
 
 @media (max-width: 800px) {
-    .inner-container {
+    .web-content {
         padding: 0;
     }
 }

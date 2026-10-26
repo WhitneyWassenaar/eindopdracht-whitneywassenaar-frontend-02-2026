@@ -1,3 +1,6 @@
+/* ====================
+   REVIEW CARD BASE
+==================== */
 .review-card {
     background-color: var(--secondary-color);
     height: 400px;
@@ -9,23 +12,30 @@
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    gap: 10px;
+    gap: 0.625rem;
     color: var(--background-color);
-    padding: 0 5px 0 5px;
+    padding:  1.25rem ;
 }
-
+/* ====================
+   REVIEW CARD IMAGE
+==================== */
 .review-card img {
     border-radius: 50%;
     width: 100px;
     height: 100px;
     object-fit: cover;
-    /*border:2px solid var(--primary-color);*/
 }
 
+/* ====================
+   REVIEW CARD TEXT
+==================== */
 .review-card p {
     color: var(--background-color);
 }
 
+/* ====================
+   REVIEW CARD RESPONSIVE
+==================== */
 @media (max-width: 915px) {
     .review-card {
         flex-direction: row;
@@ -48,12 +58,12 @@
         flex-direction: column;
         align-items: center;
         min-width: 180px;
-        border: 1px blue solid;
     }
 }
 
 @media (max-width: 659px) {
     .review-card {
+        padding: 1rem;
         flex-direction: column;
         max-width: 300px;
         height: 100%;

@@ -1,28 +1,30 @@
+/* ====================
+       DESKTOP
+==================== */
 .user-nav {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content:space-between ;
+    justify-content: space-between;
+    flex: 0 0 12.5rem;
+    width:12.5rem;
+    min-width: 0;
     min-height: 100vh;
-    width: 250px;
-    background-color:#002237;
-    padding: 10px;
-    /*border: 1px solid var(--primary-color);*/
+    padding: 0.625rem;
+    background-color: #002237;
 }
 
-.nav__top img{
+.nav__top img {
     width: 100%;
-    /*border:1px red solid;*/
 }
-.user-nav ul  {
+
+.user-nav ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
-}
-
-.nav-content-wrapper {
-    /*border:1px solid yellowgreen;*/
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .nav__logout {
@@ -38,13 +40,75 @@
     text-decoration: none;
 }
 
-/* ====================
-        NAV ACTIVE
-==================== */
 .active-menu-link {
-    border-bottom: 1px solid var(--primary-color)
+    border-bottom: 1px solid var(--primary-color);
 }
 
 .default-menu-link {
-    border-bottom: none;;
+    border-bottom: none;
+}
+
+.dashboard-hamburger {
+    display: none;
+}
+
+/* ====================
+    TABLET / MOBILE
+==================== */
+@media (max-width: 1323px) {
+    .user-nav {
+        flex: 0 0 auto;
+        width: 100%;
+        min-width: 0;
+        min-height: auto;
+        padding: 0.5rem 1rem;
+        flex-direction: column;
+    }
+
+    .nav-content-wrapper {
+        width: 100%;
+    }
+
+    .nav__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .nav__top img {
+        width: 6rem;
+    }
+
+    .dashboard-hamburger {
+        display: flex;
+    }
+
+    /* ====================
+     NAVBAR HIDDEN WHEN CLOSED
+    ==================== */
+    .user-nav .nav-menu-items {
+        display: none;
+        width: 100%;
+        padding: 1rem 0 0;
+        gap: 1rem;
+    }
+
+    /* ====================
+     NAVBAR VISIBLE WHEN OPENED
+     ==================== */
+    .user-nav.user-nav--open .nav-menu-items {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-nav .nav__logout {
+        display: none;
+    }
+
+    .user-nav.user-nav--open .nav__logout {
+        display: flex;
+        width: 100%;
+        margin-top: 1rem;
+    }
 }

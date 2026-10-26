@@ -20,7 +20,7 @@ function ZorgtakenCard({tasks}) {
     ).length;
     return (
         <DashboardCard
-            title={"Zorgtaken"}
+            title="Zorgtaken"
         >
             <ul className="zorgtaken-list">
                 <li>
