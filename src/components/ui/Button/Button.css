@@ -6,6 +6,10 @@
     border: none;
 }
 
+.button:hover {
+    transform: translateY(-3px);
+}
+
 /* =======================================
                   BUTTON VARIANT: DEFAULT
 ======================================== */
@@ -137,4 +141,23 @@
     cursor: pointer;
     background-color: var(--background-color);
     color: var(--text-color);
+}
+
+/* =======================================
+        BUTTON VARIANT: ASSIGN CARETASK
+======================================== */
+.button--assign {
+    background-color: var(--primary-color);
+}
+
+.button--assign:hover {
+    cursor: pointer;
+    background-color: var(--validation-color);
+}
+
+/* =======================================
+        BUTTON VARIANT: CANCEL CARETASK
+======================================== */
+.button--cancel:hover {
+    cursor: pointer;
 }

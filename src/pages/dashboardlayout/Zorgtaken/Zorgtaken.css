@@ -1,11 +1,17 @@
 .zorgtaken-page {
     background-color: var(--tertiary-color);
     color:var(--background-color);
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 .zorgtaken-page h1,
 .zorgtaken-page h2,
 .zorgtaken-page p {
     color: var(--background-color);
+}
+
+@media (max-width: 37.5rem) {
+    .zorgtaken-page {
+        padding: 0.625rem;
+    }
 }

@@ -1,14 +1,47 @@
+
 .horse-caretasks {
-    margin-top: 20px;
+    margin-top: 1.25rem;
+    width: 100%;
+    min-width: 0;
+
+}
+
+.caretask-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    max-height: 31.25rem;
+    overflow-y: auto;
+    min-width: 0;
 }
 
 .caretask-card {
     border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 0.625rem;
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
-.caretask-list {
-    max-height: 500px;
-    overflow-y: auto;
+.caretask-card h3 {
+    margin-top: 0;
+}
+
+.caretask-card button {
+    cursor: pointer;
+    background-color: darkgreen;
+    border:none;
+    border-radius: 0.625rem;
+    color:white;
+    transition: transform 0.2s ease;
+   padding: 0.35rem;
+}
+
+.caretask-card button:hover {
+    transform: translateY(-3px);
+}
+
+@media (max-width: 37.5rem) {
+    .caretask-card {
+        padding: 0.5rem;
+    }
 }

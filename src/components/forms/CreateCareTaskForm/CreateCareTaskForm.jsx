@@ -82,8 +82,8 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
                         onChange={(e) => setTitle(e.target.value)}
                         id="title"
                         type="text"
-                        minLength={10}
-                        maxLength={20}
+                        minLength={2}
+                        maxLength={30}
                         placeholder="Voer titel in"
                         required
                     />
@@ -115,9 +115,18 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
                 >
                     Zorgtaak aanmaken
                 </Button>
+
+                <Button
+                    type="button"
+                    variant="cancel"
+                    onClick={() =>
+                        setShowForm(null)
+                    }
+                >
+                    Annuleren
+                </Button>
             </fieldset>
         </form>
     )
 }
-
 export default CreateCareTaskForm;
