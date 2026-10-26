@@ -1,11 +1,17 @@
 .contacten-page {
     background-color: var(--tertiary-color);
     color:var(--background-color);
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 .contacten-page h1,
 .contacten-page h2,
 .contacten-page p {
     color: var(--background-color);
+}
+
+@media (max-width: 37.5rem) {
+    .contacten-page {
+        padding: 0.625rem;
+    }
 }

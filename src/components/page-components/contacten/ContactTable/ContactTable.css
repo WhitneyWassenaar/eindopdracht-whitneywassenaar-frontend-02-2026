@@ -1,0 +1,24 @@
+.contact-table-layout {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+@media (max-width: 48rem) {
+    .contact-table-layout {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        table-layout: fixed;
+    }
+
+    .contact-table-layout thead {
+        display: none;
+    }
+
+    .contact-table-layout tbody {
+        display: block;
+        width: 100%;
+    }
+
+}

@@ -22,7 +22,7 @@ function ContactRow({
             <td>
                 <img
                     src={contact.photo || defaultContactPhoto}
-                    alt={contact.name}
+                    alt={`${contact.firstName} ${contact.lastName}`}
                     className="contact-photo"
                     onError={(e) => {
                         e.target.src = defaultContactPhoto;

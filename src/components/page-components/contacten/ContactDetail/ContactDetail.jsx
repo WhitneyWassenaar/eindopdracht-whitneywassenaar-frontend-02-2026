@@ -5,8 +5,6 @@ import ContactDetailMainInfo from "../ContactDetailMainInfo/ContactDetailMainInf
 import './ContactDetail.css';
 
 function ContactDetail({contact, horses = []}) {
-    console.log("gekozen contact:", contact);
-    console.log("alle paarden:", horses);
 
     const relatedHorses = horses.filter((horse) =>
         Number(horse.ownerId) === Number(contact.id) ||

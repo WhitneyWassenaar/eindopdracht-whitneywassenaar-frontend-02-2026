@@ -9,7 +9,7 @@ function ContactTable({  contacts,
                           deleteContact,
                           toggleContactActive}) {
     return (
-        <table className="table-layout">
+        <table className="contact-table-layout">
             <thead>
             <tr>
                 <th>Foto</th>
@@ -18,6 +18,7 @@ function ContactTable({  contacts,
                 <th>Telefoonnummer</th>
                 <th>Rol</th>
                 <th>Status</th>
+                <th>Acties</th>
             </tr>
             </thead>
 
