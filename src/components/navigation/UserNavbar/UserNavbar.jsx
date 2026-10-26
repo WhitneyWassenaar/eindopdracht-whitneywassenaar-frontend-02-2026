@@ -20,7 +20,7 @@ function UserNavbar() {
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth > 800) {
+            if (window.innerWidth > 1323) {
                 setMenuOpen(false);
             }
         };
@@ -41,7 +41,7 @@ function UserNavbar() {
 
                 <div className="nav__top">
                     <NavLink to="/dashboard">
-                        <img src={logo} alt="Website logo"/>
+                        <img src={logo} alt="Logo van de website"/>
                     </NavLink>
 
                     <div className="dashboard-hamburger">

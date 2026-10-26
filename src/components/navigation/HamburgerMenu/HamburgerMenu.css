@@ -1,16 +1,16 @@
-:root {
-    --menu-bar-width: 50px;
-    --menu-bar-height: 5px;
-}
-
+/* ====================
+   HAMBURGER MENU
+==================== */
 .hamburger-menu {
+    --menu-bar-width: 2.5rem;
+    --menu-bar-height: 0.25rem;
+
     padding: 0;
     margin-right: 1rem;
     background: none;
     cursor: pointer;
-    width: 50px;
-    height: 40px;
-    /*border: 1px red solid;*/
+    width: 2.5rem;
+    height: 2rem;
     display: none;
     align-items: center;
     justify-content: center;
@@ -31,19 +31,22 @@
     width: var(--menu-bar-width);
     height: var(--menu-bar-height);
     position: absolute;
-    left:0;
+    left: 0;
 }
 
 .menu::before {
-    top: -15px;
+    top: -0.75rem;
 }
 
 .menu::after {
-    top: 15px;
+    top: 0.75rem;
 }
 
-@media (max-width: 800px){
+/* ====================
+   TABLET / MOBILE
+==================== */
+@media (max-width: 1323px) {
     .hamburger-menu {
-        display: flex;
+        display: flex !important;
     }
 }

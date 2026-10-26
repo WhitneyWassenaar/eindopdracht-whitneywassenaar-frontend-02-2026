@@ -1,13 +1,17 @@
+/* ====================
+       DESKTOP
+==================== */
 .user-nav {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
+    flex: 0 0 12.5rem;
+    width:12.5rem;
+    min-width: 0;
     min-height: 100vh;
-    width: 250px;
-    flex-shrink: 0;
-    background-color: #002237;
     padding: 0.625rem;
+    background-color: #002237;
 }
 
 .nav__top img {
@@ -49,13 +53,13 @@
 }
 
 /* ====================
-        TABLET / MOBIEL
+    TABLET / MOBILE
 ==================== */
-
-@media (max-width: 800px) {
-
+@media (max-width: 1323px) {
     .user-nav {
+        flex: 0 0 auto;
         width: 100%;
+        min-width: 0;
         min-height: auto;
         padding: 0.5rem 1rem;
         flex-direction: column;
@@ -80,23 +84,29 @@
         display: flex;
     }
 
-    .nav-menu-items {
-        display: none !important;
+    /* ====================
+     NAVBAR HIDDEN WHEN CLOSED
+    ==================== */
+    .user-nav .nav-menu-items {
+        display: none;
         width: 100%;
-        padding-top: 1rem !important;
+        padding: 1rem 0 0;
         gap: 1rem;
     }
 
-    .user-nav--open .nav-menu-items {
-        display: flex !important;
+    /* ====================
+     NAVBAR VISIBLE WHEN OPENED
+     ==================== */
+    .user-nav.user-nav--open .nav-menu-items {
+        display: flex;
         flex-direction: column;
     }
 
-    .nav__logout {
+    .user-nav .nav__logout {
         display: none;
     }
 
-    .user-nav--open .nav__logout {
+    .user-nav.user-nav--open .nav__logout {
         display: flex;
         width: 100%;
         margin-top: 1rem;
