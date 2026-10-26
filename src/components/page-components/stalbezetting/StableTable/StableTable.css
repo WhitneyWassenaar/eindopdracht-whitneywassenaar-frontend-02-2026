@@ -1,5 +1,50 @@
-.table-layout {
-    border:1px solid black;
-    height:auto;
-    min-width:1000px;
+.stable-table-layout {
+    width: 100%;
+    border-collapse: collapse;
 }
+
+.stable-table-layout th,
+.stable-table-layout td {
+    padding: 0.5rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+@media (max-width: 768px) {
+    .stable-table-layout {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .stable-table-layout thead {
+        display: none;
+    }
+
+    .stable-table-layout tbody {
+        display: block;
+        width: 100%;
+    }
+
+    .stable-table-layout .stablerow-layout {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        margin-bottom: 16px;
+        padding: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .stable-table-layout .stablerow-layout td {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        padding: 8px;
+        overflow-wrap: anywhere;
+    }
+}
+
+

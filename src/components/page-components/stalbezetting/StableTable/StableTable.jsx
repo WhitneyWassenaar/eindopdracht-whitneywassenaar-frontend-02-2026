@@ -6,7 +6,7 @@ import './StableTable.css'
 
 function StableTable({boxes, horses, contacts, updateHorse, fromBoxToPasture, fromPastureToBox, placeHorseInBox, removeHorseFromBox, moveHorseToBox,setMovingHorse, movingHorse, updateHorseDates}) {
     return (
-        <table className="table-layout">
+        <table className="stable-table-layout">
             <thead>
             <tr>
                 <th>Box</th>
