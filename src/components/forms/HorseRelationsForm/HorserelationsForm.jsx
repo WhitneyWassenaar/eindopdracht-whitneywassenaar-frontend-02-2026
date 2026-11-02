@@ -7,9 +7,12 @@ import Button from "../../ui/Button/Button.jsx";
 // Context / Hooks
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
+// Services
+import {updateHorseRelations} from "../../../services/horseService.js";
+
 // CSS
 import './HorseRelationForm.css';
-import api from "../../../api/axios.js";
+
 
 function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
 
@@ -46,27 +49,18 @@ function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
     );
 
     async function saveRelations() {
-
-        const validTrainerId = trainerId || null;
-        const validCaretakerId = caretakerId || null;
-        const validOwnerId = ownerId || null;
+        const relations = {
+            ownerId: ownerId || null,
+            caretakerId: caretakerId || null,
+            trainerId: trainerId || null
+        };
 
         try {
-            const response = await api.patch(
-                `/horses/${horse.id}`,
-                {
-                    ownerId: validOwnerId,
-                    caretakerId: validCaretakerId,
-                    trainerId: validTrainerId
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
+            const updatedHorse = await updateHorseRelations(
+                horse.id,
+                relations,
+                token
             );
-
-            const updatedHorse = response.data;
 
             setHorses(previousHorses =>
                 previousHorses.map(previousHorse =>

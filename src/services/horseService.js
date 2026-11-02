@@ -113,3 +113,13 @@ export async function createHorse(horseData, token) {
 
     return response.data;
 }
+
+export async function updateHorseRelations(horseId, relations, token) {
+    const response = await api.patch(`/horses/${horseId}`, relations, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    return response.data;
+}
