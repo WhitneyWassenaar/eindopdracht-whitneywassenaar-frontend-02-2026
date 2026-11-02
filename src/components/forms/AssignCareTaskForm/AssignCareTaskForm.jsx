@@ -120,7 +120,9 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                 assignment =>
                     Number(assignment.horseId) === Number(horseId) &&
                     Number(assignment.careTaskId) === Number(careTask.id) &&
-                    assignment.dueDate === dueDate
+                    assignment.dueDate === dueDate &&
+                    assignment.completed === false
+
             )
         );
 
