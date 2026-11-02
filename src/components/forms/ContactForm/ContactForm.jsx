@@ -12,13 +12,13 @@ function ContactForm() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
-    const [success, setSuccess] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+
+
 
     function onFormSubmit(e) {
         e.preventDefault();
-        setSuccess("");
-
-        setSuccess("Bericht succesvol verzonden!");
+        setSuccessMessage("Bericht succesvol verzonden!");
 
         setName("");
         setEmail("");
@@ -62,6 +62,7 @@ function ContactForm() {
                 id="contact-message"
                 name="contact-message"
                 rows="10"
+                minLength="10"
                 maxLength="1000"
                 required
                 placeholder="Begin hier met het schrijven van jouw bericht...">
@@ -74,9 +75,9 @@ function ContactForm() {
                 Verzenden
             </Button>
 
-            {success && (
+            {successMessage && (
                 <p className="contact-form-success-message">
-                    {success}
+                    {successMessage}
                 </p>
             )}
         </form>
