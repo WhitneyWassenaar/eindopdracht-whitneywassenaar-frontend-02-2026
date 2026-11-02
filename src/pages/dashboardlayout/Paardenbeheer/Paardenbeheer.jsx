@@ -7,12 +7,13 @@ import HorseTable from '../../../components/page-components/paardenbeheer/HorseT
 import HorseDetail from '../../../components/page-components/paardenbeheer/HorseDetail/HorseDetail.jsx';
 import CreateHorseProfileForm from '../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx';
 
+import {getHorses, getContacts, updateHorseActive, deleteHorseFromApi} from "../../../services/horseService.js";
+
 // Context
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
 // CSS
 import './Paardenbeheer.css'
-import api from "../../../api/axios.js";
 
 function Paardenbeheer() {
 
@@ -24,93 +25,35 @@ function Paardenbeheer() {
     const [sortOption, setSortOption] = useState("none");
     const {token, user} = useContext(AuthContext);
 
-    // check hoeveel user profiles er zijn en om te kijken wat hun id is
-    useEffect(() => {
-
-        async function checkUserProfiles() {
-            try {
-                const response = await api.get("/userProfiles",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                );
-
-                console.log("Alle userProfiles:", response.data);
-
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
-        if (token) {
-            checkUserProfiles();
-        }
-
-    }, [token]);
-
     useEffect(() => {
         if (!token || !user) return;
-
-        async function getHorses() {
+        async function loadHorses() {
             try {
-                const horseData = await api.get(`/users/${user.id}/horses`,
-                    {
-                        headers: {
-                            "Authorization": `Bearer ${token}`,
-                        },
-                    });
-                console.log(JSON.stringify(horseData.data, null, 2));
-                setHorses(horseData.data);
-
+                const horseData = await getHorses(user.id, token);
+                setHorses(horseData);
             } catch (error) {
                 console.error(error);
             }
         }
-
-        getHorses();
+        loadHorses();
     }, [token, user]);
 
     useEffect(() => {
         if (!token || !user) return;
-
-        async function getContacts() {
+        async function loadContacts() {
             try {
-                const contactData = await api.get(
-                    `/users/${user.id}/persons`,
-                    {
-                        headers: {
-                            "Authorization": `Bearer ${token}`,
-                        },
-                    }
-                );
-
-                setContacts(contactData.data);
-
+                const contactData = await getContacts(user.id, token);
+                setContacts(contactData);
             } catch (error) {
                 console.error(error);
             }
         }
-
-        getContacts();
-
+        loadContacts();
     }, [token, user]);
 
     async function toggleHorseActive(horse) {
         try {
-
-            await api.patch(`/horses/${horse.id}`,
-                {
-                    active: !horse.active
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
-
+            await updateHorseActive(horse.id, horse.active, token);
             setHorses(previousHorses =>
                 previousHorses.map(previousHorse =>
                     previousHorse.id === horse.id
@@ -121,7 +64,6 @@ function Paardenbeheer() {
                         : previousHorse
                 )
             );
-
         } catch (error) {
             console.error("Status wijzigen mislukt:", error);
         }
@@ -129,100 +71,19 @@ function Paardenbeheer() {
 
     async function deleteHorse(horseId) {
 
-        if (!window.confirm("Weet je zeker dat je dit paardenprofiel wilt verwijderen?"))
+        if (!window.confirm("Weet je zeker dat je dit paardenprofiel wilt verwijderen?")) {
             return;
+        }
 
         try {
-
-            // verwijder afspraken
-            const appointmentsResponse = await api.get(
-                `/horses/${horseId}/appointments`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
-
-
-            for (const appointment of appointmentsResponse.data) {
-
-                await api.delete(
-                    `/appointments/${appointment.id}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                );
-
-            }
-
-            // verwijder gezondheidsgegevens
-            const healthResponse = await api.get(
-                `/horses/${horseId}/horseHealths`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
-
-            for (const health of healthResponse.data) {
-                await api.delete(
-                    `/horseHealths/${health.id}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                );
-            }
-
-
-            // verwijder zorgtaken koppelingen
-            const assignmentsResponse = await api.get(
-                `/horses/${horseId}/careTaskAssignments`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
-
-
-            for (const assignment of assignmentsResponse.data) {
-                await api.delete(
-                    `/careTaskAssignments/${assignment.id}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                );
-            }
-
-
-            // verwijder paard
-            await api.delete(
-                `/horses/${horseId}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
-
+            await deleteHorseFromApi(horseId, token);
 
             setHorses(previous =>
-                previous.filter(
-                    horse => horse.id !== horseId
-                )
+                previous.filter(horse => horse.id !== horseId)
             );
 
-
         } catch (error) {
-            console.error(error);
+            console.error("Paard verwijderen mislukt:", error);
         }
     }
 
@@ -361,6 +222,3 @@ function Paardenbeheer() {
 }
 
 export default Paardenbeheer;
-
-
-// Paardenbeheer verder afmaken
