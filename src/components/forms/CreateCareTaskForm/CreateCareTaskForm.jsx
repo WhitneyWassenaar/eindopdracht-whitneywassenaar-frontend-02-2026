@@ -28,7 +28,7 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
             const existingTasks = await getCareTasks(token);
 
             const taskExists = existingTasks.some(task =>
-                task.title.toLowerCase() === title.trim().toLowerCase()
+                task.title.trim().toLowerCase() === title.trim().toLowerCase()
             );
 
             if (taskExists) {
