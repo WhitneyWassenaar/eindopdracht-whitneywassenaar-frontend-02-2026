@@ -1,14 +1,17 @@
 // React
 import {useContext, useEffect, useState} from "react";
 
+// Context
+import {AuthContext} from "../../../context/AuthContext.jsx";
+
+// API
+import api from "../../../api/axios.js";
+
 // Components
 import StableTable from "../../../components/page-components/stalbezetting/StableTable/StableTable.jsx";
 
 // CSS
 import './Stalbezetting.css'
-import api from "../../../api/axios.js";
-import {AuthContext} from "../../../context/AuthContext.jsx";
-
 
 function Stalbezetting() {
 
@@ -31,8 +34,6 @@ function Stalbezetting() {
                 };
 
                 const horsesResponse = await api.get("/horses", { headers });
-
-                console.log("PAARDEN UIT API:", horsesResponse.data);
                 setHorses(horsesResponse.data);
 
                 const contactsResponse = await api.get("/persons", { headers });
@@ -75,7 +76,7 @@ function Stalbezetting() {
             fetchBoxes();
         }
 
-    }, [token]);
+    }, [token, user]);
 
     async function generateBoxes() {
         try {
@@ -83,7 +84,6 @@ function Stalbezetting() {
                 Authorization: `Bearer ${token}`
             };
 
-            // huidige boxen ophalen
             const boxResponse = await api.get("/boxes", {
                 headers
             });
@@ -112,8 +112,6 @@ function Stalbezetting() {
                 return;
             }
 
-
-
             const boxesToDelete = existingBoxes.filter(
                 box => box.boxNumber > capacity
             );
@@ -124,8 +122,6 @@ function Stalbezetting() {
                 });
             }
 
-
-            // ONTBREKENDE BOXEN MAKEN
             for (let i = 1; i <= capacity; i++) {
 
                 const exists = existingBoxes.some(
@@ -145,8 +141,6 @@ function Stalbezetting() {
                 }
             }
 
-
-            // nieuwe lijst ophalen
             const updatedBoxes = await api.get("/boxes", {
                 headers
             });
@@ -175,7 +169,6 @@ function Stalbezetting() {
                 Authorization: `Bearer ${token}`
             };
 
-            // Alle paarden loskoppelen
             for (const horse of horses) {
                 if (horse.boxId) {
                     await api.patch(`/horses/${horse.id}`, {
@@ -186,14 +179,12 @@ function Stalbezetting() {
                 }
             }
 
-            // Alle boxen verwijderen
             const response = await api.get("/boxes", { headers });
 
             for (const box of response.data) {
                 await api.delete(`/boxes/${box.id}`, { headers });
             }
 
-            // Frontend leeg maken
             setBoxes([]);
 
             setHorses(prevHorses =>
@@ -211,14 +202,9 @@ function Stalbezetting() {
     }
 
     async function fromBoxToPasture(horse) {
-        console.log("NAAR WEI:", horse);
-
-        console.log("PAARD ID:", horse.id);
-        console.log("PAARD NAAM:", horse.name);
-
         try {
 
-            const response = await api.patch(`/horses/${horse.id}`,
+            await api.patch(`/horses/${horse.id}`,
                 {
                     location: "wei"
                 },
@@ -228,12 +214,6 @@ function Stalbezetting() {
                     }
                 }
             );
-
-            console.log("BACKEND RESPONSE:", response.data);
-
-            console.log("RESPONSE ID:", response.data.id);
-            console.log("RESPONSE NAAM:", response.data.name);
-            console.log("RESPONSE LOCATION:", response.data.location);
 
             setHorses(prevHorses =>
                 prevHorses.map(h =>
@@ -304,34 +284,37 @@ function Stalbezetting() {
     }
 
     async function moveHorseToBox(horse, newBoxId) {
-
-        await api.patch(`/horses/${horse.id}`,
-            {
-                boxId: Number(newBoxId)
-            },
-            {
-                headers:{
-                    Authorization:`Bearer ${token}`
+        try {
+            await api.patch(`/horses/${horse.id}`,
+                {
+                    boxId: Number(newBoxId)
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 }
-            }
-        );
+            );
 
-        setHorses(prev =>
-            prev.map(h =>
-                h.id === horse.id
-                    ? {...h, boxId:Number(newBoxId)}
-                    : h
-            )
-        );
+            setHorses(prev =>
+                prev.map(h =>
+                    h.id === horse.id
+                        ? { ...h, boxId: Number(newBoxId) }
+                        : h
+                )
+            );
 
-        setMovingHorse(null);
+            setMovingHorse(null);
+
+        } catch (error) {
+            console.error("Paard verplaatsen mislukt:", error);
+        }
     }
 
     async function removeHorseFromBox(horse) {
         try {
             await api.patch(`/horses/${horse.id}`, {
-                boxId: null,
-
+                boxId: null
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -341,15 +324,12 @@ function Stalbezetting() {
             setHorses(prevHorses =>
                 prevHorses.map(h =>
                     h.id === horse.id
-                        ? {
-                            ...h,
-                            boxId: null
-                        }
+                        ? { ...h, boxId: null }
                         : h
                 )
             );
 
-        } catch(error) {
+        } catch (error) {
             console.error("Paard loskoppelen mislukt:", error);
         }
     }
