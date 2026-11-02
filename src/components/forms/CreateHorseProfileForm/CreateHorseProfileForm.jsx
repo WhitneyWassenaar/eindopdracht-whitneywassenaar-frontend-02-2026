@@ -7,12 +7,12 @@ import Button from '../../ui/Button/Button.jsx';
 // Context / Hooks
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
+// Services
+import { createHorse } from "../../../services/horseService.js";
+
 // Data
 import horseBreeds from '../../../data/horseBreeds.js';
 import coatColors from '../../../data/coatColors.js';
-
-// Api
-import api from "../../../api/axios.js";
 
 // CSS
 import './CreateHorseProfileForm.css';
@@ -29,7 +29,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
     const [ownerId, setOwnerId] = useState("");
     const [error, setError] = useState("");
 
-    const defaultHorsePhoto = "/defaultHorsePhoto.png"
+    const defaultHorsePhoto = "/defaultHorsePhoto.png";
     const today = new Date().toISOString().split("T")[0];
 
     async function createHorseFormSubmit(e) {
@@ -37,16 +37,16 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
         setError("");
         const lettersOnly = /^[a-zA-ZÀ-ÿ\s]+$/;
 
-        if (!lettersOnly.test(horseName)) {
+        if (!lettersOnly.test(horseName.trim())) {
             setError("Alleen letters zijn toegestaan");
             return;
         }
 
         try {
-            const response = await api.post("/horses",
+            const newHorse = await createHorse(
                 {
                     userId: user.id,
-                    name: horseName,
+                    name: horseName.trim(),
                     gender: horseGender,
                     birthDate,
                     breed: horseBreed,
@@ -57,13 +57,8 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                     location: "wei",
                     boxId: null
                 },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-
-            const newHorse = response.data;
+                token
+            );
 
             setHorses(previousHorses => [
                 ...previousHorses,
@@ -74,7 +69,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
             setHorseGender("");
             setHorseColor("");
             setHorseBreed("");
-            setBirthDate("")
+            setBirthDate("");
             setHorsePhoto("");
 
             setShowForm(false);

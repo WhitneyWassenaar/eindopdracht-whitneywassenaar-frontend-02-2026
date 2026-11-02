@@ -103,3 +103,13 @@ export async function deleteHorseFromApi(horseId, token) {
         }
     );
 }
+
+export async function createHorse(horseData, token) {
+    const response = await api.post("/horses", horseData, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    return response.data;
+}
