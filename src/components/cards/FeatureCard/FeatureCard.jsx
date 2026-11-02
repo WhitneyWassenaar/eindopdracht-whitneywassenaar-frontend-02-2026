@@ -10,7 +10,8 @@ function FeatureCard({
                          children,
                          imgUrl,
                          imgAlt,
-                     variant="default"}) {
+                         variant = "default"
+                     }) {
     return (
         <div className={`feature-card-wrapper--${variant}`}>
             <article className={articleClassName}>

@@ -1,7 +1,7 @@
 // CSS
 import './FeatureEllipse.css';
 
-function FeatureEllipse({imgUrl,imgAlt}) {
+function FeatureEllipse({imgUrl, imgAlt}) {
     return (
         <div className="feature-ellipse">
             <img src={imgUrl} alt={imgAlt}/>
