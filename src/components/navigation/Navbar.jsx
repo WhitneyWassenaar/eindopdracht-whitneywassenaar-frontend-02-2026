@@ -1,7 +1,7 @@
 // React
 import {useContext} from "react";
 
-//Context
+// Context
 import {AuthContext} from "../../context/AuthContext.jsx";
 
 // Components
@@ -10,13 +10,10 @@ import UserNavbar from './UserNavbar/UserNavbar.jsx';
 
 function Navbar() {
     const {user} = useContext(AuthContext);
-    return (
-        <>
-            {!user
+    return !user
                 ?  <GuestNavbar/>
-                : <UserNavbar/>}
-        </>
-    );
-}
+                : <UserNavbar/>
+};
+
 
 export default Navbar;

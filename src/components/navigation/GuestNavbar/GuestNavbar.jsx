@@ -15,22 +15,24 @@ import './GuestNavbar.css';
 
 function GuestNavbar() {
 
-    const [menuOpen, setMenuOpen] = useState(false)
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(()=> {
         const handleResize = () => {
             if (window.innerWidth > 800) {
                 setMenuOpen(false);
             }
-        }
+        };
+
         window.addEventListener("resize",handleResize);
+
         return () => window.removeEventListener("resize",handleResize);
     },[]);
 
     return (
         <nav className="nav nav--guest">
             <div className="nav__left">
-                <NavLink to="/"> <img src={logo} alt={"Website logo"}/></NavLink>
+                <NavLink to="/"> <img src={logo} alt={"EquiManager logo"}/></NavLink>
             </div>
 
             <div className="nav__center">
@@ -55,25 +57,25 @@ function GuestNavbar() {
             <div className="nav__right">
                 <div className="button-wrapper">
                     <Button
-                        type={"button"}
-                        variant={"default"}
-                        buttonPath={"/registreren"}
+                        type="button"
+                        variant="default"
+                        buttonPath="/registreren"
                     >
                         Registreren
                     </Button>
 
                     <Button
-                        type={"button"}
-                        variant={"bordered"}
-                        buttonPath={"/inloggen"}
+                        type="button"
+                        variant="bordered"
+                        buttonPath="/inloggen"
                     >
                         Inloggen
                     </Button>
                 </div>
 
                 <Button
-                    type={"button"}
-                    variant={"hamburgermenu"}
+                    type="button"
+                    variant="hamburgermenu"
                     onClick={() => setMenuOpen(!menuOpen)}
                 >
                     <HamburgerMenu/>
