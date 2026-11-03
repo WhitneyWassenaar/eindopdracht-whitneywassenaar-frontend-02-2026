@@ -6,10 +6,13 @@ import './ContactDetail.css';
 
 function ContactDetail({contact, horses = []}) {
 
-    const relatedHorses = horses.filter((horse) =>
-        Number(horse.ownerId) === Number(contact.id) ||
-        Number(horse.caretakerId) === Number(contact.id) ||
-        Number(horse.trainerId) === Number(contact.id));
+    const contactId = Number(contact.id);
+
+    const relatedHorses = horses.filter(horse =>
+        Number(horse.ownerId) === contactId ||
+        Number(horse.caretakerId) === contactId ||
+        Number(horse.trainerId) === contactId
+    );
 
     return (
         <div className="contact-detail-container">

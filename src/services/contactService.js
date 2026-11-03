@@ -22,3 +22,37 @@ export async function createContact(contactData, token) {
 
     return response.data;
 }
+
+export async function updateContactActive(contact, token) {
+    const response = await api.patch(
+        `/persons/${contact.id}`,
+        { active: !contact.active },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    );
+
+    return response.data;
+}
+
+export async function deleteContactFromApi(contactId, token) {
+    const response = await api.delete(`/persons/${contactId}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    return response.data;
+}
+
+export async function getAllPersons(token) {
+    const response = await api.get("/persons", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    return response.data;
+}

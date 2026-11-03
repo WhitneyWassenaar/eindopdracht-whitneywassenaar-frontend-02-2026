@@ -10,9 +10,16 @@ import CreateContactProfileForm from "../../../components/forms/CreateContactPro
 // Context / hooks
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
+// Api
+import api from "../../../api/axios.js";
+
+// Services
+import { getContacts, updateContactActive } from "../../../services/contactService.js";
+import { getHorses } from "../../../services/horseService.js";
+
 // CSS
 import './Contacten.css'
-import api from "../../../api/axios.js";
+
 
 function Contacten() {
 
@@ -32,74 +39,41 @@ function Contacten() {
     useEffect(() => {
         if (!token || !user) return;
 
-        async function getContacts() {
+        async function fetchContacts() {
             try {
-                const contactData = await api.get(
-                    `/users/${user.id}/persons`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-
-                setContacts(contactData.data);
-
+                const contactData = await getContacts(user.id, token);
+                setContacts(contactData);
             } catch (error) {
                 console.error(error);
             }
         }
 
-
-        async function getHorses() {
+        async function fetchHorses() {
             try {
-                const horseData = await api.get(
-                    `/users/${user.id}/horses`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-
-                setHorses(horseData.data);
-
+                const horseData = await getHorses(user.id, token);
+                setHorses(horseData);
             } catch (error) {
                 console.error(error);
             }
         }
 
-        getContacts();
-        getHorses();
+        // getContacts();
+        fetchContacts();
+        fetchHorses();
 
     }, [token, user]);
 
-
     async function toggleContactActive(contact) {
         try {
-            await api.patch(
-                `/persons/${contact.id}`,
-                {
-                    active: !contact.active
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
+            await updateContactActive(contact, token);
 
-            setContacts(previousContacts =>
-                previousContacts.map(previousContact =>
-                    previousContact.id === contact.id
-                        ? {
-                            ...previousContact,
-                            active: !previousContact.active
-                        }
-                        : previousContact
+            setContacts(prevContacts =>
+                prevContacts.map(item =>
+                    item.id === contact.id
+                        ? { ...item, active: !item.active }
+                        : item
                 )
             );
-
         } catch (error) {
             console.error(error);
         }
@@ -141,7 +115,6 @@ function Contacten() {
                             }
                         }
                     );
-
                 }
 
             }
@@ -176,7 +149,6 @@ function Contacten() {
                 }
             );
 
-            // Row wordt visueel verwijderd, contact wordt uit de state gehaald
             setContacts(previousContacts =>
                 previousContacts.filter(contact => contact.id !== contactId)
             );
@@ -185,7 +157,6 @@ function Contacten() {
             console.error(error);
         }
     }
-
 
     const filteredContacts = contacts.filter((contact) => {
         if (filter === "active") {

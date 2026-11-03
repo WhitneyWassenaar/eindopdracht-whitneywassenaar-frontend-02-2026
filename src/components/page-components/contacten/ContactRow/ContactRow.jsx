@@ -2,10 +2,12 @@
 import Button from '../../../ui/Button/Button.jsx';
 
 // Assets
-import deleteIcon from '/src/assets/delete-icon.png'
+import deleteIcon from '/src/assets/delete-icon.png';
 
 // CSS
-import './ContactRow.css'
+import './ContactRow.css';
+
+const defaultContactPhoto = "/defaultContactPhoto.png";
 
 function ContactRow({
                         contact,
@@ -14,7 +16,7 @@ function ContactRow({
                         toggleContactActive
                     }) {
 
-    const defaultContactPhoto = "/defaultContactPhoto.png";
+
 
     return (
         <tr className="contactrow-layout"
@@ -57,13 +59,13 @@ function ContactRow({
 
             <td>
                 <Button
-                    type={"button"}
-                    variant={"delete"}
+                    type="button"
+                    variant="delete"
                     onClick={(e) => {
                         e.stopPropagation();
                         deleteContact(contact.id);
                     }}>
-                    <img src={deleteIcon} alt={"delete icon"}/>
+                    <img src={deleteIcon} alt="delete icon"/>
                 </Button>
             </td>
         </tr>

@@ -2,9 +2,10 @@
 import ContactRow from "../ContactRow/ContactRow.jsx";
 
 // CSS
-import './ContactTable.css'
+import './ContactTable.css';
 
-function ContactTable({  contacts,
+function ContactTable({
+                          contacts = [],
                           setSelectedContact,
                           deleteContact,
                           toggleContactActive}) {
