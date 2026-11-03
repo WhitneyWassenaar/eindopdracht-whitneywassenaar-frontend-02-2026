@@ -14,26 +14,26 @@ function ReviewSection() {
         <section className="review-section">
             <ReviewCard
                 profileImgUrl={reviewer1}
-                profileImgAlt={"Profile picture of the reviewer Justin van Dam"}
-                personName={"Justin van Dam"}
-                stableName={"Stal Horse Paradise"}
-                reviewText={"Ik heb veel meer rust en overzicht met alles wat te maken heeft met management, paarden en stal. "}
+                profileImgAlt="Profile picture of the reviewer Justin van Dam"
+                personName="Justin van Dam"
+                stableName="Stal Horse Paradise"
+                reviewText="Ik heb veel meer rust en overzicht met alles wat te maken heeft met management, paarden en stal. "
             />
 
             <ReviewCard
                 profileImgUrl={reviewer2}
-                profileImgAlt={"Profile picture of the reviewer Mario Hoeven"}
-                personName={"Mario Hoeven"}
-                stableName={"Stal Vrijheidshoeve"}
-                reviewText={"EquiManager zorgt er voor dat ik alle taken makkelijk kan bijhouden. Ik ben er super blij mee!"}
+                profileImgAlt="Profile picture of the reviewer Mario Hoeven"
+                personName="Mario Hoeven"
+                stableName="Stal Vrijheidshoeve"
+                reviewText="EquiManager zorgt er voor dat ik alle taken makkelijk kan bijhouden. Ik ben er super blij mee!"
             />
 
             <ReviewCard
                 profileImgUrl={reviewer3}
-                profileImgAlt={"Profile picture from the reviewer Elise de Jong"}
-                personName={"Elise de Jong"}
-                stableName={"Stal de Friezenbende"}
-                reviewText={"Ik kan niet meer zonder EquiManager.  Ik bespaar tijd en stress door deze fantastische applicatie. Ik raad het zeker aan!"}
+                profileImgAlt="Profile picture from the reviewer Elise de Jong"
+                personName="Elise de Jong"
+                stableName="Stal de Friezenbende"
+                reviewText="Ik kan niet meer zonder EquiManager.  Ik bespaar tijd en stress door deze fantastische applicatie. Ik raad het zeker aan!"
             />
         </section>
     );

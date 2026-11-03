@@ -8,7 +8,9 @@ function ContactTable({
                           contacts = [],
                           setSelectedContact,
                           deleteContact,
-                          toggleContactActive}) {
+                          toggleContactActive,
+                      updatingContactId,
+                      deletingContactId}) {
     return (
         <table className="contact-table-layout">
             <thead>
@@ -31,6 +33,8 @@ function ContactTable({
                     setSelectedContact={setSelectedContact}
                     deleteContact={deleteContact}
                     toggleContactActive={toggleContactActive}
+                    updatingContactId={updatingContactId}
+                    deletingContactId={deletingContactId}
                 />
             ))}
             </tbody>
