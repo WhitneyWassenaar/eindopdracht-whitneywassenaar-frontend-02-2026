@@ -4,7 +4,7 @@ import DashboardCard from '../DashboardCard/DashboardCard.jsx';
 // CSS
 import "./ZorgtakenCard.css";
 
-function ZorgtakenCard({tasks}) {
+function ZorgtakenCard({tasks = []}) {
     const today = new Date().toISOString().split("T")[0];
 
     const urgentTasks = tasks.filter(

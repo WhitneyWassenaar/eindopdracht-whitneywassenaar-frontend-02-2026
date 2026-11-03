@@ -249,6 +249,11 @@
           "required": true
         },
         {
+          "name": "careTaskTitle",
+          "type": "string",
+          "required": false
+        },
+        {
           "name": "dueDate",
           "type": "date",
           "required": true

@@ -10,8 +10,10 @@ import deleteIcon from '/src/assets/delete-icon.png'
 // CSS
 import './HorseRow.css'
 
-function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, contacts}) {
-    const defaultHorsePhoto = "/defaultHorsePhoto.png";
+const defaultHorsePhoto = "/defaultHorsePhoto.png";
+
+function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, contacts = []}) {
+
     const owner = contacts.find(
         contact => Number(contact.id) === Number(horse.ownerId)
     );
@@ -52,7 +54,7 @@ function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, conta
                         e.stopPropagation();
                         deleteHorse(horse.id);
                     }}>
-                    <img src={deleteIcon} alt={"delete icon"}/>
+                    <img src={deleteIcon} alt="Verwijderen"/>
                 </Button>
             </td>
         </tr>

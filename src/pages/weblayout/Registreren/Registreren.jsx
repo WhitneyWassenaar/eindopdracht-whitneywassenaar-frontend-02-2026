@@ -5,12 +5,12 @@ import RegisterForm from '../../../components/forms/RegisterForm/RegisterForm.js
 import './Registreren.css';
 
 function Registreren() {
-    return(
+    return (
         <section className="register-page">
             <h1>Account registreren</h1>
             <RegisterForm />
         </section>
-
     );
 }
+
 export default Registreren;

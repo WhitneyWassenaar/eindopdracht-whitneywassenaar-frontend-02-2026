@@ -1,14 +1,15 @@
 // React
 import {useState} from 'react';
+
 // Components
 import Button from '../../../ui/Button/Button.jsx';
 import HorseCareTasks from "../../zorgtaken/HorseCareTasks/HorseCareTasks.jsx";
 import HorseHealth from "../HorseHealth/HorseHealth.jsx";
+import HorseAppointments from "../HorseAppointments/HorseAppointments.jsx";
+import HorseRelationsForm from "../../../forms/HorseRelationsForm/HorserelationsForm.jsx";
 
 // CSS
 import './HorseDetailTabs.css';
-import HorseAppointments from "../HorseAppointments/HorseAppointments.jsx";
-import HorseRelationsForm from "../../../forms/HorseRelationsForm/HorserelationsForm.jsx";
 
 function HorseDetailTabs({horse, contacts, setHorses, setSelectedHorse}) {
 
@@ -17,7 +18,7 @@ function HorseDetailTabs({horse, contacts, setHorses, setSelectedHorse}) {
     return (
         <section className="horse-detail-tabs-container">
             <Button
-                variant={"tab"}
+                variant="tab"
                 className={activeTab === "1" ? "active" : ""}
                 onClick={() => setActiveTab("1")}
             >
@@ -25,7 +26,7 @@ function HorseDetailTabs({horse, contacts, setHorses, setSelectedHorse}) {
             </Button>
 
             <Button
-                variant={"tab"}
+                variant="tab"
                 className={activeTab === "2" ? "active" : ""}
                 onClick={() => setActiveTab("2")}
             >
@@ -33,7 +34,7 @@ function HorseDetailTabs({horse, contacts, setHorses, setSelectedHorse}) {
             </Button>
 
             <Button
-                variant={"tab"}
+                variant="tab"
                 className={activeTab === "3" ? "active" : ""}
                 onClick={() => setActiveTab("3")}
             >
@@ -41,7 +42,7 @@ function HorseDetailTabs({horse, contacts, setHorses, setSelectedHorse}) {
             </Button>
 
             <Button
-                variant={"tab"}
+                variant="tab"
                 className={activeTab === "4" ? "active" : ""}
                 onClick={() => setActiveTab("4")}
             >
@@ -76,8 +77,6 @@ function HorseDetailTabs({horse, contacts, setHorses, setSelectedHorse}) {
                         setSelectedHorse={setSelectedHorse}
                     />
                 )}
-
-
             </div>
         </section>
     );

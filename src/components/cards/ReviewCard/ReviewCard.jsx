@@ -6,11 +6,12 @@ function ReviewCard({
                         profileImgAlt,
                         personName,
                         stableName,
-                        reviewText}) {
+                        reviewText
+                    }) {
     return (
         <div className="review-card">
             <div className="avatarAndName">
-                <img src={profileImgUrl} alt={profileImgAlt} />
+                <img src={profileImgUrl} alt={profileImgAlt}/>
                 <div className="nameAndStableName">
                     <h4>{personName}</h4>
                     <h5>{stableName}</h5>

@@ -18,6 +18,7 @@ function AuthProvider({children}) {
             setToken(savedToken);
             setUser(JSON.parse(savedUser));
         }
+
         setLoading(false);
     }, []);
 

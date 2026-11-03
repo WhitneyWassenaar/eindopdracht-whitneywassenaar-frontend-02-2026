@@ -7,8 +7,9 @@ import getTodayDate from "../../../helpers/getTodayDate.js";
 // Context / Hooks
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
-// Api
-import api from "../../../api/axios.js";
+// Services
+import { getContacts } from "../../../services/contactService.js";
+import { createAppointment } from "../../../services/appointmentService.js";
 
 // CSS
 import "./CreateAppointmentForm.css";
@@ -20,33 +21,25 @@ function CreateAppointmentForm({horse, onSaved}) {
         professionalType: "",
         professionalId: "",
         date: "",
+        time: "",
         reason: ""
     });
 
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        if (!horse || !token) return;
+        if (!user || !token) return;
 
-        async function getContacts() {
+        async function loadContacts() {
             try {
-
-                const response = await api.get(`/users/${user.id}/persons`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                );
-
-                setContacts(response.data);
-
+                const contactsData = await getContacts(user.id, token);
+                setContacts(contactsData);
             } catch (error) {
-                console.error(error);
+                console.error("Contacten ophalen mislukt:", error);
             }
         }
 
-        getContacts();
+        loadContacts();
     }, [token, user]);
 
     function handleChange(e) {
@@ -73,7 +66,7 @@ function CreateAppointmentForm({horse, onSaved}) {
         }
 
         try {
-            await api.post("/appointments",
+            await createAppointment(
                 {
                     userId: user.id,
                     horseId: horse.id,
@@ -83,24 +76,18 @@ function CreateAppointmentForm({horse, onSaved}) {
                     time: formData.time,
                     reason: formData.reason
                 },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
+                token
             );
 
-            setMessage("Afspraak opgeslagen")
+            setMessage("Afspraak opgeslagen");
 
             if (onSaved) {
                 onSaved();
             }
 
         } catch (error) {
-
             console.error(error);
             setMessage("Opslaan mislukt");
-
         }
     }
 

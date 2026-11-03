@@ -7,8 +7,9 @@ import CreateAppointmentForm from "../../../forms/CreateAppointmentForm/CreateAp
 // Context / Hooks
 import {AuthContext} from "../../../../context/AuthContext.jsx";
 
-// Api
-import api from "../../../../api/axios.js";
+// Services
+import {
+    getHorseAppointments, getUserContacts, deleteAppointment} from "../../../../services/appointmentService.js";
 
 // CSS
 import "./HorseAppointments.css";
@@ -21,57 +22,34 @@ function HorseAppointments({horse}) {
     const [contacts,setContacts] = useState([]);
 
     useEffect(() => {
-        if(!horse || !token) return;
+        if (!horse || !token) return;
 
-        async function getAppointments(){
+        async function fetchAppointments() {
             try {
-
-                const response = await api.get(`/horses/${horse.id}/appointments`,
-                    {
-                        headers:{
-                            Authorization:`Bearer ${token}`
-                        }
-                    }
-                );
-
-                console.log("Afspraken:", response.data);
-                setAppointments(response.data);
-
-            } catch(error){
+                const data = await getHorseAppointments(horse.id, token);
+                setAppointments(data);
+            } catch (error) {
                 console.error(error);
             }
         }
 
-        getAppointments();
-
+        fetchAppointments();
     }, [horse, token]);
 
     useEffect(() => {
+        if (!token || !user?.id) return;
 
-        if(!token) return;
-
-
-        async function getContacts(){
-
+        async function fetchContacts() {
             try {
-
-                const response = await api.get(`/users/${user.id}/persons`,
-                    {
-                        headers:{
-                            Authorization:`Bearer ${token}`
-                        }
-                    }
-                );
-
-                setContacts(response.data);
-
-            } catch(error){
+                const data = await getUserContacts(user.id, token);
+                setContacts(data);
+            } catch (error) {
                 console.error(error);
             }
-
         }
-        getContacts();
-    }, [token]);
+
+        fetchContacts();
+    }, [token, user?.id]);
 
     function getProfessionalName(professionalId){
 
@@ -83,38 +61,23 @@ function HorseAppointments({horse}) {
         if(!professional){
             return "Onbekend";
         }
-
-
         return `${professional.firstName} ${professional.lastName}`;
-
     }
 
-    async function deleteAppointment(id) {
-
-        if(!window.confirm("Weet je zeker dat je deze afspraak wilt verwijderen?"))
+    async function handleDeleteAppointment(id) {
+        if (!window.confirm("Weet je zeker dat je deze afspraak wilt verwijderen?")) {
             return;
-
-        try {
-            await api.delete(`/appointments/${id}`,
-                {
-                    headers:{
-                        Authorization:`Bearer ${token}`
-                    }
-                }
-            );
-
-
-            setAppointments(previous =>
-                previous.filter(
-                    appointment => appointment.id !== id
-                )
-            );
-
-
-        } catch(error){
-            console.error(error);
         }
 
+        try {
+            await deleteAppointment(id, token);
+
+            setAppointments(previous =>
+                previous.filter(appointment => appointment.id !== id)
+            );
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     function dueAppointment(appointment) {
@@ -142,24 +105,18 @@ function HorseAppointments({horse}) {
                 <CreateAppointmentForm
                     horse={horse}
                     onSaved={async () => {
-
-                        const response = await api.get(`/horses/${horse.id}/appointments`,
-                            {
-                                headers:{
-                                    Authorization:`Bearer ${token}`
-                                }
-                            }
-                        );
-
-                        setAppointments(response.data);
-                        setShowForm(false);
-
+                        try {
+                            const data = await getHorseAppointments(horse.id, token);
+                            setAppointments(data);
+                            setShowForm(false);
+                        } catch (error) {
+                            console.error(error);
+                        }
                     }}
                 />
             )}
 
             {!showForm && (
-
                     <div className="appointment-list">
                     {appointments.map((appointment)=>(
 
@@ -168,7 +125,6 @@ function HorseAppointments({horse}) {
                                 ? "appointment-card due"
                                 : "appointment-card"
                         }>
-
                             <p>
                                 Datum: {appointment.date}
                             </p>
@@ -188,27 +144,20 @@ function HorseAppointments({horse}) {
                                 {getProfessionalName(appointment.professionalId)}
                             </p>
 
-
-
                             <p>
                                 Reden:
                                 {appointment.reason}
                             </p>
 
-
                             <button
-                                onClick={() => deleteAppointment(appointment.id)}
+                                onClick={() => handleDeleteAppointment(appointment.id)}
                             >
                                 Afspraak verwijderen
                             </button>
-
                         </div>
-
                     ))}
                     </div>
-
             )}
-
             {!showForm && (
                 <button
                     onClick={() => setShowForm(true)}

@@ -5,13 +5,13 @@ import {Outlet} from 'react-router-dom';
 import UserNavbar from '../../navigation/UserNavbar/UserNavbar.jsx';
 
 // CSS
-import './DashboardLayout.css'
+import './DashboardLayout.css';
 
 function DashboardLayout() {
 
     return (
         <div className="dashboard-layout">
-                <UserNavbar/>
+            <UserNavbar/>
             <main className="dashboard-content">
                 <Outlet/>
             </main>

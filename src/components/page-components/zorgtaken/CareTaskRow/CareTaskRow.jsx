@@ -2,12 +2,27 @@
 import Button from '../../../ui/Button/Button.jsx';
 
 // Assets
-import deleteIcon from '/src/assets/delete-icon.png'
+import deleteIcon from '/src/assets/delete-icon.png';
 
 // CSS
-import './CareTaskRow.css'
+import './CareTaskRow.css';
 
-function CareTaskRow({careTask, deleteCareTask, openAssignForm}) {
+
+function CareTaskRow({
+                         careTask,
+                         deleteCareTask,
+                         openAssignForm})
+{
+
+    function handleAssign(e) {
+        e.stopPropagation();
+        openAssignForm(careTask);
+    }
+
+    function handleDelete(e) {
+        e.stopPropagation();
+        deleteCareTask(careTask.id);
+    }
 
     return (
         <tr className="caretask-row-layout">
@@ -16,21 +31,15 @@ function CareTaskRow({careTask, deleteCareTask, openAssignForm}) {
 
             <td>
                 <Button
-                    variant={"assign"}
-                    onClick={(e) => {
-                        e.stopPropagation();
-                      openAssignForm(careTask)
-                    }}>
+                    variant="assign"
+                    onClick={handleAssign}>
                    Toewijzen
                 </Button>
 
                 <Button
-                    variant={"delete"}
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        deleteCareTask(careTask.id);
-                    }}>
-                    <img src={deleteIcon} alt={"delete icon"}/>
+                    variant="delete"
+                    onClick={handleDelete}>
+                    <img src={deleteIcon} alt="Verwijderen"/>
                 </Button>
             </td>
         </tr>

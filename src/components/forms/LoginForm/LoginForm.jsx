@@ -8,8 +8,8 @@ import Button from '../../ui/Button/Button.jsx';
 // Context / Hooks
 import {AuthContext} from '../../../context/AuthContext.jsx';
 
-// Api
-import api from "../../../api/axios.js";
+// Services
+import {loginUser, getUserByEmail, getUserProfile} from "../../../services/authService.js";
 
 // CSS
 import './LoginForm.css'
@@ -24,39 +24,20 @@ function LoginForm() {
     async function onFormSubmit(e) {
         e.preventDefault();
         setError("");
+
         try {
-            const response = await api.post("/login",
-                {
-                    email,
-                    password
-                });
+            const loginData = await loginUser(email, password);
 
-            const loginData = response.data;
-            console.log("Logged in user:", loginData);
+            const user = await getUserByEmail(
+                loginData.user.email,
+                loginData.token
+            );
 
-            const userResponse = await api.get("/users",
-                {
-                    headers: {
-                        Authorization: `Bearer ${loginData.token}`
-                    }
-                });
+            const profile = await getUserProfile(
+                user.id,
+                loginData.token
+            );
 
-            const user = userResponse.data.find(user => user.email === loginData.user.email)
-
-            const userId = user.id;
-
-            const profileResponse = await api.get(`/users/${userId}/userProfiles`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${loginData.token}`
-                    }
-                });
-            const profile = profileResponse.data[0];
-
-            console.log("Profiel:", profile);
-            console.log("Login response:", response.data);
-            console.log("User:", response.data.user);
-            console.log("Profiel:", profile);
             login(
                 {
                     ...loginData.user,
@@ -71,8 +52,10 @@ function LoginForm() {
             navigate("/dashboard");
 
         } catch (error) {
-            console.error(error);
-            setError(error.response?.data?.error || "Er is iets mis gegaan..")
+            console.error("Inloggen mislukt:", error);
+            setError(
+                error.response?.data?.error || "Er is iets misgegaan."
+            );
         }
     }
 

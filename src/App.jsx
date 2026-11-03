@@ -22,35 +22,31 @@ import WebLayout from './components/layout/WebLayout/WebLayout.jsx';
 import DashboardLayout from './components/layout/DashboardLayout/DashboardLayout.jsx';
 import ProtectedRoute from './routing/ProtectedRoute.jsx';
 
-// CSS
-import './App.css';
-
 function App() {
     return (
-            <Routes>
+        <Routes>
+            <Route element={<WebLayout/>}>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/functies" element={<Functies/>}/>
+                <Route path="/contact" element={<Contact/>}/>
+                <Route path="/error" element={<Error/>}/>
+                <Route path="/inloggen" element={<Inloggen/>}/>
+                <Route path="/registreren" element={<Registreren/>}/>
+                <Route path="/helpcentrum" element={<Helpcentrum/>}/>
+            </Route>
 
-                <Route element={<WebLayout/>}>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/functies" element={<Functies/>}/>
-                    <Route path="/contact" element={<Contact/>}/>
-                    <Route path="/error" element={<Error/>}/>
-                    <Route path="/inloggen" element={<Inloggen/>}/>
-                    <Route path="/registreren" element={<Registreren/>}/>
-                    <Route path="/helpcentrum" element={<Helpcentrum/>}/>
-                </Route>
-
-                <Route element={
-                    <ProtectedRoute>
-                        <DashboardLayout/>
-                    </ProtectedRoute>}>
-                    <Route path="/dashboard" element={<Dashboard/>}/>
-                    <Route path="/paardenbeheer" element={<Paardenbeheer/>}/>
-                    <Route path="/stalbezetting" element={<Stalbezetting/>}/>
-                    <Route path="/zorgtaken" element={<Zorgtaken/>}/>
-                    <Route path="/contacten" element={<Contacten/>}/>
-                </Route>
-
-            </Routes>
+            <Route element={
+                <ProtectedRoute>
+                    <DashboardLayout/>
+                </ProtectedRoute>}>
+                <Route path="/dashboard" element={<Dashboard/>}/>
+                <Route path="/paardenbeheer" element={<Paardenbeheer/>}/>
+                <Route path="/stalbezetting" element={<Stalbezetting/>}/>
+                <Route path="/zorgtaken" element={<Zorgtaken/>}/>
+                <Route path="/contacten" element={<Contacten/>}/>
+            </Route>
+        </Routes>
     );
 }
+
 export default App;

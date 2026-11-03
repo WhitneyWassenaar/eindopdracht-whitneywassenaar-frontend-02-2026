@@ -7,19 +7,18 @@ import Button from '../../ui/Button/Button.jsx';
 // Context
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
-// Api
-import api from "../../../api/axios.js";
+// Services
+import {createContact} from "../../../services/contactService.js";
 
 // Data
 import roles from "../../../data/roles.js";
-
 
 // CSS
 import './CreateContactProfileForm.css';
 
 function CreateContactProfileForm({setContacts, setShowForm}) {
     const {token, user} = useContext(AuthContext);
-    const defaultContactPhoto = "/defaultContactPhoto.png"
+    const defaultContactPhoto = "/defaultContactPhoto.png";
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -34,7 +33,7 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
         setError("");
 
         try {
-            const response = await api.post("/persons",
+            const newContact = await createContact(
                 {
                     userId: user.id,
                     firstName,
@@ -45,15 +44,8 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
                     role,
                     photo: contactPhoto || defaultContactPhoto
                 },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
+                token
             );
-
-            const newContact = response.data;
-            console.log("Nieuwe contact uit backend:", newContact);
 
             setContacts(previousContacts => [
                 ...previousContacts,
@@ -64,15 +56,17 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
             setLastName("");
             setEmail("");
             setPhoneNumber("");
+            setRole("");
             setContactPhoto("");
 
             setShowForm(false);
-            console.log("Nieuwe contact:", newContact);
-
 
         } catch (error) {
-            console.error(error)
-            setError(error.response?.data?.error || "Er is iets mis gegaan..")
+            console.error("Contact aanmaken mislukt:", error);
+            setError(
+                error.response?.data?.error ||
+                "Er is iets misgegaan."
+            );
         }
     }
 
@@ -184,7 +178,7 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
                 )}
 
                 <Button
-                    type={"submit"}
+                    type="submit"
                 >
                     Contactprofiel aanmaken
                 </Button>

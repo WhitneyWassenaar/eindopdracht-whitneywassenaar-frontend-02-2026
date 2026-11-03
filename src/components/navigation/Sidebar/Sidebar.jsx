@@ -1,14 +1,17 @@
+// React Router
+import {NavLink} from 'react-router-dom';
+
 // CSS
 import './Sidebar.css';
 
 function Sidebar({menuOpen}) {
     return (
         <aside className={menuOpen ? "sidebar open" : "sidebar"}>
-            <a href="/">Home</a>
-            <a href="/functies">Functies</a>
-            <a href="/contact">Contact</a>
-            <a href="/inloggen">Inloggen</a>
-            <a href="/registreren">Registreren</a>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/functies">Functies</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/inloggen">Inloggen</NavLink>
+            <NavLink to="/registreren">Registreren</NavLink>
         </aside>
     );
 }

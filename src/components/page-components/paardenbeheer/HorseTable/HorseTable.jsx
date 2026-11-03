@@ -4,19 +4,19 @@ import HorseRow from '../HorseRow/HorseRow.jsx';
 // CSS
 import './HorseTable.css'
 
-function HorseTable({horses, setSelectedHorse, deleteHorse,toggleHorseActive, contacts}) {
+function HorseTable({horses = [], setSelectedHorse, deleteHorse, toggleHorseActive, contacts = []}) {
     return (
         <table className="table-layout">
             <thead>
-            <tr>
-                <th>Foto</th>
-                <th>Naam</th>
-                <th>Geslacht</th>
-                <th>Leeftijd</th>
-                <th>Eigenaar</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
+                <tr>
+                    <th>Foto</th>
+                    <th>Naam</th>
+                    <th>Geslacht</th>
+                    <th>Leeftijd</th>
+                    <th>Eigenaar</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
             {horses.map((horse) => (

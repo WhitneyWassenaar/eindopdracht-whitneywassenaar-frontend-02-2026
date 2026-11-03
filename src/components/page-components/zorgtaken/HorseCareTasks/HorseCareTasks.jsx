@@ -1,11 +1,11 @@
 // React
 import {useContext, useEffect, useState} from "react";
 
-// API
-import api from "../../../../api/axios.js";
-
 // Context
 import {AuthContext} from "../../../../context/AuthContext.jsx";
+
+// Services
+import {getHorseCareTaskAssignments, getCareTasks, completeCareTaskAssignment} from "../../../../services/careTaskAssignmentService.js";
 
 // CSS
 import "./HorseCareTasks.css";
@@ -14,32 +14,19 @@ function HorseCareTasks({horse}) {
     const {token} = useContext(AuthContext);
     const [assignments, setAssignments] = useState([]);
 
+    const horseId = horse?.id;
+
     useEffect(() => {
-        if (!horse || !token) return;
+        if (!horseId || !token) return;
 
         async function getAssignments() {
             try {
-
-                const response = await api.get(`/horses/${horse.id}/careTaskAssignments`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
+                const assignments = await getHorseCareTaskAssignments(
+                    horseId,
+                    token
                 );
 
-                const assignments = response.data;
-                console.log("Assignments:", assignments);
-
-                const tasksResponse = await api.get(`/careTasks`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                );
-
-                const careTasks = tasksResponse.data;
+                const careTasks = await getCareTasks(token);
 
                 const assignmentsWithTasks = assignments.map((assignment) => ({
                     ...assignment,
@@ -54,30 +41,23 @@ function HorseCareTasks({horse}) {
                 console.error(error);
             }
         }
-
         getAssignments();
-
-    }, [horse, token]);
+    }, [horseId, token]);
 
     async function completeTask(id) {
-        await api.patch(`/careTaskAssignments/${id}`,
-            {
-                completed: true
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }
-        );
+        try {
+            await completeCareTaskAssignment(id, token);
 
-        setAssignments(previous =>
-            previous.map(task =>
-                task.id === id
-                    ? {...task, completed: true}
-                    : task
-            )
-        );
+            setAssignments(previous =>
+                previous.map(task =>
+                    task.id === id
+                        ? { ...task, completed: true }
+                        : task
+                )
+            );
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
@@ -92,7 +72,7 @@ function HorseCareTasks({horse}) {
                 </p>
             )}
             <div className="caretask-list">
-                {assignments
+                {[...assignments]
                     .sort((a, b) => {
 
                         if (a.completed !== b.completed) {
@@ -108,7 +88,8 @@ function HorseCareTasks({horse}) {
                             className="caretask-card"
                         >
                             <h3>
-                                {assignment.careTask?.title
+                                {assignment.careTaskTitle
+                                    || assignment.careTask?.title
                                     || "Zorgtaak"}
                             </h3>
                             <p>

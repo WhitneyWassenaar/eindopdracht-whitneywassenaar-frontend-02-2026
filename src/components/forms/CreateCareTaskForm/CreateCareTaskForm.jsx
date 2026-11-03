@@ -7,11 +7,8 @@ import Button from "../../ui/Button/Button.jsx";
 // Context / Hooks
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
-// Api
-import api from "../../../api/axios.js";
-
-// CSS
-import "./CreateCareTaskForm.css";
+// Services
+import {getCareTasks, createCareTask} from "../../../services/careTaskService.js";
 
 function CreateCareTaskForm({addCareTask, setShowForm}) {
     const [title, setTitle] = useState("");
@@ -25,16 +22,10 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
         setError("");
 
         try {
-            const existingTasksResponse = await api.get("/careTasks",
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
+            const existingTasks = await getCareTasks(token);
 
-            const taskExists = existingTasksResponse.data.some(task =>
-                task.title.toLowerCase() === title.toLowerCase()
+            const taskExists = existingTasks.some(task =>
+                task.title.trim().toLowerCase() === title.trim().toLowerCase()
             );
 
             if (taskExists) {
@@ -42,30 +33,23 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
                 return;
             }
 
-            const response = await api.post("/careTasks",
+            const newCareTask = await createCareTask(
                 {
                     userId: user.id,
-                    title,
-                    description,
+                    title: title.trim(),
+                    description: description.trim()
                 },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
+                token
             );
-
-            const newCareTask = response.data;
             addCareTask(newCareTask);
-            console.log("Nieuwe zorgtaak uit backend:", newCareTask);
 
             setTitle("");
             setDescription("");
             setShowForm(false);
 
         } catch (error) {
-            console.error(error)
-            setError(error.response?.data?.error || "Er is iets mis gegaan..")
+            console.error("Zorgtaak aanmaken mislukt:", error);
+            setError(error.response?.data?.error || "Er is iets misgegaan.");
         }
     }
 
@@ -111,7 +95,7 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
                 )}
 
                 <Button
-                    type={"submit"}
+                    type="submit"
                 >
                     Zorgtaak aanmaken
                 </Button>

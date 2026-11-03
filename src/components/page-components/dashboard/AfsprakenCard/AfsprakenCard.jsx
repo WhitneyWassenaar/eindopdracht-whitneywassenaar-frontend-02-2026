@@ -4,20 +4,20 @@ import DashboardCard from '../DashboardCard/DashboardCard.jsx';
 // CSS
 import './AfsprakenCard.css';
 
-function AfsprakenCard({appointments}) {
+function AfsprakenCard({appointments = []}) {
     const today = new Date().toISOString().split("T")[0];
 
     const upcomingAppointments = appointments.filter(
         appointment => appointment.date >= today
-    ).length;
+    );
 
-    const treatments = appointments.filter(
+    const treatments = upcomingAppointments.filter(
         appointment =>
             appointment.professionalType === "Dierenarts" ||
             appointment.professionalType === "Hoefsmid"
     ).length;
 
-    const trainings = appointments.filter(
+    const trainings = upcomingAppointments.filter(
         appointment =>
             appointment.professionalType === "Trainer"
     ).length;
@@ -29,7 +29,7 @@ function AfsprakenCard({appointments}) {
             <ul className="afspraken-list">
                 <li>
                     <span>Aankomende afspraken:</span>
-                    <strong>{upcomingAppointments}</strong>
+                    <strong>{upcomingAppointments.length}</strong>
                 </li>
                 <li>
                     <span>Behandelingen:</span>

@@ -4,7 +4,10 @@ import CareTaskRow from "../CareTaskRow/CareTaskRow.jsx";
 // CSS
 import "./CareTasksTable.css";
 
-function CareTasksTable({careTasks, deleteCareTask, openAssignForm}) {
+function CareTasksTable({
+                            careTasks,
+                            deleteCareTask,
+                            openAssignForm}) {
     return (
         <table className="caretask-table-layout">
             <thead>

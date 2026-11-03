@@ -68,7 +68,7 @@
     background-color: var(--tertiary-color);
     position: relative;
     z-index: 2;
-    margin-bottom: -1px; /* trekt de tab over de content border heen */
+    margin-bottom: -1px;
 }
 
 .button--tab:hover {

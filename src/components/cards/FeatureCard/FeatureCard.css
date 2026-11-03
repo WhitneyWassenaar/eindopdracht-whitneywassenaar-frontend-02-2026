@@ -13,7 +13,6 @@
 .feature-card-wrapper--default {
     display: flex;
     gap: 5rem;
-    /*border: 4px red solid;*/
 }
 
 .feature-card--default h2 {
@@ -23,7 +22,6 @@
 }
 
 .feature-content-wrapper {
-    /*border: 1px solid greenyellow ;*/
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -35,7 +33,6 @@
     display: flex;
     flex-direction: row-reverse;
     gap: 5rem;
-    /*border: 4px green solid;*/
 }
 
 .feature-card--reverse {
@@ -44,7 +41,6 @@
     align-items: center;
     border-radius: 20px;
     background-color: var(--tertiary-color);
-    /*border: 5px solid var(--primary-color);*/
     color: var(--background-color);
     width: 100%;
     max-width: 600px;
@@ -59,6 +55,5 @@
 
 .feature-list--default,
 .feature-list--reverse {
-
     padding-left: 1.25rem;
 }

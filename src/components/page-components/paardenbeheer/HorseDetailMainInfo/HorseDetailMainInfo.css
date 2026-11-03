@@ -33,6 +33,10 @@
     object-fit: contain;
 }
 
+.info-label {
+    font-weight:600;
+}
+
 .horse-main-info ul {
     list-style-type: none;
 }
@@ -44,6 +48,12 @@
     max-width: 100%;
     overflow-wrap: anywhere;
     box-sizing: border-box;
+}
+
+.info-block li {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 8px;
 }
 
 .info-block ul {

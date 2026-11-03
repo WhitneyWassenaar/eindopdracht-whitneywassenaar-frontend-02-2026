@@ -1,14 +1,14 @@
 // React
 import {useContext, useEffect, useState} from "react";
 
-// Components
-import Button from "../../ui/Button/Button.jsx";
-
 // Context
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
 // Api
 import api from "../../../api/axios.js";
+
+// Components
+import Button from "../../ui/Button/Button.jsx";
 
 // CSS
 import "./AssignCareTaskForm.css";
@@ -35,8 +35,8 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                     const response = await api.get(
                         `/horses/${horse.id}/careTaskAssignments`,
                         {
-                            headers:{
-                                Authorization:`Bearer ${token}`
+                            headers: {
+                                Authorization: `Bearer ${token}`
                             }
                         }
                     );
@@ -46,13 +46,12 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
 
                 setExistingAssignments(allAssignments);
 
-            } catch(error) {
+            } catch (error) {
                 console.error(error);
             }
         }
 
         getExistingAssignments();
-
     }, [horses, token]);
 
     useEffect(() => {
@@ -65,28 +64,25 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                 const response = await api.get(
                     `/users/${user.id}/horses`,
                     {
-                        headers:{
-                            Authorization:`Bearer ${token}`
+                        headers: {
+                            Authorization: `Bearer ${token}`
                         }
                     }
                 );
 
                 setHorses(response.data);
 
-            } catch(error) {
+            } catch (error) {
                 console.error(error);
             }
         }
-
         getHorses();
-
     }, [token, user]);
 
     function handleHorseSelect(horseId) {
-
         setSelectedHorses(previous => {
 
-            if(previous.includes(horseId)) {
+            if (previous.includes(horseId)) {
 
                 return previous.filter(
                     id => id !== horseId
@@ -98,64 +94,68 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                     ...previous,
                     horseId
                 ];
-
             }
-
         });
-
     }
 
     async function assignCareTaskSubmit(e) {
         e.preventDefault();
         setError("");
+        setMessage("");
 
-        if(selectedHorses.length === 0) {
+        if (selectedHorses.length === 0) {
             setError("Selecteer minimaal één paard");
             return;
         }
 
+        const hasDuplicate = selectedHorses.some(horseId =>
+            existingAssignments.some(
+                assignment =>
+                    Number(assignment.horseId) === Number(horseId) &&
+                    Number(assignment.careTaskId) === Number(careTask.id) &&
+                    assignment.dueDate === dueDate &&
+                    assignment.completed === false
+            )
+        );
+
+        if (hasDuplicate) {
+            setError(
+                "Deze zorgtaak is al toegewezen aan één of meerdere geselecteerde paarden op deze datum."
+            );
+            return;
+        }
+
         try {
-            for(const horseId of selectedHorses) {
-
-                const duplicate = existingAssignments.some(
-                    (assignment) =>
-                        assignment.horseId === horseId &&
-                        assignment.careTaskId === careTask.id &&
-                        assignment.dueDate === dueDate
-                );
-
-                if (duplicate) {
-                    setError(
-                        "Deze zorgtaak is al toegewezen aan dit paard op deze datum."
-                    );
-                    return;
-                }
-
+            for (const horseId of selectedHorses) {
                 await api.post(
                     "/careTaskAssignments",
                     {
                         careTaskId: careTask.id,
+                        careTaskTitle: careTask.title,
                         horseId: horseId,
                         dueDate: dueDate,
                         completed: false
                     },
                     {
-                        headers:{
-                            Authorization:`Bearer ${token}`
+                        headers: {
+                            Authorization: `Bearer ${token}`
                         }
                     }
                 );
             }
 
-            setMessage("Zorgtaak succesvol toegewezen aan de geselecteerde paarden.");
+            setMessage(
+                "Zorgtaak succesvol toegewezen aan de geselecteerde paarden."
+            );
 
             setTimeout(() => {
                 setSelectedCareTask(null);
                 setMessage("");
-            }, 5000);
+            }, 3000);
 
-        } catch(error) {
+        } catch (error) {
             console.error(error);
+
             setError(
                 error.response?.data?.error ||
                 "Toewijzen mislukt"
@@ -206,7 +206,7 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                         id="dueDate"
                         type="date"
                         value={dueDate}
-                        onChange={(e)=>
+                        onChange={(e) =>
                             setDueDate(e.target.value)
                         }
                         required
@@ -243,4 +243,5 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
         </form>
     );
 }
+
 export default AssignCareTaskForm;

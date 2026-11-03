@@ -6,7 +6,7 @@ import Navbar from '../../navigation/Navbar.jsx';
 import Footer from '../Footer/Footer.jsx';
 
 // CSS
-import './WebLayout.css'
+import './WebLayout.css';
 
 function WebLayout() {
     return (

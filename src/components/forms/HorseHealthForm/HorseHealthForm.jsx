@@ -4,11 +4,11 @@ import {useContext, useEffect, useState} from "react";
 // Context / Hooks
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
-// Api
-import api from "../../../api/axios.js";
+// Services
+import {getHorseHealth, updateHorseHealth, createHorseHealth} from "../../../services/horseHealthService.js";
 
 // CSS
-import "./HorseHealthForm.css"
+import "./HorseHealthForm.css";
 
 function HorseHealthForm({horse, onSaved}) {
     const {token, user} = useContext(AuthContext);
@@ -32,16 +32,10 @@ function HorseHealthForm({horse, onSaved}) {
         async function getHealth() {
             try {
 
-                const response = await api.get(`/horses/${horse.id}/horseHealths`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                );
+                const healthData = await getHorseHealth(horse.id, token);
 
-                if (response.data.length > 0) {
-                    const health = response.data[0];
+                if (healthData.length > 0) {
+                    const health = healthData[0];
 
                     setHealthId(health.id);
 
@@ -74,37 +68,32 @@ function HorseHealthForm({horse, onSaved}) {
 
     async function handleSubmit(e) {
         e.preventDefault();
+
         try {
+            const healthData = {
+                ...formData,
+                weight: formData.weight === "" ? null : Number(formData.weight),
+                lastDeworming: formData.lastDeworming || null
+            };
+
             if (healthId) {
-                // bestaande gegevens aanpassen
-                await api.patch(`/horseHealths/${healthId}`,
-                    formData,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                );
-
+                await updateHorseHealth(healthId, healthData, token);
             } else {
+                await createHorseHealth(
 
-                // nieuwe gezondheidsgegevens maken
-                await api.post(
-                    "/horseHealths",
                     {
-                        ...formData,
+                        ...healthData,
+                        weight: formData.weight === "" ? undefined : Number(formData.weight),
+                        lastDeworming: formData.lastDeworming || undefined,
                         userId: user.id,
                         horseId: horse.id
                     },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
+                    token
                 );
             }
 
             setMessage("Gezondheidsgegevens opgeslagen");
+
             if (onSaved) {
                 onSaved();
             }
@@ -195,6 +184,7 @@ function HorseHealthForm({horse, onSaved}) {
                         name="lastDeworming"
                         value={formData.lastDeworming}
                         onChange={handleChange}
+                        max={new Date().toLocaleDateString("en-CA")}
                     />
             </div>
 

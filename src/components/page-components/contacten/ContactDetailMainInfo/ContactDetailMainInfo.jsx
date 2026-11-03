@@ -1,8 +1,9 @@
 // CSS
 import './ContactDetailMainInfo.css';
 
+const defaultContactPhoto = "/defaultContactPhoto.png";
+
 function ContactDetailMainInfo({contact, horses = []}) {
-    const defaultContactPhoto = "/defaultContactPhoto.png";
 
     return (
         <div className="contact-detail-main-info-container">
@@ -21,7 +22,7 @@ function ContactDetailMainInfo({contact, horses = []}) {
                 </div>
 
                 <div className="info-block">
-                    <h4>Relaties</h4>
+                    <h3>Relaties</h3>
                     {horses.length > 0 ? (
                         horses.map((horse) => (
                             <div key={horse.id} className="related-horse">

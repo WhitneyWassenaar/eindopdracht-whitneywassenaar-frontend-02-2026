@@ -12,9 +12,9 @@ import {AuthProvider} from './context/AuthContext.jsx';
 import './index.css';
 
 createRoot(document.getElementById('root')).render(
-        <AuthProvider>
-            <Router>
-                <App/>
-            </Router>
-        </AuthProvider>
+    <AuthProvider>
+        <Router>
+            <App/>
+        </Router>
+    </AuthProvider>
 );

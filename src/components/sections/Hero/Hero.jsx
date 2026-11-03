@@ -15,9 +15,8 @@ function Hero({
                   buttonVariant = "default",
                   imageVariant = "default",
                   ellipseVariant = "default",
-                  buttonPath
-              }
-) {
+                  buttonPath})
+{
     return (
         <section className={`hero hero--${variant}`}>
             <article className="hero-article-wrapper">

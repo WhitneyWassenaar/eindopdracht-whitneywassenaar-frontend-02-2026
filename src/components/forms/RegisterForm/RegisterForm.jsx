@@ -5,8 +5,8 @@ import {useNavigate} from 'react-router-dom';
 // Components
 import Button from '../../ui/Button/Button.jsx';
 
-// Api
-import api from "../../../api/axios.js";
+// Services
+import {registerUser, createUserProfile} from "../../../services/authService.js";
 
 // CSS
 import './RegisterForm.css';
@@ -55,29 +55,23 @@ function RegisterForm() {
         }
 
         if (!acceptToc) {
-            setError("Je moet akkoord gaan met de voorwaarden om te kunnen registreren")
+            setError("Je moet akkoord gaan met de voorwaarden om te kunnen registreren");
             return;
         }
 
         try {
-            const response = await api.post("/users",
-                {
-                    email: cleanEmail,
-                    password,
-                    roles: ["user"]
-                }
-            );
+            const userData = await registerUser({
+                email: cleanEmail,
+                password,
+                roles: ["user"]
+            });
 
-            const userData = response.data;
-
-            await api.post("/userProfiles",
-                {
-                    userId: userData.id,
-                    firstName: cleanFirstName,
-                    lastName: cleanLastName,
-                    stableName: cleanStableName
-                }
-            );
+            await createUserProfile({
+                userId: userData.id,
+                firstName: cleanFirstName,
+                lastName: cleanLastName,
+                stableName: cleanStableName
+            });
 
             localStorage.setItem("userId", userData.id);
 
@@ -88,7 +82,8 @@ function RegisterForm() {
             }, 5000);
 
         } catch (error) {
-            setError(error.response?.data?.error || "Er is iets mis gegaan...");
+            console.error("Registreren mislukt:", error);
+            setError(error.response?.data?.error || "Er is iets misgegaan...");
         }
     }
 
@@ -230,7 +225,7 @@ function RegisterForm() {
                     )}
 
                     <Button
-                        type={"submit"}
+                        type="submit"
                     >
                         Registreren
                     </Button>

@@ -4,14 +4,13 @@ import {useContext, useEffect, useState} from "react";
 // Context
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
+// Services
+import {getDashboardData} from "../../../services/dashboardService.js";
+
 // Components
-import PaardenverdelingCard
-    from '../../../components/page-components/dashboard/PaardenverdelingCard/Paardenverdeling.jsx';
+import PaardenverdelingCard from '../../../components/page-components/dashboard/PaardenverdelingCard/Paardenverdeling.jsx';
 import ZorgtakenCard from '../../../components/page-components/dashboard/ZorgtakenCard/ZorgtakenCard.jsx';
 import AfsprakenCard from '../../../components/page-components/dashboard/AfsprakenCard/AfsprakenCard.jsx';
-
-// Api
-import api from "../../../api/axios.js";
 
 // CSS
 import './Dashboard.css'
@@ -24,54 +23,25 @@ function Dashboard() {
     const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
+        if (!token || !user) return;
+
         async function fetchDashboardData() {
             try {
-                const headers = {
-                    Authorization: `Bearer ${token}`
-                };
+                const data = await getDashboardData(user.id, token);
 
-                const horsesResponse = await api.get(`/users/${user.id}/horses`, {headers});
-                console.log("Dashboard paarden:", horsesResponse.data);
-
-                const horses = horsesResponse.data;
-                setHorses(horses);
-
-                const boxesResponse = await api.get(`/users/${user.id}/boxes`, {headers});
-                setBoxes(boxesResponse.data);
-
-                const appointmentsResponse = await api.get(`/users/${user.id}/appointments`, {
-                    headers
-                });
-
-                setAppointments(
-                    appointmentsResponse.data.filter(appointment =>
-                        horses.some(horse => horse.id === appointment.horseId)
-                    )
-                );
-
-                const careTaskAssignmentResponse = await api.get(`/careTaskAssignments`,
-                    {headers}
-                );
-
-                setCareTasks(
-                    careTaskAssignmentResponse.data.filter(task =>
-                        horses.some(horse => horse.id === task.horseId)
-                    )
-                );
+                setHorses(data.horses);
+                setBoxes(data.boxes);
+                setAppointments(data.appointments);
+                setCareTasks(data.careTasks);
 
             } catch (error) {
-                console.error(
-                    "Dashboard data ophalen mislukt:",
-                    error
-                );
+                console.error("Dashboard data ophalen mislukt:", error);
             }
         }
-
-        if (token && user) {
-            fetchDashboardData();
-        }
-
+        fetchDashboardData();
     }, [token, user]);
+
+    if (!user) return null;
 
     return (
         <div className="dashboard-page">

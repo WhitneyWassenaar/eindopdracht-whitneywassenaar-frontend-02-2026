@@ -1,0 +1,9 @@
+.relation-info-label {
+    font-weight:400;
+}
+
+.relation-info-block li {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 8px;
+}

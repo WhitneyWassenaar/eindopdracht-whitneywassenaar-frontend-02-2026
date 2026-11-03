@@ -8,17 +8,15 @@ function PaardenverdelingCard({horses, boxes}) {
     const stableCapacity = boxes?.length || 0;
 
     const horsesInStable = horses?.filter(
-        horse => horse.location === "stal"
+        horse => horse.location === "stal" && horse.boxId !== null
     ).length || 0;
 
     const horsesInPasture = horses?.filter(
-        horse => horse.location === "wei"
+        horse => horse.location === "wei" && horse.boxId !== null
     ).length || 0;
 
     return (
-        <DashboardCard
-            title="Paardenverdeling"
-        >
+        <DashboardCard title="Paardenverdeling">
             <ul className="paardenverdeling-list">
                 <li>
                     <span>Stal capaciteit: </span>
@@ -37,4 +35,4 @@ function PaardenverdelingCard({horses, boxes}) {
     );
 }
 
-export default PaardenverdelingCard
+export default PaardenverdelingCard;
