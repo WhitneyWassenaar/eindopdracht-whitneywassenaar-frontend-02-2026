@@ -19,3 +19,24 @@ export async function createCareTask(careTaskData, token) {
 
     return response.data;
 }
+
+export async function getCareTasksByUser(parentId, token) {
+    const response = await api.get(
+        `/users/${parentId}/careTasks`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    );
+
+    return response.data;
+}
+
+export async function deleteCareTask(id, token) {
+    await api.delete(`/careTasks/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}

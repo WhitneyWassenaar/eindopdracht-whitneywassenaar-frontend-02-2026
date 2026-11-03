@@ -139,6 +139,7 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                     "/careTaskAssignments",
                     {
                         careTaskId: careTask.id,
+                        careTaskTitle: careTask.title,
                         horseId: horseId,
                         dueDate: dueDate,
                         completed: false

@@ -10,8 +10,11 @@ import AssignCareTaskForm from "../../../components/forms/AssignCareTaskForm/Ass
 // Context / Hooks
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
-// Api
-import api from "../../../api/axios.js";
+// Services
+import {
+    getCareTasksByUser,
+    deleteCareTask as deleteCareTaskFromApi
+} from "../../../services/careTaskService.js";
 
 // CSS
 import './Zorgtaken.css'
@@ -33,11 +36,7 @@ function Zorgtaken() {
         if (!window.confirm("Weet je zeker dat je deze zorgtaak wilt verwijderen?"))
             return;
         try {
-            await api.delete(`/careTasks/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            await deleteCareTaskFromApi(id, token);
 
             setCareTasks((previousTasks) =>
                 previousTasks.filter((task) => task.id !== id)
@@ -52,14 +51,9 @@ function Zorgtaken() {
 
         async function getCareTasks() {
             try {
-                const careTasksData = await api.get(`/users/${user.id}/careTasks`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    });
+                const careTasksData = await getCareTasksByUser(user.id, token);
 
-                setCareTasks(careTasksData.data);
+                setCareTasks(careTasksData);
             } catch (error) {
                 console.error(error);
             }
@@ -70,7 +64,6 @@ function Zorgtaken() {
     }, [token, user])
 
     function openAssignForm(careTask) {
-        console.log("Gekozen zorgtaak:", careTask);
         setSelectedCareTask(careTask);
     }
 
