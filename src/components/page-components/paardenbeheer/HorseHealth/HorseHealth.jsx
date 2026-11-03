@@ -19,15 +19,24 @@ function HorseHealth({horse}) {
     const [health, setHealth] = useState(null);
     const [showForm, setShowForm] = useState(false);
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+
     useEffect(() => {
         if (!horse?.id || !token) return;
 
         async function fetchHealth() {
             try {
+                setIsLoading(true);
+                setError("");
+
                 const data = await getHorseHealth(horse.id, token);
                 setHealth(data[0] || null);
             } catch (error) {
-                console.error(error);
+                console.error("Gezondheidsgegevens ophalen mislukt:", error);
+                setError("Het ophalen van de gezondheidsgegevens is mislukt.");
+            } finally {
+                setIsLoading(false);
             }
         }
 
@@ -36,18 +45,27 @@ function HorseHealth({horse}) {
 
     async function reloadHealth() {
         try {
+            setIsLoading(true);
+            setError("");
+
             const data = await getHorseHealth(horse.id, token);
             setHealth(data[0] || null);
             setShowForm(false);
         } catch (error) {
-            console.error(error);
+            console.error("Gezondheidsgegevens opnieuw ophalen mislukt:", error);
+            setError("De gegevens zijn opgeslagen, maar konden niet opnieuw worden opgehaald.");
+        } finally {
+            setIsLoading(false);
         }
     }
 
     return (
         <section className="horse-health">
             <h2>Gezondheid</h2>
-            {!health && !showForm && (
+            {isLoading && <p>Gezondheidsgegevens worden geladen...</p>}
+            {error && <p className="error-message">{error}</p>}
+
+            {!isLoading && !health && !showForm && (
                 <button
                     onClick={() => setShowForm(true)}
                 >
@@ -55,14 +73,14 @@ function HorseHealth({horse}) {
                 </button>
             )}
 
-            {showForm && (
+            {showForm && !isLoading && (
                 <HorseHealthForm
                     horse={horse}
                     onSaved={reloadHealth}
                 />
             )}
 
-            {health && !showForm && (
+            {!isLoading && health && !showForm && (
                 <div className="health-overview">
 
                     <p>
