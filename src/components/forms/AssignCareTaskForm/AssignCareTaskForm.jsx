@@ -4,8 +4,10 @@ import {useContext, useEffect, useState} from "react";
 // Context
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
-// Api
-import api from "../../../api/axios.js";
+// Services
+import {getHorses} from "../../../services/horseService.js";
+import {getHorseCareTaskAssignments, assignCareTask} from "../../../services/careTaskService.js";
+
 
 // Components
 import Button from "../../ui/Button/Button.jsx";
@@ -18,6 +20,7 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
     const {token, user} = useContext(AuthContext);
 
     const [horses, setHorses] = useState([]);
+    // const [loadingHorses, setLoadingHorses] = useState(true);
     const [selectedHorses, setSelectedHorses] = useState([]);
     const [dueDate, setDueDate] = useState("");
     const [error, setError] = useState("");
@@ -32,22 +35,18 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                 const allAssignments = [];
 
                 for (const horse of horses) {
-                    const response = await api.get(
-                        `/horses/${horse.id}/careTaskAssignments`,
-                        {
-                            headers: {
-                                Authorization: `Bearer ${token}`
-                            }
-                        }
+                    const assignments = await getHorseCareTaskAssignments(
+                        horse.id,
+                        token
                     );
 
-                    allAssignments.push(...response.data);
+                    allAssignments.push(...assignments);
                 }
 
                 setExistingAssignments(allAssignments);
 
             } catch (error) {
-                console.error(error);
+                console.error("Fout bij ophalen bestaande toewijzingen:", error);
             }
         }
 
@@ -58,25 +57,16 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
         if (!token || !user) return;
 
 
-        async function getHorses() {
+        async function fetchHorses() {
             try {
-
-                const response = await api.get(
-                    `/users/${user.id}/horses`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                );
-
-                setHorses(response.data);
+                const data = await getHorses(user.id, token);
+                setHorses(data);
 
             } catch (error) {
-                console.error(error);
+                console.error("Fout bij ophalen paarden:", error);
             }
         }
-        getHorses();
+        fetchHorses();
     }, [token, user]);
 
     function handleHorseSelect(horseId) {
@@ -127,8 +117,7 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
 
         try {
             for (const horseId of selectedHorses) {
-                await api.post(
-                    "/careTaskAssignments",
+                await assignCareTask(
                     {
                         careTaskId: careTask.id,
                         careTaskTitle: careTask.title,
@@ -136,11 +125,7 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                         dueDate: dueDate,
                         completed: false
                     },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
+                    token
                 );
             }
 
