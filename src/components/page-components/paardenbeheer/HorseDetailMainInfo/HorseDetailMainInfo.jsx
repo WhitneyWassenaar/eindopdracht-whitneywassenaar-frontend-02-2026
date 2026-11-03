@@ -24,26 +24,38 @@ function HorseDetailMainInfo({horse, contacts}) {
                 <div className="info-block">
                     <h2>{horse.name}</h2>
                     <ul>
-                        <li>Ras: {horse.breed}</li>
-                        <li>Geslacht: {horse.gender}</li>
-                        <li>Leeftijd: {calculateAge(horse.birthDate)}</li>
-                        <li>Geboren: {horse.birthDate}</li>
-                        <li>Vachtkleur: {horse.color}</li>
+                        <li>
+                            <span className="info-label">Ras</span> {horse.breed}
+                        </li>
+                        <li>
+                            <span className="info-label">Geslacht</span> {horse.gender}
+                        </li>
+                        <li>
+                            <span className="info-label">Leeftijd</span> {calculateAge(horse.birthDate)}
+                        </li>
+                        <li>
+                            <span className="info-label">Geboren</span> {horse.birthDate}
+                        </li>
+                        <li>
+                            <span className="info-label">Vachtkleur</span> {horse.color}
+                        </li>
                     </ul>
                 </div>
 
                 <div className="info-block">
                     <ul>
                         <li>
-                            Eigenaar:{owner
+                            <span className="info-label">Eigenaar</span> {owner
                             ? `${owner.firstName} ${owner.lastName}`
                             : "Eigenaar onbekend"}
                         </li>
-                        <li>Telefoon:{owner
+                        <li>
+                            <span className="info-label">Telefoon</span> {owner
                             ? `${owner.phone}`
                             : "Telefoonnummer onbekend"}
                         </li>
-                        <li>Email:{owner
+                        <li>
+                            <span className="info-label">Email</span> {owner
                             ? `${owner.email}`
                             : "Email onbekend"}
                         </li>

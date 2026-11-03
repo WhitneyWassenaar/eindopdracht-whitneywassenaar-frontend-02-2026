@@ -1,3 +1,6 @@
+// CSS
+import "./HorseRelations.css";
+
 function HorseRelations({horse, contacts = []}) {
 
     const caretaker = contacts.find(
@@ -9,20 +12,20 @@ function HorseRelations({horse, contacts = []}) {
     );
 
     return (
-        <div className="info-block">
+        <div className="relation-info-block">
             <h4>Relaties</h4>
 
             {caretaker || trainer ? (
                 <ul>
                     {caretaker && (
                         <li>
-                            Verzorger: {caretaker.firstName} {caretaker.lastName}
+                            <span className="relation-info-label">Verzorger</span> {caretaker.firstName} {caretaker.lastName}
                         </li>
                     )}
 
                     {trainer && (
                         <li>
-                            Trainer: {trainer.firstName} {trainer.lastName}
+                            <span className="relation-info-label">Trainer</span> {trainer.firstName} {trainer.lastName}
                         </li>
                     )}
                 </ul>
