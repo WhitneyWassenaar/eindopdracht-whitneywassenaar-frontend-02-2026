@@ -15,7 +15,10 @@ function StableRowActions({
                               fromBoxToPasture,
                               fromPastureToBox,
                               removeHorseFromBox,
-                              placeHorseInBox
+                              placeHorseInBox,
+                              movingHorseId,
+                              removingHorseId,
+                              changingBoxHorseId
                           }) {
     return (
         <div className="stable-actions-container">
@@ -27,12 +30,15 @@ function StableRowActions({
                                 <>
                                     <select
                                         className="choose-box"
+                                        disabled={changingBoxHorseId === horse.id}
                                         onChange={(e) =>
                                             moveHorseToBox(horse, e.target.value)
                                         }
                                     >
                                         <option value="">
-                                            Kies nieuwe box
+                                            {changingBoxHorseId === horse.id
+                                                ? "Bezig met verplaatsen..."
+                                                : "Kies nieuwe box"}
                                         </option>
 
                                         {boxes
@@ -42,15 +48,15 @@ function StableRowActions({
                                                 )
                                             )
                                             .map(box => (
-                                                <option
-                                                    key={box.id}
-                                                    value={box.id}
-                                                >
+                                                <option key={box.id} value={box.id}>
                                                     Box {box.boxNumber}
                                                 </option>
                                             ))
                                         }
                                     </select>
+                                    {changingBoxHorseId === horse.id && (
+                                        <span>Bezig met verplaatsen...</span>
+                                    )}
 
                                     <Button
                                         variant="stable-actions"
@@ -71,16 +77,22 @@ function StableRowActions({
                             {horse.location === "stal" ? (
                                 <Button
                                     variant="stable-actions"
+                                    disabled={movingHorseId === horse.id}
                                     onClick={() => fromBoxToPasture(horse)}
                                 >
-                                    Naar wei
+                                    {movingHorseId === horse.id
+                                        ? "Bezig met verplaatsen..."
+                                        : "Naar wei"}
                                 </Button>
                             ) : (
                                 <Button
                                     variant="stable-actions"
+                                    disabled={movingHorseId === horse.id}
                                     onClick={() => fromPastureToBox(horse)}
                                 >
-                                    Zet op stal
+                                    {movingHorseId === horse.id
+                                        ? "Bezig met verplaatsen..."
+                                        : "Zet op stal"}
                                 </Button>
                             )}
                         </>
@@ -88,17 +100,22 @@ function StableRowActions({
 
                     <Button
                         variant="stable-actions"
+                        disabled={removingHorseId === horse.id}
                         onClick={() => removeHorseFromBox(horse)}
                     >
-                        Loskoppelen
+                        {removingHorseId === horse.id
+                            ? "Bezig met loskoppelen..."
+                            : "Loskoppelen"}
                     </Button>
                 </>
             ) : (
                 <select
                     className="place-horse"
+                    disabled={horses.some(horse => Number(horse.id) === movingHorseId)}
                     onChange={(e) =>
                         placeHorseInBox(e.target.value, boxId)
                     }
+
                 >
                     <option value="">
                         Paard plaatsen
