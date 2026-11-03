@@ -24,18 +24,27 @@ function CreateAppointmentForm({horse, onSaved}) {
         time: "",
         reason: ""
     });
-
     const [message, setMessage] = useState("");
+
+    const [loadingContacts, setLoadingContacts] = useState(false);
+    const [contactsError, setContactsError] = useState("");
+    const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
         if (!user || !token) return;
 
         async function loadContacts() {
             try {
+                setLoadingContacts(true);
+                setContactsError("");
+
                 const contactsData = await getContacts(user.id, token);
                 setContacts(contactsData);
             } catch (error) {
                 console.error("Contacten ophalen mislukt:", error);
+                setContactsError("Het ophalen van de contacten is niet gelukt.");
+            } finally {
+                setLoadingContacts(false);
             }
         }
 
@@ -66,6 +75,9 @@ function CreateAppointmentForm({horse, onSaved}) {
         }
 
         try {
+            setIsSaving(true);
+            setMessage("");
+
             await createAppointment(
                 {
                     userId: user.id,
@@ -84,10 +96,12 @@ function CreateAppointmentForm({horse, onSaved}) {
             if (onSaved) {
                 onSaved();
             }
-
-        } catch (error) {
+        }
+        catch (error) {
             console.error(error);
             setMessage("Opslaan mislukt");
+        } finally {
+            setIsSaving(false);
         }
     }
 
@@ -159,27 +173,30 @@ function CreateAppointmentForm({horse, onSaved}) {
                 <label htmlFor="professional-name">
                     Naam professional
                 </label>
-                <select
-                    id="professional-name"
-                    name="professionalId"
-                    value={formData.professionalId}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="">
-                        Kies contact
-                    </option>
 
-                    {filteredProfessionals.map(contact => (
+                {loadingContacts ? (
+                    <p>Contacten worden geladen...</p>
+                ) : contactsError ? (
+                    <p className="error-message">{contactsError}</p>
+                ) : filteredProfessionals.length === 0 ? (
+                    <p>Geen contacten beschikbaar voor dit type professional.</p>
+                ) : (
+                    <select
+                        id="professional-name"
+                        name="professionalId"
+                        value={formData.professionalId}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">Kies contact</option>
 
-                        <option
-                            key={contact.id}
-                            value={contact.id}
-                        >
-                            {contact.firstName} {contact.lastName}
-                        </option>
-                    ))}
-                </select>
+                        {filteredProfessionals.map(contact => (
+                            <option key={contact.id} value={contact.id}>
+                                {contact.firstName} {contact.lastName}
+                            </option>
+                        ))}
+                    </select>
+                )}
             </div>
 
             <div className="form-row">
@@ -195,8 +212,8 @@ function CreateAppointmentForm({horse, onSaved}) {
                 />
             </div>
 
-            <button type="submit">
-                Opslaan
+            <button type="submit" disabled={isSaving}>
+                {isSaving ? "Bezig met opslaan..." : "Opslaan"}
             </button>
 
             {message && (
