@@ -27,12 +27,14 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
     const [role, setRole] = useState("");
     const [contactPhoto, setContactPhoto] = useState("");
     const [error, setError] = useState("");
+    const [isSaving, setIsSaving] = useState(false);
 
     async function createContactFormSubmit(e) {
         e.preventDefault();
         setError("");
 
         try {
+            setIsSaving(true);
             const newContact = await createContact(
                 {
                     userId: user.id,
@@ -67,7 +69,9 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
                 error.response?.data?.error ||
                 "Er is iets misgegaan."
             );
-        }
+        } finally {
+        setIsSaving(false);
+    }
     }
 
     return (
@@ -179,8 +183,9 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
 
                 <Button
                     type="submit"
+                    disabled={isSaving}
                 >
-                    Contactprofiel aanmaken
+                    {isSaving ? "Bezig met aanmaken..." : "Contactprofiel aanmaken"}
                 </Button>
             </fieldset>
         </form>
