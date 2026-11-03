@@ -12,23 +12,23 @@ function Home() {
     return (
         <>
             <Hero
-                title={"Beheer jouw paarden,\n behoud het overzicht"}
-                text={"Beheer gezondheid, trainingen, voeding, documenten en planning van al je paarden vanuit één centraal systeem."}
+                title="Beheer jouw paarden,\n behoud het overzicht"
+                text="Beheer gezondheid, trainingen, voeding, documenten en planning van al je paarden vanuit één centraal systeem."
                 imgUrl={greyHorseAndRider}
-                imgAlt={"An image of a rider that takes a jump with her grey horse"}
-                buttonVariant={"hero"}
-                buttonPath={"/registreren"}
+                imgAlt="An image of a rider that takes a jump with her grey horse"
+                buttonVariant="hero"
+                buttonPath="/registreren"
             >
                 Probeer het gratis
             </Hero>
 
             <ContentSection
-                title={"Wat is EquiManager?"}
-                variant={"default"}
+                title="Wat is EquiManager?"
+                variant="default"
                 imgUrl={laptopAndPhone}
-                imgAlt={"An image of two foals grooming each other."}
-                ellipseVariant={"wat-is-equimanager"}
-                imageVariant={"wat-is-equimanager"}
+                imgAlt="An image of two foals grooming each other."
+                ellipseVariant="wat-is-equimanager"
+                imageVariant="wat-is-equimanager"
             >
                 <div className="contentsection-child--wat-is-equimanager">
                     <p>
@@ -47,13 +47,13 @@ function Home() {
             </ContentSection>
 
             <ContentSection
-                title={"Waarom EquiManager bij jou past!"}
-                variant={"reverse"}
-                styleVariant={"waarom-equimanager"}
+                title="Waarom EquiManager bij jou past!"
+                variant="reverse"
+                styleVariant="waarom-equimanager"
                 imgUrl={walkingGirlAndHorse}
-                imgAlt={"An image of a girl walking with her bay horse"}
-                ellipseVariant={"waarom-equimanager"}
-                imageVariant={"waarom-equimanager"}
+                imgAlt="An image of a girl walking with her bay horse"
+                ellipseVariant="waarom-equimanager"
+                imageVariant="waarom-equimanager"
             >
                 <div className="contentsection-child--waarom-equimanager">
                     <div className="waarom-equimanager--highlight">
@@ -72,7 +72,7 @@ function Home() {
                     </div>
                     <div className="waarom-equimanager--highlight">
                         <h3>Gericht op overzicht</h3>
-                        <p>Bekijk de belangrijkste gegevens , urgente taken en de status van je paarden in één
+                        <p>Bekijk de belangrijkste gegevens, urgente taken en de status van je paarden in één
                             overzicht. Zo
                             behoud je controle over de gezondheid van de paarden en verzorging van je stal.</p>
                     </div>
