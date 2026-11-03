@@ -20,12 +20,15 @@ function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
 
     async function onFormSubmit(e) {
         e.preventDefault();
         setError("");
 
         try {
+            setIsLoggingIn(true);
+            setError("");
             const loginData = await loginUser(email, password);
 
             const user = await getUserByEmail(
@@ -56,6 +59,8 @@ function LoginForm() {
             setError(
                 error.response?.data?.error || "Er is iets misgegaan."
             );
+        } finally {
+            setIsLoggingIn(false);
         }
     }
 
@@ -111,8 +116,9 @@ function LoginForm() {
             <Button
                 type="submit"
                 variant="default"
+                disabled={isLoggingIn}
             >
-                Inloggen
+                {isLoggingIn ? "Bezig met inloggen..." : "Inloggen"}
             </Button>
         </form>
     )
