@@ -4,7 +4,7 @@ import DashboardCard from '../DashboardCard/DashboardCard.jsx';
 // CSS
 import './Paardenverdeling.css';
 
-function PaardenverdelingCard({ horses, boxes }) {
+function PaardenverdelingCard({horses, boxes}) {
     const stableCapacity = boxes?.length || 0;
 
     const horsesInStable = horses?.filter(
