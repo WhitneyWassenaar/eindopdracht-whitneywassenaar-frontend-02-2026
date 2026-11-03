@@ -28,6 +28,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
     const [horsePhoto, setHorsePhoto] = useState("");
     const [ownerId, setOwnerId] = useState("");
     const [error, setError] = useState("");
+    const [isSaving, setIsSaving] = useState(false);
 
     const defaultHorsePhoto = "/defaultHorsePhoto.png";
     const today = new Date().toISOString().split("T")[0];
@@ -43,6 +44,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
         }
 
         try {
+            setIsSaving(true);
             const newHorse = await createHorse(
                 {
                     userId: user.id,
@@ -77,6 +79,8 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
         } catch (error) {
             console.error(error)
             setError(error.response?.data?.error || "Er is iets mis gegaan..")
+        } finally {
+            setIsSaving(false);
         }
     }
 
@@ -258,8 +262,9 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
 
                 <Button
                     type="submit"
+                    disabled={isSaving}
                 >
-                    Paardenprofiel aanmaken
+                    {isSaving ? "Bezig met aanmaken..." : "Paardenprofiel aanmaken"}
                 </Button>
 
                 <Button
