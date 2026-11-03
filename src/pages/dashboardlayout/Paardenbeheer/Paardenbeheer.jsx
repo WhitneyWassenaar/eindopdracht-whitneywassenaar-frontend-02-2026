@@ -7,9 +7,9 @@ import HorseTable from '../../../components/page-components/paardenbeheer/HorseT
 import HorseDetail from '../../../components/page-components/paardenbeheer/HorseDetail/HorseDetail.jsx';
 import CreateHorseProfileForm from '../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx';
 
-// import {getHorses, getContacts, updateHorseActive, deleteHorseFromApi} from "../../../services/horseService.js";
 import {getHorses, updateHorseActive, deleteHorseFromApi} from "../../../services/horseService.js";
 import { getContacts } from "../../../services/contactService.js";
+
 // Context
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
@@ -20,20 +20,43 @@ function Paardenbeheer() {
 
     const [horses, setHorses] = useState([]);
     const [selectedHorse, setSelectedHorse] = useState(null);
+
+    const [isLoadingContacts, setIsLoadingContacts] = useState(false);
+    const [contactsError, setContactsError] = useState("");
+
     const [showForm, setShowForm] = useState(false);
     const [contacts, setContacts] = useState([]);
+
+    const [isLoadingHorses, setIsLoadingHorses] = useState(false);
+    const [horsesError, setHorsesError] = useState("");
+
     const [filter, setFilter] = useState("all");
     const [sortOption, setSortOption] = useState("none");
+
+    const [updatingHorseId, setUpdatingHorseId] = useState(null);
+    const [updateHorseError, setUpdateHorseError] = useState("");
+
+    const [deletingHorseId, setDeletingHorseId] = useState(null);
+    const [deleteHorseError, setDeleteHorseError] = useState("");
+
+
     const {token, user} = useContext(AuthContext);
 
     useEffect(() => {
         if (!token || !user) return;
         async function loadHorses() {
             try {
+                setIsLoadingHorses(true);
+                setHorsesError("");
+
                 const horseData = await getHorses(user.id, token);
                 setHorses(horseData);
+
             } catch (error) {
-                console.error(error);
+                console.error("Paarden ophalen mislukt:", error);
+                setHorsesError("Het ophalen van de paarden is mislukt.");
+            } finally {
+                setIsLoadingHorses(false);
             }
         }
         loadHorses();
@@ -43,10 +66,17 @@ function Paardenbeheer() {
         if (!token || !user) return;
         async function loadContacts() {
             try {
+                setIsLoadingContacts(true);
+                setContactsError("");
+
                 const contactData = await getContacts(user.id, token);
                 setContacts(contactData);
+
             } catch (error) {
-                console.error(error);
+                console.error("Contacten ophalen mislukt:", error);
+                setContactsError("Het ophalen van de contacten is mislukt.");
+            } finally {
+                setIsLoadingContacts(false);
             }
         }
         loadContacts();
@@ -54,7 +84,11 @@ function Paardenbeheer() {
 
     async function toggleHorseActive(horse) {
         try {
+            setUpdatingHorseId(horse.id);
+            setUpdateHorseError("");
+
             await updateHorseActive(horse.id, horse.active, token);
+
             setHorses(previousHorses =>
                 previousHorses.map(previousHorse =>
                     previousHorse.id === horse.id
@@ -67,16 +101,21 @@ function Paardenbeheer() {
             );
         } catch (error) {
             console.error("Status wijzigen mislukt:", error);
+            setUpdateHorseError("Het wijzigen van de paardenstatus is mislukt.");
+        } finally {
+            setUpdatingHorseId(null);
         }
     }
 
     async function deleteHorse(horseId) {
-
         if (!window.confirm("Weet je zeker dat je dit paardenprofiel wilt verwijderen?")) {
             return;
         }
 
         try {
+            setDeletingHorseId(horseId);
+            setDeleteHorseError("");
+
             await deleteHorseFromApi(horseId, token);
 
             setHorses(previous =>
@@ -85,6 +124,9 @@ function Paardenbeheer() {
 
         } catch (error) {
             console.error("Paard verwijderen mislukt:", error);
+            setDeleteHorseError("Het verwijderen van het paardenprofiel is mislukt.");
+        } finally {
+            setDeletingHorseId(null);
         }
     }
 
@@ -124,6 +166,16 @@ function Paardenbeheer() {
         <section className="paardenbeheer-page">
             <section className="paardenbeheer-inner-container">
                 <h1>Paardenbeheer</h1>
+                {isLoadingHorses && <p>Paarden worden geladen...</p>}
+
+                {horsesError && (
+                    <p className="error-message">{horsesError}</p>
+                )}
+                {isLoadingContacts && <p>Contacten worden geladen...</p>}
+
+                {contactsError && (
+                    <p className="error-message">{contactsError}</p>
+                )}
                 <p className="horse-profile-count">
                     Totaal aantal paardenprofielen:{" "}
                     <strong>{horses.length}</strong>
@@ -168,12 +220,20 @@ function Paardenbeheer() {
 
                 <div className="horse-overview-content">
                     <div className="horse-table-container">
+                        {updateHorseError && (
+                            <p className="error-message">{updateHorseError}</p>
+                        )}
+                        {deleteHorseError && (
+                            <p className="error-message">{deleteHorseError}</p>
+                        )}
                         <HorseTable
                             horses={sortedHorses}
                             setSelectedHorse={setSelectedHorse}
                             deleteHorse={deleteHorse}
                             toggleHorseActive={toggleHorseActive}
                             contacts={contacts}
+                            updatingHorseId={updatingHorseId}
+                            deletingHorseId={deletingHorseId}
                         />
                     </div>
 
