@@ -13,6 +13,9 @@ import "./HorseCareTasks.css";
 function HorseCareTasks({horse}) {
     const {token} = useContext(AuthContext);
     const [assignments, setAssignments] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [completingTaskId, setCompletingTaskId] = useState(null);
 
     const horseId = horse?.id;
 
@@ -21,6 +24,9 @@ function HorseCareTasks({horse}) {
 
         async function getAssignments() {
             try {
+                setIsLoading(true);
+                setError("");
+
                 const assignments = await getHorseCareTaskAssignments(
                     horseId,
                     token
@@ -36,9 +42,11 @@ function HorseCareTasks({horse}) {
                 }));
 
                 setAssignments(assignmentsWithTasks);
-
             } catch (error) {
-                console.error(error);
+                console.error("Zorgtaken ophalen mislukt:", error);
+                setError("Het ophalen van de zorgtaken is mislukt.");
+            } finally {
+                setIsLoading(false);
             }
         }
         getAssignments();
@@ -46,6 +54,8 @@ function HorseCareTasks({horse}) {
 
     async function completeTask(id) {
         try {
+            setCompletingTaskId(id);
+            setError("");
             await completeCareTaskAssignment(id, token);
 
             setAssignments(previous =>
@@ -65,8 +75,11 @@ function HorseCareTasks({horse}) {
             <h2>
                 Zorgtaken
             </h2>
+            {isLoading && <p>Zorgtaken worden geladen...</p>}
 
-            {assignments.length === 0 && (
+            {error && <p className="error-message">{error}</p>}
+
+            {!isLoading && !error && assignments.length === 0 && (
                 <p>
                     Geen zorgtaken toegewezen.
                 </p>
@@ -110,8 +123,11 @@ function HorseCareTasks({horse}) {
                             {!assignment.completed && (
                                 <button
                                     onClick={() => completeTask(assignment.id)}
+                                    disabled={completingTaskId === assignment.id}
                                 >
-                                    Voltooien
+                                    {completingTaskId === assignment.id
+                                        ? "Bezig met voltooien..."
+                                        : "Voltooien"}
                                 </button>
                             )}
                         </article>
