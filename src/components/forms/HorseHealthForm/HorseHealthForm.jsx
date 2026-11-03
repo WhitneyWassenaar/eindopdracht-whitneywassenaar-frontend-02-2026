@@ -25,13 +25,17 @@ function HorseHealthForm({horse, onSaved}) {
 
     const [message, setMessage] = useState("");
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
+
     useEffect(() => {
 
         if (!horse || !token) return;
 
         async function getHealth() {
             try {
-
+                setIsLoading(true);
+                setMessage("");
                 const healthData = await getHorseHealth(horse.id, token);
 
                 if (healthData.length > 0) {
@@ -52,6 +56,9 @@ function HorseHealthForm({horse, onSaved}) {
 
             } catch (error) {
                 console.error(error);
+                setMessage("Gezondheidsgegevens ophalen is mislukt.");
+            } finally {
+                setIsLoading(false);
             }
         }
 
@@ -70,6 +77,8 @@ function HorseHealthForm({horse, onSaved}) {
         e.preventDefault();
 
         try {
+            setIsSaving(true);
+            setMessage("");
             const healthData = {
                 ...formData,
                 weight: formData.weight === "" ? null : Number(formData.weight),
@@ -101,12 +110,17 @@ function HorseHealthForm({horse, onSaved}) {
         } catch (error) {
             console.error(error);
             setMessage("Opslaan mislukt");
+        } finally {
+            setIsSaving(false);
         }
     }
 
     return (
 
         <form onSubmit={handleSubmit} className="horsehealth-form-layout">
+            {isLoading && (
+                <p>Gezondheidsgegevens worden geladen...</p>
+            )}
 
             <div className="form-row">
                 <label htmlFor="weight">
@@ -200,8 +214,8 @@ function HorseHealthForm({horse, onSaved}) {
                     />
             </div>
 
-            <button type="submit">
-                Opslaan
+            <button type="submit" disabled={isSaving || isLoading}>
+                {isSaving ? "Bezig met opslaan..." : "Opslaan"}
             </button>
 
             {message && (
