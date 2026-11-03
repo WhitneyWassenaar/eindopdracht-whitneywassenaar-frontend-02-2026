@@ -17,11 +17,16 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
 
     const {token,user} = useContext(AuthContext);
 
+    const [isSaving, setIsSaving] = useState(false);
+
     async function createCareTaskFormSubmit(e) {
         e.preventDefault();
         setError("");
 
         try {
+            setIsSaving(true);
+            setError("");
+
             const existingTasks = await getCareTasks(token);
 
             const taskExists = existingTasks.some(task =>
@@ -96,8 +101,9 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
 
                 <Button
                     type="submit"
+                    disabled={isSaving}
                 >
-                    Zorgtaak aanmaken
+                    {isSaving ? "Bezig met aanmaken..." : "Zorgtaak aanmaken"}
                 </Button>
 
                 <Button
