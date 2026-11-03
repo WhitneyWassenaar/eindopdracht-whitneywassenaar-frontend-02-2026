@@ -41,9 +41,7 @@ function HorseCareTasks({horse}) {
                 console.error(error);
             }
         }
-
         getAssignments();
-
     }, [horseId, token]);
 
     async function completeTask(id) {
@@ -57,7 +55,6 @@ function HorseCareTasks({horse}) {
                         : task
                 )
             );
-
         } catch (error) {
             console.error(error);
         }

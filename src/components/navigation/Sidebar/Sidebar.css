@@ -19,7 +19,7 @@
     font-weight: 600;
 }
 
-.sidebar.open { /*element die beide classes tegelijk heeft*/
+.sidebar.open {
     transform: translateX(0);
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
 }

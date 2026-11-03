@@ -13,7 +13,6 @@ function HorseDetail({horse, contacts, setHorses, setSelectedHorse}) {
                 contacts={contacts}
             />
             <div className="relation-and-tabs-container">
-
                 <HorseDetailTabs
                     horse={horse}
                     contacts={contacts}
@@ -21,7 +20,6 @@ function HorseDetail({horse, contacts, setHorses, setSelectedHorse}) {
                     setSelectedHorse={setSelectedHorse}
                 />
             </div>
-
         </div>
     );
 }

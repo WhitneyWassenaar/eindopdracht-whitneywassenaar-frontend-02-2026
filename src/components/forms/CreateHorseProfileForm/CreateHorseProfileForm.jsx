@@ -8,7 +8,7 @@ import Button from '../../ui/Button/Button.jsx';
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
 // Services
-import { createHorse } from "../../../services/horseService.js";
+import {createHorse} from "../../../services/horseService.js";
 
 // Data
 import horseBreeds from '../../../data/horseBreeds.js';

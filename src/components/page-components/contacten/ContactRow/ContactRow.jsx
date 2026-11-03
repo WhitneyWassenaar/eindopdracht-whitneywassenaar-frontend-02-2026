@@ -15,9 +15,6 @@ function ContactRow({
                         deleteContact,
                         toggleContactActive
                     }) {
-
-
-
     return (
         <tr className="contactrow-layout"
             onClick={() => setSelectedContact(contact)}>

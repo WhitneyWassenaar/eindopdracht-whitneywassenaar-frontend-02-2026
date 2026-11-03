@@ -11,8 +11,8 @@ import UserNavbar from './UserNavbar/UserNavbar.jsx';
 function Navbar() {
     const {user} = useContext(AuthContext);
     return !user
-                ?  <GuestNavbar/>
-                : <UserNavbar/>
+                ?  <GuestNavbar />
+                : <UserNavbar />
 };
 
 

@@ -1,11 +1,9 @@
 .feature-ellipse {
     width: min(230px, 30vw);
     height: 230px;
-    /*min-width: 230px;*/
-    /*min-height:230px;*/
     border-radius: 50%;
     overflow: hidden;
-    border:12px solid var(--primary-color);
+    border: 12px solid var(--primary-color);
     box-sizing: border-box;
     flex-shrink: 0;
 }

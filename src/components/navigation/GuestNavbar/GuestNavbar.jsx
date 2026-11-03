@@ -17,17 +17,17 @@ function GuestNavbar() {
 
     const [menuOpen, setMenuOpen] = useState(false);
 
-    useEffect(()=> {
+    useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth > 800) {
                 setMenuOpen(false);
             }
         };
 
-        window.addEventListener("resize",handleResize);
+        window.addEventListener("resize", handleResize);
 
-        return () => window.removeEventListener("resize",handleResize);
-    },[]);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     return (
         <nav className="nav nav--guest">
@@ -39,17 +39,19 @@ function GuestNavbar() {
                 <ul>
                     <li>
                         <NavLink
-                            className={({ isActive }) => isActive ? 'active-menu-link' : 'default-menu-link'}
+                            className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}
                             to="/"
                         >
                             Home
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink className={({ isActive }) => isActive ? 'active-menu-link' : 'default-menu-link'} to="/functies">Functies</NavLink>
+                        <NavLink className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}
+                                 to="/functies">Functies</NavLink>
                     </li>
                     <li>
-                        <NavLink className={({ isActive }) => isActive ? 'active-menu-link' : 'default-menu-link'} to="/contact">Contact</NavLink>
+                        <NavLink className={({isActive}) => isActive ? 'active-menu-link' : 'default-menu-link'}
+                                 to="/contact">Contact</NavLink>
                     </li>
                 </ul>
             </div>
@@ -82,9 +84,9 @@ function GuestNavbar() {
                 </Button>
             </div>
 
-                <Sidebar menuOpen={menuOpen}/>
+            <Sidebar menuOpen={menuOpen}/>
             {menuOpen && (
-                <div className="backdrop" onClick={()=> setMenuOpen(false)}/>
+                <div className="backdrop" onClick={() => setMenuOpen(false)}/>
             )}
         </nav>
 

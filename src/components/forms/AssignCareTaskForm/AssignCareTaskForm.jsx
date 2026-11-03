@@ -52,7 +52,6 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
         }
 
         getExistingAssignments();
-
     }, [horses, token]);
 
     useEffect(() => {
@@ -77,13 +76,10 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                 console.error(error);
             }
         }
-
         getHorses();
-
     }, [token, user]);
 
     function handleHorseSelect(horseId) {
-
         setSelectedHorses(previous => {
 
             if (previous.includes(horseId)) {
@@ -98,11 +94,8 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                     ...previous,
                     horseId
                 ];
-
             }
-
         });
-
     }
 
     async function assignCareTaskSubmit(e) {
@@ -122,7 +115,6 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                     Number(assignment.careTaskId) === Number(careTask.id) &&
                     assignment.dueDate === dueDate &&
                     assignment.completed === false
-
             )
         );
 

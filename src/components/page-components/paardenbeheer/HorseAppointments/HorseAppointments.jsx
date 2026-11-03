@@ -61,10 +61,7 @@ function HorseAppointments({horse}) {
         if(!professional){
             return "Onbekend";
         }
-
-
         return `${professional.firstName} ${professional.lastName}`;
-
     }
 
     async function handleDeleteAppointment(id) {
@@ -120,7 +117,6 @@ function HorseAppointments({horse}) {
             )}
 
             {!showForm && (
-
                     <div className="appointment-list">
                     {appointments.map((appointment)=>(
 
@@ -129,7 +125,6 @@ function HorseAppointments({horse}) {
                                 ? "appointment-card due"
                                 : "appointment-card"
                         }>
-
                             <p>
                                 Datum: {appointment.date}
                             </p>
@@ -149,27 +144,20 @@ function HorseAppointments({horse}) {
                                 {getProfessionalName(appointment.professionalId)}
                             </p>
 
-
-
                             <p>
                                 Reden:
                                 {appointment.reason}
                             </p>
-
 
                             <button
                                 onClick={() => handleDeleteAppointment(appointment.id)}
                             >
                                 Afspraak verwijderen
                             </button>
-
                         </div>
-
                     ))}
                     </div>
-
             )}
-
             {!showForm && (
                 <button
                     onClick={() => setShowForm(true)}

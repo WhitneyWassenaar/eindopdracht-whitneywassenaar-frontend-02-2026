@@ -14,8 +14,6 @@ function ContactForm() {
     const [message, setMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
 
-
-
     function onFormSubmit(e) {
         e.preventDefault();
         setSuccessMessage("Bericht succesvol verzonden!");

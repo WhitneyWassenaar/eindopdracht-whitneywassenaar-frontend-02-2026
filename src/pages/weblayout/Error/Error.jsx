@@ -7,9 +7,6 @@ import ContentSection from "../../../components/sections/ContentSection/ContentS
 // Assets
 import errorImg from "../../../assets/error/errorImg.png";
 
-// CSS
-import "./Error.css"
-
 function Error() {
     return (
         <ContentSection

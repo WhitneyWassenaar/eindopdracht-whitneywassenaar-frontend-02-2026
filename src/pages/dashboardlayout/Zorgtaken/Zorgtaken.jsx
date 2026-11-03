@@ -70,7 +70,6 @@ function Zorgtaken() {
     return (
         <div className="dashboard-page">
             <h1>Zorgtaken</h1>
-
             <CareTasksTable
                 careTasks={careTasks}
                 deleteCareTask={deleteCareTask}

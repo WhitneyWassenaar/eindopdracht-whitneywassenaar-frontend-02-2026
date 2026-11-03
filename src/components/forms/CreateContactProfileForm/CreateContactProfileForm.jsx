@@ -8,11 +8,10 @@ import Button from '../../ui/Button/Button.jsx';
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
 // Services
-import { createContact } from "../../../services/contactService.js";
+import {createContact} from "../../../services/contactService.js";
 
 // Data
 import roles from "../../../data/roles.js";
-
 
 // CSS
 import './CreateContactProfileForm.css';
@@ -28,6 +27,7 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
     const [role, setRole] = useState("");
     const [contactPhoto, setContactPhoto] = useState("");
     const [error, setError] = useState("");
+
     async function createContactFormSubmit(e) {
         e.preventDefault();
         setError("");

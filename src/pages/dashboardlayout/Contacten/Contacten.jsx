@@ -56,8 +56,6 @@ function Contacten() {
                 console.error(error);
             }
         }
-
-        // getContacts();
         fetchContacts();
         fetchHorses();
 
@@ -78,7 +76,6 @@ function Contacten() {
             console.error(error);
         }
     }
-
 
     async function deleteContact(contactId) {
         if (!window.confirm("Weet je zeker dat je dit contact wilt verwijderen?"))
@@ -118,8 +115,6 @@ function Contacten() {
                 }
 
             }
-
-
             setHorses(previousHorses =>
                 previousHorses.map(horse => ({
                     ...horse,
@@ -186,7 +181,6 @@ function Contacten() {
         return 0;
     });
 
-
     return (
         <div className="contacten-page">
 
@@ -224,7 +218,6 @@ function Contacten() {
                         >
                             Filter
                         </Button>
-
 
                         <Button
                             variant="filter-sort"
@@ -264,7 +257,6 @@ function Contacten() {
                         </>
                     )}
 
-
                     {showSort && (
                         <>
                             <label htmlFor="sort-contacts">
@@ -290,13 +282,11 @@ function Contacten() {
                             </select>
                         </>
                     )}
-
                     <ContactTable
                         contacts={sortedContacts}
                         setSelectedContact={setSelectedContact}
                         deleteContact={deleteContact}
                         toggleContactActive={toggleContactActive}
-
                     />
 
                     <Button

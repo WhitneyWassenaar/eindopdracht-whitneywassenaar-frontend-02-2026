@@ -24,7 +24,6 @@ function CareTaskRow({
         deleteCareTask(careTask.id);
     }
 
-
     return (
         <tr className="caretask-row-layout">
             <td>{careTask.title}</td>

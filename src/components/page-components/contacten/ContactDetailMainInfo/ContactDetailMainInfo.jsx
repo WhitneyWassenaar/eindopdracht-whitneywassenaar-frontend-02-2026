@@ -5,7 +5,6 @@ const defaultContactPhoto = "/defaultContactPhoto.png";
 
 function ContactDetailMainInfo({contact, horses = []}) {
 
-
     return (
         <div className="contact-detail-main-info-container">
             <div className="contact-profile-picture">

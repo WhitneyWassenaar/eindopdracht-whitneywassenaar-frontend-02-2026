@@ -61,7 +61,6 @@ function HorseDetailMainInfo({horse, contacts}) {
                         </li>
                     </ul>
                 </div>
-
                 <HorseRelations
                     horse={horse}
                     contacts={contacts}/>

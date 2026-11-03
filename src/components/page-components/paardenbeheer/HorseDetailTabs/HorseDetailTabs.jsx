@@ -11,7 +11,6 @@ import HorseRelationsForm from "../../../forms/HorseRelationsForm/Horserelations
 // CSS
 import './HorseDetailTabs.css';
 
-
 function HorseDetailTabs({horse, contacts, setHorses, setSelectedHorse}) {
 
     const [activeTab, setActiveTab] = useState("1");

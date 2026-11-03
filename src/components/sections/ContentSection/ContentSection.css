@@ -29,7 +29,6 @@
     CONTENT WRAPPER
 ==================== */
 .content-wrapper {
-    /*border: 1px solid greenyellow;*/
     padding: 0 0.625rem;
 }
 
@@ -46,7 +45,6 @@
    CONTENT SECTION - Wat is EquiManager?
 =========================================== */
 .contentsection-child--wat-is-equimanager {
-    /*border: 1px solid var(--background-color);*/
     width: 100%;
     padding: 0.625rem;
 }

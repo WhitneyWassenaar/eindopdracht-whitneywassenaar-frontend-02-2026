@@ -10,9 +10,6 @@ import {AuthContext} from "../../../context/AuthContext.jsx";
 // Services
 import {getCareTasks, createCareTask} from "../../../services/careTaskService.js";
 
-// CSS
-import "./CreateCareTaskForm.css";
-
 function CreateCareTaskForm({addCareTask, setShowForm}) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
