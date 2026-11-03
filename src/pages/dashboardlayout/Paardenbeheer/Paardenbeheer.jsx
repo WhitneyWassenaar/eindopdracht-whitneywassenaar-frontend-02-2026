@@ -7,8 +7,9 @@ import HorseTable from '../../../components/page-components/paardenbeheer/HorseT
 import HorseDetail from '../../../components/page-components/paardenbeheer/HorseDetail/HorseDetail.jsx';
 import CreateHorseProfileForm from '../../../components/forms/CreateHorseProfileForm/CreateHorseProfileForm.jsx';
 
-import {getHorses, getContacts, updateHorseActive, deleteHorseFromApi} from "../../../services/horseService.js";
-
+// import {getHorses, getContacts, updateHorseActive, deleteHorseFromApi} from "../../../services/horseService.js";
+import {getHorses, updateHorseActive, deleteHorseFromApi} from "../../../services/horseService.js";
+import { getContacts } from "../../../services/contactService.js";
 // Context
 import {AuthContext} from "../../../context/AuthContext.jsx";
 

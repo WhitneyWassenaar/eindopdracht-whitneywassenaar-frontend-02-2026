@@ -7,17 +7,9 @@ import calculateAge from '../../../../helpers/calculateAge.jsx';
 // CSS
 import './HorseDetailMainInfo.css';
 
+const defaultHorsePhoto = "/defaultHorsePhoto.png";
+
 function HorseDetailMainInfo({horse, contacts}) {
-    const defaultHorsePhoto = "/defaultHorsePhoto.png";
-    console.log(horse.photo);
-    console.log(
-        "Relaties:",
-        {
-            horse: horse.name,
-            caretakerId: horse.caretakerId,
-            trainerId: horse.trainerId
-        }
-    );
     const owner = contacts.find(
         contact => Number(contact.id) === Number(horse.ownerId)
     );

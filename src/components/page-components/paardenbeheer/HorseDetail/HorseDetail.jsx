@@ -1,14 +1,11 @@
 // Components
-
 import HorseDetailMainInfo from '../HorseDetailMainInfo/HorseDetailMainInfo.jsx';
-
 import HorseDetailTabs from "../HorseDetailTabs/HorseDetailTabs.jsx";
 
 // CSS
 import './HorseDetail.css';
 
 function HorseDetail({horse, contacts, setHorses, setSelectedHorse}) {
-    console.log("HorseDetail wordt weergegeven");
     return (
         <div className="horse-detail-container">
             <HorseDetailMainInfo
@@ -21,7 +18,8 @@ function HorseDetail({horse, contacts, setHorses, setSelectedHorse}) {
                     horse={horse}
                     contacts={contacts}
                     setHorses={setHorses}
-                    setSelectedHorse={setSelectedHorse}/>
+                    setSelectedHorse={setSelectedHorse}
+                />
             </div>
 
         </div>

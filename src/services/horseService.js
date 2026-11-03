@@ -10,16 +10,6 @@ export async function getHorses(userId, token) {
     return response.data;
 }
 
-export async function getContacts(userId, token) {
-    const response = await api.get(`/users/${userId}/persons`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
-
-    return response.data;
-}
-
 export async function updateHorseActive(horseId, active, token) {
     await api.patch(
         `/horses/${horseId}`,
@@ -116,6 +106,16 @@ export async function createHorse(horseData, token) {
 
 export async function updateHorseRelations(horseId, relations, token) {
     const response = await api.patch(`/horses/${horseId}`, relations, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    return response.data;
+}
+
+export async function getAllHorses(token) {
+    const response = await api.get("/horses", {
         headers: {
             Authorization: `Bearer ${token}`
         }

@@ -1,4 +1,4 @@
-function HorseRelations({horse, contacts}) {
+function HorseRelations({horse, contacts = []}) {
 
     const caretaker = contacts.find(
         contact => Number(contact.id) === Number(horse.caretakerId)

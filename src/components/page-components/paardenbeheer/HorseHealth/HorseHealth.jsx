@@ -7,8 +7,8 @@ import HorseHealthForm from "../../../forms/HorseHealthForm/HorseHealthForm.jsx"
 // Context / Hooks
 import {AuthContext} from "../../../../context/AuthContext.jsx";
 
-// Api
-import api from "../../../../api/axios.js";
+// Services
+import {getHorseHealth} from "../../../../services/horseHealthService.js";
 
 // CSS
 import './HorseHealth.css';
@@ -20,44 +20,26 @@ function HorseHealth({horse}) {
     const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
-        if(!horse || !token) return;
+        if (!horse?.id || !token) return;
 
-        async function getHealth(){
+        async function fetchHealth() {
             try {
-
-                const response = await api.get(`/horses/${horse.id}/horseHealths`,
-                    {
-                        headers:{
-                            Authorization:`Bearer ${token}`
-                        }
-                    }
-                );
-
-                setHealth(response.data[0] || null);
-
-            } catch(error){
+                const data = await getHorseHealth(horse.id, token);
+                setHealth(data[0] || null);
+            } catch (error) {
                 console.error(error);
             }
         }
-        getHealth();
 
-    }, [horse, token]);
+        fetchHealth();
+    }, [horse?.id, token]);
 
     async function reloadHealth() {
         try {
-            const response = await api.get(`/horses/${horse.id}/horseHealths`,
-                {
-                    headers:{
-                        Authorization:`Bearer ${token}`
-                    }
-                }
-            );
-
-            setHealth(response.data[0] || null);
+            const data = await getHorseHealth(horse.id, token);
+            setHealth(data[0] || null);
             setShowForm(false);
-
-
-        } catch(error){
+        } catch (error) {
             console.error(error);
         }
     }
@@ -124,4 +106,5 @@ function HorseHealth({horse}) {
         </section>
     );
 }
+
 export default HorseHealth;
