@@ -10,7 +10,8 @@ function Button({
                     buttonPath,
                     type = "button",
                     onClick,
-                    className
+                    className,
+                    disabled = false
                 }) {
 
     const navigate = useNavigate();
@@ -26,8 +27,9 @@ function Button({
     return (
         <button
             type={type}
-            className={`button button--${variant} ${className} || ""}`}
+            className={`button button--${variant} ${className || ""}`}
             onClick={handleClick}
+            disabled={disabled}
         >
             {children}
         </button>

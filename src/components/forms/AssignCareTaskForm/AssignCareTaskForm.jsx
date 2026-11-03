@@ -20,18 +20,26 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
     const {token, user} = useContext(AuthContext);
 
     const [horses, setHorses] = useState([]);
-    // const [loadingHorses, setLoadingHorses] = useState(true);
     const [selectedHorses, setSelectedHorses] = useState([]);
     const [dueDate, setDueDate] = useState("");
     const [error, setError] = useState("");
     const [existingAssignments, setExistingAssignments] = useState([]);
     const [message, setMessage] = useState("");
 
+    const [loadingHorses, setLoadingHorses] = useState(false);
+    const [horsesError, setHorsesError] = useState("");
+    const [loadingAssignments, setLoadingAssignments] = useState(false);
+    const [assignmentsError, setAssignmentsError] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     useEffect(() => {
         if (!token || !horses.length) return;
 
         async function getExistingAssignments() {
             try {
+                setLoadingAssignments(true);
+                setAssignmentsError("");
+
                 const allAssignments = [];
 
                 for (const horse of horses) {
@@ -47,6 +55,11 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
 
             } catch (error) {
                 console.error("Fout bij ophalen bestaande toewijzingen:", error);
+                setAssignmentsError(
+                    "Het ophalen van bestaande zorgtaaktoewijzingen is niet gelukt."
+                );
+            } finally {
+                setLoadingAssignments(false);
             }
         }
 
@@ -59,11 +72,17 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
 
         async function fetchHorses() {
             try {
+                setLoadingHorses(true);
+                setHorsesError("");
+
                 const data = await getHorses(user.id, token);
                 setHorses(data);
 
             } catch (error) {
                 console.error("Fout bij ophalen paarden:", error);
+                setHorsesError("Het ophalen van de paarden is niet gelukt.");
+            } finally {
+                setLoadingHorses(false);
             }
         }
         fetchHorses();
@@ -115,6 +134,8 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
             return;
         }
 
+        setIsSubmitting(true);
+
         try {
             for (const horseId of selectedHorses) {
                 await assignCareTask(
@@ -145,6 +166,8 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                 error.response?.data?.error ||
                 "Toewijzen mislukt"
             );
+        } finally {
+            setIsSubmitting(false);
         }
     }
 
@@ -165,7 +188,13 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
 
                     <span className="form-label">Paarden</span>
 
-                    {horses.map((horse) => (
+                    {loadingHorses ? (
+                        <p>Paarden worden geladen...</p>
+                    ) : horsesError ? (
+                        <p className="error-message">{horsesError}</p>
+                    ) : horses.length === 0 ? (
+                        <p>Er zijn geen paarden beschikbaar.</p>
+                    ) : ( horses.map((horse) => (
                         <label key={horse.id}>
                             <input
                                 type="checkbox"
@@ -178,7 +207,18 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                             />
                             {horse.name}
                         </label>
-                    ))}
+                    )))
+                    }
+
+                    {loadingAssignments && (
+                        <p> Bestaande zorgtaaktoewijzingen worden geladen...</p>
+                    )}
+
+                    {assignmentsError && (
+                        <p className="error-message">
+                            {assignmentsError}
+                        </p>
+                    )}
                 </div>
 
                 <div className="form-row">
@@ -211,8 +251,10 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
                     </p>
                 )}
 
-                <Button type="submit">
-                    Zorgtaak toewijzen
+                <Button
+                    type="submit"
+                    disabled={isSubmitting} >
+                    {isSubmitting ? "Bezig met toewijzen..." : "Zorgtaak toewijzen"}
                 </Button>
 
                 <Button
