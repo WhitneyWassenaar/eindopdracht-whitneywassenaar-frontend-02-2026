@@ -4,18 +4,22 @@ import {useContext, useEffect, useState} from "react";
 // Context
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
-// API
-import api from "../../../api/axios.js";
-
 // Components
 import StableTable from "../../../components/page-components/stalbezetting/StableTable/StableTable.jsx";
+
+// Services
+import {getUserBoxes, deleteBox, createBox} from "../../../services/boxService.js";
+
+import {getAllPersons} from "../../../services/contactService.js";
+
+import {updateHorseRelations, getAllHorses} from "../../../services/horseService.js";
 
 // CSS
 import './Stalbezetting.css'
 
 function Stalbezetting() {
 
-    const {token,user} = useContext(AuthContext);
+    const {token, user} = useContext(AuthContext);
     const [capacity, setCapacity] = useState("");
     const [boxes, setBoxes] = useState([]);
     const [horses, setHorses] = useState([]);
@@ -29,15 +33,11 @@ function Stalbezetting() {
     useEffect(() => {
         async function fetchHorsesAndContacts() {
             try {
-                const headers = {
-                    Authorization: `Bearer ${token}`
-                };
+                const horsesData = await getAllHorses(token);
+                setHorses(horsesData);
 
-                const horsesResponse = await api.get("/horses", { headers });
-                setHorses(horsesResponse.data);
-
-                const contactsResponse = await api.get("/persons", { headers });
-                setContacts(contactsResponse.data);
+                const contactsData = await getAllPersons(token);
+                setContacts(contactsData);
 
             } catch (error) {
                 console.error("Fout bij ophalen paarden/contacten:", error);
@@ -49,20 +49,10 @@ function Stalbezetting() {
         }
     }, [token]);
 
-
-
     useEffect(() => {
         async function fetchBoxes() {
             try {
-                const response = await api.get("/boxes", {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-
-                const userBoxes = response.data.filter(
-                    box => box.userId === user?.id
-                );
+                const userBoxes = await getUserBoxes(user.id, token);
 
                 setBoxes(userBoxes);
                 setCapacity(userBoxes.length);
@@ -80,17 +70,7 @@ function Stalbezetting() {
 
     async function generateBoxes() {
         try {
-            const headers = {
-                Authorization: `Bearer ${token}`
-            };
-
-            const boxResponse = await api.get("/boxes", {
-                headers
-            });
-
-            const existingBoxes = boxResponse.data.filter(
-                box => box.userId === user?.id
-            );
+            const existingBoxes = await getUserBoxes(user.id, token);
 
             const occupiedBoxesAfterCapacity = existingBoxes.filter(box =>
                 box.boxNumber > capacity &&
@@ -117,9 +97,7 @@ function Stalbezetting() {
             );
 
             for (const box of boxesToDelete) {
-                await api.delete(`/boxes/${box.id}`, {
-                    headers
-                });
+                await deleteBox(box.id, token);
             }
 
             for (let i = 1; i <= capacity; i++) {
@@ -129,25 +107,13 @@ function Stalbezetting() {
                 );
 
                 if (!exists) {
-                    await api.post("/boxes",
-                        {
-                            userId: user.id,
-                            boxNumber: i
-                        },
-                        {
-                            headers
-                        }
-                    );
+                    await createBox(user.id, i, token);
                 }
             }
 
-            const updatedBoxes = await api.get("/boxes", {
-                headers
-            });
+            const updatedBoxes = await getUserBoxes(user.id, token);
 
-            setBoxes(
-                updatedBoxes.data.filter(box => box.userId === user?.id)
-            );
+            setBoxes(updatedBoxes);
 
         } catch (error) {
             console.error(error.response?.data || error);
@@ -165,24 +131,20 @@ function Stalbezetting() {
         }
 
         try {
-            const headers = {
-                Authorization: `Bearer ${token}`
-            };
-
             for (const horse of horses) {
                 if (horse.boxId) {
-                    await api.patch(`/horses/${horse.id}`, {
-                        boxId: null
-                    }, {
-                        headers
-                    });
+                    await updateHorseRelations(
+                        horse.id,
+                        {boxId: null},
+                        token
+                    );
                 }
             }
 
-            const response = await api.get("/boxes", { headers });
+            const userBoxes = await getUserBoxes(user.id, token);
 
-            for (const box of response.data) {
-                await api.delete(`/boxes/${box.id}`, { headers });
+            for (const box of userBoxes) {
+                await deleteBox(box.id, token);
             }
 
             setBoxes([]);
@@ -204,67 +166,56 @@ function Stalbezetting() {
     async function fromBoxToPasture(horse) {
         try {
 
-            await api.patch(`/horses/${horse.id}`,
-                {
-                    location: "wei"
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
+            await updateHorseRelations(
+                horse.id,
+                {location: "wei"},
+                token
             );
 
             setHorses(prevHorses =>
                 prevHorses.map(h =>
                     h.id === horse.id
-                        ? { ...h, location: "wei" }
+                        ? {...h, location: "wei"}
                         : h
                 )
             );
 
-        } catch(error) {
+        } catch (error) {
             console.error(error);
         }
     }
 
     async function fromPastureToBox(horse) {
         try {
-            await api.patch(`/horses/${horse.id}`,
-                {
-                    boxId: horse.boxId,
-                    location: "stal"
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
+            await updateHorseRelations(
+                horse.id,
+                {location: "stal", boxId: horse.boxId},
+                token
             );
 
             setHorses(prevHorses =>
                 prevHorses.map(h =>
                     h.id === horse.id
-                        ? { ...h, location: "stal" }
+                        ? {...h, location: "stal"}
                         : h
                 )
             );
 
-        } catch(error) {
+        } catch (error) {
             console.error(error);
         }
     }
 
     async function placeHorseInBox(horseId, boxId) {
         try {
-            await api.patch(`/horses/${horseId}`, {
-                boxId: Number(boxId),
-                location: "stal"
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            await updateHorseRelations(
+                horseId,
+                {
+                    boxId: Number(boxId),
+                    location: "stal"
+                },
+                token
+            );
 
             setHorses(prevHorses =>
                 prevHorses.map(h =>
@@ -285,21 +236,16 @@ function Stalbezetting() {
 
     async function moveHorseToBox(horse, newBoxId) {
         try {
-            await api.patch(`/horses/${horse.id}`,
-                {
-                    boxId: Number(newBoxId)
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
+            await updateHorseRelations(
+                horse.id,
+                {boxId: Number(newBoxId)},
+                token
             );
 
             setHorses(prev =>
                 prev.map(h =>
                     h.id === horse.id
-                        ? { ...h, boxId: Number(newBoxId) }
+                        ? {...h, boxId: Number(newBoxId)}
                         : h
                 )
             );
@@ -313,18 +259,16 @@ function Stalbezetting() {
 
     async function removeHorseFromBox(horse) {
         try {
-            await api.patch(`/horses/${horse.id}`, {
-                boxId: null
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            await updateHorseRelations(
+                horse.id,
+                {boxId: null},
+                token
+            );
 
             setHorses(prevHorses =>
                 prevHorses.map(h =>
                     h.id === horse.id
-                        ? { ...h, boxId: null }
+                        ? {...h, boxId: null}
                         : h
                 )
             );
@@ -353,14 +297,11 @@ function Stalbezetting() {
         }
 
         try {
-
-            await api.patch(`/horses/${horse.id}`, {
-                [field]: value
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            await updateHorseRelations(
+                horse.id,
+                {[field]: value},
+                token
+            );
 
 
             setHorses(prev =>
@@ -374,38 +315,38 @@ function Stalbezetting() {
                 )
             );
 
-        } catch(error) {
+        } catch (error) {
             console.error("Datum aanpassen mislukt:", error);
         }
     }
 
     return (
-            <div className="stalbezetting-page">
-                <h1>Stalbezetting</h1>
-                <label htmlFor="box-capacity">
-                    Hoeveel boxen heb je nodig?
-                </label>
-                <input
-                    id="box-capacity"
-                    type="number"
-                    min="1"
-                    max="100"
-                    value={capacity}
-                    onChange={handleCapacityChange}
-                />
+        <div className="stalbezetting-page">
+            <h1>Stalbezetting</h1>
+            <label htmlFor="box-capacity">
+                Hoeveel boxen heb je nodig?
+            </label>
+            <input
+                id="box-capacity"
+                type="number"
+                min="1"
+                max="100"
+                value={capacity}
+                onChange={handleCapacityChange}
+            />
 
-                <button
-                    type="button"
-                    onClick={generateBoxes}>
-                    Opslaan
-                </button>
-                <button
-                    type="button"
-                    onClick={deleteAllBoxes}>
-                    Reset boxen
-                </button>
+            <button
+                type="button"
+                onClick={generateBoxes}>
+                Opslaan
+            </button>
+            <button
+                type="button"
+                onClick={deleteAllBoxes}>
+                Reset boxen
+            </button>
 
-                <StableTable
+            <StableTable
                 boxes={boxes}
                 horses={horses}
                 contacts={contacts}
@@ -418,8 +359,9 @@ function Stalbezetting() {
                 setMovingHorse={setMovingHorse}
                 movingHorse={movingHorse}
                 updateHorseDates={updateHorseDates}
-                />
-            </div>
+            />
+        </div>
     );
 }
+
 export default Stalbezetting;

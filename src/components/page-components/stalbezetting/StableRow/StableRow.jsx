@@ -1,31 +1,38 @@
+// Components
+import StableRowActions from '../StableRowActions/StableRowActions.jsx';
+
 // CSS
 import './StableRow.css'
-import Button from '../../../ui/Button/Button.jsx';
 
-function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, placeHorseInBox, removeHorseFromBox, setMovingHorse, movingHorse, moveHorseToBox,boxes, updateHorseDates}) {
-    const defaultHorsePhoto = "/defaultHorsePhoto.png";
+const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
-    const horse = horses?.find(
-        horse => Number(horse.boxId) === Number(box.id)
+function StableRow({
+                       box,
+                       horses = [],
+                       contacts = [],
+                       fromBoxToPasture,
+                       fromPastureToBox,
+                       placeHorseInBox,
+                       removeHorseFromBox,
+                       setMovingHorse,
+                       movingHorse,
+                       moveHorseToBox,
+                       boxes = [],
+                       updateHorseDates})
+{
+
+    const horse = horses.find(
+        currentHorse => Number(currentHorse.boxId) === Number(box.id)
     );
 
-    const owner = contacts?.find(
+    const owner = contacts.find(
         contact => Number(contact.id) === Number(horse?.ownerId));
-    console.log("Gevonden paard voor deze box:", horse);
-    console.log(
-        "BOX:",
-        box.id,
-        "paarden in deze box:",
-        horses.filter(horse => Number(horse.boxId) === Number(box.id))
-    );
 
     const status = !horse
         ? "Vrij"
         : horse.location === "stal"
             ? "Stal"
             : "Wei";
-
-
 
     return (
         <tr className={horse && !horse.active
@@ -95,113 +102,19 @@ function StableRow({box, horses, contacts, fromBoxToPasture, fromPastureToBox, p
 
             <td>{status}</td>
             <td>
-                <div className="stable-actions-container">
-                {horse ? (
-                    <>
-                        {horse.active && (
-                            <>
-                                {movingHorse?.id === horse.id ? (
-                                    <>
-                                    <select
-                                        className="choose-box"
-                                        onChange={(e) =>
-                                            moveHorseToBox(horse, e.target.value)
-                                        }
-                                    >
-                                        <option value="">
-                                            Kies nieuwe box
-                                        </option>
-
-                                        {boxes
-                                            .filter(box =>
-                                                !horses.some(h =>
-                                                    Number(h.boxId) === Number(box.id)
-                                                )
-                                            )
-                                            .map(box => (
-                                                <option
-                                                    key={box.id}
-                                                    value={box.id}
-                                                >
-                                                    Box {box.boxNumber}
-                                                </option>
-                                            ))
-                                        }
-                                    </select>
-
-                                    <Button
-                                        variant="stable-actions"
-                                        onClick={() => setMovingHorse(null)}
-                                    >
-                                        Verplaatsen annuleren
-                                    </Button>
-                                    </>
-                                    ) : (
-                                    <Button
-                                        variant="stable-actions"
-                                    onClick={() => setMovingHorse(horse)}
-                                >
-                            Verplaatsen
-                            </Button>
-                        )}
-
-
-
-
-                                {horse.location === "stal" ? (
-                                    <Button
-                                        variant="stable-actions"
-                                        onClick={() => fromBoxToPasture(horse)}
-                                    >
-                                        Naar wei
-                                    </Button>
-                                ) : (
-                                    <Button
-                                        variant="stable-actions"
-                                        onClick={() => fromPastureToBox(horse)}
-                                    >
-                                        Zet op stal
-                                    </Button>
-                                )}
-                            </>
-                        )}
-
-                        <Button
-                            variant="stable-actions"
-                            onClick={() => removeHorseFromBox(horse)}
-
-                        >
-                            Loskoppelen
-                        </Button>
-                    </>
-                ) : (
-                    <select
-                        className="place-horse"
-                        onChange={(e) =>
-                            placeHorseInBox(e.target.value, box.id)
-                        }
-                    >
-                        <option
-                            value="">
-                            Paard plaatsen
-                        </option>
-
-                        {horses
-                            ?.filter(horse =>
-                                !horse.boxId && horse.active
-                            )
-                            .map(horse => (
-                                <option
-                                    key={horse.id}
-                                    value={horse.id}
-                                >
-                                    {horse.name}
-                                </option>
-                            ))
-                        }
-                    </select>
-                )}
-                </div>
+                <StableRowActions
+                    horse={horse}
+                    horses={horses}
+                    boxes={boxes}
+                    boxId={box.id}
+                    movingHorse={movingHorse}
+                    setMovingHorse={setMovingHorse}
+                    moveHorseToBox={moveHorseToBox}
+                    fromBoxToPasture={fromBoxToPasture}
+                    fromPastureToBox={fromPastureToBox}
+                    removeHorseFromBox={removeHorseFromBox}
+                    placeHorseInBox={placeHorseInBox}
+                />
             </td>
         </tr>
     );
