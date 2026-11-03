@@ -66,34 +66,31 @@ function HorseHealth({horse}) {
                 <div className="health-overview">
 
                     <p>
-                        Gewicht: {health.weight} kg
+                        Gewicht: {health.weight ? `${health.weight} kg` : "Geen gewicht ingevuld"}
                     </p>
 
                     <p>
-                        Dieet: {health.diet || "Geen dieet ingevuld"}
+                        Dieet: {health.diet ? `${health.diet}` : "Geen speciaal dieet"}
                     </p>
 
                     <p>
-                        Allergieën: {health.allergies || "Geen allergieën"}
+                        Allergieën: {health.allergies ? `${health.allergies}` : "Geen allergieën"}
                     </p>
 
                     <p>
-                        Medicatie: {health.medication || "Geen medicatie"}
+                        Medicatie: {health.medication ? `${health.medication}` : "Geen medicatie"}
                     </p>
 
                     <p>
-                        Vaccinatie:
-                        {health.vaccinated ? " Ja" : " Nee"}
+                        Vaccinatie: {health.vaccinated ? " Ja" : " Nee"}
                     </p>
 
                     <p>
-                        Laatste ontworming:
-                        {health.lastDeworming || "Niet ingevuld"}
+                        Laatste ontworming: {health.lastDeworming ? `${health.lastDeworming}` :  "Niet ingevuld"}
                     </p>
 
                     <p>
-                        Bijzonderheden:
-                        {health.notes || "Geen bijzonderheden"}
+                        Bijzonderheden: {health.notes ? `${health.notes}` : "Geen bijzonderheden"}
                     </p>
 
                     <button

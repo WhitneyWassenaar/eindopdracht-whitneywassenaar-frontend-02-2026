@@ -31,30 +31,6 @@ function HorseHealthForm({horse, onSaved}) {
 
         async function getHealth() {
             try {
-                //
-                // const response = await api.get(`/horses/${horse.id}/horseHealths`,
-                //     {
-                //         headers: {
-                //             Authorization: `Bearer ${token}`
-                //         }
-                //     }
-                // );
-                //
-                // if (response.data.length > 0) {
-                //     const health = response.data[0];
-                //
-                //     setHealthId(health.id);
-                //
-                //     setFormData({
-                //         weight: health.weight || "",
-                //         diet: health.diet || "",
-                //         allergies: health.allergies || "",
-                //         medication: health.medication || "",
-                //         vaccinated: health.vaccinated || false,
-                //         lastDeworming: health.lastDeworming || "",
-                //         notes: health.notes || ""
-                //     });
-                // }
 
                 const healthData = await getHorseHealth(horse.id, token);
 
@@ -94,12 +70,21 @@ function HorseHealthForm({horse, onSaved}) {
         e.preventDefault();
 
         try {
+            const healthData = {
+                ...formData,
+                weight: formData.weight === "" ? null : Number(formData.weight),
+                lastDeworming: formData.lastDeworming || null
+            };
+
             if (healthId) {
-                await updateHorseHealth(healthId, formData, token);
+                await updateHorseHealth(healthId, healthData, token);
             } else {
                 await createHorseHealth(
+
                     {
-                        ...formData,
+                        ...healthData,
+                        weight: formData.weight === "" ? undefined : Number(formData.weight),
+                        lastDeworming: formData.lastDeworming || undefined,
                         userId: user.id,
                         horseId: horse.id
                     },
@@ -199,6 +184,7 @@ function HorseHealthForm({horse, onSaved}) {
                         name="lastDeworming"
                         value={formData.lastDeworming}
                         onChange={handleChange}
+                        max={new Date().toLocaleDateString("en-CA")}
                     />
             </div>
 
