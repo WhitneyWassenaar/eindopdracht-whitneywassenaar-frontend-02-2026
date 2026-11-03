@@ -5,7 +5,7 @@ import LoginForm from '../../../components/forms/LoginForm/LoginForm.jsx';
 import './Inloggen.css';
 
 function Inloggen() {
-    return(
+    return (
         <section className="login-page">
             <h1>Inloggen</h1>
             <LoginForm />
