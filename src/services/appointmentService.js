@@ -15,21 +15,23 @@ export async function createAppointment(appointmentData, token) {
 }
 
 
-export async function getHorseAppointments(horseId, token) {
+export async function getHorseAppointments(horseId, token, signal) {
     const response = await api.get(`/horses/${horseId}/appointments`, {
         headers: {
             Authorization: `Bearer ${token}`
-        }
+        },
+        signal
     });
 
     return response.data;
 }
 
-export async function getUserContacts(userId, token) {
+export async function getUserContacts(userId, token, signal) {
     const response = await api.get(`/users/${userId}/persons`, {
         headers: {
             Authorization: `Bearer ${token}`
-        }
+        },
+        signal
     });
 
     return response.data;
