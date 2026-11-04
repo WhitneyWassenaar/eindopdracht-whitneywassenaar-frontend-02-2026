@@ -12,7 +12,7 @@ import './HorseRow.css'
 
 const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
-function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, contacts = []}) {
+function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, contacts = [],   updatingHorseId,   deletingHorseId}) {
 
     const owner = contacts.find(
         contact => Number(contact.id) === Number(horse.ownerId)
@@ -40,10 +40,15 @@ function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, conta
                 className={horse.active ? "horse-status active" : "horse-status inactive"}
                 onClick={(e) => {
                     e.stopPropagation();
+                    if (updatingHorseId === horse.id) return;
                     toggleHorseActive(horse);
                 }}
                 >
-                {horse.active ? "Actief" : "Inactief"}
+                {updatingHorseId === horse.id
+                    ? "Bezig met wijzigen..."
+                    : horse.active
+                        ? "Actief"
+                        : "Inactief"}
             </td>
 
             <td>
@@ -53,8 +58,11 @@ function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, conta
                     onClick={(e) => {
                         e.stopPropagation();
                         deleteHorse(horse.id);
-                    }}>
-                    <img src={deleteIcon} alt="Verwijderen"/>
+                    }}
+                    disabled={deletingHorseId === horse.id}>
+                    {deletingHorseId === horse.id
+                        ? "Bezig met verwijderen..."
+                        : <img src={deleteIcon} alt="Verwijderen" />}
                 </Button>
             </td>
         </tr>

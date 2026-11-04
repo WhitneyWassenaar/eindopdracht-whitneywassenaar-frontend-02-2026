@@ -18,7 +18,10 @@ function StableRow({
                        movingHorse,
                        moveHorseToBox,
                        boxes = [],
-                       updateHorseDates})
+                       updateHorseDates,
+                       movingHorseId,
+                       removingHorseId,
+                       changingBoxHorseId})
 {
 
     const horse = horses.find(
@@ -114,6 +117,9 @@ function StableRow({
                     fromPastureToBox={fromPastureToBox}
                     removeHorseFromBox={removeHorseFromBox}
                     placeHorseInBox={placeHorseInBox}
+                    movingHorseId={movingHorseId}
+                    removingHorseId={removingHorseId}
+                    changingBoxHorseId={changingBoxHorseId}
                 />
             </td>
         </tr>

@@ -10,12 +10,9 @@ import CreateContactProfileForm from "../../../components/forms/CreateContactPro
 // Context / hooks
 import {AuthContext} from "../../../context/AuthContext.jsx";
 
-// Api
-import api from "../../../api/axios.js";
-
 // Services
-import { getContacts, updateContactActive } from "../../../services/contactService.js";
-import { getHorses } from "../../../services/horseService.js";
+import { getContacts, updateContactActive, deleteContactFromApi } from "../../../services/contactService.js";
+import { getHorses, updateHorseRelations } from "../../../services/horseService.js";
 
 // CSS
 import './Contacten.css'
@@ -34,6 +31,20 @@ function Contacten() {
     const [sortOption, setSortOption] = useState("none");
     const [showSort, setShowSort] = useState(false);
 
+    const [isLoadingContacts, setIsLoadingContacts] = useState(false);
+    const [contactsError, setContactsError] = useState("");
+
+    const [isLoadingHorses, setIsLoadingHorses] = useState(false);
+    const [horsesError, setHorsesError] = useState("");
+
+    const [updatingContactId, setUpdatingContactId] = useState(null);
+    const [updateContactError, setUpdateContactError] = useState("");
+
+    const [deletingContactId, setDeletingContactId] = useState(null);
+    const [deleteContactError, setDeleteContactError] = useState("");
+
+
+
     const {token, user} = useContext(AuthContext);
 
     useEffect(() => {
@@ -41,19 +52,31 @@ function Contacten() {
 
         async function fetchContacts() {
             try {
+                setIsLoadingContacts(true);
+                setContactsError("");
+
                 const contactData = await getContacts(user.id, token);
                 setContacts(contactData);
             } catch (error) {
-                console.error(error);
+                console.error("Contacten ophalen mislukt:", error);
+                setContactsError("Het ophalen van de contacten is mislukt.");
+            } finally {
+                setIsLoadingContacts(false);
             }
         }
 
         async function fetchHorses() {
             try {
+                setIsLoadingHorses(true);
+                setHorsesError("");
+
                 const horseData = await getHorses(user.id, token);
                 setHorses(horseData);
             } catch (error) {
-                console.error(error);
+                console.error("Paarden ophalen mislukt:", error);
+                setHorsesError("Het ophalen van de paarden is mislukt.");
+            } finally {
+                setIsLoadingHorses(false);
             }
         }
         fetchContacts();
@@ -63,6 +86,9 @@ function Contacten() {
 
     async function toggleContactActive(contact) {
         try {
+            setUpdatingContactId(contact.id);
+            setUpdateContactError("");
+
             await updateContactActive(contact, token);
 
             setContacts(prevContacts =>
@@ -73,7 +99,10 @@ function Contacten() {
                 )
             );
         } catch (error) {
-            console.error(error);
+            console.error("Contactstatus wijzigen mislukt:", error);
+            setUpdateContactError("Het wijzigen van de contactstatus is mislukt.");
+        } finally {
+            setUpdatingContactId(null);
         }
     }
 
@@ -82,35 +111,31 @@ function Contacten() {
             return;
 
         try {
+            setDeletingContactId(contactId);
+            setDeleteContactError("");
             for (const horse of horses) {
                 if (
                     Number(horse.ownerId) === Number(contactId) ||
                     Number(horse.caretakerId) === Number(contactId) ||
                     Number(horse.trainerId) === Number(contactId)
                 ) {
-                    await api.patch(
-                        `/horses/${horse.id}`,
+                    await updateHorseRelations(
+                        horse.id,
                         {
                             ownerId:
                                 Number(horse.ownerId) === Number(contactId)
                                     ? null
                                     : horse.ownerId,
-
                             caretakerId:
                                 Number(horse.caretakerId) === Number(contactId)
                                     ? null
                                     : horse.caretakerId,
-
                             trainerId:
                                 Number(horse.trainerId) === Number(contactId)
                                     ? null
                                     : horse.trainerId,
                         },
-                        {
-                            headers: {
-                                Authorization: `Bearer ${token}`
-                            }
-                        }
+                        token
                     );
                 }
 
@@ -135,21 +160,17 @@ function Contacten() {
                 }))
             );
 
-            await api.delete(
-                `/persons/${contactId}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
+            await deleteContactFromApi(contactId, token);
 
             setContacts(previousContacts =>
                 previousContacts.filter(contact => contact.id !== contactId)
             );
 
         } catch (error) {
-            console.error(error);
+            console.error("Contact verwijderen mislukt:", error);
+            setDeleteContactError("Het verwijderen van het contact is mislukt.");
+        } finally {
+            setDeletingContactId(null);
         }
     }
 
@@ -185,6 +206,17 @@ function Contacten() {
         <div className="contacten-page">
 
             <h1>Contacten</h1>
+            {deleteContactError && (
+                <p className="error-message">{deleteContactError}</p>
+            )}
+            {updateContactError && (
+                <p className="error-message">{updateContactError}</p>
+            )}
+            {isLoadingHorses && <p>Paarden worden geladen...</p>}
+
+            {horsesError && (
+                <p className="error-message">{horsesError}</p>
+            )}
 
             {selectedContact ? (
                 <>
@@ -282,12 +314,28 @@ function Contacten() {
                             </select>
                         </>
                     )}
-                    <ContactTable
-                        contacts={sortedContacts}
-                        setSelectedContact={setSelectedContact}
-                        deleteContact={deleteContact}
-                        toggleContactActive={toggleContactActive}
-                    />
+
+                    {isLoadingContacts && <p>Contacten worden geladen...</p>}
+
+                    {contactsError && (
+                        <p className="error-message">{contactsError}</p>
+                    )}
+
+                    {!isLoadingContacts && !contactsError && contacts.length === 0 ? (
+                        <p>Er zijn nog geen contacten beschikbaar.</p>
+                    ) : (
+                        !isLoadingContacts &&
+                        !contactsError && (
+                            <ContactTable
+                                contacts={sortedContacts}
+                                setSelectedContact={setSelectedContact}
+                                deleteContact={deleteContact}
+                                toggleContactActive={toggleContactActive}
+                                updatingContactId={updatingContactId}
+                                deletingContactId={deletingContactId}
+                            />
+                        )
+                    )}
 
                     <Button
                         type="button"

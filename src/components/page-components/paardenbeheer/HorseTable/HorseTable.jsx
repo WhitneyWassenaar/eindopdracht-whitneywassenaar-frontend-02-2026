@@ -4,7 +4,7 @@ import HorseRow from '../HorseRow/HorseRow.jsx';
 // CSS
 import './HorseTable.css'
 
-function HorseTable({horses = [], setSelectedHorse, deleteHorse, toggleHorseActive, contacts = []}) {
+function HorseTable({horses = [], setSelectedHorse, deleteHorse, toggleHorseActive, contacts = [],  updatingHorseId,  deletingHorseId}) {
     return (
         <table className="table-layout">
             <thead>
@@ -27,6 +27,8 @@ function HorseTable({horses = [], setSelectedHorse, deleteHorse, toggleHorseActi
                     deleteHorse={deleteHorse}
                     toggleHorseActive={toggleHorseActive}
                     contacts={contacts}
+                    updatingHorseId={updatingHorseId}
+                    deletingHorseId={deletingHorseId}
                 />
             ))}
             </tbody>

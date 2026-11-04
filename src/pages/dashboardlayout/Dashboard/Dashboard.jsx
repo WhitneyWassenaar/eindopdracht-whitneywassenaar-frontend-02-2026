@@ -22,11 +22,17 @@ function Dashboard() {
     const [careTasks, setCareTasks] = useState([]);
     const [appointments, setAppointments] = useState([]);
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+
     useEffect(() => {
         if (!token || !user) return;
 
         async function fetchDashboardData() {
             try {
+                setIsLoading(true);
+                setError("");
+
                 const data = await getDashboardData(user.id, token);
 
                 setHorses(data.horses);
@@ -36,6 +42,9 @@ function Dashboard() {
 
             } catch (error) {
                 console.error("Dashboard data ophalen mislukt:", error);
+                setError("Het ophalen van de dashboardgegevens is mislukt.");
+            } finally {
+                setIsLoading(false);
             }
         }
         fetchDashboardData();
@@ -52,6 +61,11 @@ function Dashboard() {
             <h2 className="dashboard-page-heading">
                 Overzicht van {user.stableName}
             </h2>
+            {isLoading && <p>Dashboardgegevens worden geladen...</p>}
+
+            {error && (
+                <p className="error-message">{error}</p>
+            )}
 
             <div className="dashboard-card-container">
                 <PaardenverdelingCard

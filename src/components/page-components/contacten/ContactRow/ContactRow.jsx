@@ -13,7 +13,9 @@ function ContactRow({
                         contact,
                         setSelectedContact,
                         deleteContact,
-                        toggleContactActive
+                        toggleContactActive,
+                        updatingContactId,
+                        deletingContactId
                     }) {
     return (
         <tr className="contactrow-layout"
@@ -48,21 +50,34 @@ function ContactRow({
                 className={contact.active ? "contact-status active" : "contact-status inactive"}
                 onClick={(e) => {
                     e.stopPropagation();
+                    if (updatingContactId === contact.id) return;
                     toggleContactActive(contact);
                 }}
             >
-                {contact.active ? "Actief" : "Inactief"}
+                {updatingContactId === contact.id
+                    ? "Bezig met wijzigen..."
+                    : contact.active
+                        ? "Actief"
+                        : "Inactief"}
             </td>
 
             <td>
                 <Button
                     type="button"
                     variant="delete"
+                    disabled={deletingContactId === contact.id}
                     onClick={(e) => {
                         e.stopPropagation();
+
+                        if (deletingContactId === contact.id) return;
+
                         deleteContact(contact.id);
-                    }}>
-                    <img src={deleteIcon} alt="delete icon"/>
+                    }}
+                >
+                    {deletingContactId === contact.id
+                        ? "Bezig met verwijderen..."
+                        : <img src={deleteIcon} alt="delete icon" />
+                    }
                 </Button>
             </td>
         </tr>

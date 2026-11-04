@@ -24,6 +24,7 @@ function RegisterForm() {
     const [acceptToc, setAcceptToc] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [isRegistering, setIsRegistering] = useState(false);
 
     async function onFormSubmit(e) {
         e.preventDefault();
@@ -60,6 +61,9 @@ function RegisterForm() {
         }
 
         try {
+            setIsRegistering(true);
+            setError("");
+            setSuccess("");
             const userData = await registerUser({
                 email: cleanEmail,
                 password,
@@ -84,6 +88,8 @@ function RegisterForm() {
         } catch (error) {
             console.error("Registreren mislukt:", error);
             setError(error.response?.data?.error || "Er is iets misgegaan...");
+        } finally {
+            setIsRegistering(false);
         }
     }
 
@@ -226,8 +232,9 @@ function RegisterForm() {
 
                     <Button
                         type="submit"
+                        disabled={isRegistering}
                     >
-                        Registreren
+                        {isRegistering ? "Bezig met registreren..." : "Registreren"}
                     </Button>
                 </form>
     );

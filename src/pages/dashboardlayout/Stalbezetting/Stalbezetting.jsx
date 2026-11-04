@@ -26,6 +26,26 @@ function Stalbezetting() {
     const [contacts, setContacts] = useState([]);
     const [movingHorse, setMovingHorse] = useState(null);
 
+    const [isLoadingHorses, setIsLoadingHorses] = useState(false);
+    const [horsesError, setHorsesError] = useState("");
+
+    const [isLoadingBoxes, setIsLoadingBoxes] = useState(false);
+    const [boxesError, setBoxesError] = useState("");
+
+    const [isSavingBoxes, setIsSavingBoxes] = useState(false);
+    const [saveBoxesError, setSaveBoxesError] = useState("");
+
+    const [isDeletingAllBoxes, setIsDeletingAllBoxes] = useState(false);
+    const [deleteAllBoxesError, setDeleteAllBoxesError] = useState("");
+
+    const [movingHorseId, setMovingHorseId] = useState(null);
+    const [removingHorseId, setRemovingHorseId] = useState(null);
+    const [moveHorseError, setMoveHorseError] = useState("");
+
+    const [changingBoxHorseId, setChangingBoxHorseId] = useState(null);
+    const [dateUpdateError, setDateUpdateError] = useState("");
+    const [isUpdatingDate, setIsUpdatingDate] = useState(false);
+
     function handleCapacityChange(e) {
         setCapacity(Number(e.target.value));
     }
@@ -33,6 +53,9 @@ function Stalbezetting() {
     useEffect(() => {
         async function fetchHorsesAndContacts() {
             try {
+                setIsLoadingHorses(true);
+                setHorsesError("");
+
                 const horsesData = await getAllHorses(token);
                 setHorses(horsesData);
 
@@ -41,6 +64,9 @@ function Stalbezetting() {
 
             } catch (error) {
                 console.error("Fout bij ophalen paarden/contacten:", error);
+                setHorsesError("Het ophalen van paarden en contacten is mislukt.");
+            } finally {
+                setIsLoadingHorses(false);
             }
         }
 
@@ -52,6 +78,9 @@ function Stalbezetting() {
     useEffect(() => {
         async function fetchBoxes() {
             try {
+                setIsLoadingBoxes(true);
+                setBoxesError("");
+
                 const userBoxes = await getUserBoxes(user.id, token);
 
                 setBoxes(userBoxes);
@@ -59,6 +88,9 @@ function Stalbezetting() {
 
             } catch (error) {
                 console.error("Fout bij ophalen boxen:", error);
+                setBoxesError("Het ophalen van de boxen is mislukt.");
+            } finally {
+                setIsLoadingBoxes(false);
             }
         }
 
@@ -70,6 +102,8 @@ function Stalbezetting() {
 
     async function generateBoxes() {
         try {
+            setIsSavingBoxes(true);
+            setSaveBoxesError("");
             const existingBoxes = await getUserBoxes(user.id, token);
 
             const occupiedBoxesAfterCapacity = existingBoxes.filter(box =>
@@ -117,6 +151,9 @@ function Stalbezetting() {
 
         } catch (error) {
             console.error(error.response?.data || error);
+            setSaveBoxesError("Het opslaan van de boxen is mislukt.");
+        } finally {
+            setIsSavingBoxes(false);
         }
     }
 
@@ -131,6 +168,8 @@ function Stalbezetting() {
         }
 
         try {
+            setIsDeletingAllBoxes(true);
+            setDeleteAllBoxesError("");
             for (const horse of horses) {
                 if (horse.boxId) {
                     await updateHorseRelations(
@@ -160,12 +199,16 @@ function Stalbezetting() {
 
         } catch (error) {
             console.error(error.response?.data || error);
+            setDeleteAllBoxesError("Het resetten van de boxen is mislukt.");
+        } finally {
+            setIsDeletingAllBoxes(false);
         }
     }
 
     async function fromBoxToPasture(horse) {
         try {
-
+            setMovingHorseId(horse.id);
+            setMoveHorseError("");
             await updateHorseRelations(
                 horse.id,
                 {location: "wei"},
@@ -182,11 +225,16 @@ function Stalbezetting() {
 
         } catch (error) {
             console.error(error);
+            setMoveHorseError("Het verplaatsen van het paard naar de wei is mislukt.");
+        } finally {
+            setMovingHorseId(null);
         }
     }
 
     async function fromPastureToBox(horse) {
         try {
+            setMovingHorseId(horse.id);
+            setMoveHorseError("");
             await updateHorseRelations(
                 horse.id,
                 {location: "stal", boxId: horse.boxId},
@@ -203,11 +251,18 @@ function Stalbezetting() {
 
         } catch (error) {
             console.error(error);
+            setMoveHorseError("Het verplaatsen van het paard naar de stal is mislukt.");
+        } finally {
+            setMovingHorseId(null);
+
         }
     }
 
     async function placeHorseInBox(horseId, boxId) {
         try {
+            setMovingHorseId(Number(horseId));
+            setMoveHorseError("");
+
             await updateHorseRelations(
                 horseId,
                 {
@@ -231,11 +286,17 @@ function Stalbezetting() {
 
         } catch (error) {
             console.error("Paard plaatsen mislukt:", error);
+            setMoveHorseError("Het plaatsen van het paard in de box is mislukt.");
+        } finally {
+            setMovingHorseId(null);
         }
     }
 
     async function moveHorseToBox(horse, newBoxId) {
         try {
+            setChangingBoxHorseId(horse.id);
+            setMoveHorseError("");
+
             await updateHorseRelations(
                 horse.id,
                 {boxId: Number(newBoxId)},
@@ -254,11 +315,17 @@ function Stalbezetting() {
 
         } catch (error) {
             console.error("Paard verplaatsen mislukt:", error);
+            setMoveHorseError("Het verplaatsen naar de andere box is mislukt.");
+        } finally {
+            setChangingBoxHorseId(null);
         }
     }
 
     async function removeHorseFromBox(horse) {
         try {
+            setRemovingHorseId(horse.id);
+            setMoveHorseError("");
+
             await updateHorseRelations(
                 horse.id,
                 {boxId: null},
@@ -275,6 +342,9 @@ function Stalbezetting() {
 
         } catch (error) {
             console.error("Paard loskoppelen mislukt:", error);
+            setMoveHorseError("Het loskoppelen van het paard is mislukt.");
+        } finally {
+            setRemovingHorseId(null);
         }
     }
 
@@ -297,12 +367,13 @@ function Stalbezetting() {
         }
 
         try {
+            setIsUpdatingDate(true);
+            setDateUpdateError("");
             await updateHorseRelations(
                 horse.id,
                 {[field]: value},
                 token
             );
-
 
             setHorses(prev =>
                 prev.map(h =>
@@ -317,12 +388,26 @@ function Stalbezetting() {
 
         } catch (error) {
             console.error("Datum aanpassen mislukt:", error);
+            setDateUpdateError("Het aanpassen van de datum is mislukt.");
+        } finally {
+            setIsUpdatingDate(false);
         }
     }
 
     return (
         <div className="stalbezetting-page">
             <h1>Stalbezetting</h1>
+            {isLoadingHorses && <p>Paarden en contacten worden geladen...</p>}
+
+            {horsesError && (
+                <p className="error-message">{horsesError}</p>
+            )}
+
+            {isLoadingBoxes && <p>Boxen worden geladen...</p>}
+
+            {boxesError && (
+                <p className="error-message">{boxesError}</p>
+            )}
             <label htmlFor="box-capacity">
                 Hoeveel boxen heb je nodig?
             </label>
@@ -337,15 +422,33 @@ function Stalbezetting() {
 
             <button
                 type="button"
-                onClick={generateBoxes}>
-                Opslaan
+                onClick={generateBoxes}
+                disabled={isSavingBoxes}>
+                {isSavingBoxes ? "Bezig met opslaan..." : "Opslaan"}
             </button>
+            {saveBoxesError && (
+                <p className="error-message">{saveBoxesError}</p>
+            )}
             <button
                 type="button"
-                onClick={deleteAllBoxes}>
-                Reset boxen
+                onClick={deleteAllBoxes}
+                disabled={isDeletingAllBoxes}>
+                {isDeletingAllBoxes ? "Bezig met resetten..." : "Reset boxen"}
             </button>
+            {deleteAllBoxesError && (
+                <p className="error-message">{deleteAllBoxesError}</p>
+            )}
 
+            {moveHorseError && (
+                <p className="error-message">{moveHorseError}</p>
+            )}
+            {isUpdatingDate && (
+                <p>Datum wordt opgeslagen...</p>
+            )}
+
+            {dateUpdateError && (
+                <p className="error-message">{dateUpdateError}</p>
+            )}
             <StableTable
                 boxes={boxes}
                 horses={horses}
@@ -359,6 +462,9 @@ function Stalbezetting() {
                 setMovingHorse={setMovingHorse}
                 movingHorse={movingHorse}
                 updateHorseDates={updateHorseDates}
+                movingHorseId={movingHorseId}
+                removingHorseId={removingHorseId}
+                changingBoxHorseId={changingBoxHorseId}
             />
         </div>
     );

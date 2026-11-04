@@ -17,6 +17,8 @@ import './HorseRelationForm.css';
 function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
 
     const {token} = useContext(AuthContext);
+    const [isSaving, setIsSaving] = useState(false);
+    const [error, setError] = useState("");
 
     const [ownerId, setOwnerId] = useState(
         horse.ownerId || ""
@@ -56,6 +58,8 @@ function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
         };
 
         try {
+            setIsSaving(true);
+            setError("");
             const updatedHorse = await updateHorseRelations(
                 horse.id,
                 relations,
@@ -74,6 +78,9 @@ function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
 
         } catch (error) {
             console.error("Relaties opslaan mislukt:", error);
+            setError("Het opslaan van de relaties is mislukt.");
+        } finally {
+            setIsSaving(false);
         }
     }
 
@@ -160,12 +167,15 @@ function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
                     ))}
                 </select>
             </div>
-
+            {error && (
+                <p className="error-message">{error}</p>
+            )}
             <Button
                 variant="save-relations"
                 onClick={saveRelations}
+                disabled={isSaving}
             >
-                Opslaan
+                {isSaving ? "Bezig met opslaan..." : "Opslaan"}
             </Button>
         </div>
     );

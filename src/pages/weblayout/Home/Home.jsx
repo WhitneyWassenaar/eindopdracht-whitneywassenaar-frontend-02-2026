@@ -12,7 +12,7 @@ function Home() {
     return (
         <>
             <Hero
-                title="Beheer jouw paarden,\n behoud het overzicht"
+                title={"Beheer jouw paarden,\n behoud het overzicht"}
                 text="Beheer gezondheid, trainingen, voeding, documenten en planning van al je paarden vanuit één centraal systeem."
                 imgUrl={greyHorseAndRider}
                 imgAlt="An image of a rider that takes a jump with her grey horse"

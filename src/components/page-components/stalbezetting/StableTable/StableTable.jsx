@@ -16,7 +16,10 @@ function StableTable({
                          moveHorseToBox,
                          setMovingHorse,
                          movingHorse,
-                         updateHorseDates}) {
+                         updateHorseDates,
+                         movingHorseId,
+                         removingHorseId,
+                         changingBoxHorseId}) {
     return (
         <table className="stable-table-layout">
             <thead>
@@ -47,6 +50,9 @@ function StableTable({
                     setMovingHorse={setMovingHorse}
                     movingHorse={movingHorse}
                     updateHorseDates={updateHorseDates}
+                    movingHorseId={movingHorseId}
+                    removingHorseId={removingHorseId}
+                    changingBoxHorseId={changingBoxHorseId}
                 />
             ))}
             </tbody>

@@ -21,15 +21,29 @@ function HorseAppointments({horse}) {
     const [showForm, setShowForm] = useState(false);
     const [contacts,setContacts] = useState([]);
 
+    const [loadingAppointments, setLoadingAppointments] = useState(false);
+    const [appointmentsError, setAppointmentsError] = useState("");
+    const [loadingContacts, setLoadingContacts] = useState(false);
+    const [contactsError, setContactsError] = useState("");
+
+    const [deletingAppointment, setDeletingAppointment] = useState(false);
+    const [deleteError, setDeleteError] = useState("");
+
     useEffect(() => {
         if (!horse || !token) return;
 
         async function fetchAppointments() {
             try {
+                setLoadingAppointments(true);
+                setAppointmentsError("");
+
                 const data = await getHorseAppointments(horse.id, token);
                 setAppointments(data);
             } catch (error) {
-                console.error(error);
+                console.error("Afspraken ophalen mislukt:", error);
+                setAppointmentsError("Het ophalen van de afspraken is mislukt.");
+            } finally {
+                setLoadingAppointments(false);
             }
         }
 
@@ -41,10 +55,16 @@ function HorseAppointments({horse}) {
 
         async function fetchContacts() {
             try {
+                setLoadingContacts(true);
+                setContactsError("");
+
                 const data = await getUserContacts(user.id, token);
                 setContacts(data);
             } catch (error) {
-                console.error(error);
+                console.error("Contacten ophalen mislukt:", error);
+                setContactsError("Het ophalen van de contacten is mislukt.");
+            } finally {
+                setLoadingContacts(false);
             }
         }
 
@@ -70,13 +90,19 @@ function HorseAppointments({horse}) {
         }
 
         try {
+            setDeletingAppointment(true);
+            setDeleteError("");
+
             await deleteAppointment(id, token);
 
             setAppointments(previous =>
                 previous.filter(appointment => appointment.id !== id)
             );
         } catch (error) {
-            console.error(error);
+            console.error("Afspraak verwijderen mislukt:", error);
+            setDeleteError("Het verwijderen van de afspraak is mislukt.");
+        } finally {
+            setDeletingAppointment(false);
         }
     }
 
@@ -94,23 +120,47 @@ function HorseAppointments({horse}) {
             <h2>
                 Afspraken
             </h2>
+            {deleteError && (
+                <p className="error-message">{deleteError}</p>
+            )}
 
-            {appointments.length === 0 && !showForm &&(
-                    <p>
-                        Geen afspraken gepland.
-                    </p>
+            {!showForm && loadingAppointments && (
+                <p>Afspraken worden geladen...</p>
+            )}
+
+            {!showForm && appointmentsError && (
+                <p className="error-message">{appointmentsError}</p>
+            )}
+
+            {!showForm && !loadingAppointments && !appointmentsError && appointments.length === 0 && (
+                <p>Geen afspraken gepland.</p>
+            )}
+
+            {showForm && loadingContacts && (
+                <p>Contacten worden geladen...</p>
+            )}
+
+            {showForm && contactsError && (
+                <p className="error-message">{contactsError}</p>
             )}
 
             {showForm && (
+
                 <CreateAppointmentForm
                     horse={horse}
                     onSaved={async () => {
                         try {
+                            setLoadingAppointments(true);
+                            setAppointmentsError("");
+
                             const data = await getHorseAppointments(horse.id, token);
                             setAppointments(data);
                             setShowForm(false);
                         } catch (error) {
-                            console.error(error);
+                            console.error("Afspraken opnieuw ophalen mislukt:", error);
+                            setAppointmentsError("De afspraak is opgeslagen, maar het ophalen van de afspraken is mislukt.");
+                        } finally {
+                            setLoadingAppointments(false);
                         }
                     }}
                 />
@@ -151,8 +201,9 @@ function HorseAppointments({horse}) {
 
                             <button
                                 onClick={() => handleDeleteAppointment(appointment.id)}
+                                disabled={deletingAppointment}
                             >
-                                Afspraak verwijderen
+                                {deletingAppointment ? "Bezig met verwijderen..." : "Afspraak verwijderen"}
                             </button>
                         </div>
                     ))}

@@ -40,3 +40,30 @@ export async function deleteCareTask(id, token) {
         }
     });
 }
+
+export async function getHorseCareTaskAssignments(horseId, token) {
+    const response = await api.get(
+        `/horses/${horseId}/careTaskAssignments`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    );
+
+    return response.data;
+}
+
+export async function assignCareTask(assignmentData, token) {
+    const response = await api.post(
+        "/careTaskAssignments",
+        assignmentData,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    );
+
+    return response.data;
+}
