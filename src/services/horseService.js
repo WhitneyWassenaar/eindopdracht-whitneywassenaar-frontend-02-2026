@@ -115,11 +115,11 @@ export async function updateHorseRelations(horseId, relations, token) {
     return response.data;
 }
 
-export async function getAllHorses(token) {
+export async function getAllHorses(token, signal) {
     const response = await api.get("/horses", {
         headers: {
             Authorization: `Bearer ${token}`
-        }
+        }, signal
     });
 
     return response.data;

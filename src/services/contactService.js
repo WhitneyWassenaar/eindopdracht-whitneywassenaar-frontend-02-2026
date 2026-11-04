@@ -48,11 +48,11 @@ export async function deleteContactFromApi(contactId, token) {
     return response.data;
 }
 
-export async function getAllPersons(token) {
+export async function getAllPersons(token, signal) {
     const response = await api.get("/persons", {
         headers: {
             Authorization: `Bearer ${token}`
-        }
+        }, signal
     });
 
     return response.data;

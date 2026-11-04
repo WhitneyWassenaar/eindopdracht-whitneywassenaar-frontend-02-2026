@@ -51,54 +51,102 @@ function Stalbezetting() {
     }
 
     useEffect(() => {
+        if (!token) return;
+
+        const controller = new AbortController();
+
         async function fetchHorsesAndContacts() {
             try {
                 setIsLoadingHorses(true);
                 setHorsesError("");
 
-                const horsesData = await getAllHorses(token);
+                const horsesData = await getAllHorses(
+                    token,
+                    controller.signal
+                );
+
+                if (controller.signal.aborted) return;
+
                 setHorses(horsesData);
 
-                const contactsData = await getAllPersons(token);
+                const contactsData = await getAllPersons(
+                    token,
+                    controller.signal
+                );
+
+                if (controller.signal.aborted) return;
+
                 setContacts(contactsData);
 
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Fout bij ophalen paarden/contacten:", error);
                 setHorsesError("Het ophalen van paarden en contacten is mislukt.");
             } finally {
-                setIsLoadingHorses(false);
+                if (!controller.signal.aborted) {
+                    setIsLoadingHorses(false);
+                }
             }
         }
 
-        if (token) {
-            fetchHorsesAndContacts();
-        }
+        fetchHorsesAndContacts();
+
+        return () => {
+            controller.abort();
+        };
     }, [token]);
 
     useEffect(() => {
+        if (!token || user?.id == null) return;
+
+        const userId = user.id;
+        const controller = new AbortController();
+
         async function fetchBoxes() {
             try {
                 setIsLoadingBoxes(true);
                 setBoxesError("");
 
-                const userBoxes = await getUserBoxes(user.id, token);
+                const userBoxes = await getUserBoxes(
+                    userId,
+                    token,
+                    controller.signal
+                );
+
+                if (controller.signal.aborted) return;
 
                 setBoxes(userBoxes);
                 setCapacity(userBoxes.length);
 
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Fout bij ophalen boxen:", error);
                 setBoxesError("Het ophalen van de boxen is mislukt.");
             } finally {
-                setIsLoadingBoxes(false);
+                if (!controller.signal.aborted) {
+                    setIsLoadingBoxes(false);
+                }
             }
         }
 
-        if (token) {
-            fetchBoxes();
-        }
+        fetchBoxes();
 
-    }, [token, user]);
+        return () => {
+            controller.abort();
+        };
+    }, [token, user?.id]);
 
     async function generateBoxes() {
         try {

@@ -1,17 +1,17 @@
 import api from "../api/axios.js";
 
-export async function getBoxes(token) {
+export async function getBoxes(token, signal) {
     const response = await api.get("/boxes", {
         headers: {
             Authorization: `Bearer ${token}`
-        }
+        }, signal
     });
 
     return response.data;
 }
 
-export async function getUserBoxes(userId, token) {
-    const boxes = await getBoxes(token);
+export async function getUserBoxes(userId, token, signal) {
+    const boxes = await getBoxes(token, signal);
 
     return boxes.filter(
         box => box.userId === userId
