@@ -20,13 +20,13 @@ export async function createCareTask(careTaskData, token) {
     return response.data;
 }
 
-export async function getCareTasksByUser(parentId, token) {
+export async function getCareTasksByUser(parentId, token, signal) {
     const response = await api.get(
         `/users/${parentId}/careTasks`,
         {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
+            }, signal
         }
     );
 
