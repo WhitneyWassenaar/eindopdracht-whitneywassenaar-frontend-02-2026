@@ -55,6 +55,8 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
         } catch (error) {
             console.error("Zorgtaak aanmaken mislukt:", error);
             setError(error.response?.data?.error || "Er is iets misgegaan.");
+        } finally {
+            setIsSaving(false);
         }
     }
 

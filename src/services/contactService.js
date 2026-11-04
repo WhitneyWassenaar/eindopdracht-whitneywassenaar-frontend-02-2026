@@ -1,12 +1,13 @@
 import api from "../api/axios.js";
 
-export async function getContacts(userId, token) {
+export async function getContacts(userId, token, signal) {
     const response = await api.get(
         `/users/${userId}/persons`,
         {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
+            },
+            signal
         }
     );
 
