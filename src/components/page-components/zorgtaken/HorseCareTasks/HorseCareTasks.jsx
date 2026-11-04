@@ -20,7 +20,9 @@ function HorseCareTasks({horse}) {
     const horseId = horse?.id;
 
     useEffect(() => {
-        if (!horseId || !token) return;
+        if (horseId == null || !token) return;
+
+        const controller = new AbortController();
 
         async function getAssignments() {
             try {
@@ -29,10 +31,16 @@ function HorseCareTasks({horse}) {
 
                 const assignments = await getHorseCareTaskAssignments(
                     horseId,
-                    token
+                    token,
+                    controller.signal
                 );
 
-                const careTasks = await getCareTasks(token);
+                const careTasks = await getCareTasks(
+                    token,
+                    controller.signal
+                );
+
+                if (controller.signal.aborted) return;
 
                 const assignmentsWithTasks = assignments.map((assignment) => ({
                     ...assignment,
@@ -43,13 +51,27 @@ function HorseCareTasks({horse}) {
 
                 setAssignments(assignmentsWithTasks);
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Zorgtaken ophalen mislukt:", error);
                 setError("Het ophalen van de zorgtaken is mislukt.");
             } finally {
-                setIsLoading(false);
+                if (!controller.signal.aborted) {
+                    setIsLoading(false);
+                }
             }
         }
+
         getAssignments();
+
+        return () => {
+            controller.abort();
+        };
     }, [horseId, token]);
 
     async function completeTask(id) {
