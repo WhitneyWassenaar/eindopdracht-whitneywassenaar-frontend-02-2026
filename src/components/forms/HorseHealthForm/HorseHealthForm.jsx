@@ -29,14 +29,22 @@ function HorseHealthForm({horse, onSaved}) {
     const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
-
         if (!horse || !token) return;
+
+        const controller = new AbortController();
 
         async function getHealth() {
             try {
                 setIsLoading(true);
                 setMessage("");
-                const healthData = await getHorseHealth(horse.id, token);
+
+                const healthData = await getHorseHealth(
+                    horse.id,
+                    token,
+                    controller.signal
+                );
+
+                if (controller.signal.aborted) return;
 
                 if (healthData.length > 0) {
                     const health = healthData[0];
@@ -52,18 +60,33 @@ function HorseHealthForm({horse, onSaved}) {
                         lastDeworming: health.lastDeworming || "",
                         notes: health.notes || ""
                     });
+                } else {
+                    setHealthId(null);
                 }
 
             } catch (error) {
-                console.error(error);
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
+                console.error("Gezondheidsgegevens ophalen mislukt:", error);
                 setMessage("Gezondheidsgegevens ophalen is mislukt.");
             } finally {
-                setIsLoading(false);
+                if (!controller.signal.aborted) {
+                    setIsLoading(false);
+                }
             }
         }
 
         getHealth();
-    }, [horse, token]);
+
+        return () => {
+            controller.abort();
+        };
+    }, [horse?.id, token]);
 
     function handleChange(e) {
         const {name, value, type, checked} = e.target;

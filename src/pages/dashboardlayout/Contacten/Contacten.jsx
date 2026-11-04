@@ -48,20 +48,39 @@ function Contacten() {
     const {token, user} = useContext(AuthContext);
 
     useEffect(() => {
-        if (!token || !user) return;
+        if (!token || user?.id == null) return;
+
+        const userId = user.id;
+        const controller = new AbortController();
 
         async function fetchContacts() {
             try {
                 setIsLoadingContacts(true);
                 setContactsError("");
 
-                const contactData = await getContacts(user.id, token);
+                const contactData = await getContacts(
+                    userId,
+                    token,
+                    controller.signal
+                );
+
+                if (controller.signal.aborted) return;
+
                 setContacts(contactData);
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Contacten ophalen mislukt:", error);
                 setContactsError("Het ophalen van de contacten is mislukt.");
             } finally {
-                setIsLoadingContacts(false);
+                if (!controller.signal.aborted) {
+                    setIsLoadingContacts(false);
+                }
             }
         }
 
@@ -70,19 +89,39 @@ function Contacten() {
                 setIsLoadingHorses(true);
                 setHorsesError("");
 
-                const horseData = await getHorses(user.id, token);
+                const horseData = await getHorses(
+                    userId,
+                    token,
+                    controller.signal
+                );
+
+                if (controller.signal.aborted) return;
+
                 setHorses(horseData);
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Paarden ophalen mislukt:", error);
                 setHorsesError("Het ophalen van de paarden is mislukt.");
             } finally {
-                setIsLoadingHorses(false);
+                if (!controller.signal.aborted) {
+                    setIsLoadingHorses(false);
+                }
             }
         }
+
         fetchContacts();
         fetchHorses();
 
-    }, [token, user]);
+        return () => {
+            controller.abort();
+        };
+    }, [token, user?.id]);
 
     async function toggleContactActive(contact) {
         try {

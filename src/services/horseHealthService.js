@@ -1,12 +1,13 @@
 import api from "../api/axios.js";
 
-export async function getHorseHealth(horseId, token) {
+export async function getHorseHealth(horseId, token, signal) {
     const response = await api.get(
         `/horses/${horseId}/horseHealths`,
         {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
+            },
+            signal
         }
     );
 

@@ -20,13 +20,13 @@ export async function createCareTask(careTaskData, token) {
     return response.data;
 }
 
-export async function getCareTasksByUser(parentId, token) {
+export async function getCareTasksByUser(parentId, token, signal) {
     const response = await api.get(
         `/users/${parentId}/careTasks`,
         {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
+            }, signal
         }
     );
 
@@ -41,13 +41,14 @@ export async function deleteCareTask(id, token) {
     });
 }
 
-export async function getHorseCareTaskAssignments(horseId, token) {
+export async function getHorseCareTaskAssignments(horseId, token, signal) {
     const response = await api.get(
         `/horses/${horseId}/careTaskAssignments`,
         {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
+            },
+            signal
         }
     );
 

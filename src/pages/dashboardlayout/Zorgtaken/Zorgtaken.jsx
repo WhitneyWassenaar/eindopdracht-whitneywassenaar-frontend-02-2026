@@ -61,25 +61,48 @@ function Zorgtaken() {
     }
 
     useEffect(() => {
-        if (!token || !user) return;
+        if (!token || user?.id == null) return;
+
+        const userId = user.id;
+        const controller = new AbortController();
 
         async function getCareTasks() {
             try {
                 setIsLoading(true);
                 setError("");
 
-                const careTasksData = await getCareTasksByUser(user.id, token);
+                const careTasksData = await getCareTasksByUser(
+                    userId,
+                    token,
+                    controller.signal
+                );
+
+                if (controller.signal.aborted) return;
+
                 setCareTasks(careTasksData);
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Fout bij ophalen zorgtaken:", error);
                 setError("Het ophalen van de zorgtaken is mislukt.");
             } finally {
-                setIsLoading(false);
+                if (!controller.signal.aborted) {
+                    setIsLoading(false);
+                }
             }
         }
 
         getCareTasks();
-    }, [token, user]);
+
+        return () => {
+            controller.abort();
+        };
+    }, [token, user?.id]);
 
     function openAssignForm(careTask) {
         setSelectedCareTask(careTask);

@@ -1,12 +1,13 @@
 import api from "../api/axios.js";
 
-export async function getContacts(userId, token) {
+export async function getContacts(userId, token, signal) {
     const response = await api.get(
         `/users/${userId}/persons`,
         {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
+            },
+            signal
         }
     );
 
@@ -47,11 +48,11 @@ export async function deleteContactFromApi(contactId, token) {
     return response.data;
 }
 
-export async function getAllPersons(token) {
+export async function getAllPersons(token, signal) {
     const response = await api.get("/persons", {
         headers: {
             Authorization: `Bearer ${token}`
-        }
+        }, signal
     });
 
     return response.data;

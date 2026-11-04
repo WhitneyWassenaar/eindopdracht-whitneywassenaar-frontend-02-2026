@@ -43,44 +43,92 @@ function Paardenbeheer() {
     const {token, user} = useContext(AuthContext);
 
     useEffect(() => {
-        if (!token || !user) return;
+        if (!token || user?.id == null) return;
+
+        const userId = user.id;
+        const controller = new AbortController();
+
         async function loadHorses() {
             try {
                 setIsLoadingHorses(true);
                 setHorsesError("");
 
-                const horseData = await getHorses(user.id, token);
-                setHorses(horseData);
+                const horseData = await getHorses(
+                    userId,
+                    token,
+                    controller.signal
+                );
 
+                if (controller.signal.aborted) return;
+
+                setHorses(horseData);
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Paarden ophalen mislukt:", error);
                 setHorsesError("Het ophalen van de paarden is mislukt.");
             } finally {
-                setIsLoadingHorses(false);
+                if (!controller.signal.aborted) {
+                    setIsLoadingHorses(false);
+                }
             }
         }
+
         loadHorses();
-    }, [token, user]);
+
+        return () => {
+            controller.abort();
+        };
+    }, [token, user?.id]);
 
     useEffect(() => {
-        if (!token || !user) return;
+        if (!token || user?.id == null) return;
+
+        const userId = user.id;
+        const controller = new AbortController();
+
         async function loadContacts() {
             try {
                 setIsLoadingContacts(true);
                 setContactsError("");
 
-                const contactData = await getContacts(user.id, token);
-                setContacts(contactData);
+                const contactData = await getContacts(
+                    userId,
+                    token,
+                    controller.signal
+                );
 
+                if (controller.signal.aborted) return;
+
+                setContacts(contactData);
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Contacten ophalen mislukt:", error);
                 setContactsError("Het ophalen van de contacten is mislukt.");
             } finally {
-                setIsLoadingContacts(false);
+                if (!controller.signal.aborted) {
+                    setIsLoadingContacts(false);
+                }
             }
         }
+
         loadContacts();
-    }, [token, user]);
+
+        return () => {
+            controller.abort();
+        };
+    }, [token, user?.id]);
 
     async function toggleHorseActive(horse) {
         try {

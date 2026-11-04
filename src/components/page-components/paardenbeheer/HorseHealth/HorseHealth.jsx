@@ -23,24 +23,47 @@ function HorseHealth({horse}) {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        if (!horse?.id || !token) return;
+        if (horse?.id == null || !token) return;
+
+        const horseId = horse.id;
+        const controller = new AbortController();
 
         async function fetchHealth() {
             try {
                 setIsLoading(true);
                 setError("");
 
-                const data = await getHorseHealth(horse.id, token);
+                const data = await getHorseHealth(
+                    horseId,
+                    token,
+                    controller.signal
+                );
+
+                if (controller.signal.aborted) return;
+
                 setHealth(data[0] || null);
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Gezondheidsgegevens ophalen mislukt:", error);
                 setError("Het ophalen van de gezondheidsgegevens is mislukt.");
             } finally {
-                setIsLoading(false);
+                if (!controller.signal.aborted) {
+                    setIsLoading(false);
+                }
             }
         }
 
         fetchHealth();
+
+        return () => {
+            controller.abort();
+        };
     }, [horse?.id, token]);
 
     async function reloadHealth() {

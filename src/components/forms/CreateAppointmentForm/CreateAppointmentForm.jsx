@@ -33,22 +33,42 @@ function CreateAppointmentForm({horse, onSaved}) {
     useEffect(() => {
         if (!user || !token) return;
 
+        const controller = new AbortController();
+
         async function loadContacts() {
             try {
                 setLoadingContacts(true);
                 setContactsError("");
 
-                const contactsData = await getContacts(user.id, token);
+                const contactsData = await getContacts(
+                    user.id,
+                    token,
+                    controller.signal
+                );
+
                 setContacts(contactsData);
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Contacten ophalen mislukt:", error);
                 setContactsError("Het ophalen van de contacten is niet gelukt.");
             } finally {
-                setLoadingContacts(false);
+                if (!controller.signal.aborted) {
+                    setLoadingContacts(false);
+                }
             }
         }
 
         loadContacts();
+
+        return () => {
+            controller.abort();
+        };
     }, [token, user]);
 
     function handleChange(e) {

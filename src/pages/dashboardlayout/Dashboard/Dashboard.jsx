@@ -26,14 +26,23 @@ function Dashboard() {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        if (!token || !user) return;
+        if (!token || user?.id == null) return;
+
+        const userId = user.id;
+        const controller = new AbortController();
 
         async function fetchDashboardData() {
             try {
                 setIsLoading(true);
                 setError("");
 
-                const data = await getDashboardData(user.id, token);
+                const data = await getDashboardData(
+                    userId,
+                    token,
+                    controller.signal
+                );
+
+                if (controller.signal.aborted) return;
 
                 setHorses(data.horses);
                 setBoxes(data.boxes);
@@ -41,14 +50,28 @@ function Dashboard() {
                 setCareTasks(data.careTasks);
 
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Dashboard data ophalen mislukt:", error);
                 setError("Het ophalen van de dashboardgegevens is mislukt.");
             } finally {
-                setIsLoading(false);
+                if (!controller.signal.aborted) {
+                    setIsLoading(false);
+                }
             }
         }
+
         fetchDashboardData();
-    }, [token, user]);
+
+        return () => {
+            controller.abort();
+        };
+    }, [token, user?.id]);
 
     if (!user) return null;
 

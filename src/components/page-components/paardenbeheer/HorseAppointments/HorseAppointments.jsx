@@ -32,43 +32,84 @@ function HorseAppointments({horse}) {
     useEffect(() => {
         if (!horse || !token) return;
 
+        const horseId = horse.id;
+        const controller = new AbortController();
+
         async function fetchAppointments() {
             try {
                 setLoadingAppointments(true);
                 setAppointmentsError("");
 
-                const data = await getHorseAppointments(horse.id, token);
+                const data = await getHorseAppointments(
+                    horseId,
+                    token,
+                    controller.signal
+                );
+
                 setAppointments(data);
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Afspraken ophalen mislukt:", error);
                 setAppointmentsError("Het ophalen van de afspraken is mislukt.");
             } finally {
-                setLoadingAppointments(false);
+                if (!controller.signal.aborted) {
+                    setLoadingAppointments(false);
+                }
             }
         }
 
         fetchAppointments();
-    }, [horse, token]);
+
+        return () => {
+            controller.abort();
+        };
+    }, [horse?.id, token]);
 
     useEffect(() => {
-        if (!token || !user?.id) return;
+        if (!token || user?.id == null) return;
+
+        const controller = new AbortController();
 
         async function fetchContacts() {
             try {
                 setLoadingContacts(true);
                 setContactsError("");
 
-                const data = await getUserContacts(user.id, token);
+                const data = await getUserContacts(
+                    user.id,
+                    token,
+                    controller.signal
+                );
+
                 setContacts(data);
             } catch (error) {
+                if (
+                    error.name === "CanceledError" ||
+                    error.name === "AbortError"
+                ) {
+                    return;
+                }
+
                 console.error("Contacten ophalen mislukt:", error);
-                setContactsError("Het ophalen van de contacten is mislukt.");
+                setContactsError("Het ophalen van de contacten is niet gelukt.");
             } finally {
-                setLoadingContacts(false);
+                if (!controller.signal.aborted) {
+                    setLoadingContacts(false);
+                }
             }
         }
 
         fetchContacts();
+
+        return () => {
+            controller.abort();
+        };
     }, [token, user?.id]);
 
     function getProfessionalName(professionalId){
