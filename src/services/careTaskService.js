@@ -41,13 +41,14 @@ export async function deleteCareTask(id, token) {
     });
 }
 
-export async function getHorseCareTaskAssignments(horseId, token) {
+export async function getHorseCareTaskAssignments(horseId, token, signal) {
     const response = await api.get(
         `/horses/${horseId}/careTaskAssignments`,
         {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
+            },
+            signal
         }
     );
 

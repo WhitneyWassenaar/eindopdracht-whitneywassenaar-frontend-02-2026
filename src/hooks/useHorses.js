@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getHorses } from "../services/horseService.js";
 
 function useHorses(userId, token) {
-    console.log("useHorses wordt aangeroepen", userId, token);
+    console.log("useHorses wordt aangeroepen", userId);
     const [horses, setHorses] = useState([]);
     const [loadingHorses, setLoadingHorses] = useState(false);
     const [horsesError, setHorsesError] = useState("");
