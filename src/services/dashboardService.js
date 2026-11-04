@@ -1,30 +1,33 @@
 import api from "../api/axios.js";
 
-export async function getDashboardData(userId, token) {
-    const headers = {
-        Authorization: `Bearer ${token}`
+export async function getDashboardData(userId, token, signal) {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        signal
     };
 
     const horsesResponse = await api.get(
         `/users/${userId}/horses`,
-        { headers }
+        { ...config }
     );
 
     const horses = horsesResponse.data;
 
     const boxesResponse = await api.get(
         `/users/${userId}/boxes`,
-        { headers }
+        {...config }
     );
 
     const appointmentsResponse = await api.get(
         `/users/${userId}/appointments`,
-        { headers }
+        { ...config}
     );
 
     const careTaskAssignmentResponse = await api.get(
         `/careTaskAssignments`,
-        { headers }
+        { ...config }
     );
 
     return {
