@@ -7,7 +7,8 @@ import "./CareTasksTable.css";
 function CareTasksTable({
                             careTasks,
                             deleteCareTask,
-                            openAssignForm}) {
+                            openAssignForm,
+                            deletingCareTaskId}) {
     return (
         <table className="caretask-table-layout">
             <thead>
@@ -24,6 +25,7 @@ function CareTasksTable({
                     careTask={careTask}
                     deleteCareTask={deleteCareTask}
                     openAssignForm={openAssignForm}
+                    deletingCareTaskId={deletingCareTaskId}
                 />
             ))}
             </tbody>

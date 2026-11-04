@@ -25,6 +25,12 @@ function Zorgtaken() {
     const [showForm, setShowForm] = useState(false);
     const [selectedCareTask, setSelectedCareTask] = useState(null);
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    const [deletingCareTaskId, setDeletingCareTaskId] = useState(null);
+    const [deleteError, setDeleteError] = useState("");
+
     function addCareTask(newCareTask) {
         setCareTasks(previousTasks => [
             ...previousTasks,
@@ -33,16 +39,24 @@ function Zorgtaken() {
     }
 
     async function deleteCareTask(id) {
-        if (!window.confirm("Weet je zeker dat je deze zorgtaak wilt verwijderen?"))
+        if (!window.confirm("Weet je zeker dat je deze zorgtaak wilt verwijderen?")) {
             return;
+        }
+
         try {
+            setDeletingCareTaskId(id);
+            setDeleteError("");
+
             await deleteCareTaskFromApi(id, token);
 
             setCareTasks((previousTasks) =>
                 previousTasks.filter((task) => task.id !== id)
             );
         } catch (error) {
-            console.error(error);
+            console.error("Fout bij verwijderen zorgtaak:", error);
+            setDeleteError("Het verwijderen van de zorgtaak is mislukt.");
+        } finally {
+            setDeletingCareTaskId(null);
         }
     }
 
@@ -51,17 +65,21 @@ function Zorgtaken() {
 
         async function getCareTasks() {
             try {
-                const careTasksData = await getCareTasksByUser(user.id, token);
+                setIsLoading(true);
+                setError("");
 
+                const careTasksData = await getCareTasksByUser(user.id, token);
                 setCareTasks(careTasksData);
             } catch (error) {
-                console.error(error);
+                console.error("Fout bij ophalen zorgtaken:", error);
+                setError("Het ophalen van de zorgtaken is mislukt.");
+            } finally {
+                setIsLoading(false);
             }
         }
 
         getCareTasks();
-
-    }, [token, user])
+    }, [token, user]);
 
     function openAssignForm(careTask) {
         setSelectedCareTask(careTask);
@@ -70,10 +88,21 @@ function Zorgtaken() {
     return (
         <div className="dashboard-page">
             <h1>Zorgtaken</h1>
+            {isLoading && (
+                <p>Zorgtaken worden geladen...</p>
+            )}
+            {deleteError && (
+                <p className="error-message">{deleteError}</p>
+            )}
+            {error && (
+                <p className="error-message">{error}</p>
+            )}
             <CareTasksTable
                 careTasks={careTasks}
                 deleteCareTask={deleteCareTask}
-                openAssignForm={openAssignForm}/>
+                openAssignForm={openAssignForm}
+                deletingCareTaskId={deletingCareTaskId}
+            />
 
             {selectedCareTask && (
                 <AssignCareTaskForm

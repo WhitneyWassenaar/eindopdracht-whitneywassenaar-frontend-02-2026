@@ -11,7 +11,8 @@ import './CareTaskRow.css';
 function CareTaskRow({
                          careTask,
                          deleteCareTask,
-                         openAssignForm})
+                         openAssignForm,
+                         deletingCareTaskId})
 {
 
     function handleAssign(e) {
@@ -38,8 +39,13 @@ function CareTaskRow({
 
                 <Button
                     variant="delete"
-                    onClick={handleDelete}>
-                    <img src={deleteIcon} alt="Verwijderen"/>
+                    onClick={handleDelete}
+                    disabled={deletingCareTaskId === careTask.id}
+                >
+                    {deletingCareTaskId === careTask.id
+                        ? "Bezig met verwijderen..."
+                        : <img src={deleteIcon} alt="Verwijderen" />
+                    }
                 </Button>
             </td>
         </tr>
