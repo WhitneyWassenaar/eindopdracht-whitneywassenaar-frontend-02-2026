@@ -40,7 +40,10 @@ function App() {
                     <DashboardLayout/>
                 </ProtectedRoute>}>
                 <Route path="/dashboard" element={<Dashboard/>}/>
+
                 <Route path="/paardenbeheer" element={<Paardenbeheer/>}/>
+                <Route path="/paardenbeheer/:horseId" element={<Paardenbeheer/>}/>
+
                 <Route path="/stalbezetting" element={<Stalbezetting/>}/>
                 <Route path="/zorgtaken" element={<Zorgtaken/>}/>
                 <Route path="/contacten" element={<Contacten/>}/>

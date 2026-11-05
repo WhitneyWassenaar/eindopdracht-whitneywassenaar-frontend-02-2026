@@ -1,6 +1,9 @@
 // React
 import {useState, useEffect, useContext} from 'react';
 
+// React Router
+import {useParams, useNavigate} from "react-router-dom";
+
 // Components
 import Button from '../../../components/ui/Button/Button.jsx';
 import HorseTable from '../../../components/page-components/paardenbeheer/HorseTable/HorseTable.jsx';
@@ -17,9 +20,10 @@ import {AuthContext} from "../../../context/AuthContext.jsx";
 import './Paardenbeheer.css'
 
 function Paardenbeheer() {
+    const { horseId } = useParams();
+    const navigate = useNavigate();
 
     const [horses, setHorses] = useState([]);
-    const [selectedHorse, setSelectedHorse] = useState(null);
 
     const [isLoadingContacts, setIsLoadingContacts] = useState(false);
     const [contactsError, setContactsError] = useState("");
@@ -41,6 +45,10 @@ function Paardenbeheer() {
 
 
     const {token, user} = useContext(AuthContext);
+
+    const selectedHorse = horses.find(
+        horse => String(horse.id) === horseId
+    ) || null;
 
     useEffect(() => {
         if (!token || user?.id == null) return;
@@ -262,8 +270,6 @@ function Paardenbeheer() {
                             <option value="age-old">Oudste eerst</option>
                         </select>
                     </label>
-
-
                 </div>
 
                 <div className="horse-overview-content">
@@ -276,7 +282,7 @@ function Paardenbeheer() {
                         )}
                         <HorseTable
                             horses={sortedHorses}
-                            setSelectedHorse={setSelectedHorse}
+                            // setSelectedHorse={setSelectedHorse}
                             deleteHorse={deleteHorse}
                             toggleHorseActive={toggleHorseActive}
                             contacts={contacts}
@@ -292,20 +298,24 @@ function Paardenbeheer() {
                                 setShowForm={setShowForm}
                                 contacts={contacts}
                             />
+                        ) : horseId && !selectedHorse && !isLoadingHorses && !horsesError ? (
+                            <div className="horse-profile-empty-state">
+                                <h2>Paard niet gevonden</h2>
+                                <p>
+                                    Het paardenprofiel dat je zoekt bestaat niet of is niet beschikbaar.
+                                </p>
+                            </div>
                         ) : selectedHorse ? (
                             <HorseDetail
                                 horse={selectedHorse}
                                 contacts={contacts}
                                 setHorses={setHorses}
-                                setSelectedHorse={setSelectedHorse}
                             />
                         ) : (
                             <div className="horse-profile-empty-state">
                                 <h2>Geen profiel geselecteerd</h2>
                                 <p>
-                                    Selecteer een paardenprofiel uit de tabel om de profielgegevens te bekijken, of maak
-                                    een
-                                    nieuw paardenprofiel aan.
+                                    Selecteer een paardenprofiel uit de tabel om de profielgegevens te bekijken, of maak een nieuw paardenprofiel aan.
                                 </p>
                             </div>
                         )}
@@ -316,8 +326,8 @@ function Paardenbeheer() {
                     <Button
                         type="button"
                         onClick={() => {
+                            navigate('/paardenbeheer');
                             setShowForm(true);
-                            setSelectedHorse(null);
                         }}
                     >
                         Nieuw profiel aanmaken
