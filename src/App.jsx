@@ -47,6 +47,7 @@ function App() {
                 <Route path="/stalbezetting" element={<Stalbezetting/>}/>
                 <Route path="/zorgtaken" element={<Zorgtaken/>}/>
                 <Route path="/contacten" element={<Contacten/>}/>
+                <Route path="/contacten/:contactId" element={<Contacten/>}/>
             </Route>
         </Routes>
     );

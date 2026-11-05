@@ -1,6 +1,9 @@
 // React
 import {useState, useEffect, useContext} from 'react';
 
+// react Router
+import {useParams, useNavigate} from 'react-router-dom';
+
 // Components
 import Button from '../../../components/ui/Button/Button.jsx';
 import ContactTable from "../../../components/page-components/contacten/ContactTable/ContactTable.jsx";
@@ -19,9 +22,12 @@ import './Contacten.css'
 
 
 function Contacten() {
+    const {contactId} = useParams();
+    const navigate = useNavigate();
+
+
 
     const [contacts, setContacts] = useState([]);
-    const [selectedContact, setSelectedContact] = useState(null);
     const [showForm, setShowForm] = useState(false);
     const [horses, setHorses] = useState([]);
 
@@ -42,6 +48,10 @@ function Contacten() {
 
     const [deletingContactId, setDeletingContactId] = useState(null);
     const [deleteContactError, setDeleteContactError] = useState("");
+
+    const selectedContact = contacts.find(
+        contact => String(contact.id) === contactId
+    ) || null;
 
 
 
@@ -261,7 +271,7 @@ function Contacten() {
                 <>
                     <Button
                         type="button"
-                        onClick={() => setSelectedContact(null)}
+                        onClick={() => navigate('/contacten')}
                     >
                         Terug
                     </Button>
@@ -360,6 +370,19 @@ function Contacten() {
                         <p className="error-message">{contactsError}</p>
                     )}
 
+                    {contactId &&
+                        !selectedContact &&
+                        !isLoadingContacts &&
+                        !contactsError && (
+                            <div className="contact-detail-empty-state">
+                                <h2>Contact niet gevonden</h2>
+                                <p>
+                                    Het contact dat je zoekt bestaat niet of is niet beschikbaar.
+                                </p>
+                            </div>
+                        )
+                    }
+
                     {!isLoadingContacts && !contactsError && contacts.length === 0 ? (
                         <p>Er zijn nog geen contacten beschikbaar.</p>
                     ) : (
@@ -367,7 +390,6 @@ function Contacten() {
                         !contactsError && (
                             <ContactTable
                                 contacts={sortedContacts}
-                                setSelectedContact={setSelectedContact}
                                 deleteContact={deleteContact}
                                 toggleContactActive={toggleContactActive}
                                 updatingContactId={updatingContactId}
