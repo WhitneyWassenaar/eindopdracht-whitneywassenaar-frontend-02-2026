@@ -1,3 +1,6 @@
+// React
+import { useNavigate } from 'react-router-dom';
+
 // Components
 import Button from '../../../ui/Button/Button.jsx';
 
@@ -11,15 +14,15 @@ const defaultContactPhoto = "/defaultContactPhoto.png";
 
 function ContactRow({
                         contact,
-                        setSelectedContact,
                         deleteContact,
                         toggleContactActive,
                         updatingContactId,
                         deletingContactId
                     }) {
+    const navigate = useNavigate();
     return (
         <tr className="contactrow-layout"
-            onClick={() => setSelectedContact(contact)}>
+            onClick={() => navigate(`/contacten/${contact.id}`)}>
             <td>
                 <img
                     src={contact.photo || defaultContactPhoto}

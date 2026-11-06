@@ -11,7 +11,7 @@ import HorseRelationsForm from "../../../forms/HorseRelationsForm/Horserelations
 // CSS
 import './HorseDetailTabs.css';
 
-function HorseDetailTabs({horse, contacts, setHorses, setSelectedHorse}) {
+function HorseDetailTabs({horse, contacts, setHorses}) {
 
     const [activeTab, setActiveTab] = useState("1");
 
@@ -74,7 +74,6 @@ function HorseDetailTabs({horse, contacts, setHorses, setSelectedHorse}) {
                         contacts={contacts}
                         horse={horse}
                         setHorses={setHorses}
-                        setSelectedHorse={setSelectedHorse}
                     />
                 )}
             </div>

@@ -1,6 +1,9 @@
 // React
 import Button from '../../../ui/Button/Button.jsx';
 
+// React Router
+import { useNavigate } from 'react-router-dom';
+
 // Helpers
 import calculateAge from '../../../../helpers/calculateAge.jsx';
 
@@ -12,7 +15,8 @@ import './HorseRow.css'
 
 const defaultHorsePhoto = "/defaultHorsePhoto.png";
 
-function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, contacts = [],   updatingHorseId,   deletingHorseId}) {
+function HorseRow({horse, deleteHorse,toggleHorseActive, contacts = [],   updatingHorseId,   deletingHorseId}) {
+    const navigate = useNavigate();
 
     const owner = contacts.find(
         contact => Number(contact.id) === Number(horse.ownerId)
@@ -20,7 +24,8 @@ function HorseRow({horse, setSelectedHorse, deleteHorse,toggleHorseActive, conta
 
     return (
         <tr className="horse-row-layout"
-            onClick={() => {setSelectedHorse(currentHorse => currentHorse?.id === horse.id ? null : horse);}}>
+            onClick={() => navigate(`/paardenbeheer/${horse.id}`)
+        }>
             <td>
                 <img
                     src={horse.photo || defaultHorsePhoto}

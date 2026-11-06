@@ -5,7 +5,7 @@ import HorseDetailTabs from "../HorseDetailTabs/HorseDetailTabs.jsx";
 // CSS
 import './HorseDetail.css';
 
-function HorseDetail({horse, contacts, setHorses, setSelectedHorse}) {
+function HorseDetail({horse, contacts, setHorses}) {
     return (
         <div className="horse-detail-container">
             <HorseDetailMainInfo
@@ -17,7 +17,6 @@ function HorseDetail({horse, contacts, setHorses, setSelectedHorse}) {
                     horse={horse}
                     contacts={contacts}
                     setHorses={setHorses}
-                    setSelectedHorse={setSelectedHorse}
                 />
             </div>
         </div>

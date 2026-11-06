@@ -13,8 +13,7 @@ import {updateHorseRelations} from "../../../services/horseService.js";
 // CSS
 import './HorseRelationForm.css';
 
-
-function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
+function HorseRelationsForm({contacts, horse, setHorses}) {
 
     const {token} = useContext(AuthContext);
     const [isSaving, setIsSaving] = useState(false);
@@ -73,8 +72,6 @@ function HorseRelationsForm({contacts, horse, setHorses, setSelectedHorse}) {
                         : previousHorse
                 )
             );
-
-            setSelectedHorse(updatedHorse);
 
         } catch (error) {
             console.error("Relaties opslaan mislukt:", error);

@@ -6,7 +6,6 @@ import './ContactTable.css';
 
 function ContactTable({
                           contacts = [],
-                          setSelectedContact,
                           deleteContact,
                           toggleContactActive,
                       updatingContactId,
@@ -30,7 +29,6 @@ function ContactTable({
                 <ContactRow
                     key={contact.id}
                     contact={contact}
-                    setSelectedContact={setSelectedContact}
                     deleteContact={deleteContact}
                     toggleContactActive={toggleContactActive}
                     updatingContactId={updatingContactId}
