@@ -3,7 +3,7 @@
     border-collapse: collapse;
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 80.50rem) {
     .contact-table-layout {
         display: block;
         width: 100%;

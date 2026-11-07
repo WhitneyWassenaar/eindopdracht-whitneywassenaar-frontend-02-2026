@@ -94,149 +94,149 @@ function RegisterForm() {
     }
 
     return (
-                <form
-                    className="register-form"
-                    onSubmit={onFormSubmit}
+        <form
+            className="register-form"
+            onSubmit={onFormSubmit}
+        >
+            <label
+                htmlFor="first-name"
+                className="register-form-label"
+            >
+                Voornaam
+            </label>
+            <input
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="register-form-input"
+                type="text"
+                id="first-name"
+                name="first-name"
+                required
+                minLength={1}
+                maxLength={50}
+            />
+
+            <label
+                htmlFor="last-name"
+                className="register-form-label"
+            >
+                Achternaam
+            </label>
+            <input
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="register-form-input"
+                type="text"
+                id="last-name"
+                name="last-name"
+                required
+                minLength={1}
+                maxLength={50}
+            />
+
+            <label
+                htmlFor="stable-name"
+                className="register-form-label"
+            >
+                Stalnaam
+            </label>
+            <input
+                value={stableName}
+                onChange={(e) => setStableName(e.target.value)}
+                className="register-form-input"
+                type="text"
+                id="stable-name"
+                name="stable-name"
+                required
+                minLength={5}
+                maxLength={40}
+            />
+
+            <label
+                htmlFor="e-mail"
+                className="register-form-label"
+            >
+                E-mail
+            </label>
+
+            <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="register-form-input"
+                type="email"
+                id="e-mail"
+                name="e-mail"
+                required
+                maxLength="50"
+            />
+
+            <label
+                htmlFor="password"
+                className="register-form-label"
+            >
+                Wachtwoord
+            </label>
+            <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="register-form-input"
+                type="password"
+                id="password"
+                name="password"
+                required
+            />
+
+            <label
+                htmlFor="confirm-password"
+                className="register-form-label"
+            >
+                Herhaal wachtwoord
+            </label>
+            <input
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="register-form-input"
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                required
+            />
+
+            <div className="register-form-checkbox">
+                <input
+                    id="accept-tos"
+                    checked={acceptToc}
+                    onChange={(e) => setAcceptToc(e.target.checked)}
+                    type="checkbox"
+                    required
+                />
+                <label
+                    htmlFor="accept-tos"
                 >
-                    <label
-                        htmlFor="first-name"
-                        className="register-form-label"
-                    >
-                        Voornaam
-                    </label>
-                    <input
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        className="register-form-input"
-                        type="text"
-                        id="first-name"
-                        name="first-name"
-                        required
-                        minLength="2"
-                        maxLength="50"
-                    />
+                    Ik ga akkoord met de voorwaarden
+                </label>
+            </div>
 
-                    <label
-                        htmlFor="last-name"
-                        className="register-form-label"
-                    >
-                        Achternaam
-                    </label>
-                    <input
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        className="register-form-input"
-                        type="text"
-                        id="last-name"
-                        name="last-name"
-                        required
-                        minLength="2"
-                        maxLength="50"
-                    />
+            {error && (
+                <p className="register-form-error-message"
+                >
+                    {error}
+                </p>
+            )}
 
-                    <label
-                        htmlFor="stable-name"
-                        className="register-form-label"
-                    >
-                        Stalnaam
-                    </label>
-                    <input
-                        value={stableName}
-                        onChange={(e) => setStableName(e.target.value)}
-                        className="register-form-input"
-                        type="text"
-                        id="stable-name"
-                        name="stable-name"
-                        required
-                        minLength="5"
-                        maxLength="50"
-                    />
+            {success && (
+                <p className="register-form-success-message">
+                    {success}
+                </p>
+            )}
 
-                    <label
-                        htmlFor="e-mail"
-                        className="register-form-label"
-                    >
-                        E-mail
-                    </label>
-
-                    <input
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="register-form-input"
-                        type="email"
-                        id="e-mail"
-                        name="e-mail"
-                        required
-                        maxLength="50"
-                    />
-
-                    <label
-                        htmlFor="password"
-                        className="register-form-label"
-                    >
-                        Wachtwoord
-                    </label>
-                    <input
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="register-form-input"
-                        type="password"
-                        id="password"
-                        name="password"
-                        required
-                    />
-
-                    <label
-                        htmlFor="confirm-password"
-                        className="register-form-label"
-                    >
-                        Herhaal wachtwoord
-                    </label>
-                    <input
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="register-form-input"
-                        type="password"
-                        id="confirm-password"
-                        name="confirm-password"
-                        required
-                    />
-
-                    <div className="register-form-checkbox">
-                        <input
-                            id="accept-tos"
-                            checked={acceptToc}
-                            onChange={(e) => setAcceptToc(e.target.checked)}
-                            type="checkbox"
-                            required
-                        />
-                        <label
-                            htmlFor="accept-tos"
-                        >
-                            Ik ga akkoord met de voorwaarden
-                        </label>
-                    </div>
-
-                    {error && (
-                        <p className="register-form-error-message"
-                        >
-                            {error}
-                        </p>
-                    )}
-
-                    {success && (
-                        <p className="register-form-success-message">
-                            {success}
-                        </p>
-                    )}
-
-                    <Button
-                        type="submit"
-                        disabled={isRegistering}
-                    >
-                        {isRegistering ? "Bezig met registreren..." : "Registreren"}
-                    </Button>
-                </form>
+            <Button
+                type="submit"
+                disabled={isRegistering}
+            >
+                {isRegistering ? "Bezig met registreren..." : "Registreren"}
+            </Button>
+        </form>
     );
 }
 

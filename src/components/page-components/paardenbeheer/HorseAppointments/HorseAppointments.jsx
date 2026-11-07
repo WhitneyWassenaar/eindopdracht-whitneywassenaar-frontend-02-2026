@@ -221,23 +221,19 @@ function HorseAppointments({horse}) {
                             </p>
 
                             <p>
-                                Tijd:
-                                {appointment.time}
+                                Tijd: {appointment.time}
                             </p>
 
                             <p>
-                                Categorie:
-                                {appointment.professionalType}
+                                Categorie: {appointment.professionalType}
                             </p>
 
                             <p>
-                                Professional:
-                                {getProfessionalName(appointment.professionalId)}
+                                Professional: {getProfessionalName(appointment.professionalId)}
                             </p>
 
                             <p>
-                                Reden:
-                                {appointment.reason}
+                                Reden: {appointment.reason}
                             </p>
 
                             <button

@@ -104,7 +104,7 @@ function CreateHorseProfileForm({setHorses, setShowForm, contacts}) {
                         }}
                         id="horse-name"
                         type="text"
-                        maxLength={50}
+                        maxLength={30}
                         placeholder="Voer naam van paard in"
                         required/>
                 </div>
