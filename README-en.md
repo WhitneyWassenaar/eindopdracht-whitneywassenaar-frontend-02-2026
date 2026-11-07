@@ -110,7 +110,7 @@ Therefore, create a `.env` file in the root directory of the project.
 
 Add the following configuration in .env:
 
-`VITE_PROJECT_ID="project-ID"`
+`VITE_PROJECT_ID=project-ID`
 
 Replace `project-ID` with the correct project ID associated with the backend.
 

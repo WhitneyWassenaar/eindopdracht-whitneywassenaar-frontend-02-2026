@@ -109,7 +109,7 @@ Maak daarom zelf een `.env`-bestand aan in de hoofdmap van het project.
 
 Voeg in de `.env`-bestand de volgende configuratie toe:
 
-`VITE_PROJECT_ID="project-ID"`
+`VITE_PROJECT_ID=project-ID`
 
 Vervang `project-ID` door de juiste project-ID dat bij de backend hoort.
 
