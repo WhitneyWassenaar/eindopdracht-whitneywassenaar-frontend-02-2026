@@ -70,8 +70,8 @@ function CreateContactProfileForm({setContacts, setShowForm}) {
                 "Er is iets misgegaan."
             );
         } finally {
-        setIsSaving(false);
-    }
+            setIsSaving(false);
+        }
     }
 
     return (

@@ -15,7 +15,7 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
     const [description, setDescription] = useState("");
     const [error, setError] = useState("");
 
-    const {token,user} = useContext(AuthContext);
+    const {token, user} = useContext(AuthContext);
 
     const [isSaving, setIsSaving] = useState(false);
 
@@ -73,7 +73,7 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
                         onChange={(e) => setTitle(e.target.value)}
                         id="title"
                         type="text"
-                        minLength={2}
+                        minLength={1}
                         maxLength={30}
                         placeholder="Voer titel in"
                         required
@@ -121,4 +121,5 @@ function CreateCareTaskForm({addCareTask, setShowForm}) {
         </form>
     )
 }
+
 export default CreateCareTaskForm;

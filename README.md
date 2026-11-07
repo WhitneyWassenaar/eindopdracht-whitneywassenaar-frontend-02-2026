@@ -1,4 +1,4 @@
-[English version]()
+[English version](README-en.md)
 # EquiManager handleiding
 
 ---
@@ -18,10 +18,10 @@ Het doel van de applicatie is om alle onderdelen rondom paardenbeheer op één c
 ### Functionaliteiten
 - Gebruikersregistratie en inloggen
 - Beheren van paarden
+- Beheren van stalbezetting
 - Beheren van contacten
 - Beheren van zorgtaken
 - Contactprofielen koppelen aan (meerdere) paardenprofielen
-- Beheren van stalbezetting
 - Beheren van afspraken met professionals zoals hoefsmeden en dierenartsen
 - Dashboard-overzicht van aantal paarden op stal en in de wei, openstaande afspraken en zorgtaken.
 ---
@@ -105,18 +105,18 @@ Installeer dependencies met: `npm install`
 **Stap 4. Omgevingsvariabelen instellen**
 De applicatie maakt gebruik van een .env-bestand voor de configuratie van de verbinding met de backend. Dit bestand is niet opgenomen in de GitHub-repository. Dit bestand wordt door `.gitignore` uitgesloten van versiebeheer, zodat configuratiegegevens niet automatisch worden meegestuurd naar de repository.
 
-Maak daarom zelf een .env-bestand aan in de hoofdmap van het project.
+Maak daarom zelf een `.env`-bestand aan in de hoofdmap van het project.
 
-Voeg hierin de volgende configuratie toe:
+Voeg in de `.env`-bestand de volgende configuratie toe:
 
 `VITE_PROJECT_ID="project-ID"`
 
 Vervang `project-ID` door de juiste project-ID dat bij de backend hoort.
 
 **Stap 5. Applicatie starten**
-Start de ontwikkelserver met het volgende commando: `npm run dev`
+1. Start de ontwikkelserver met het volgende commando: `npm run dev`
 
-Na het starten verschijnt er een lokaal adres in de terminal. Open dit adres in de browser om EquiManager te gebruiken.
+2. Na het starten verschijnt er een lokaal adres in de terminal. Open dit adres in de browser om EquiManager te gebruiken.
 
 <small>Bij het inleveren van de eindopdracht is de `.env` bestand wel toegevoegd.</small>
 
@@ -144,11 +144,4 @@ Binnen EquiManager zijn de volgende npm-commando's beschikbaar:
 | `npm run dev` | Start de ontwikkelserver, zodat de applicatie lokaal in de browser bekeken kan worden.                                           |
 | `npm run build` | Bouwt de applicatie voor productie.                                                                                              |
 | `npm run preview` | Start een lokale server om de gebouwde productieversie te bekijken en te testen voordat de applicatie online wordt gepubliceerd. |
-
-
-
-![screenshot_1.png](src/assets/screenshot_1.png)
-
-![screenshot_2.png](src/assets/screenshot_2.png)
-
-![screenshot_3.png](src/assets/screenshot_3.png)
+---

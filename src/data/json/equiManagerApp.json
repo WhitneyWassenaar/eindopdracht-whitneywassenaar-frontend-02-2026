@@ -17,14 +17,14 @@
           "name": "firstName",
           "type": "string",
           "required": true,
-          "min": 2,
-          "max": 20
+          "min": 1,
+          "max": 50
         },
         {
           "name": "lastName",
           "type": "string",
           "required": true,
-          "min": 2,
+          "min": 1,
           "max": 20
         },
         {
@@ -79,7 +79,7 @@
           "type": "string",
           "required": true,
           "min": 1,
-          "max": 50
+          "max": 30
         },
         {
           "name": "gender",
@@ -204,22 +204,22 @@
           "name": "firstName",
           "type": "string",
           "required": true,
-          "min": 2,
-          "max": 20
+          "min": 1,
+          "max": 50
         },
         {
           "name": "lastName",
           "type": "string",
           "required": true,
-          "min": 2,
-          "max": 20
+          "min": 1,
+          "max": 50
         },
         {
           "name": "stableName",
           "type": "string",
           "required": true,
           "min": 5,
-          "max": 30
+          "max": 40
         }
       ],
       "permissions": {
@@ -289,8 +289,8 @@
           "name": "title",
           "type": "string",
           "required": true,
-          "min":5,
-          "max": 50
+          "min":1,
+          "max": 30
         },
         {
           "name": "description",
