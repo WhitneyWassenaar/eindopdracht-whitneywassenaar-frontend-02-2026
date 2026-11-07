@@ -1,5 +1,7 @@
 [English version](README-en.md)
-# EquiManager handleiding
+
+![EquiManager logo](src/assets/home/logo.svg)
+# Installatie handleiding
 
 ---
 ## Inhoudsopgave
@@ -24,6 +26,7 @@ Het doel van de applicatie is om alle onderdelen rondom paardenbeheer op één c
 - Contactprofielen koppelen aan (meerdere) paardenprofielen
 - Beheren van afspraken met professionals zoals hoefsmeden en dierenartsen
 - Dashboard-overzicht van aantal paarden op stal en in de wei, openstaande afspraken en zorgtaken.
+
 ---
 ## 2. Gebruikte technieken en dependencies
 Voor het ontwikkelen en uitvoeren van EquiManager wordt gebruikgemaakt van verschillende libraries, frameworks en ontwikkeltools.
@@ -107,11 +110,11 @@ De applicatie maakt gebruik van een .env-bestand voor de configuratie van de ver
 
 1. Maak daarom zelf een `.env`-bestand aan in de hoofdmap van het project.
 
-    <img src="src/assets/readme/create-env01.png" alt="EquiManager create .env screenshot" width="300">
+    <img src="./src/assets/readme/create-env01.png" alt="EquiManager create .env screenshot" width="300">
 
 2. Click op `File` en noem de file: `.env`
 
-    <img src="src/assets/readme/create-env02.png" alt="EquiManager create .env screenshot" width="300">
+    <img src="./src/assets/readme/create-env02.png" alt="EquiManager create .env screenshot" width="300">
 
 
 3. Voeg in de `.env`-bestand de volgende configuratie toe: 
