@@ -162,7 +162,7 @@ function AssignCareTaskForm({careTask, setSelectedCareTask}) {
             setTimeout(() => {
                 setSelectedCareTask(null);
                 setMessage("");
-            }, 3000);
+            }, 1300);
 
         } catch (error) {
             console.error(error);

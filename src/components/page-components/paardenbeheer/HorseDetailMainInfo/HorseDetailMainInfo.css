@@ -47,7 +47,6 @@
     min-width: 0;
     max-width: 100%;
     overflow-wrap: anywhere;
-    box-sizing: border-box;
 }
 
 .info-block li {

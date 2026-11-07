@@ -35,7 +35,7 @@
     color: red;
 }
 
-@media (max-width: 37.5rem) {
+@media (max-width: 80.5rem) {
     .contactrow-layout {
         display: flex;
         flex-direction: column;

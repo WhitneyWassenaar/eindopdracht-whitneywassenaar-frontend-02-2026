@@ -12,16 +12,22 @@ function ContactDetailMainInfo({contact, horses = []}) {
             </div>
 
             <div className="contact-main-info">
-                <div className="info-block">
+                <div className="contact-info-block">
                     <h2>{contact.firstName} {contact.lastName}</h2>
                     <ul>
-                        <li>Email: {contact.email}</li>
-                        <li>Telefoonnummer: {contact.phone}</li>
-                        <li>Rol: {contact.role}</li>
+                        <li>
+                            <span className="contact-info-label">Email</span> {contact.email}
+                        </li>
+                        <li>
+                            <span className="contact-info-label">Telefoonnummer</span> {contact.phone}
+                        </li>
+                        <li>
+                            <span className="contact-info-label">Rol</span> {contact.role}
+                        </li>
                     </ul>
                 </div>
 
-                <div className="info-block">
+                <div className="contact-info-block">
                     <h3>Relaties</h3>
                     {horses.length > 0 ? (
                         horses.map((horse) => (
