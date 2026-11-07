@@ -105,13 +105,20 @@ Installeer dependencies met: `npm install`
 **Stap 4. Omgevingsvariabelen instellen**
 De applicatie maakt gebruik van een .env-bestand voor de configuratie van de verbinding met de backend. Dit bestand is niet opgenomen in de GitHub-repository. Dit bestand wordt door `.gitignore` uitgesloten van versiebeheer, zodat configuratiegegevens niet automatisch worden meegestuurd naar de repository.
 
-Maak daarom zelf een `.env`-bestand aan in de hoofdmap van het project.
+1. Maak daarom zelf een `.env`-bestand aan in de hoofdmap van het project.
 
-Voeg in de `.env`-bestand de volgende configuratie toe:
+    <img src="src/assets/readme/create-env01.png" alt="EquiManager create .env screenshot" width="300">
 
-`VITE_PROJECT_ID=project-ID`
+2. Click op `File` en noem de file: `.env`
 
-Vervang `project-ID` door de juiste project-ID dat bij de backend hoort.
+    <img src="src/assets/readme/create-env02.png" alt="EquiManager create .env screenshot" width="300">
+
+
+3. Voeg in de `.env`-bestand de volgende configuratie toe: 
+
+   `VITE_PROJECT_ID=project-ID`
+
+    Vervang `project-ID` door de juiste project-ID dat bij de backend hoort.
 
 **Stap 5. Applicatie starten**
 1. Start de ontwikkelserver met het volgende commando: `npm run dev`
