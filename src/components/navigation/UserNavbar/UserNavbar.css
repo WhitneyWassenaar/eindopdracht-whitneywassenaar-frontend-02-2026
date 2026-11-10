@@ -12,6 +12,7 @@
     min-height: 100vh;
     padding: 0.625rem;
     background-color: #002237;
+    position: fixed;
 }
 
 .nav__top img {
@@ -63,6 +64,7 @@
         min-height: auto;
         padding: 0.5rem 1rem;
         flex-direction: column;
+        position: fixed;
     }
 
     .nav-content-wrapper {
