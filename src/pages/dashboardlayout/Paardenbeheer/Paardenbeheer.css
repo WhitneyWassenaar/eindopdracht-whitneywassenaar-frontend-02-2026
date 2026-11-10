@@ -67,7 +67,7 @@
     color: var(--background-color);
 }
 
-@media (max-width: 2022px) {
+@media (max-width: 1500px) {
     .horse-overview-content {
         flex-direction: column;
         flex: 1 1 0;
@@ -79,7 +79,7 @@
         width: 100%;
         min-width: 0;
         height: 100%;
-        max-height: 200px;
+        max-height: 110px;
         overflow: auto;
     }
 

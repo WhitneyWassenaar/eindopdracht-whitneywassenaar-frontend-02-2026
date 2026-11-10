@@ -17,12 +17,3 @@
     width: 100%;
     min-width: 0;
 }
-
-/* ====================
-    TABLET / MOBILE
-==================== */
-@media (min-width: 1500px) and (max-width: 2023px) {
-    .horse-detail-container {
-        flex-direction: row;
-    }
-}

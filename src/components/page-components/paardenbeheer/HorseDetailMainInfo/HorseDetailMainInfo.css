@@ -20,7 +20,7 @@
 }
 
 .horse-profile-picture {
-    flex: 0 1 20rem;
+    flex: 0 1 10rem;
     min-width: 0;
     max-height: 15rem;
     overflow: hidden;

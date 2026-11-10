@@ -1,5 +1,5 @@
 [Dutch version](README.md)
-# EquiManager - Installation guide
+## EquiManager - Installation guide
 
 ---
 ## Table of contents
