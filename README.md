@@ -3,14 +3,12 @@
 ![EquiManager logo](src/assets/home/logo.svg)
 # Installatie handleiding
 
----
 ## Inhoudsopgave
 1. [Inleiding](#1-inleiding)
 2. [Gebruikte technieken en frameworks](#2-gebruikte-technieken-en-dependencies)
 3. [Installatie en lokaal uitvoeren van de applicatie](#3-installatie-en-lokaal-uitvoeren-van-de-applicatie)
 4. [Beschikbare testaccount](#4-beschikbare-testaccount)
 5. [Beschikbare npm commando's](#5-beschikbare-npm-commandos)
----
 
 ## 1. Inleiding
 Deze applicatie is ontwikkeld voor stalhouders om het beheer van paarden en dagelijkse werkzaamheden op stal overzichtelijk te maken. De gebruiker kan paarden, contacten en zorgtaken beheren, relaties koppelen en afspraken bijhouden.
@@ -27,7 +25,13 @@ Het doel van de applicatie is om alle onderdelen rondom paardenbeheer op één c
 - Beheren van afspraken met professionals zoals hoefsmeden en dierenartsen
 - Dashboard-overzicht van aantal paarden op stal en in de wei, openstaande afspraken en zorgtaken.
 
----
+<img src="./src/assets/readme/paardenbeheer.png" alt="EquiManager create .env screenshot" width="500">
+
+<img src="./src/assets/readme/paardenprofiel.png" alt="EquiManager create .env screenshot" width="500">
+<img src="./src/assets/readme/contacts.png" alt="EquiManager create .env screenshot" width="500">
+<img src="./src/assets/readme/contactform.png" alt="EquiManager create .env screenshot" width="500">
+<img src="./src/assets/readme/caretasks01.png" alt="EquiManager create .env screenshot" width="500">
+
 ## 2. Gebruikte technieken en dependencies
 Voor het ontwikkelen en uitvoeren van EquiManager wordt gebruikgemaakt van verschillende libraries, frameworks en ontwikkeltools.
 
@@ -85,8 +89,6 @@ Axios wordt gebruikt voor het versturen van HTTP-verzoeken naar de backend zoals
 
 De meeste componenten hebben een eigen CSS-bestand voor de styling.
 
----
-
 ## 3. Installatie en lokaal uitvoeren van de applicatie
 Voordat de applicatie geïnstalleerd kan worden, moeten de volgende programma's aanwezig zijn:
 
@@ -130,8 +132,6 @@ De applicatie maakt gebruik van een .env-bestand voor de configuratie van de ver
 
 <small>Bij het inleveren van de eindopdracht is de `.env` bestand wel toegevoegd.</small>
 
----
-
 ## 4. Beschikbare testaccount
 
 Om EquiManager te kunnen bekijken en testen, is er een testaccount beschikbaar. Met dit account kan worden ingelogd via de inlogpagina van EquiManager.
@@ -142,7 +142,6 @@ Om EquiManager te kunnen bekijken en testen, is er een testaccount beschikbaar. 
 |--------|---|
 |E-mailadres|docent@novi-education.nl|
 |Wachtwoord|`noviEducation@123`|
----
 
 ## 5. Beschikbare npm-commando's
 
