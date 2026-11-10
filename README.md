@@ -25,17 +25,12 @@ Het doel van de applicatie is om alle onderdelen rondom paardenbeheer op één c
 - Beheren van afspraken met professionals zoals hoefsmeden en dierenartsen
 - Dashboard-overzicht van aantal paarden op stal en in de wei, openstaande afspraken en zorgtaken.
 
-<img src="./src/assets/readme/paardenbeheer.png" alt="EquiManager paardenbeheer page" width="500"/>
+#### Desktop screenshots
+<img src="./src/assets/readme/paardenbeheer.png" alt="EquiManager paardenbeheer page"/>
+<img src="src/assets/readme/contacts-page.png" alt="EquiManager paardenbeheer page"/>
 
-<img src="./src/assets/readme/paardenprofiel.png" alt="EquiManager horse profile" width="500"/>
-
-<img src="./src/assets/readme/contactform.png" alt="EquiManager create contact form" width="500"/>
-
-<img src="./src/assets/readme/caretasks01.png" alt="EquiManager caretasks page" width="500"/>
-
-Mobiel
-
-<img src="./src/assets/readme/contacts-mobile.png" alt="EquiManager contacts mobile version" width="300"> <img src="./src/assets/readme/paardenbeheer-mobile.png" alt="EquiManager contacts mobile version" width="300">
+#### Mobile screenshots
+<img src="./src/assets/readme/caretasks-mobile.png" alt="EquiManager caretasks mobile page" width="250"/> <img src="src/assets/readme/contacts-mobileversion.png" alt="EquiManager contacts mobile page" width="242"/>  <img src="src/assets/readme/horseprofile-mobile.png" alt="EquiManager contacts mobile page" width="250"/>
 
 ## 2. Gebruikte technieken en dependencies
 Voor het ontwikkelen en uitvoeren van EquiManager wordt gebruikgemaakt van verschillende libraries, frameworks en ontwikkeltools.
