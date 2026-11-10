@@ -29,8 +29,6 @@ Het doel van de applicatie is om alle onderdelen rondom paardenbeheer op één c
 
 <img src="./src/assets/readme/paardenprofiel.png" alt="EquiManager horse profile" width="500"/>
 
-<img src="./src/assets/readme/contacts.png" alt="EquiManager horse profile" width="500"/>
-
 <img src="./src/assets/readme/contactform.png" alt="EquiManager create contact form" width="500"/>
 
 <img src="./src/assets/readme/caretasks01.png" alt="EquiManager caretasks page" width="500"/>
