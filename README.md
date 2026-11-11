@@ -46,11 +46,11 @@ Hierdoor kunnen gebruikers zich registreren en inloggen om toegang te krijgen to
 ### Softwarevereisten
 De volgende software is nodig om de applicatie lokaal te kunnen installeren en uitvoeren:
 
-| Software | Versie | Omschrijving|
-|---|-------|---|
-|Git|Nieuwste versie|Voor het clonen en beheren van de repository.|
-|Node.js|v24.13.0|Voor het uitvoeren van JavaScript buiten de browser. |
-|npm|v11.6.2|Voor het installeren en beheren van de projectdependencies.|
+| Software | Versie | Omschrijving| Download |
+|---|-------|---|---|
+|Git|Nieuwste versie|Voor het clonen en beheren van de repository.|https://git-scm.com/install/windows
+|Node.js|v24.13.0|Voor het uitvoeren van JavaScript buiten de browser. | https://nodejs.org/en/download
+|npm|v11.6.2|Voor het installeren en beheren van de projectdependencies.| Wordt meegeleverd met Node.js
 
 ### Ontwikkelomgeving
 **Vite v8.1.6**
@@ -90,7 +90,7 @@ Axios wordt gebruikt voor het versturen van HTTP-verzoeken naar de backend zoals
 De meeste componenten hebben een eigen CSS-bestand voor de styling.
 
 ## 3. Installatie en lokaal uitvoeren van de applicatie
-Voordat de applicatie geïnstalleerd kan worden, moeten de volgende programma's aanwezig zijn:
+Voordat de applicatie geïnstalleerd kan worden, moeten de volgende programma's aanwezig zijn. Controleer [Gebruikte technieken en frameworks](#2-gebruikte-technieken-en-dependencies) om ontbrekende software te downloaden.
 
 |Software|Versie|
 |---|---|
@@ -129,7 +129,7 @@ De applicatie maakt gebruik van een `.env`-bestand voor de configuratie van de v
 
     Vervang `project-ID` door de juiste project-ID dat bij de backend hoort.
 
-**Stap 5. Applicatie starten**
+**Stap 4. Applicatie starten**
 
 1. Start de ontwikkelserver met het volgende commando: `npm run dev`
 

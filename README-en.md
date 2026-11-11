@@ -24,7 +24,7 @@ The goal of the application is to bring all aspects of horse management together
 - Managing contacts
 - Managing care tasks
 - Linking contact profiles to multiple horse profiles
-Managing appointments with professionals such as farriers and veterinarians
+- Managing appointments with professionals such as farriers and veterinarians
 - Dashboard overview of the number of horses in the stable and pasture, outstanding appointments and care tasks.
 
 #### Desktop screenshots
@@ -48,11 +48,11 @@ This allows users to register and log in to access the protected sections of Equ
 ### Software requirements
 The following software is required to install and run the application locally:
 
-| Software | Version| Description|
-|---|--------|------------|
-|Git|Latest version|Used for cloning and managing the repository.|
-|Node.js|v24.13.0|Used to run JavaScript outside the browser.|
-|npm| v11.6.2 | Used to install and manage project dependencies.|
+| Software | Version| Description| Download|
+|---|--------|------------|---|
+|Git|Latest version|Used for cloning and managing the repository.|https://git-scm.com/install/windows
+|Node.js|v24.13.0|Used to run JavaScript outside the browser.|https://nodejs.org/en/download
+|npm| v11.6.2 | Used to install and manage project dependencies.| Included with Node.js.
 
 ### Development environment
 **Vite v8.1.6**
@@ -94,7 +94,7 @@ Most components have their own CSS file for styling.
 ---
 
 ## 3. Installation and running the application locally
-Before installing the application, the following software must be available:
+Before installing the application, the following software must be available. Check out [Technologies and dependencies](#2-technologies-and-dependencies) to install missing software.
 
 |Software| Version        |
 |---|----------------|
@@ -132,13 +132,13 @@ The application uses a `.env` file to configure the connection to the backend. T
 
 Replace `project-ID` with the correct project ID associated with the backend.
 
-**Step 5. Start the application**
+**Step 4. Start the application**
 
-1. Start the development server using the following command:: `npm run dev`
+1. Start the development server using the following command: `npm run dev`
 
 2. After starting the server, a local URL will appear in the terminal. Open this URL in your browser to use EquiManager.
 
-<small>When submitting the final project, the `.env` file has been included.</small>
+<small>The `.env` file has been included in the final project submission.</small>
 
 ---
 
