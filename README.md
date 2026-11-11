@@ -1,7 +1,7 @@
 [English version](README-en.md)
 
 ![EquiManager logo](src/assets/home/logo.svg)
-# Installatie handleiding
+# EquiManager - Installatie handleiding
 
 ## Inhoudsopgave
 1. [Inleiding](#1-inleiding)
@@ -98,16 +98,20 @@ Voordat de applicatie geïnstalleerd kan worden, moeten de volgende programma's 
 |Node.js|v24.13.0|
 |npm|v11.6.2|
 
-**Stap 1. Repository clonen**
-Clone de repository vanaf GitHub met het volgende commando: `git clone git@github.com:WhitneyWassenaar/eindopdracht-whitneywassenaar-frontend-02-2026.git`
+**Stap 1. Repository clonen** 
 
-**Stap 2. Navigeren naar projectmap**
-Open de terminal en navigeer naar de map van het project: `cd eindopdracht-whitneywassenaar-frontend-02-2026`
+Clone de repository vanaf GitHub via de IDE terminal met het volgende commando: `git clone git@github.com:WhitneyWassenaar/eindopdracht-whitneywassenaar-frontend-02-2026.git`
 
-**Stap 3. Installeer de benodigde dependencies**
-Installeer dependencies met: `npm install`
+of
 
-**Stap 4. Omgevingsvariabelen instellen**
+Wanneer je de IDE opent, kies je gelijk voor `Clone Repository`, plak de project ssh-key `git@github.com:WhitneyWassenaar/eindopdracht-whitneywassenaar-frontend-02-2026.git` en open het project.
+
+**Stap 2. Installeer de benodigde dependencies** 
+
+Installeer dependencies door `npm install` in te voeren in de terminal en druk op enter.
+
+**Stap 3. Omgevingsvariabelen instellen** 
+
 De applicatie maakt gebruik van een .env-bestand voor de configuratie van de verbinding met de backend. Dit bestand is niet opgenomen in de GitHub-repository. Dit bestand wordt door `.gitignore` uitgesloten van versiebeheer, zodat configuratiegegevens niet automatisch worden meegestuurd naar de repository.
 
 1. Maak daarom zelf een `.env`-bestand aan in de hoofdmap van het project.
@@ -130,7 +134,7 @@ De applicatie maakt gebruik van een .env-bestand voor de configuratie van de ver
 
 2. Na het starten verschijnt er een lokaal adres in de terminal. Open dit adres in de browser om EquiManager te gebruiken.
 
-<small>Bij het inleveren van de eindopdracht is de `.env` bestand wel toegevoegd.</small>
+<small>Bij het inleveren van de eindopdracht is het `.env` bestand wel toegevoegd.</small>
 
 ## 4. Beschikbare testaccount
 
@@ -154,3 +158,5 @@ Binnen EquiManager zijn de volgende npm-commando's beschikbaar:
 | `npm run build` | Bouwt de applicatie voor productie.                                                                                              |
 | `npm run preview` | Start een lokale server om de gebouwde productieversie te bekijken en te testen voordat de applicatie online wordt gepubliceerd. |
 ---
+
+<small>Alle gegevens in de applicatie zijn fictief en hebben geen betrekking op echte personen, paarden of organisaties.</small>
