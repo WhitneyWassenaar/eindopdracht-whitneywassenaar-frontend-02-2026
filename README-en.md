@@ -118,9 +118,15 @@ Install the dependencies by entering `npm install` in the terminal and pressing 
 
 The application uses a `.env` file to configure the connection to the backend. This file is not included in the GitHub repository. It is excluded from version control through `.gitignore`, so configuration data is not automatically uploaded to the repository.
 
-Therefore, create a `.env` file in the root directory of the project.
+1. Therefore, create a `.env` file in the root directory of the project.
 
-Add the following configuration in .env:
+   <img src="./src/assets/readme/create-env01.png" alt="EquiManager create .env screenshot" width="300">
+
+2. Click `File` and name the file: `.env`
+
+ <img src="./src/assets/readme/create-env02.png" alt="EquiManager create .env screenshot" width="300">
+
+3. Add the following configuration in `.env`:
 
 `VITE_PROJECT_ID=project-ID`
 
