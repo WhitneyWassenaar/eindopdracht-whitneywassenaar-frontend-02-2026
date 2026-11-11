@@ -1,4 +1,6 @@
 [Dutch version](README.md)
+
+![EquiManager logo](src/assets/home/logo.svg)
 ## EquiManager - Installation guide
 
 ---
@@ -24,6 +26,13 @@ The goal of the application is to bring all aspects of horse management together
 - Linking contact profiles to multiple horse profiles
 Managing appointments with professionals such as farriers and veterinarians
 - Dashboard overview of the number of horses in the stable and pasture, outstanding appointments and care tasks.
+
+#### Desktop screenshots
+<img src="./src/assets/readme/paardenbeheer.png" alt="EquiManager paardenbeheer page"/>
+<img src="src/assets/readme/contacts-page.png" alt="EquiManager paardenbeheer page"/>
+
+#### Mobile screenshots
+<img src="./src/assets/readme/caretasks-mobile.png" alt="EquiManager caretasks mobile page" width="250"/> <img src="src/assets/readme/contacts-mobileversion.png" alt="EquiManager contacts mobile page" width="242"/>  <img src="src/assets/readme/horseprofile-mobile.png" alt="EquiManager contacts mobile page" width="250"/>
 ---
 ## 2. Technologies and dependencies
 EquiManager uses several libraries, frameworks and development tools.
@@ -93,16 +102,19 @@ Before installing the application, the following software must be available:
 |Node.js| v24.13.0       |
 |npm| v11.6.2        |
 
-**Step 1. Clone the repository**
+**Step 1. Clone the repository** 
+
 Clone the repository from GitHub using the following command:: `git clone git@github.com:WhitneyWassenaar/eindopdracht-whitneywassenaar-frontend-02-2026.git`
 
-**Step 2. Navigate to the project directory**
-Open the terminal and navigate to the project directory:: `cd eindopdracht-whitneywassenaar-frontend-02-2026`
+or
 
-**Step 3. Install the required dependencies**
-Install the dependencies using: `npm install`
+When you open your IDE, select `Clone Repository`, paste the project's SSH-key `git@github.com:WhitneyWassenaar/eindopdracht-whitneywassenaar-frontend-02-2026.git`, and open the project.
 
-**Step 4. Configure environment variables**
+**Step 2. Install the required dependencies** 
+
+Install the dependencies by entering `npm install` in the terminal and pressing Enter.
+
+**Step 3. Configure environment variables**
 
 The application uses a `.env` file to configure the connection to the backend. This file is not included in the GitHub repository. It is excluded from version control through `.gitignore`, so configuration data is not automatically uploaded to the repository.
 
@@ -147,3 +159,5 @@ The following npm commands are available within EquiManager:
 | `npm run build` | Builds the application for production.                                                                               |
 | `npm run preview` | Starts a local server to view and test the production build before publishing the application online.|
 ---
+
+<small>All data used in the application is fictional and does not represent real individuals, horses, or organizations.</small>
